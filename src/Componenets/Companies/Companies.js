@@ -1,0 +1,505 @@
+"use client";
+import React, { useState, useMemo, useEffect, useRef } from "react";
+import {
+  SearchIcon,
+  BuildingIcon,
+ 
+} from "lucide-react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import CompanyCard from "../Company/CompanyCard";
+import SponsoredCompanyCard from "../Company/SponsoredCompanyCard";
+import EndpointSecurityHero from "./EndpointSecurityHero";
+
+export default function CompanyListingPage({
+  companies = [],
+  description,
+  slug,
+  categoryName,
+  totalCompanies,
+  name,
+  pagination = {},
+  sponsorCompanies = [],
+  relatedSubcategories = [],
+}) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Search states
+  const [locationInput, setLocationInput] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  
+  // Related subcategories state
+  const [relatedSubcats, setRelatedSubcats] = useState(relatedSubcategories);
+  const [loadingRelated, setLoadingRelated] = useState(false);
+
+  // Get current parameters from URL
+  const currentPage = parseInt(searchParams.get("page")) || 1;
+
+  const [filteredCompanies, setFilteredCompanies] = useState(companies);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Debounce for search
+  const searchTimeoutRef = useRef(null);
+
+  const locationInputRef = useRef(null);
+  const suggestionsRef = useRef(null);
+
+  // Update companies when props change
+  useEffect(() => {
+    setFilteredCompanies(companies);
+  }, [companies]);
+
+  // Update related subcategories when props change
+  useEffect(() => {
+    setRelatedSubcats(relatedSubcategories);
+    setLoadingRelated(false);
+  }, [relatedSubcategories]);
+
+  // Get unique locations from current companies for suggestions
+  const uniqueLocations = useMemo(() => {
+    const locations = companies
+      .map((company) => company.companyCountry)
+      .filter((location) => location && location.trim())
+      .map((location) => location.trim());
+    return [...new Set(locations)].sort();
+  }, [companies]);
+
+  
+  // Filter companies by location
+  useEffect(() => {
+    let filtered = companies;
+
+    // Filter by selected location
+    if (selectedLocation.trim()) {
+      const locationLower = selectedLocation.toLowerCase().trim();
+      filtered = filtered.filter((company) => {
+        const location = company.companyCountry?.toLowerCase() || "";
+        return location.includes(locationLower);
+      });
+    }
+
+    setFilteredCompanies(filtered);
+  }, [companies, selectedLocation]);
+
+  // Function to update URL with new parameters
+  const updateURL = (newParams) => {
+    const params = new URLSearchParams();
+
+    // Always preserve current parameters
+    searchParams.forEach((value, key) => {
+      params.set(key, value);
+    });
+
+    // Update with new parameters
+    Object.entries(newParams).forEach(([key, value]) => {
+      if (value !== null && value !== undefined && value !== "") {
+        params.set(key, value.toString());
+      } else {
+        params.delete(key);
+      }
+    });
+
+    const newURL = `${window.location.pathname}?${params.toString()}`;
+    router.push(newURL);
+  };
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    setIsLoading(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    updateURL({
+      page: page,
+    });
+  };
+
+  // Handle loading state when URL changes
+  useEffect(() => {
+    setIsLoading(false);
+  }, [companies]);
+
+  // Handle clicking outside to close suggestions
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        locationInputRef.current &&
+        !locationInputRef.current.contains(event.target) &&
+        suggestionsRef.current &&
+        !suggestionsRef.current.contains(event.target)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Handle location input change
+  const handleLocationInputChange = (e) => {
+    const value = e.target.value;
+    setLocationInput(value);
+    setShowSuggestions(true);
+
+    if (!value.trim()) {
+      setSelectedLocation("");
+    }
+  };
+
+ 
+  // Generate structured data for SEO
+  const generateStructuredData = () => {
+    if (filteredCompanies.length === 0) return null;
+
+    const isMSP = name.toLowerCase().includes("managed service") || name.toLowerCase().includes("msp");
+    const isMSSP = name.toLowerCase().includes("managed security") || name.toLowerCase().includes("mssp");
+
+    const companiesData = filteredCompanies.map((company, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Organization",
+        name: company.companyName,
+        url: `https://intentwire.com/${slug}/${company.slug}`,
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: company.companyCountry,
+        },
+        employeeCount: company.employees,
+        foundingDate: company.foundedYear?.toString(),
+        industry: company.industries?.[0],
+        ...(isMSP && { 
+          serviceType: "Managed Service Provider",
+          keywords: "managed service provider, MSP, IT managed services, cybersecurity outsourcing, cloud service provider, 24/7 IT support, data backup and recovery"
+        }),
+        ...(isMSSP && { 
+          serviceType: "Managed Security Service Provider",
+          keywords: "managed security service provider, MSSP, cybersecurity services, security outsourcing, SOC services, penetration testing, compliance management"
+        })
+      },
+    }));
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      itemListElement: companiesData,
+      description: `Browse our comprehensive directory of ${name} companies. Find verified ${isMSP ? "managed service providers (MSPs)" : isMSSP ? "managed security service providers (MSSPs)" : "vendors"} with detailed profiles, contact information, and client reviews. Discover top-rated providers offering ${isMSP ? "IT managed services, cloud solutions, and cybersecurity outsourcing" : isMSSP ? "cybersecurity services, threat monitoring, and compliance solutions" : "specialized services"} near you. ${isMSP ? "Compare MSP pricing, services, and client reviews to find the perfect technology partner for your business." : isMSSP ? "Evaluate MSSP security capabilities, compliance expertise, and threat detection rates to protect your organization." : "Research provider expertise, service offerings, and customer satisfaction ratings."}`,
+      name: `${name} Companies Directory`,
+      ...(isMSP && { 
+        category: "Managed Service Providers",
+        keywords: "managed service provider, MSP, IT managed services, cloud service provider, best managed service providers, top MSP, managed IT services, IT support services"
+      }),
+      ...(isMSSP && { 
+        category: "Managed Security Service Providers",
+        keywords: "managed security service provider, MSSP, cybersecurity services, security outsourcing, best managed security providers, top MSSP, SOC monitoring, penetration testing"
+      })
+    };
+  };
+
+  const structuredData = generateStructuredData();
+
+  // Determine if this is an MSP or MSSP category
+  const isMSP = name.toLowerCase().includes("managed service") || name.toLowerCase().includes("msp");
+  const isMSSP = name.toLowerCase().includes("managed security") || name.toLowerCase().includes("mssp");
+  
+  // Enhanced description
+  const enhancedDescription = description || 
+    (isMSP 
+      ? `Browse our comprehensive directory of managed service providers (MSPs) offering IT managed services, cloud computing solutions, and cybersecurity outsourcing. Find verified MSP companies with detailed profiles, contact information, and client reviews. Discover top-rated managed service providers near you with expertise in ${name.toLowerCase().includes("cloud") ? "cloud infrastructure management" : name.toLowerCase().includes("security") ? "cybersecurity solutions" : "comprehensive IT services"}.`
+      : isMSSP
+      ? `Explore our curated list of managed security service providers (MSSPs) specializing in cybersecurity services, threat monitoring, and compliance management. Discover verified MSSP companies with security expertise and proven track records. Find top managed security service providers near you offering ${name.toLowerCase().includes("network") ? "network security services" : name.toLowerCase().includes("penetration") ? "penetration testing" : "advanced threat protection"}.`
+      : `Browse our comprehensive directory of ${name} companies. Find verified vendors with detailed profiles, contact information, and client reviews. Discover top-rated providers offering specialized services in ${name.toLowerCase().includes("data") ? "data management solutions" : name.toLowerCase().includes("cloud") ? "cloud computing services" : name.toLowerCase().includes("network") ? "network infrastructure" : "technology services"} near you.`);
+
+  
+
+  // Use sponsorCompanies if available, otherwise use static data
+  const displayedSponsoredCompanies = sponsorCompanies;
+
+  // Pagination component
+  const Pagination = () => {
+    const { totalPages } = pagination;
+
+    if (totalPages <= 1) return null;
+
+    const pageNumbers = [];
+    const maxVisiblePages = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return (
+      <nav
+        aria-label="Pagination"
+        className="flex items-center justify-center mt-12 mb-8"
+      >
+        <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-2">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1 || isLoading}
+            className="px-3 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors font-medium text-sm"
+            aria-label="Go to previous page"
+          >
+            Prev
+          </button>
+
+          {startPage > 1 && (
+            <>
+              <button
+                onClick={() => handlePageChange(1)}
+                disabled={isLoading}
+                className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 font-medium text-sm disabled:opacity-50"
+                aria-label="Go to first page"
+              >
+                1
+              </button>
+              {startPage > 2 && (
+                <span className="px-2 text-gray-500" aria-hidden="true">
+                  ...
+                </span>
+              )}
+            </>
+          )}
+
+          {pageNumbers.map((number) => (
+            <button
+              key={number}
+              onClick={() => handlePageChange(number)}
+              disabled={isLoading}
+              className={`px-3 py-2 border rounded-lg transition-colors font-medium text-sm disabled:opacity-50 ${
+                currentPage === number
+                  ? "bg-[#314158] text-white border-[#314158] shadow-sm"
+                  : "border-gray-300 hover:bg-gray-50"
+              }`}
+              aria-label={`Go to page ${number}`}
+              aria-current={currentPage === number ? "page" : undefined}
+            >
+              {number}
+            </button>
+          ))}
+
+          {endPage < totalPages && (
+            <>
+              {endPage < totalPages - 1 && (
+                <span className="px-2 text-gray-500" aria-hidden="true">
+                  ...
+                </span>
+              )}
+              <button
+                onClick={() => handlePageChange(totalPages)}
+                disabled={isLoading}
+                className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 font-medium text-sm disabled:opacity-50"
+                aria-label="Go to last page"
+              >
+                {totalPages}
+              </button>
+            </>
+          )}
+
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages || isLoading}
+            className="px-3 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors font-medium text-sm"
+            aria-label="Go to next page"
+          >
+            Next
+          </button>
+        </div>
+      </nav>
+    );
+  };
+
+  // Handle search from hero section
+  const handleHeroSearch = (searchTerm, locationTerm) => {
+    setIsLoading(true);
+    updateURL({
+      search: searchTerm,
+      location: locationTerm,
+      page: 1,
+    });
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Structured Data for SEO */}
+      {structuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      )}
+
+      {/* Pass search handler to hero section */}
+      <EndpointSecurityHero 
+        categoryName={categoryName} 
+        description={description}
+        name={name} 
+        onSearch={handleHeroSearch}
+        totalCompanies={totalCompanies}
+        uniqueLocations={uniqueLocations}
+      />
+
+      {/* Main Content */}
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto">
+          {/* Main Content - Center */}
+          <div className="flex-1">
+            {/* Results Header Row - Only shows company count and view options */}
+            <section
+              aria-labelledby="results-heading"
+              className="bg-white rounded-xl shadow-sm p-6 mb-6 border border-gray-200"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                {/* Left: Total Companies Count */}
+                <div className="flex items-center gap-2">
+                  <BuildingIcon className="w-5 h-5 text-[#314158]" />
+                  <h2 className="text-xl font-bold text-gray-900">
+                    {totalCompanies.toLocaleString()}{" "}
+                    {(pagination.total || filteredCompanies.length) === 1
+                      ? "Company"
+                      : "Companies"}{" "}
+                    Found
+                    {pagination.searchTerm && (
+                      <span className="text-sm font-normal text-gray-600">
+                        {" "}
+                        for {pagination.searchTerm}
+                      </span>
+                    )}
+                    {selectedLocation && (
+                      <span className="text-sm font-normal text-gray-600">
+                        {" "}
+                        in {selectedLocation}
+                      </span>
+                    )}
+                  </h2>
+                </div>
+                {/* Right: View Toggle - Removed since we only want list view */}
+                <div className="flex items-center gap-3">
+                  {/* View toggle removed as we only want list view */}
+                </div>
+              </div>
+            </section>
+
+            {/* Loading State */}
+            {isLoading && (
+              <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+                <div className="text-[#314158] mb-4">
+                  <div
+                    className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#314158] mx-auto"
+                    role="status"
+                  >
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  Loading companies...
+                </h3>
+              </div>
+            )}
+
+            {/* Company Cards - Changed to single column layout */}
+            {!isLoading && filteredCompanies.length > 0 ? (
+              <section aria-labelledby="company-list-heading">
+                <h2 id="company-list-heading" className="sr-only">
+                  List of Companies
+                </h2>
+                <div className="space-y-6"> {/* Changed from grid to space-y-6 for single column */}
+                  {filteredCompanies.map((company) => (
+                    <CompanyCard key={company._id} company={company} viewMode="list" />
+                  ))}
+                </div>
+              </section>
+            ) : !isLoading ? (
+              <section aria-labelledby="no-results-heading">
+                <h2 id="no-results-heading" className="sr-only">
+                  No Companies Found
+                </h2>
+                <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+                  <div className="text-gray-300 mb-4">
+                    <SearchIcon className="w-16 h-16 mx-auto" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    No companies found
+                  </h3>
+                  <p className="text-gray-500 mb-6 max-w-md mx-auto">
+                    {selectedLocation ? (
+                      <>
+                        We couldn&apos;t find any companies matching your location
+                        filter. Try adjusting your filter.
+                      </>
+                    ) : (
+                      <>
+                        We couldn&apos;t find any companies. Please try again
+                        later.
+                      </>
+                    )}
+                  </p>
+                </div>
+              </section>
+            ) : null}
+
+            {/* Pagination */}
+            <Pagination />
+          </div>
+
+          {/* Right Sidebar - Sponsored Companies */}
+          <aside
+            aria-label="Sponsored companies"
+            className="w-full lg:w-80 xl:w-96 shrink-0"
+          >
+            <div className="sticky top-8">
+              {/* Sponsored Companies Section */}
+              <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 mb-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Sponsored Companies</h3>
+                <div>
+                  {displayedSponsoredCompanies.slice(0, 10).map((company) => (
+                    <SponsoredCompanyCard key={company._id} company={company} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+      
+      {/* Related Subcategories Section */}
+      <div className="pb-12 p-6 bg-gradient-to-r from-[#f0f4f9] to-[#e8eff5] border border-[#314158]/20 w-full mx-auto shadow-sm">
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">Explore Related {name} Services</h3>
+        <p className="text-gray-700 mb-6 max-w-3xl">
+          Looking for other technology solutions in {name.toLowerCase().includes("managed service") || name.toLowerCase().includes("msp") ? "managed IT services" : name.toLowerCase().includes("managed security") || name.toLowerCase().includes("mssp") ? "cybersecurity services" : name.toLowerCase().includes("cloud") ? "cloud computing" : name.toLowerCase().includes("network") ? "network security" : "IT services"}? Browse our comprehensive directory of specialized providers and solutions.
+        </p>
+        
+        {loadingRelated ? (
+          <div className="flex justify-center items-center h-20">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#314158]"></div>
+          </div>
+        ) : relatedSubcats.length > 0 ? (
+          <div className="flex flex-wrap gap-3">
+            {relatedSubcats.map((subcategory) => (
+              <Link 
+                key={subcategory.slug}
+                href={`/${subcategory.slug}`}
+                className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-[#314158] to-[#253347] text-white hover:from-[#253347] hover:to-[#1a2533] transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              >
+                {subcategory.name}
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-white/50 rounded-xl p-4 border border-gray-200">
+            <p className="text-gray-500 italic text-center">No related services found.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
