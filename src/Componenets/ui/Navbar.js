@@ -227,13 +227,13 @@ const Navbar = ({ categories = [] }) => {
                 </div>
               
 <Link
-                  href="/"
+                  href="/review"
                   className="text-lg font-semibold text-gray-800  transition-colors duration-300 px-3 py-2"
                 >
                   Write a Review
                 </Link>
 <Link
-                  href="/"
+                  href="/listing"
                   className="text-lg font-semibold text-gray-800  transition-colors duration-300 px-3 py-2"
                 >
                   Add a Product
