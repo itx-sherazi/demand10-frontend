@@ -36,13 +36,4 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 
-vps Data:
-rootuser:ssh intentwir@145.79.6.178
-rootpassword:HExbeGpIhlOij3EFYW5r
-intentfrontendpath: cd /intentwire-app/intentfrontend$
-
-
-
-
-
 

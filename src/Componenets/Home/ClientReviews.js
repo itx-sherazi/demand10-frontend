@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const ReviewSection = () => {
   return (
@@ -84,13 +85,15 @@ const ReviewSection = () => {
 
             {/* Supporting Text */}
             <p className="text-lg text-gray-600 leading-relaxed">
-              Leave a review of the business partners you've worked with over the years. Make your voice heard and help other business leaders make a confident choice.
+              Leave a review of the business partners you&apos;ve worked with over the years. Make your voice heard and help other business leaders make a confident choice.
             </p>
 
             {/* CTA Button */}
-            <button className="inline-flex items-center px-6 py-3 bg-[#314158] text-white font-semibold rounded-lg hover:bg-[#314158]/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#314158] focus:ring-offset-2 shadow-md hover:shadow-lg">
+          <Link href='/review'>
+            <button className="inline-flex cursor-pointer items-center px-6 py-3 bg-[#314158] text-white font-semibold rounded-lg hover:bg-[#314158]/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#314158] focus:ring-offset-2 shadow-md hover:shadow-lg">
               Write a Review
             </button>
+          </Link>
           </div>
 
           {/* Right Column - Image with SVG Overlay */}

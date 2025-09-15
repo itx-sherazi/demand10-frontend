@@ -84,7 +84,7 @@ const ContactPage = () => {
             </div>
             {/* Description */}
             <p className="text-lg text-white/80 mb-8 leading-relaxed">
-              We're here to assist you with all your IT and cybersecurity needs. Whether you're seeking a reliable Managed Service Provider (MSP) or a robust Managed Security Service Provider (MSSP), our team is ready to help you navigate the complexities of modern technology.
+              We&apos;re here to assist you with all your IT and cybersecurity needs. Whether you&apos;re seeking a reliable Managed Service Provider (MSP) or a robust Managed Security Service Provider (MSSP), our team is ready to help you navigate the complexities of modern technology.
             </p>
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -116,7 +116,7 @@ const ContactPage = () => {
           {/* Left Section - Support Info */}
           <div className="bg-gradient-to-br from-[#314158] to-[#253347] rounded-2xl p-8 shadow-lg text-white">
             <h2 className="text-3xl font-bold mb-8">
-              We're Here To Support You Always!
+              We&apos;re Here To Support You Always!
             </h2>
 
             <div className="space-y-6">
@@ -179,7 +179,7 @@ const ContactPage = () => {
               Get in <span className="text-[#314158]">touch</span> with us
             </h2>
             <p className="text-gray-600 mb-8 text-lg leading-relaxed">
-              Have questions or need assistance? Our team is here to help! Send us a message, and we'll respond promptly to assist you.
+              Have questions or need assistance? Our team is here to help! Send us a message, and we&apos;ll respond promptly to assist you.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-6">

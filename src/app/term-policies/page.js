@@ -172,8 +172,8 @@ const TermsOfUse = () => {
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   The Channel Company provides our Internet sites and the
                   content, products and services offered on or through those
-                  sites (collectively, the "Services"), to you subject to the
-                  following Terms of Service ("TOS"). Your use of the Services
+                  sites (collectively, the &quot;Services&quot;), to you subject to the
+                  following Terms of Service (&quot;TOS&quot;). Your use of the Services
                   in whole or in part constitutes your binding acceptance of
                   these TOS. If you do not agree to these TOS, you should not
                   use the Services. Some Services may be subject to additional
@@ -209,14 +209,14 @@ const TermsOfUse = () => {
                   information, ideas, opinions, photographs, images, video,
                   creative works or other information, messages, transmissions
                   or material to us or others on or through that Service
-                  (collectively, the "Postings"). We adhere to high journalistic
+                  (collectively, the &quot;Postings&quot;). We adhere to high journalistic
                   standards, and use every reasonable effort to provide
                   informative and relevant content as part of the Services.
                   However, in using the Services, you may be exposed to content
                   that you find offensive, indecent, objectionable or that is
                   inaccurate and you bear all risks associated with using that
                   content. You understand that the Services are provided by The
-                  Channel Company "AS IS", as further described in Section 15 of
+                  Channel Company &quot;AS IS&quot;, as further described in Section 15 of
                   these TOS, and that The Channel Company does not guarantee the
                   accuracy, integrity or quality of any content available on or
                   through the Services. In this regard, you acknowledge that you
@@ -225,7 +225,7 @@ const TermsOfUse = () => {
                   to, product reviews, white papers, product descriptions, stock
                   quotes, or Postings on any bulletin board, chat, news group,
                   community, forum or other feedback section of the Services
-                  (collectively, the "Forums"). You understand that from time to
+                  (collectively, the &quot;Forums&quot;). You understand that from time to
                   time, you may communicate with, receive communications from,
                   or otherwise participate in or use the services or obtain
                   goods and services of or from, third parties (e.g.,
@@ -273,7 +273,7 @@ const TermsOfUse = () => {
                 </p>
                 <ul className="list-disc pl-6 mb-4 space-y-2 text-gray-600">
                   <li>
-                    You will not interfere with another member's use and
+                    You will not interfere with another member&apos;s use and
                     enjoyment of the Services; you will not interfere with or
                     disrupt the security measures of the Services; you will not
                     interfere with or disrupt networks connected to the
@@ -288,14 +288,14 @@ const TermsOfUse = () => {
                   <li>
                     You will not use the Services to send or result in the
                     transmission of junk e-mail, chain letters, duplicative or
-                    unsolicited messages, or so-called "spamming"; harm minors
+                    unsolicited messages, or so-called &quot;spamming&quot;; harm minors
                     in any way; promote or generate revenue for any business or
                     commercial purposes, whether or not for a charge or through
                     linking with any other web services or pages, unless
                     authorized by The Channel Company; impersonate any person or
                     entity; intentionally or unintentionally violate any
                     applicable local, state, national or international law;
-                    "stalk" or otherwise harass another;
+                    &quot;stalk&quot; or otherwise harass another;
                   </li>
                   <li>
                     You will not collect or store personal data about other
@@ -339,7 +339,7 @@ const TermsOfUse = () => {
                 <ul className="list-disc pl-6 mb-4 space-y-2 text-gray-600">
                   <li>
                     is false, inaccurate, or misleading; infringes any third
-                    party's copyright, patent, trademark, trade secret or other
+                    party&apos;s copyright, patent, trademark, trade secret or other
                     proprietary rights, or rights of publicity or privacy;
                     violates a nondisclosure agreement, or violates any law or
                     regulation (including, without limitation, those governing
@@ -403,12 +403,12 @@ const TermsOfUse = () => {
                   otherwise violates these TOS, we reserve the right, at any
                   time, without prior notice and without limiting any and all
                   other rights we may have, at law or in equity, to (a) modify,
-                  refuse or remove the Posting; (b) revoke the applicable user's
+                  refuse or remove the Posting; (b) revoke the applicable user&apos;s
                   right to use the Services; and/or (d) use any technological,
                   legal, operational or other means available to The Channel
                   Company to enforce the provisions of these TOS, including,
                   without limitation, blocking specific IP addresses or
-                  deactivating the applicable user's registration.
+                  deactivating the applicable user&apos;s registration.
                 </p>
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   Finally, you specifically grant to The Channel Company and its
@@ -426,7 +426,7 @@ const TermsOfUse = () => {
                     or in part; use, in whole or in part, your name, likeness,
                     photograph, voice, company name, screen name, e-mail address
                     and/or other identifying information submitted by you as
-                    part of or in connection with such Postings ("Image"), and
+                    part of or in connection with such Postings (&quot;Image&quot;), and
                     reproduce, publish, create derivative works from,
                     distribute, perform and display materials containing the
                     same; and
@@ -450,7 +450,7 @@ const TermsOfUse = () => {
               {/* Section 5 */}
               <section>
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  5. The Channel Company's Proprietary Rights
+                  5. The Channel Company&apos;s Proprietary Rights
                 </h2>
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   All Services software, design, text, images, photographs,
@@ -458,9 +458,9 @@ const TermsOfUse = () => {
                   material, database, proprietary information and all
                   copyrightable or otherwise legally protectable elements of the
                   Services, including, but not limited to, the selection,
-                  sequence and 'look and feel' and arrangement of items, and all
+                  sequence and &apos;look and feel&apos; and arrangement of items, and all
                   trademarks, service marks and trade names, excluding any of
-                  your Postings (individually and/or collectively, "Material"),
+                  your Postings (individually and/or collectively, &quot;Material&quot;),
                   are the property of The Channel Company, its subsidiaries,
                   affiliates, licensors or suppliers and are legally protected,
                   without limitation, under U.S. Federal and State, as well as
@@ -539,7 +539,7 @@ const TermsOfUse = () => {
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   Some of our Services may from time to time conduct promotions,
                   including, but not limited to, auctions, contests and
-                  sweepstakes ("Promotions"). Each Promotion will have
+                  sweepstakes (&quot;Promotions&quot;). Each Promotion will have
                   additional terms, conditions and rules which will be posted or
                   otherwise made available to you and, for purposes of each
                   Promotion in which you participate, will be deemed
@@ -601,7 +601,7 @@ const TermsOfUse = () => {
                   information by guarding that password, and by changing it as
                   soon as possible if you believe its security has been
                   compromised. If The Channel Company allows you to choose a
-                  username and you select, in The Channel Company's sole
+                  username and you select, in The Channel Company&apos;s sole
                   discretion, one that is obscene, indecent, abusive or which is
                   otherwise objectionable, The Channel Company has the right,
                   without prior notice to you, to automatically change your
@@ -686,9 +686,9 @@ const TermsOfUse = () => {
                   Company, its subsidiaries, affiliates, and all of their
                   respective officers, directors, owners, employees, agents,
                   licensors, representatives, licensors and suppliers
-                  (collectively, the "The Channel Company Parties"), harmless
+                  (collectively, the &quot;The Channel Company Parties&quot;), harmless
                   from and against any and all liability, losses, expenses,
-                  damages and costs (including attorneys' fees), incurred by any
+                  damages and costs (including attorneys&apos; fees), incurred by any
                   The Channel Company Party in connection with any claim arising
                   out of your use of the Services, any use or alleged use of
                   your accounts or your passwords by any person, whether or not
@@ -715,7 +715,7 @@ const TermsOfUse = () => {
                 </h2>
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   THE SERVICES, AND MATERIALS, PRODUCTS AND POSTINGS ARE MADE
-                  AVAILABLE ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT ANY
+                  AVAILABLE ON AN &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; BASIS, WITHOUT ANY
                   REPRESENTATION, PROMISE OR WARRANTY OF ANY KIND, EXPRESS OR
                   IMPLIED, OR ANY GUARANTY OR ASSURANCE THE SERVICES WILL BE
                   AVAILABLE FOR USE, OR UNINTERRUPTED OR ERROR FREE, OR THAT ALL
@@ -788,7 +788,7 @@ const TermsOfUse = () => {
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   The Channel Company respects the intellectual property of
                   others and requires that you do the same. In accordance with
-                  the Digital Millennium Copyright Act ("DMCA"), the text of
+                  the Digital Millennium Copyright Act (&quot;DMCA&quot;), the text of
                   which may be found on the U.S. Copyright Office website at
                   http://www.copyright.gov/legislation/dmca.pdf, we will respond
                   expeditiously to notices of alleged copyright infringement
@@ -801,7 +801,7 @@ const TermsOfUse = () => {
                   our Copyright Agent the following information:
                 </p>
                 <h3 className="text-xl font-medium text-gray-700 mb-3">
-                  DMCA Notice of Alleged Infringement ("Notice")
+                  DMCA Notice of Alleged Infringement (&quot;Notice&quot;)
                 </h3>
                 <ul className="list-disc pl-6 mb-4 space-y-2 text-gray-600">
                   <li>
@@ -821,17 +821,17 @@ const TermsOfUse = () => {
                   </li>
                   <li>
                     Include both of the following statements in the body of the
-                    Notice: "I hereby state that I have a good-faith belief that
+                    Notice: &quot;I hereby state that I have a good-faith belief that
                     the disputed use of the copyrighted material is not
                     authorized by the copyright owner, its agent, or the law
-                    (e.g., fair use)."
+                    (e.g., fair use).&quot;
                   </li>
                   <li>
-                    "I hereby state that the information in this Notice is
+                    &quot;I hereby state that the information in this Notice is
                     accurate and, under penalty of perjury, that I am the owner
                     or authorized to act on behalf of the owner, of the
                     copyright or of an exclusive right under the copyright that
-                    is allegedly infringed."
+                    is allegedly infringed.&quot;
                   </li>
                   <li>
                     Provide your full legal name and your electronic or physical
@@ -857,7 +857,7 @@ const TermsOfUse = () => {
                 </p>
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   While we consider all such notices seriously, you may be
-                  liable for damages (including costs and attorneys' fees) if
+                  liable for damages (including costs and attorneys&apos; fees) if
                   you materially misrepresent that content or activity is
                   infringing. Accordingly, if you are uncertain whether material
                   infringes your copyrights (including whether use of
@@ -910,7 +910,7 @@ const TermsOfUse = () => {
                   with accurate information, we cannot be held liable if we fail
                   to notify you. You have the right to request that we provide
                   such notices to you in paper format, and may do so by
-                  contacting the The Channel Company's Legal Department, The
+                  contacting the The Channel Company&apos;s Legal Department, The
                   Channel Company, 117 Kendrick Street, Suite 300, Needham, MA
                   02494; Tel. (508) 416-1142. If you are a California resident,
                   you may have this same information emailed to you by sending a
@@ -959,7 +959,7 @@ const TermsOfUse = () => {
                   such right or provision. If any provision of the TOS is found
                   by a court of competent jurisdiction to be invalid, the
                   parties nevertheless agree that the court should endeavor to
-                  give effect to the parties' intentions as reflected in the
+                  give effect to the parties&apos; intentions as reflected in the
                   provision, and the other provisions of the TOS remain in full
                   force and effect.
                 </p>

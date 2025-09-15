@@ -70,7 +70,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
       const authData = await checkUserAuth();
       if (authData.ok) {
         // User is authenticated, redirect to user dashboard
-        router.push("/user-dashboard");
+        router.push("/review");
       } else {
         // User is not authenticated, show login popup
         setShowLoginPopup(true);
@@ -236,7 +236,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
                   </h4>
                   {/* Review Quote */}
                   <div className="mb-4">
-                    <blockquote className="text-gray-800 text-base leading-relaxed italic bg-[#f8f9fa] p-4 rounded-lg border-l-4 border-[#314158]">
+                    <blockquote className="text-gray-800 text-base leading-relaxed italic bg-[#f8f9fa] p-4 rounded-lg border-l-4 border-[#314158] break-words">
                       &#34;{review.reviewText || review.review || 'They had an in-house team and an offshore team, so they were able to work almost all day.'}&#34;
                     </blockquote>
                   </div>
@@ -246,7 +246,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
                     <h5 className="text-xs font-semibold text-[#314158] uppercase tracking-wider mb-2">
                       FEEDBACK SUMMARY
                     </h5>
-                    <p className="text-gray-700 text-sm leading-relaxed">
+                    <p className="text-gray-700 text-sm leading-relaxed break-words">
                       {review.feedbackSummary || 'The site Denologix developed met the end client&#39;s expectations, and they haven&#39;t had any issues since the site was delivered. Denologix was flexible in dealing with the project&#39;s ambiguity. They met deadlines and communicated effectively through Microsoft Teams meetings and phone calls. This review is an update by the client company. The original content is located below the new review.'}
                     </p>
                   </div>

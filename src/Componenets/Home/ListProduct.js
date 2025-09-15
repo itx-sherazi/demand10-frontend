@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from "next/image";
+import Link from 'next/link';
 
 export default function ListProductSection() {
   return (
@@ -98,12 +99,14 @@ export default function ListProductSection() {
                 </div>
               </div>
               
-              <button className="bg-[#314158] hover:bg-[#314158]/90 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 mt-8 shadow-md hover:shadow-lg inline-flex items-center text-lg">
+              <Link href='/listing'>
+              <button className="bg-[#314158] cursor-pointer hover:bg-[#314158]/90 text-white font-semibold py-4 px-8 rounded-lg transition-all duration-300 mt-8 shadow-md hover:shadow-lg inline-flex items-center text-lg">
                 Get Listed
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </button>
+              </Link>
             </div>
           </div>
           

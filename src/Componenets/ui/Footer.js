@@ -34,11 +34,11 @@ const Footer = () => {
                 Quick Links
               </h3>
               <ul className="space-y-3">
-                <li>
+                {/* <li>
                   <Link href="/about" className="text-gray-300 hover:text-white transition-colors duration-200 text-base font-light">
                     About Us
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link href="/blog" className="text-gray-300 hover:text-white transition-colors duration-200 text-base font-light">
                     Blog
@@ -83,14 +83,14 @@ const Footer = () => {
                     History
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     href="/services"
                     className="text-gray-300 hover:text-white transition-colors duration-200 text-base font-light"
                   >
                     Services
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     href="/msp"
