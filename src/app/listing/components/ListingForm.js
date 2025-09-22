@@ -5,8 +5,28 @@ import { getCategoriesWithSubcategories, submitCompanyListing } from '@/services
 import { toast } from 'react-toastify';
 import Image from 'next/image';
 import { checkUserAuth } from '@/services/userApi';
+import ServiceLines from './ServiceLines';
+import FocusLines from './FocusLines';
+import Industries from './Industries';
+import Clients from './Clients';
 
-export default function ListingForm() {
+// Skeleton component for loading state
+const ListingFormSkeleton = () => (
+  <div className="bg-white rounded-xl shadow-lg p-6 max-w-2xl mx-auto">
+    <div className="animate-pulse space-y-4">
+      <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+      <div className="h-4 bg-gray-200 rounded w-full"></div>
+      <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div className="h-10 bg-gray-200 rounded"></div>
+        <div className="h-10 bg-gray-200 rounded"></div>
+      </div>
+      <div className="h-32 bg-gray-200 rounded mt-4"></div>
+    </div>
+  </div>
+);
+
+export default function ListingForm({ onListingCompleted }) {
   // State for form steps
   const [currentStep, setCurrentStep] = useState(1);
   const [user, setUser] = useState(null);
@@ -26,6 +46,10 @@ export default function ListingForm() {
     foundedYear: '',
     employees: '',
     
+    // New fields
+    minimumProjectSize: '',
+    hourlyRate: '',
+    
     // Social media
     linkedinUrl: '',
     facebookUrl: '',
@@ -35,10 +59,22 @@ export default function ListingForm() {
     categoryId: '',
     subcategoryId: '',
     
+    // Services
+    services: [],
+    
+    // Focus
+    focus: [],
+    
+    // Industries
+    industries: [],
+    
+    // Clients
+    clients: [],
+    
     // Image
     image: null
   });
-
+  
   const [imagePreview, setImagePreview] = useState('');
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
@@ -133,14 +169,14 @@ export default function ListingForm() {
       }
     }
     
-    if (currentStep === 4) {
+    if (currentStep === 7) { // Categories step
       if (!formData.categoryId || !formData.subcategoryId) {
         toast.error('Please select both category and subcategory');
         return;
       }
     }
     
-    setCurrentStep(prev => Math.min(prev + 1, 4));
+    setCurrentStep(prev => Math.min(prev + 1, 7)); // 7 steps total
   };
 
   const prevStep = () => {
@@ -165,10 +201,30 @@ export default function ListingForm() {
       
       // Append all form fields
       Object.keys(formData).forEach(key => {
-        if (key !== 'image' && formData[key]) {
+        if (key !== 'image' && key !== 'services' && key !== 'focus' && key !== 'industries' && key !== 'clients' && formData[key]) {
           formDataToSend.append(key, formData[key]);
         }
       });
+      
+      // Append services as JSON string
+      if (formData.services && formData.services.length > 0) {
+        formDataToSend.append('services', JSON.stringify(formData.services));
+      }
+      
+      // Append focus as JSON string
+      if (formData.focus && formData.focus.length > 0) {
+        formDataToSend.append('focus', JSON.stringify(formData.focus));
+      }
+      
+      // Append industries as JSON string
+      if (formData.industries && formData.industries.length > 0) {
+        formDataToSend.append('industries', JSON.stringify(formData.industries));
+      }
+      
+      // Append clients as JSON string
+      if (formData.clients && formData.clients.length > 0) {
+        formDataToSend.append('clients', JSON.stringify(formData.clients));
+      }
       
       // Append image if provided
       if (formData.image) {
@@ -189,15 +245,25 @@ export default function ListingForm() {
           description: '',
           foundedYear: '',
           employees: '',
+          minimumProjectSize: '',
+          hourlyRate: '',
           linkedinUrl: '',
           facebookUrl: '',
           twitterUrl: '',
           categoryId: '',
           subcategoryId: '',
+          services: [],
+          focus: [],
+          industries: [],
           image: null
         });
         setImagePreview('');
         setCurrentStep(1);
+        
+        // Notify parent component that listing is completed
+        if (onListingCompleted) {
+          onListingCompleted();
+        }
       } else {
         toast.error(result.message || 'Failed to submit company listing');
       }
@@ -218,13 +284,13 @@ export default function ListingForm() {
   if (!user) {
     return (
       <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 max-w-xl mx-auto text-center">
-        <h2 className="text-2xl font-bold text-[#253347] mb-4">Authentication Required</h2>
-        <p className="text-[#314158] mb-6">
+        <h2 className="text-2xl font-bold text-[#1a365d] mb-4">Authentication Required</h2>
+        <p className="text-[#0249aa] mb-6">
           You need to be signed in to list your company. Please sign in to continue.
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="bg-[#314158] hover:bg-[#253347] text-white font-medium py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#314158]"
+          className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1a365d]"
         >
           Refresh Page
         </button>
@@ -233,192 +299,209 @@ export default function ListingForm() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-white to-[#f8fafc] rounded-xl shadow-lg p-4 md:p-5 border border-gray-100 max-w-xl mx-auto">
-      <h2 className="text-xl md:text-2xl font-bold text-[#253347] text-center mb-1">
-        List Your Product
-      </h2>
-      <p className="text-[#314158] text-center mb-5">It&apos;s Free and Takes Less Than 5 Minutes</p>
+    <div className="bg-gradient-to-br from-white to-[#f8fafc]    p-4 md:p-6 border border-gray-100 w-full mx-auto">
+   
       
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Step 1: Basic Information */}
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Step 1: Company Info and Details */}
         {currentStep === 1 && (
-          <div className="space-y-4 animate-fadeIn">
-            <div>
-              <label htmlFor="companyName" className="block text-[#253347] mb-1 text-sm font-medium">
-                Company Name *
-              </label>
-              <input 
-                type="text" 
-                id="companyName" 
-                name="companyName" 
-                value={formData.companyName}
-                onChange={handleInputChange}
-                required 
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm"
-                placeholder="Your Company Inc."
-              />
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="companyEmail" className="block text-[#253347] mb-1 text-sm font-medium">
-                  Company Email *
-                </label>
-                <input 
-                  type="email" 
-                  id="companyEmail" 
-                  name="companyEmail" 
-                  value={formData.companyEmail}
-                  onChange={handleInputChange}
-                  required 
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm"
-                  placeholder="contact@company.com"
-                />
-              </div>
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Company Information</h3>
+              <p className="text-[#0249aa] mb-6">Tell us about your company basics</p>
               
-              <div>
-                <label htmlFor="companyPhone" className="block text-[#253347] mb-1 text-sm font-medium">
-                  Company Phone *
-                </label>
-                <input 
-                  type="tel" 
-                  id="companyPhone" 
-                  name="companyPhone" 
-                  value={formData.companyPhone}
-                  onChange={handleInputChange}
-                  required 
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm"
-                  placeholder="+1 (555) 123-4567"
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="companyName" className="block text-[#1a365d] mb-2 font-medium">
+                    Company Name *
+                  </label>
+                  <input 
+                    type="text" 
+                    id="companyName" 
+                    name="companyName" 
+                    value={formData.companyName}
+                    onChange={handleInputChange}
+                    required 
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="Your Company Inc."
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="companyEmail" className="block text-[#1a365d] mb-2 font-medium">
+                    Company Email *
+                  </label>
+                  <input 
+                    type="email" 
+                    id="companyEmail" 
+                    name="companyEmail" 
+                    value={formData.companyEmail}
+                    onChange={handleInputChange}
+                    required 
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="contact@company.com"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="companyPhone" className="block text-[#1a365d] mb-2 font-medium">
+                    Company Phone *
+                  </label>
+                  <input 
+                    type="tel" 
+                    id="companyPhone" 
+                    name="companyPhone" 
+                    value={formData.companyPhone}
+                    onChange={handleInputChange}
+                    required 
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="website" className="block text-[#1a365d] mb-2 font-medium">
+                    Company Website
+                  </label>
+                  <input 
+                    type="url" 
+                    id="website" 
+                    name="website" 
+                    value={formData.website}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="https://yourcompany.com"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="companyCountry" className="block text-[#1a365d] mb-2 font-medium">
+                    Company Country
+                  </label>
+                  <input
+                    type="text"
+                    id="companyCountry"
+                    name="companyCountry"
+                    value={formData.companyCountry}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="United States"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="employees" className="block text-[#1a365d] mb-2 font-medium">
+                    Number of Employees
+                  </label>
+                  <select 
+                    id="employees" 
+                    name="employees"
+                    value={formData.employees}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition appearance-none bg-white shadow-sm"
+                  >
+                    <option value="">Select Range</option>
+                    <option value="1-10">1-10</option>
+                    <option value="11-50">11-50</option>
+                    <option value="51-200">51-200</option>
+                    <option value="201-500">201-500</option>
+                    <option value="501-1000">501-1000</option>
+                    <option value="1000+">1000+</option>
+                  </select>
+                </div>
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="website" className="block text-[#253347] mb-1 text-sm font-medium">
-                  Company Website
-                </label>
-                <input 
-                  type="url" 
-                  id="website" 
-                  name="website" 
-                  value={formData.website}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm"
-                  placeholder="https://yourcompany.com"
-                />
-              </div>
+            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Company Details</h3>
+              <p className="text-[#0249aa] mb-6">Tell us more about your company</p>
               
-              <div>
-                <label htmlFor="companyCountry" className="block text-[#253347] mb-1 text-sm font-medium">
-                  Company Country
-                </label>
-                <input
-                  type="text"
-                  id="companyCountry"
-                  name="companyCountry"
-                  value={formData.companyCountry}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm"
-                  placeholder="United States"
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="md:col-span-2">
+                  <label htmlFor="description" className="block text-[#1a365d] mb-2 font-medium">
+                    Company Description
+                  </label>
+                  <textarea 
+                    id="description" 
+                    name="description" 
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    rows="4"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="Briefly describe your company and what you do..."
+                  ></textarea>
+                </div>
+                
+                <div>
+                  <label htmlFor="foundedYear" className="block text-[#1a365d] mb-2 font-medium">
+                    Founded Year
+                  </label>
+                  <input 
+                    type="number" 
+                    id="foundedYear" 
+                    name="foundedYear" 
+                    value={formData.foundedYear}
+                    onChange={handleInputChange}
+                    min="1900" 
+                    max={new Date().getFullYear()}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="2010"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="minimumProjectSize" className="block text-[#1a365d] mb-2 font-medium">
+                    Minimum Project Size ($)
+                  </label>
+                  <input 
+                    type="number" 
+                    id="minimumProjectSize" 
+                    name="minimumProjectSize" 
+                    value={formData.minimumProjectSize}
+                    onChange={handleInputChange}
+                    min="0"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="1000"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="hourlyRate" className="block text-[#1a365d] mb-2 font-medium">
+                    Hourly Rate ($)
+                  </label>
+                  <input 
+                    type="number" 
+                    id="hourlyRate" 
+                    name="hourlyRate" 
+                    value={formData.hourlyRate}
+                    onChange={handleInputChange}
+                    min="0"
+                    step="0.01"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="50.00"
+                  />
+                </div>
               </div>
             </div>
             
-            <div className="pt-2">
-              <button 
-                type="button" 
-                onClick={nextStep}
-                className="w-full bg-gradient-to-r from-[#314158] to-[#253347] hover:from-[#253347] hover:to-[#1a2533] text-white font-medium py-3 rounded-lg transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#314158]"
-              >
-                Next
-                <FaArrowRight className="ml-2 text-sm" />
-              </button>
-            </div>
-          </div>
-        )}
-        
-        {/* Step 2: Company Details */}
-        {currentStep === 2 && (
-          <div className="space-y-4 animate-fadeIn">
-            <h3 className="text-lg font-bold text-[#253347]">Company Details</h3>
-            <p className="text-[#314158] text-sm">Tell us more about your company</p>
-            
-            <div>
-              <label htmlFor="description" className="block text-[#253347] mb-1 text-sm font-medium">
-                Company Description
-              </label>
-              <textarea 
-                id="description" 
-                name="description" 
-                value={formData.description}
-                onChange={handleInputChange}
-                rows="4"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm"
-                placeholder="Briefly describe your company and what you do..."
-              ></textarea>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="foundedYear" className="block text-[#253347] mb-1 text-sm font-medium">
-                  Founded Year
-                </label>
-                <input 
-                  type="number" 
-                  id="foundedYear" 
-                  name="foundedYear" 
-                  value={formData.foundedYear}
-                  onChange={handleInputChange}
-                  min="1900" 
-                  max={new Date().getFullYear()}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm"
-                  placeholder="2010"
-                />
-              </div>
+            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Company Logo</h3>
               
-              <div>
-                <label htmlFor="employees" className="block text-[#253347] mb-1 text-sm font-medium">
-                  Number of Employees
-                </label>
-                <select 
-                  id="employees" 
-                  name="employees"
-                  value={formData.employees}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm appearance-none bg-white"
-                >
-                  <option value="">Select Range</option>
-                  <option value="1-10">1-10</option>
-                  <option value="11-50">11-50</option>
-                  <option value="51-200">51-200</option>
-                  <option value="201-500">201-500</option>
-                  <option value="501-1000">501-1000</option>
-                  <option value="1000+">1000+</option>
-                </select>
-              </div>
-            </div>
-            
-            {/* Image Upload */}
-            <div>
-              <label className="block text-sm font-medium text-[#253347] mb-1">
-                Company Logo
-              </label>
-              <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
+              <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
                 {imagePreview && (
                   <div className="relative">
                     <Image 
                       src={imagePreview} 
                       alt="Preview" 
-                      width={80}
-                      height={80}
-                      className="w-20 h-20 object-cover rounded-md border-2 border-[#314158]"
+                      width={100}
+                      height={100}
+                      className="w-24 h-24 object-cover rounded-lg border-2 border-[#1a365d]"
                     />
                   </div>
                 )}
                 <div className="flex-1 w-full">
-                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0">
-                    <label className="bg-gradient-to-r from-[#314158] to-[#253347] hover:from-[#253347] hover:to-[#1a2533] text-white px-4 py-2 rounded-md cursor-pointer transition-all duration-300 shadow-md text-center sm:text-left focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#314158]">
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0">
+                    <label className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white px-5 py-3 rounded-lg cursor-pointer transition-all duration-300 shadow-md">
                       Choose Image
                       <input
                         type="file"
@@ -427,170 +510,307 @@ export default function ListingForm() {
                         className="hidden"
                       />
                     </label>
-                    <span className="text-sm text-gray-600 truncate max-w-[150px] sm:ml-3">
+                    <span className="text-sm text-gray-600 truncate max-w-[200px] sm:ml-4">
                       {formData.image ? formData.image.name : 'No file chosen'}
                     </span>
                   </div>
-                  <p className="mt-2 text-sm text-gray-500">
+                  <p className="mt-3 text-sm text-gray-500">
                     Upload a company logo (JPG, PNG, GIF)
                   </p>
                 </div>
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <div className="flex justify-end">
+              <button 
+                type="button" 
+                onClick={nextStep}
+                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+              >
+                Next
+                <FaArrowRight className="ml-2" />
+              </button>
+            </div>
+          </div>
+        )}
+        
+        {/* Step 2: Social Media */}
+        {currentStep === 2 && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Social Media</h3>
+              <p className="text-[#0249aa] mb-6">Share your company&apos;s social media profiles</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label htmlFor="linkedinUrl" className="block text-[#1a365d] mb-2 font-medium flex items-center">
+                    <FaLinkedin className="text-[#0077b5] mr-2" /> LinkedIn
+                  </label>
+                  <input 
+                    type="url" 
+                    id="linkedinUrl" 
+                    name="linkedinUrl" 
+                    value={formData.linkedinUrl}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="https://linkedin.com/company/yourcompany"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="facebookUrl" className="block text-[#1a365d] mb-2 font-medium flex items-center">
+                    <FaFacebook className="text-[#1877f2] mr-2" /> Facebook
+                  </label>
+                  <input 
+                    type="url" 
+                    id="facebookUrl" 
+                    name="facebookUrl" 
+                    value={formData.facebookUrl}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="https://facebook.com/yourcompany"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="twitterUrl" className="block text-[#1a365d] mb-2 font-medium flex items-center">
+                    <FaTwitter className="text-[#1da1f2] mr-2" /> Twitter
+                  </label>
+                  <input 
+                    type="url" 
+                    id="twitterUrl" 
+                    name="twitterUrl" 
+                    value={formData.twitterUrl}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    placeholder="https://twitter.com/yourcompany"
+                  />
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex justify-between">
               <button 
                 type="button" 
                 onClick={prevStep}
-                className="flex-1 bg-gray-100 hover:bg-gray-200 text-[#253347] font-medium py-3 rounded-lg transition-colors flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300"
+                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
               >
-                <FaArrowLeft className="mr-2 text-sm" />
+                <FaArrowLeft className="mr-2" />
                 Back
               </button>
               
               <button 
                 type="button" 
                 onClick={nextStep}
-                className="flex-1 bg-gradient-to-r from-[#314158] to-[#253347] hover:from-[#253347] hover:to-[#1a2533] text-white font-medium py-3 rounded-lg transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#314158]"
+                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
               >
                 Next
-                <FaArrowRight className="ml-2 text-sm" />
+                <FaArrowRight className="ml-2" />
               </button>
             </div>
           </div>
         )}
         
-        {/* Step 3: Social Media */}
+        {/* Step 3: Services */}
         {currentStep === 3 && (
-          <div className="space-y-4 animate-fadeIn">
-            <h3 className="text-lg font-bold text-[#253347]">Social Media</h3>
-            <p className="text-[#314158] text-sm">Share your company&apos;s social media profiles</p>
-            
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="linkedinUrl" className="block text-[#253347] mb-1 text-sm font-medium flex items-center">
-                  <FaLinkedin className="text-[#0077b5] mr-2" /> LinkedIn URL
-                </label>
-                <input 
-                  type="url" 
-                  id="linkedinUrl" 
-                  name="linkedinUrl" 
-                  value={formData.linkedinUrl}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm"
-                  placeholder="https://linkedin.com/company/yourcompany"
-                />
-              </div>
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Services</h3>
+              <p className="text-[#0249aa] mb-6">What services does your company provide?</p>
               
-              <div>
-                <label htmlFor="facebookUrl" className="block text-[#253347] mb-1 text-sm font-medium flex items-center">
-                  <FaFacebook className="text-[#1877f2] mr-2" /> Facebook URL
-                </label>
-                <input 
-                  type="url" 
-                  id="facebookUrl" 
-                  name="facebookUrl" 
-                  value={formData.facebookUrl}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm"
-                  placeholder="https://facebook.com/yourcompany"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="twitterUrl" className="block text-[#253347] mb-1 text-sm font-medium flex items-center">
-                  <FaTwitter className="text-[#1da1f2] mr-2" /> Twitter URL
-                </label>
-                <input 
-                  type="url" 
-                  id="twitterUrl" 
-                  name="twitterUrl" 
-                  value={formData.twitterUrl}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm"
-                  placeholder="https://twitter.com/yourcompany"
-                />
-              </div>
+              <ServiceLines 
+                services={formData.services} 
+                onServicesChange={(services) => setFormData(prev => ({ ...prev, services }))}
+              />
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <div className="flex justify-between">
               <button 
                 type="button" 
                 onClick={prevStep}
-                className="flex-1 bg-gray-100 hover:bg-gray-200 text-[#253347] font-medium py-3 rounded-lg transition-colors flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300"
+                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
               >
-                <FaArrowLeft className="mr-2 text-sm" />
+                <FaArrowLeft className="mr-2" />
                 Back
               </button>
               
               <button 
                 type="button" 
                 onClick={nextStep}
-                className="flex-1 bg-gradient-to-r from-[#314158] to-[#253347] hover:from-[#253347] hover:to-[#1a2533] text-white font-medium py-3 rounded-lg transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#314158]"
+                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
               >
                 Next
-                <FaArrowRight className="ml-2 text-sm" />
+                <FaArrowRight className="ml-2" />
               </button>
             </div>
           </div>
         )}
         
-        {/* Step 4: Categories */}
+        {/* Step 4: Focus */}
         {currentStep === 4 && (
-          <div className="space-y-4 animate-fadeIn">
-            <h3 className="text-lg font-bold text-[#253347]">Categories</h3>
-            <p className="text-[#314158] text-sm">Select your company&apos;s primary category and subcategory</p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="categoryId" className="block text-[#253347] mb-1 text-sm font-medium">
-                  Primary Category *
-                </label>
-                <select 
-                  id="categoryId" 
-                  name="categoryId"
-                  value={formData.categoryId}
-                  onChange={handleCategoryChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm appearance-none bg-white"
-                >
-                  <option value="">Select Category</option>
-                  {categories.map(category => (
-                    <option key={category._id} value={category._id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Focus Areas</h3>
+              <p className="text-[#0249aa] mb-6">What are your company&apos;s focus areas?</p>
               
-              <div>
-                <label htmlFor="subcategoryId" className="block text-[#253347] mb-1 text-sm font-medium">
-                  Subcategory *
-                </label>
-                <select 
-                  id="subcategoryId" 
-                  name="subcategoryId"
-                  value={formData.subcategoryId}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-[#314158] outline-none transition text-sm shadow-sm appearance-none bg-white"
-                  disabled={!formData.categoryId}
-                >
-                  <option value="">Select Subcategory</option>
-                  {subcategories.map(subcategory => (
-                    <option key={subcategory._id} value={subcategory._id}>
-                      {subcategory.name}
-                    </option>
-                  ))}
-                </select>
+              <FocusLines 
+                focus={formData.focus} 
+                onFocusChange={(focus) => setFormData(prev => ({ ...prev, focus }))}
+              />
+            </div>
+            
+            <div className="flex justify-between">
+              <button 
+                type="button" 
+                onClick={prevStep}
+                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
+              >
+                <FaArrowLeft className="mr-2" />
+                Back
+              </button>
+              
+              <button 
+                type="button" 
+                onClick={nextStep}
+                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+              >
+                Next
+                <FaArrowRight className="ml-2" />
+              </button>
+            </div>
+          </div>
+        )}
+        
+        {/* Step 5: Industries */}
+        {currentStep === 5 && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Industries</h3>
+              <p className="text-[#0249aa] mb-6">Which industries does your company serve?</p>
+              
+              <Industries 
+                industries={formData.industries} 
+                onIndustriesChange={(industries) => setFormData(prev => ({ ...prev, industries }))}
+              />
+            </div>
+            
+            <div className="flex justify-between">
+              <button 
+                type="button" 
+                onClick={prevStep}
+                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
+              >
+                <FaArrowLeft className="mr-2" />
+                Back
+              </button>
+              
+              <button 
+                type="button" 
+                onClick={nextStep}
+                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+              >
+                Next
+                <FaArrowRight className="ml-2" />
+              </button>
+            </div>
+          </div>
+        )}
+        
+        {/* Step 6: Clients */}
+        {currentStep === 6 && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Clients</h3>
+              <p className="text-[#0249aa] mb-6">What types of clients does your company work with?</p>
+              
+              <Clients 
+                clients={formData.clients} 
+                onClientsChange={(clients) => {
+                  setFormData(prev => ({ ...prev, clients }));
+                }}
+              />
+            </div>
+            
+            <div className="flex justify-between">
+              <button 
+                type="button" 
+                onClick={prevStep}
+                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
+              >
+                <FaArrowLeft className="mr-2" />
+                Back
+              </button>
+              
+              <button 
+                type="button" 
+                onClick={nextStep}
+                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+              >
+                Next
+                <FaArrowRight className="ml-2" />
+              </button>
+            </div>
+          </div>
+        )}
+        
+        {/* Step 7: Categories and Submit (Congratulations) */}
+        {currentStep === 7 && (
+          <div className="space-y-6 animate-fadeIn">
+            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Categories</h3>
+              <p className="text-[#0249aa] mb-6">Select your company&apos;s primary category and subcategory</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="categoryId" className="block text-[#1a365d] mb-2 font-medium">
+                    Primary Category *
+                  </label>
+                  <select 
+                    id="categoryId" 
+                    name="categoryId"
+                    value={formData.categoryId}
+                    onChange={handleCategoryChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition appearance-none bg-white shadow-sm"
+                  >
+                    <option value="">Select Category</option>
+                    {categories.map(category => (
+                      <option key={category._id} value={category._id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div>
+                  <label htmlFor="subcategoryId" className="block text-[#1a365d] mb-2 font-medium">
+                    Subcategory *
+                  </label>
+                  <select 
+                    id="subcategoryId" 
+                    name="subcategoryId"
+                    value={formData.subcategoryId}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition appearance-none bg-white shadow-sm"
+                    disabled={!formData.categoryId}
+                  >
+                    <option value="">Select Subcategory</option>
+                    {subcategories.map(subcategory => (
+                      <option key={subcategory._id} value={subcategory._id}>
+                        {subcategory.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
             
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 shadow-sm">
-              <h3 className="font-bold text-[#253347] mb-2 flex items-center">
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 shadow-sm">
+              <h3 className="font-bold text-[#1a365d] mb-3 flex items-center">
                 <FaCheck className="text-green-500 mr-2" /> Review Your Details
               </h3>
-              <div className="text-sm text-[#314158] space-y-1">
+              <div className="text-sm text-[#0249aa] space-y-2">
                 <p><span className="font-medium">User:</span> {user?.email}</p>
                 <p><span className="font-medium">Company:</span> {formData.companyName}</p>
                 <p><span className="font-medium">Website:</span> {formData.website || 'Not provided'}</p>
@@ -599,33 +819,33 @@ export default function ListingForm() {
               </div>
             </div>
             
-            <div className="flex items-center bg-gray-50 p-3 rounded-lg">
+            <div className="flex items-center bg-gray-50 p-4 rounded-lg">
               <input 
                 type="checkbox" 
                 id="terms" 
                 name="terms" 
                 required 
-                className="w-5 h-5 text-[#314158] border-gray-300 rounded focus:ring-[#314158] mr-2"
+                className="w-5 h-5 text-[#1a365d] border-gray-300 rounded focus:ring-[#1a365d] mr-3"
               />
-              <label htmlFor="terms" className="text-[#253347] text-sm">
-                I agree to the <a href="#terms" className="text-[#314158] hover:underline font-medium">Terms of Use</a> and <a href="#privacy" className="text-[#314158] hover:underline font-medium">Privacy Policy</a>
+              <label htmlFor="terms" className="text-[#1a365d]">
+                I agree to the <a href="#terms" className="text-[#0249aa] hover:underline font-medium">Terms of Use</a> and <a href="#privacy" className="text-[#0249aa] hover:underline font-medium">Privacy Policy</a>
               </label>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <div className="flex justify-between">
               <button 
                 type="button" 
                 onClick={prevStep}
-                className="flex-1 bg-gray-100 hover:bg-gray-200 text-[#253347] font-medium py-3 rounded-lg transition-colors flex items-center justify-center shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300"
+                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
               >
-                <FaArrowLeft className="mr-2 text-sm" />
+                <FaArrowLeft className="mr-2" />
                 Back
               </button>
               
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="flex-1 bg-gradient-to-r from-[#314158] to-[#253347] hover:from-[#253347] hover:to-[#1a2533] text-white font-medium py-3 rounded-lg transition-all duration-300 flex items-center justify-center shadow-md hover:shadow-lg disabled:opacity-70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#314158]"
+                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg disabled:opacity-70"
               >
                 {isSubmitting ? (
                   <>
@@ -637,7 +857,7 @@ export default function ListingForm() {
                   </>
                 ) : (
                   <>
-                    <FaCheck className="mr-2 text-sm" />
+                    <FaCheck className="mr-2" />
                     Submit Listing
                   </>
                 )}
@@ -646,73 +866,6 @@ export default function ListingForm() {
           </div>
         )}
       </form>
-    </div>
-  );
-}
-
-// Skeleton component for loading state
-function ListingFormSkeleton() {
-  return (
-    <div className="bg-gradient-to-br from-white to-[#f8fafc] rounded-xl shadow-lg p-4 md:p-5 border border-gray-100 max-w-xl mx-auto">
-      <div className="space-y-4">
-        {/* Header skeleton */}
-        <div className="space-y-3">
-          <div className="h-6 bg-gray-200 rounded w-3/4 mx-auto animate-pulse"></div>
-          <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto animate-pulse"></div>
-        </div>
-        
-        {/* Progress bar skeleton */}
-        <div className="mb-6">
-          <div className="flex justify-between mb-2">
-            {[1, 2, 3, 4].map((step) => (
-              <div key={step} className="flex flex-col items-center">
-                <div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse"></div>
-                <div className="h-3 bg-gray-200 rounded w-10 mt-1 animate-pulse"></div>
-              </div>
-            ))}
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-2 animate-pulse"></div>
-        </div>
-        
-        {/* Form skeleton */}
-        <div className="space-y-4">
-          {/* Input fields skeleton */}
-          <div className="space-y-4">
-            <div>
-              <div className="h-4 bg-gray-200 rounded w-1/3 mb-2 animate-pulse"></div>
-              <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <div className="h-4 bg-gray-200 rounded w-1/3 mb-2 animate-pulse"></div>
-                <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
-              </div>
-              
-              <div>
-                <div className="h-4 bg-gray-200 rounded w-1/3 mb-2 animate-pulse"></div>
-                <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <div className="h-4 bg-gray-200 rounded w-1/3 mb-2 animate-pulse"></div>
-                <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
-              </div>
-              
-              <div>
-                <div className="h-4 bg-gray-200 rounded w-1/3 mb-2 animate-pulse"></div>
-                <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
-              </div>
-            </div>
-            
-            <div className="pt-2">
-              <div className="h-12 bg-gray-200 rounded-lg animate-pulse"></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

@@ -181,9 +181,9 @@ const DynamicCompanyTable = () => {
 
                     <div className="col-span-2 flex items-center">
                       <span className="text-sm text-gray-700 truncate">
-                        {Array.isArray(company.industries)
-                          ? company.industries.join(", ")
-                          : company.industries || "-"}
+                        {Array.isArray(company.industryTags)
+                          ? company.industryTags.join(", ")
+                          : company.industryTags || "-"}
                       </span>
                     </div>
 
@@ -240,9 +240,9 @@ const DynamicCompanyTable = () => {
                           )}
                           {renderCompanyDetail(
                             "Industry",
-                            Array.isArray(company.industries)
-                              ? company.industries.join(", ")
-                              : company.industries,
+                            Array.isArray(company.industryTags)
+                              ? company.industryTags.join(", ")
+                              : company.industryTags,
                             false
                           )}
                         </div>

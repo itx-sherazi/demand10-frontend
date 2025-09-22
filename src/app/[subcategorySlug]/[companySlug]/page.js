@@ -94,7 +94,16 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const industry = company.industries?.[0]?.toLowerCase() || "technology";
+  // Handle both old string format and new object format for industries
+  let industry = "technology";
+  if (company.industries?.[0]) {
+    if (typeof company.industries[0] === 'object' && company.industries[0] !== null) {
+      industry = company.industries[0].industryName?.toLowerCase() || "technology";
+    } else {
+      industry = company.industries[0]?.toLowerCase() || "technology";
+    }
+  }
+
   const baseTitle = `${company.companyName}`;
   const trimmedTitle = truncateText(baseTitle, 55);
 
@@ -146,11 +155,22 @@ export async function generateMetadata({ params }) {
   const isMSP = subcategorySlug.includes("managed-service") || subcategorySlug.includes("msp");
   const isMSSP = subcategorySlug.includes("managed-security") || subcategorySlug.includes("mssp");
   
+  // Handle industries for keywords - support both old and new formats
+  let industriesForKeywords = [];
+  if (Array.isArray(company.industries) && company.industries.length > 0) {
+    industriesForKeywords = company.industries.map(industry => {
+      if (typeof industry === 'object' && industry !== null) {
+        return industry.industryName || '';
+      }
+      return industry || '';
+    }).filter(industry => industry.trim() !== '');
+  }
+  
   let keywords = [
     company.companyName,
     "IntentWire",
     "company profile",
-    industry,
+    ...industriesForKeywords,
     company.companyCountry,
     "B2B intelligence",
   ];

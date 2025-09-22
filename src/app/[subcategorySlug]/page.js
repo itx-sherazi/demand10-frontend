@@ -141,7 +141,6 @@ export default async function Page({ params, searchParams }) {
     const subcategoryDetails = await fetchSubcategoryDetails(subcategorySlug) || {};
     // Fetch related subcategories on the server side
     const relatedSubcategories = await fetchRelatedSubcategories(subcategorySlug, 5) || [];
-    
     return (
       <main>
         <Companies 

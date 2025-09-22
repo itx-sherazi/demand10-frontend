@@ -108,7 +108,7 @@ export default async function RootLayout({ children }) {
           }}
         />
         <NextTopLoader
-         color="#8d9fbe"
+         color="#1a365d"
           height={3}
           showSpinner={false}
           crawlSpeed={200}

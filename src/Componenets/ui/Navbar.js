@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   ChevronDown,
-  ChevronRight,
   Menu,
   X,
   Facebook,
@@ -174,20 +173,19 @@ const Navbar = ({ categories = [] }) => {
      
 
       {/* Main Navbar */}
-      <header className="relative sticky top-0 z-50 bg-white  border-b border-gray-100">
+      <header className="relative sticky top-0   z-50 bg-white  border-b border-gray-100">
         <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <div className="flex items-center">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/blue_logo.png"
                   width={140}
                   height={60}
                   alt="Logo"
                   className="w-50 md:w-66 h-full object-contain"
-                  priority
-                  unoptimized
+                  
                 />
               </div>
             </Link>
@@ -246,7 +244,7 @@ const Navbar = ({ categories = [] }) => {
               {user ? (
                <div className="relative cursor-pointer">
                   <button
-                    className="hidden lg:flex items-center cursor-pointer justify-center w-13 h-13 rounded-full bg-[#28374b]  text-white transition-colors duration-300"
+                    className="hidden lg:flex items-center cursor-pointer justify-center w-13 h-13 rounded-full bg-[#0249aa]  text-white transition-colors duration-300"
                     onClick={() => (window.location.href = '/user-dashboard')}
                   >
                     <User className="h-8 w-8" />
@@ -256,7 +254,7 @@ const Navbar = ({ categories = [] }) => {
               ) : (
                 // Auth button when user is not logged in
                 <button 
-                  className="hidden lg:flex items-center cursor-pointer bg-[#314158]  text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-300"
+                  className="hidden lg:flex items-center cursor-pointer bg-[#0249aa]  text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-300"
                   onClick={() => setShowAuthForm(true)}
                 >
                   Sign In
@@ -266,7 +264,7 @@ const Navbar = ({ categories = [] }) => {
               {/* Mobile Menu Button */}
               <button
                 onClick={toggleMobileMenu}
-                className="lg:hidden p-2 text-gray-600 hover:text-[#4ecfc5] hover:bg-[#4ecfc5]/10 rounded-lg transition-colors duration-300 mobile-menu-button"
+                className="lg:hidden p-2 text-gray-600 hover:text-[#0249aa] hover:bg-[#0249aa]/10 rounded-lg transition-colors duration-300 mobile-menu-button"
               >
                 {isMobileMenuOpen ? (
                   <X className="h-6 w-6" />
@@ -329,7 +327,7 @@ const Navbar = ({ categories = [] }) => {
                 <Link 
                   href="/all-categories"
                   onClick={closeDropdown}
-                  className="inline-block bg-[#28374b] text-white px-8 py-2 rounded-lg font-semibold  transition-colors duration-200"
+                  className="inline-block bg-[#0249aa] text-white px-8 py-2 rounded-lg font-semibold  transition-colors duration-200"
                 >
                   View All Categories
                 </Link>
@@ -356,7 +354,7 @@ const Navbar = ({ categories = [] }) => {
             <div className="flex items-center justify-between p-4 border-b">
               <Link href="/" onClick={toggleMobileMenu} className="flex-shrink-0">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/blue_logo.png"
                   width={140}
                   height={60}
                   alt="Logo"
@@ -365,7 +363,7 @@ const Navbar = ({ categories = [] }) => {
               </Link>
               <button
                 onClick={toggleMobileMenu}
-                className="p-2 text-gray-600 hover:text-[#4ecfc5] rounded-lg"
+                className="p-2 text-gray-600 hover:text-[#0249aa] rounded-lg"
               >
                 <X className="h-6 w-6" />
               </button>
@@ -375,7 +373,7 @@ const Navbar = ({ categories = [] }) => {
               {/* Auth/Profile Button for Mobile */}
               {user ? (
                 <button 
-                  className="w-full mb-6 bg-[#596a9b] text-white py-3 rounded-lg font-semibold transition-colors duration-300 flex items-center justify-center"
+                  className="w-full mb-6 bg-[#0249aa] text-white py-3 rounded-lg font-semibold transition-colors duration-300 flex items-center justify-center"
                   onClick={() => {
                     toggleMobileMenu();
                     window.location.href = '/user-dashboard';
@@ -386,7 +384,7 @@ const Navbar = ({ categories = [] }) => {
                 </button>
               ) : (
                 <button 
-                  className="w-full mb-6 bg-[#314158]  text-white py-3 rounded-lg font-semibold transition-colors duration-300"
+                  className="w-full mb-6 bg-[#0249aa]  text-white py-3 rounded-lg font-semibold transition-colors duration-300"
                   onClick={() => {
                     toggleMobileMenu();
                     setShowAuthForm(true);

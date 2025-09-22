@@ -556,25 +556,21 @@ export const fetchHomepageCompanies = async () => {
   }
 };
 
-export const searchCompanies = async (query) => {
+export const searchHeroCompanies = async (query) => {
   try {
     // Ensure query is provided and not empty
     if (!query || query.trim() === '') {
-      return [];
+      return { ok: true, data: [] };
     }
     
-    // Use the new hero search endpoint
+    // Use the new hero search endpoint with proper query parameter handling
     const response = await fetch(`${API_BASE_URL}/hero-search?company_name=${encodeURIComponent(query.trim())}`);
     const data = await response.json();
     
-    if (data.ok && Array.isArray(data.data)) {
-      return data.data;
-    } else {
-      return [];
-    }
+    return data;
   } catch (error) {
-    console.error("Search companies error:", error);
-    return [];
+    console.error("Hero search error:", error);
+    return { ok: false, message: "Failed to search companies", data: [] };
   }
 };
 

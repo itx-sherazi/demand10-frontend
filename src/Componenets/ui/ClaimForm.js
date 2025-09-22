@@ -173,13 +173,21 @@ export default function ClaimForm({ company, user, onClose }) {
     setShowBusinessEmailForm(true);
   };
 
+  // Add a function to refresh the parent page
+  const refreshParentPage = () => {
+    // Dispatch a custom event that the parent can listen to
+    window.dispatchEvent(new CustomEvent('companyClaimed', { detail: { companyId: company?._id } }));
+    // Close the form
+    onClose();
+  };
+
   // If authentication check is still loading
   if (!authChecked) {
     return (
       <div className="fixed inset-0 bg-black/10 backdrop-blur-sm flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 animate-scaleIn">
           <div className="text-center py-8">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#4ecfc5] mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0249aa] mx-auto mb-4"></div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2">Checking Authentication</h3>
             <p className="text-gray-600">Please wait while we verify your account...</p>
           </div>
@@ -194,8 +202,8 @@ export default function ClaimForm({ company, user, onClose }) {
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 animate-scaleIn">
           <div className="text-center py-6">
-            <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#0249aa]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
             </div>
@@ -210,7 +218,7 @@ export default function ClaimForm({ company, user, onClose }) {
               </button>
               <button
                 onClick={() => router.push('/')}
-                className="flex-1 px-4 py-3 bg-gradient-to-r from-[#4ecfc5] to-[#3ab5a8] text-white rounded-lg hover:from-[#3ab5a8] hover:to-[#2fa197] transition-all shadow-md font-medium"
+                className="flex-1 px-4 py-3 bg-[#0249aa] text-white rounded-lg hover:bg-[#1a365d] transition-colors font-medium"
               >
                 Go to Login
               </button>
@@ -241,7 +249,7 @@ export default function ClaimForm({ company, user, onClose }) {
             </button>
           </div>
           
-          {success ? (
+          {success && (
             <div className="text-center py-8">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -249,21 +257,26 @@ export default function ClaimForm({ company, user, onClose }) {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Claim Submitted!</h3>
-              <p className="text-gray-600 mb-6">Your claim has been submitted successfully. You will be redirected to your dashboard shortly.</p>
-              <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                <div className="bg-[#4ecfc5] h-full animate-progress"></div>
-              </div>
+              <p className="text-gray-600 mb-6">Your claim has been submitted successfully. Our team will review it and contact you.</p>
+              <button
+                onClick={refreshParentPage}
+                className="px-4 py-2 bg-[#0249aa] text-white rounded-lg hover:bg-[#1a365d] transition-colors font-medium"
+              >
+                Close
+              </button>
             </div>
-          ) : showVerificationForm ? (
+          )}
+
+          {showVerificationForm ? (
             <form onSubmit={verifyBusinessEmail} className="space-y-5">
               <div className="bg-blue-100 p-4 rounded-lg border border-blue-200">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#0249aa] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <p className="ml-3 text-sm text-blue-700">
+                  <p className="ml-3 text-sm text-[#0249aa]">
                     We&apos;ve sent a verification code to <strong>{businessEmail}</strong>. Please enter the code below to verify your business email.
                   </p>
                 </div>
@@ -278,7 +291,7 @@ export default function ClaimForm({ company, user, onClose }) {
                   id="verificationToken"
                   value={verificationToken}
                   onChange={handleTokenChange}
-                  className="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-[#4ecfc5] focus:border-[#4ecfc5]"
+                  className="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-[#0249aa] focus:border-[#0249aa]"
                   placeholder="Enter verification code"
                   required
                 />
@@ -298,7 +311,7 @@ export default function ClaimForm({ company, user, onClose }) {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 px-4 py-3 bg-gradient-to-r from-[#4ecfc5] to-[#3ab5a8] text-white rounded-lg hover:from-[#3ab5a8] hover:to-[#2fa197] transition-all shadow-md font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="flex-1 px-4 py-3 bg-[#0249aa] text-white rounded-lg hover:bg-[#1a365d] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
                   {loading ? (
                     <>
@@ -322,14 +335,14 @@ export default function ClaimForm({ company, user, onClose }) {
             </form>
           ) : showBusinessEmailForm ? (
             <form onSubmit={submitBusinessEmail} className="space-y-5">
-              <div className="bg-amber-100 p-4 rounded-lg border border-amber-200">
+              <div className="bg-blue-100 p-4 rounded-lg border border-blue-200">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#0249aa] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <p className="ml-3 text-sm text-amber-700">
+                  <p className="ml-3 text-sm text-[#0249aa]">
                     Please provide your business email address for verification. We&apod;ll send a verification code to this email.
                   </p>
                 </div>
@@ -351,7 +364,7 @@ export default function ClaimForm({ company, user, onClose }) {
                     id="businessEmail"
                     value={businessEmail}
                     onChange={handleBusinessEmailChange}
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-[#4ecfc5] focus:border-[#4ecfc5]"
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-[#0249aa] focus:border-[#0249aa]"
                     placeholder="you@yourcompany.com"
                     required
                   />
@@ -372,7 +385,7 @@ export default function ClaimForm({ company, user, onClose }) {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 px-4 py-3 bg-gradient-to-r from-[#4ecfc5] to-[#3ab5a8] text-white rounded-lg hover:from-[#3ab5a8] hover:to-[#2fa197] transition-all shadow-md font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="flex-1 px-4 py-3 bg-[#0249aa] text-white rounded-lg hover:bg-[#1a365d] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
                   {loading ? (
                     <>
@@ -396,14 +409,14 @@ export default function ClaimForm({ company, user, onClose }) {
             </form>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="bg-green-100 p-4 rounded-lg border border-[#3ab5a8]">
+              <div className="bg-blue-50 p-4 rounded-lg border border-[#0249aa]">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#3ab5a8] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#0249aa] mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <p className="ml-3 text-sm text-[#3ab5a8]">
+                  <p className="ml-3 text-sm text-[#0249aa]">
                     Please provide accurate information to verify your association with this company. Our team will review your claim and contact you.
                   </p>
                 </div>
@@ -425,7 +438,7 @@ export default function ClaimForm({ company, user, onClose }) {
                     name="userName"
                     value={formData.userName}
                     onChange={handleChange}
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-[#4ecfc5] focus:border-[#4ecfc5]"
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-[#0249aa] focus:border-[#0249aa]"
                     placeholder="John Doe"
                     required
                   />
@@ -449,7 +462,7 @@ export default function ClaimForm({ company, user, onClose }) {
                     name="userEmail"
                     value={formData.userEmail}
                     onChange={handleChange}
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-[#4ecfc5] focus:border-[#4ecfc5]"
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-[#0249aa] focus:border-[#0249aa]"
                     placeholder="you@example.com"
                     required
                   />
@@ -472,7 +485,7 @@ export default function ClaimForm({ company, user, onClose }) {
                     name="userPhone"
                     value={formData.userPhone}
                     onChange={handleChange}
-                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-[#4ecfc5] focus:border-[#4ecfc5]"
+                    className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-[#0249aa] focus:border-[#0249aa]"
                     placeholder="+1 (555) 123-4567"
                   />
                 </div>
@@ -488,7 +501,7 @@ export default function ClaimForm({ company, user, onClose }) {
                   name="companyName"
                   value={formData.companyName}
                   onChange={handleChange}
-                  className="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-[#4ecfc5] focus:border-[#4ecfc5]"
+                  className="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-[#0249aa] focus:border-[#0249aa]"
                   placeholder="Company Name"
                   required
                   readOnly
@@ -505,7 +518,7 @@ export default function ClaimForm({ company, user, onClose }) {
                   value={formData.issue}
                   onChange={handleChange}
                   rows={4}
-                  className="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-[#4ecfc5] focus:border-[#4ecfc5]"
+                  className="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-[#0249aa] focus:border-[#0249aa]"
                   placeholder="Please describe your relationship with this company (e.g., owner, employee, representative, etc.)"
                   required
                 />
@@ -522,7 +535,7 @@ export default function ClaimForm({ company, user, onClose }) {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 px-4 py-3 bg-gradient-to-r from-[#4ecfc5] to-[#3ab5a8] text-white rounded-lg hover:from-[#3ab5a8] hover:to-[#2fa197] transition-all shadow-md font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="flex-1 px-4 py-3 bg-[#0249aa] text-white rounded-lg hover:bg-[#1a365d] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 >
                   {loading ? (
                     <>

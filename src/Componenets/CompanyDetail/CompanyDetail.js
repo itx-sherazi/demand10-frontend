@@ -1,91 +1,310 @@
 "use client";
-import React, { useState, useMemo, lazy, Suspense } from "react";
+import React, { useState, useMemo, lazy, useEffect } from "react";
 import {
   Calendar,
-  Building,
   Facebook,
   Linkedin,
   Twitter,
   Globe,
   MapPin,
   Users,
-  ExternalLink,
-  ChevronDown,
-  ChevronUp,
-  Mail,
-  Phone,
+
   Star,
+  Clock,
+  DollarSign,
+  Award
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ClaimForm from "@/Componenets/ui/ClaimForm";
 import CompanyReviews from "../Company/CompanyReviews";
 import CompanyBadges from "../Company/CompanyBadges";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend
+} from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 // Lazy load heavy components
 const ContactFormCompany = lazy(() => import("../ui/ContactFormCompany"));
 
-// Loading skeleton component
-const LoadingSkeleton = () => (
-  <div className="animate-pulse">
-    <div className="h-64 bg-gray-200 rounded-2xl mb-8"></div>
-  </div>
-);
+// Tab Panel Component for the right side chart
+const TabPanel = ({ activeTab, services, focus, industries, industryTags, clients }) => {
+  // Chart options matching reference design
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false, // Hide legend as per reference
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            return `${context.label}: ${context.parsed}%`;
+          }
+        }
+      }
+    },
+    elements: {
+      arc: {
+        borderWidth: 2,
+        borderColor: '#ffffff'
+      }
+    }
+  };
 
-// Memoized Team Member Card Component
-const TeamMemberCard = React.memo(function TeamMemberCard({ member }) {
+  // Get data for the active tab
+  const getActiveData = () => {
+    switch(activeTab) {
+      case 'Services':
+        return services || [];
+      case 'Focus':
+        return focus || [];
+      case 'Industries':
+        return industries || []; // Chart data for industries
+      case 'Clients':
+        return clients || [];
+      default:
+        return [];
+    }
+  };
+
+  // Get label key based on active tab
+  const getLabelKey = () => {
+    switch(activeTab) {
+      case 'Services':
+        return 'serviceName';
+      case 'Focus':
+        return 'focusName';
+      case 'Industries':
+        return 'industryName';
+      case 'Clients':
+        return 'clientSegment';
+      default:
+        return '';
+    }
+  };
+
+  // Get chart data with reference image colors
+  const getChartData = () => {
+    const data = getActiveData();
+    const labelKey = getLabelKey();
+    
+    if (!data || data.length === 0) {
+      return null;
+    }
+
+    // Colors matching reference image with new color scheme
+    const colors = [
+      '#1a365d', // Dark blue
+      '#0249aa', // New blue
+      '#3b82f6', // Blue
+      '#60a5fa', // Light blue
+      '#93c5fd', // Lighter blue
+      '#059669', // Green
+      '#10b981', // Light green
+      '#34d399'  // Lighter green
+    ];
+
+    return {
+      labels: data.map(item => item[labelKey]),
+      datasets: [
+        {
+          data: data.map(item => item.percentage),
+          backgroundColor: colors.slice(0, data.length),
+          borderColor: '#ffffff',
+          borderWidth: 2,
+        },
+      ],
+    };
+  };
+
+  const activeData = getActiveData();
+  const chartData = getChartData();
+  const labelKey = getLabelKey();
+
+  // Get the correct heading based on active tab
+  const getHeading = () => {
+    switch(activeTab) {
+      case 'Services':
+        return 'Service Lines';
+      case 'Focus':
+        return 'Focus Areas';
+      case 'Industries':
+        return 'Industries';
+      case 'Clients':
+        return 'Client Segments';
+      default:
+        return 'Data';
+    }
+  };
+
+
+  // Colors for legend items
+  const colors = ['#1a365d', '#0249aa', '#3b82f6', '#60a5fa', '#93c5fd', '#059669', '#10b981', '#34d399'];
+
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-all duration-300">
-      <div className="flex items-center gap-4 mb-4">
-        <div className="w-16 h-16 rounded-full bg-[#314158] flex items-center justify-center text-white font-bold text-lg">
-          {member?.name?.charAt(0) || 'U'}
+    <div className="bg-white">
+      {/* Mobile Layout - Stacked */}
+      <div className="md:hidden space-y-6">
+        {/* Chart */}
+        <div className="w-full h-64 flex-shrink-0">
+          {chartData ? <Pie data={chartData} options={chartOptions} /> : (
+            <div className="flex flex-col items-center justify-center h-full p-6 text-center">
+              <p className="text-gray-500 mb-4">
+                No {activeTab.toLowerCase()} data available.
+              </p>
+              <p className="text-sm text-gray-600">
+                Claim this profile and update your company information to add {activeTab.toLowerCase()} data.
+              </p>
+            </div>
+          )}
         </div>
-        <div>
-          <h3 className="font-bold text-gray-900">{member?.name}</h3>
-          <p className="text-[#314158] text-sm">{member?.position}</p>
-        </div>
-      </div>
-      <div className="flex gap-2">
-        {member?.linkedinUrl && (
-          <a
-            href={member?.linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-8 h-8 bg-[#314158] rounded-md flex items-center justify-center transition-all duration-300 hover:scale-110"
-            aria-label={`Visit ${member.name}'s LinkedIn profile`}
-          >
-            <Linkedin className="w-4 h-4 text-white" />
-          </a>
+        
+        {/* Data List or Sidebar */}
+        {chartData && (
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">{getHeading()}</h3>
+            
+              <div className="space-y-3">
+                {activeData.map((item, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <div 
+                      className="w-4 h-4 rounded-full"
+                      style={{ backgroundColor: colors[index % colors.length] }}
+                    ></div>
+                    <span className="text-sm text-gray-700 flex-1">{item[labelKey]}</span>
+                    <span className="text-sm font-medium text-gray-900">{item.percentage}%</span>
+                  </div>
+                ))}
+              </div>
+            
+          </div>
         )}
-        {member?.twitterUrl && (
-          <a
-            href={member?.twitterUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-8 h-8 bg-[#314158] rounded-md flex items-center justify-center transition-all duration-300 hover:scale-110"
-            aria-label={`Visit ${member.name}'s Twitter profile`}
-          >
-            <Twitter className="w-4 h-4 text-white" />
-          </a>
+      </div>
+      
+      {/* Desktop Layout - Side by side */}
+      <div className="hidden md:block">
+        {chartData ? (
+          
+            <div className="flex items-start gap-6 ">
+              {/* Chart */}
+              <div className="w-64 h-64 flex-shrink-0">
+                <Pie data={chartData} options={chartOptions} />
+              </div>
+              
+              {/* Data List */}
+              <div className="flex-1 mt-12 h-46 overflow-y-auto custom-scrollbar">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{getHeading()}</h3>
+                <div className="space-y-2">
+                  {activeData.map((item, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <div 
+                        className="w-4 h-4 rounded"
+                        style={{ backgroundColor: colors[index % colors.length] }}
+                      ></div>
+                      <span className="text-sm text-gray-700 flex-1">{item[labelKey]}</span>
+                      <span className="text-sm font-medium text-gray-900">{item.percentage}%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          
+        ) : (
+          // No data available message
+          <div className="flex items-center justify-center p-12">
+            <div className="text-center">
+              <p className="text-gray-500 mb-2">
+                No {activeTab.toLowerCase()} data available.
+              </p>
+              <p className="text-sm text-gray-600">
+                Claim this profile and update your company information to add {activeTab.toLowerCase()} data.
+              </p>
+            </div>
+          </div>
         )}
       </div>
     </div>
   );
-});
+};
 
 const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
   const [showAllTeamMembers, setShowAllTeamMembers] = useState(false);
   const [showClaimForm, setShowClaimForm] = useState(false);
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('Services');
+  const [companyData, setCompanyData] = useState(sampleCompanyData);
+
+  // Add custom scrollbar styles
+  const scrollbarStyle = `
+    .custom-scrollbar {
+      scrollbar-width: thin;
+      scrollbar-color: #1a365d #ffffff;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #ffffff;
+      border-radius: 3px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #1a365d;
+      border-radius: 3px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: #0249aa;
+    }
+    
+    /* Hide scrollbar buttons (arrows) */
+    .custom-scrollbar::-webkit-scrollbar-button {
+      display: none;
+    }
+  `;
+
+  // Update company data when sampleCompanyData changes
+  useEffect(() => {
+    setCompanyData(sampleCompanyData);
+  }, [sampleCompanyData]);
+
+  // Listen for company claim events
+  useEffect(() => {
+    const handleCompanyClaimed = (event) => {
+      // If the claimed company matches this company, refresh the data
+      if (event.detail.companyId === companyData?._id) {
+        // In a real implementation, you would fetch updated company data from the server
+        // For now, we'll just update the local state to show the company as claimed
+        setCompanyData(prevData => ({
+          ...prevData,
+          claimedBy: "claimed" // Set a non-null value to indicate the company is now claimed
+        }));
+      }
+    };
+
+    window.addEventListener('companyClaimed', handleCompanyClaimed);
+    
+    return () => {
+      window.removeEventListener('companyClaimed', handleCompanyClaimed);
+    };
+  }, [companyData?._id]);
 
   // Memoize processed company data
-  const companyData = useMemo(() => {
-    if (!sampleCompanyData || Object.keys(sampleCompanyData).length === 0) {
+  const processedCompanyData = useMemo(() => {
+    if (!companyData || Object.keys(companyData).length === 0) {
       return {
         companyName: "Default Company",
         image: "/placeholder-logo.png",
         employees: 0,
-        industries: [],
+        industryTags: [], // Simple string array for tags
         foundedYear: null,
         website: "#",
         linkedinUrl: "",
@@ -98,110 +317,81 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
         phone: "",
         rating: 0,
         reviewCount: 0,
+        services: [],
+        focus: [],
+        industries: [], // Complex object array for chart data
+        clients: [],
+        minimumProjectSize: null,
+        hourlyRate: null,
+        // Verification fields
+        submittedThroughListingForm: false,
+        claimedBy: null,
+        _id: null
       };
     }
     
-    // Ensure all required fields have safe defaults
     return {
-      ...sampleCompanyData,
-      companyName: sampleCompanyData.companyName || "Unknown Company",
-      employees: sampleCompanyData.employees || 0,
-      industries: Array.isArray(sampleCompanyData.industries) ? sampleCompanyData.industries : [],
-      foundedYear: sampleCompanyData.foundedYear || null,
-      teamLeads: Array.isArray(sampleCompanyData.teamLeads) ? sampleCompanyData.teamLeads : [],
-      companyCountry: sampleCompanyData.companyCountry || "Not specified",
-      description: sampleCompanyData.description || "Company description not available.",
-      email: sampleCompanyData.email || "",
-      phone: sampleCompanyData.phone || "",
-      rating: sampleCompanyData.rating || 0,
-      reviewCount: sampleCompanyData.reviewCount || 0,
+      ...companyData,
+      companyName: companyData.companyName || "Unknown Company",
+      employees: companyData.employees || 0,
+      industryTags: Array.isArray(companyData.industryTags) ? companyData.industryTags : [], // Simple string array for tags
+      foundedYear: companyData.foundedYear || null,
+      teamLeads: Array.isArray(companyData.teamLeads) ? companyData.teamLeads : [],
+      companyCountry: companyData.companyCountry || "Not specified",
+      description: companyData.description || "Company description not available.",
+      email: companyData.email || "",
+      phone: companyData.phone || "",
+      rating: companyData.rating || 0,
+      reviewCount: companyData.reviewCount || 0,
+      services: Array.isArray(companyData.services) ? companyData.services : [],
+      focus: Array.isArray(companyData.focus) ? companyData.focus : [],
+      industries: Array.isArray(companyData.industries) ? companyData.industries : [], // Complex object array for chart data
+      clients: Array.isArray(companyData.clients) ? companyData.clients : [],
+      minimumProjectSize: companyData.minimumProjectSize || null,
+      hourlyRate: companyData.hourlyRate || null,
+      // Verification fields
+      submittedThroughListingForm: companyData.submittedThroughListingForm || false,
+      claimedBy: companyData.claimedBy || null,
+      _id: companyData._id || null
     };
-  }, [sampleCompanyData]);
-
-  // Memoize displayed team members
-  const displayedTeamMembers = useMemo(() => {
-    const teamLeads = companyData.teamLeads || [];
-    return showAllTeamMembers ? teamLeads : teamLeads.slice(0, 4);
-  }, [companyData.teamLeads, showAllTeamMembers]);
+  }, [companyData]);
 
   // Memoize social links
   const socialLinks = useMemo(() => {
     const links = [];
-    if (companyData.website)
-      links.push({ href: companyData.website, icon: Globe, label: "Website" });
-    if (companyData.linkedinUrl)
+    if (processedCompanyData.website)
+      links.push({ href: processedCompanyData.website, icon: Globe, label: "Website" });
+    if (processedCompanyData.linkedinUrl)
       links.push({
-        href: companyData.linkedinUrl,
+        href: processedCompanyData.linkedinUrl,
         icon: Linkedin,
         label: "LinkedIn",
       });
-    if (companyData.twitterUrl)
+    if (processedCompanyData.twitterUrl)
       links.push({
-        href: companyData.twitterUrl,
+        href: processedCompanyData.twitterUrl,
         icon: Twitter,
         label: "Twitter",
       });
-    if (companyData.facebookUrl)
+    if (processedCompanyData.facebookUrl)
       links.push({
-        href: companyData.facebookUrl,
+        href: processedCompanyData.facebookUrl,
         icon: Facebook,
         label: "Facebook",
       });
     return links;
   }, [
-    companyData.website,
-    companyData.linkedinUrl,
-    companyData.twitterUrl,
-    companyData.facebookUrl,
+    processedCompanyData.website,
+    processedCompanyData.linkedinUrl,
+    processedCompanyData.twitterUrl,
+    processedCompanyData.facebookUrl,
   ]);
-
-  // Generate structured data for SEO
-  const structuredData = useMemo(() => {
-    const safeCompanyData = {
-      companyName: companyData?.companyName || '',
-      description: companyData?.description || '',
-      image: companyData?.image || "/placeholder-logo.png",
-      website: companyData?.website || "#",
-      companyCountry: companyData?.companyCountry || '',
-      foundedYear: companyData?.foundedYear,
-      employees: companyData?.employees,
-      industries: companyData?.industries,
-      linkedinUrl: companyData?.linkedinUrl,
-      twitterUrl: companyData?.twitterUrl,
-      facebookUrl: companyData?.facebookUrl
-    };
-
-    return {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": safeCompanyData.companyName,
-      "description": safeCompanyData.description,
-      "image": safeCompanyData.image,
-      "url": safeCompanyData.website,
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": safeCompanyData.companyCountry
-      },
-      "foundingDate": safeCompanyData.foundedYear && safeCompanyData.foundedYear !== null ? safeCompanyData.foundedYear.toString() : undefined,
-      "numberOfEmployees": safeCompanyData.employees || 0,
-      "industry": Array.isArray(safeCompanyData.industries) ? safeCompanyData.industries.join(", ") : "",
-      "sameAs": [
-        safeCompanyData.linkedinUrl,
-        safeCompanyData.twitterUrl,
-        safeCompanyData.facebookUrl
-      ].filter(url => url && url.trim() !== '')
-    };
-  }, [companyData]);
-
-  const toggleTeamMembers = () => {
-    setShowAllTeamMembers(!showAllTeamMembers);
-  };
 
   const {
     companyName = '',
     image = '',
     employees = 0,
-    industries = [],
+    industryTags = [], // Simple string array for tags
     foundedYear = '',
     website = '#',
     teamLeads = [],
@@ -211,131 +401,348 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
     phone = '',
     rating = 0,
     reviewCount = 0,
-  } = companyData || {};
+    services = [],
+    focus = [],
+    industries = [], // Complex object array for chart data
+    clients = [],
+    minimumProjectSize = null,
+    hourlyRate = null,
+    // Verification fields
+    submittedThroughListingForm = false,
+    claimedBy = null,
+    _id = null
+  } = processedCompanyData || {};
+
+  // Determine if company is verified
+  // A company is verified if:
+  // 1. It was submitted through the listing form (submittedThroughListingForm = true), OR
+  // 2. It has been claimed and approved (claimedBy is not null)
+  const isVerified = submittedThroughListingForm || (claimedBy !== null);
+
+  // Define tabs
+  const tabs = ['Services', 'Focus', 'Industries', 'Clients'];
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Structured Data for SEO */}
-      <script 
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      {/* Add custom scrollbar styles */}
+      <style>{scrollbarStyle}</style>
+      
+      {/* Header Section - Simplified with solid colors */}
+      <div className="bg-white shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          {/* Company Logo */}
+<div className="flex-shrink-0">
+  <div className="w-20 h-20 rounded-lg bg-gray-50 border-2 border-gray-200 flex items-center justify-center overflow-hidden shadow-sm">
+    {image && image !== "" ? (
+      <Image
+        width={80}
+        height={80}
+        src={image}
+        alt={`${companyName} logo`}
+        className="w-full h-full object-contain"
+        loading="eager"
+        priority
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.parentElement.innerHTML = `
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+              <span class="text-[11px] font-medium text-gray-500 text-center px-2">No logo provided</span>
+            </div>`;
+        }}
       />
+    ) : (
+      <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+        <span className="text-[11px] font-medium text-gray-500 text-center px-2">
+          No logo provided
+        </span>
+      </div>
+    )}
+  </div>
+</div>
 
-      {/* Company Header Section */}
-      <div className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col lg:flex-row items-start gap-8">
-            {/* Company Logo */}
-            <div className="flex-shrink-0">
-              <div className="w-32 h-32 rounded-2xl bg-white border border-gray-200 flex items-center justify-center shadow-sm overflow-hidden">
-                {image ? (
-                  <Image
-                    width={128}
-                    height={128}
-                    src={image}
-                    alt={`${companyName} logo`}
-                    className="w-full h-full object-contain"
-                    loading="eager"
-                    priority
-                  />
-                ) : (
-                  <div
-                    className="w-full h-full bg-[#314158] flex items-center justify-center text-white font-bold text-4xl"
-                    aria-hidden="true"
-                  >
-                    {companyName?.charAt(0) || 'C'}
+
+            {/* Company Name and Details */}
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center gap-3 mb-2">
+                <h1 className="text-2xl font-bold text-[#1a365d]">
+                  {companyName}
+                </h1>
+                {/* Verified Badge - Only show if company is verified */}
+                {isVerified && (
+                  <div className="flex items-center gap-1 bg-[#0249aa] text-white px-2 py-1 rounded-full text-xs font-medium">
+                    <Award size={12} />
+                    <span>Verified</span>
                   </div>
+                )}
+              </div>
+              
+              {/* Rating - Only show if rating > 0 */}
+              {rating > 0 && (
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${
+                          i < Math.floor(rating)
+                            ? "text-yellow-400 fill-yellow-400"
+                            : "text-gray-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm text-gray-600 font-medium">
+                    {reviewCount} reviews
+                  </span>
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href={website || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  prefetch={false}
+                >
+                  <button className="bg-[#0249aa] hover:bg-[#1a365d] text-white px-6 py-2 rounded-md font-medium text-sm transition-colors shadow-sm hover:shadow">
+                    Visit Website
+                  </button>
+                </Link>
+                
+                {/* Claim Profile Button - Only show if company is NOT verified */}
+                {!isVerified && (
+                  <button 
+                    onClick={() => setShowClaimForm(true)}
+                    className="border border-[#0249aa] text-[#0249aa] hover:bg-[#0249aa] hover:text-white px-5 py-2.5 rounded-lg font-medium text-sm transition-colors"
+                  >
+                    Claim Profile
+                  </button>
                 )}
               </div>
             </div>
 
-            {/* Company Info */}
-            <div className="flex-1">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                <div>
-                  <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                    {companyName}
-                  </h1>
-                  <div className="flex items-center text-gray-600 mb-3">
-                    <MapPin size={18} className="mr-2 text-[#314158]" />
-                    <span>{companyCountry}</span>
+            
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          {/* Left Side - Company Description */}
+          <div className="col-span-12 md:col-span-6">
+            <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">
+             About {companyName}
+              </h2>
+              
+              <div className="space-y-4 text-gray-700 leading-relaxed">
+                <p>{description}</p>
+              </div>
+
+              {/* Company Stats Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mt-8">
+                <div className="bg-blue-50 rounded-lg p-4 border border-gray-200">
+                  <div className="flex items-center gap-2 text-gray-700 mb-1">
+                    <DollarSign size={16} />
+                    <span className="text-sm font-medium">Min project size</span>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center">
-                      <div className="flex">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-5 h-5 ${
-                              i < Math.floor(rating)
-                                ? "text-yellow-400 fill-yellow-400"
-                                : "text-gray-300"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                      <span className="ml-2 text-gray-600">
-                        {rating.toFixed(1)} ({reviewCount} reviews)
-                      </span>
+                  <p className="font-semibold text-[#0249aa]">
+                    ${minimumProjectSize?.toLocaleString() || '50,000+'}
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 rounded-lg p-4 border border-gray-200">
+                  <div className="flex items-center gap-2 text-gray-700 mb-1">
+                    <Clock size={16} />
+                    <span className="text-sm font-medium">Hourly rate</span>
+                  </div>
+                  <p className="font-semibold text-[#0249aa]">
+                    ${hourlyRate || '50'} / hr
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 rounded-lg p-4 border border-gray-200">
+                  <div className="flex items-center gap-2 text-gray-700 mb-1">
+                    <Users size={16} />
+                    <span className="text-sm font-medium">Employees</span>
+                  </div>
+                  <p className="font-semibold text-[#0249aa]">
+                    {employees || '10'}   
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 rounded-lg p-4 border border-gray-200">
+                  <div className="flex items-center gap-2 text-gray-700 mb-1">
+                    <MapPin size={16} />
+                    <span className="text-sm font-medium">Locations</span>
+                  </div>
+                  <p className="font-semibold text-[#0249aa]">{companyCountry}</p>
+                </div>
+
+                <div className="bg-blue-50 rounded-lg p-4 border border-gray-200">
+                  <div className="flex items-center gap-2 text-gray-700 mb-1">
+                    <Calendar size={16} />
+                    <span className="text-sm font-medium">Year founded</span>
+                  </div>
+                  <p className="font-semibold text-[#0249aa]">
+                    Founded {foundedYear || '2003'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Tabs and Chart */}
+          <div className="col-span-12 md:col-span-6">
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+              {/* Tab Content - Reorganized for mobile with integrated dropdown */}
+              <div className="p-4 md:p-6">
+                {/* Mobile Dropdown - Inside the content area */}
+                <div className="md:hidden mb-6 w-full">
+                  <label htmlFor="tab-select" className="block text-sm font-medium text-gray-700 mb-1">
+                    Select Category
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="tab-select"
+                      value={activeTab}
+                      onChange={(e) => setActiveTab(e.target.value)}
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0249aa] focus:ring-[#0249aa] sm:text-sm p-2 border box-border appearance-none bg-white"
+                    >
+                      {tabs.map((tab) => {
+                        // Check if tab has data
+                        const hasData = (() => {
+                          switch(tab) {
+                            case 'Services': return services && services.length > 0;
+                            case 'Focus': return focus && focus.length > 0;
+                            case 'Industries': return industries && industries.length > 0;
+                            case 'Clients': return clients && clients.length > 0;
+                            default: return false;
+                          }
+                        })();
+                        
+                        return (
+                          <option key={tab} value={tab}>
+                            {tab} {hasData ? '' : '(No data)'}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    {/* Custom dropdown arrow */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                      <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
                     </div>
                   </div>
                 </div>
                 
-                <div className="flex flex-wrap gap-3">
-                  <Link
-                    href={website || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    prefetch={false}
-                  >
-                    <button className="cursor-pointer bg-[#314158] hover:bg-[#253347] text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-colors duration-300">
-                      <ExternalLink size={16} />
-                      Visit Website
-                    </button>
-                  </Link>
-                  {!companyData.submittedThroughListingForm && (
-                    <button 
-                      onClick={() => setShowClaimForm(true)}
-                      className="bg-white border border-[#314158] text-[#314158] hover:bg-[#314158] hover:text-white px-5 py-2.5 rounded-lg font-medium transition-colors duration-300"
-                    >
-                      Claim Profile
-                    </button>
-                  )}
+                {/* Desktop Tabs - Only visible on md and larger screens */}
+                <div className="hidden md:block mb-6">
+                  <nav className="flex overflow-x-auto border-b border-gray-200" aria-label="Tabs">
+                    {tabs.map((tab) => {
+                      // Check if tab has data
+                      const hasData = (() => {
+                        switch(tab) {
+                          case 'Services': return services && services.length > 0;
+                          case 'Focus': return focus && focus.length > 0;
+                          case 'Industries': return industries && industries.length > 0;
+                          case 'Clients': return clients && clients.length > 0;
+                          default: return false;
+                        }
+                      })();
+                      
+                      // Show all tabs but mark active one
+                      return (
+                        <button
+                          key={tab}
+                          onClick={() => setActiveTab(tab)}
+                          className={`flex-1 py-3 px-4 text-sm font-medium text-center whitespace-nowrap min-w-[80px] ${
+                            activeTab === tab
+                              ? 'border-b-2 border-[#0249aa] text-[#1a365d] bg-blue-50'
+                              : 'border-transparent text-gray-500 hover:text-[#1a365d] hover:border-gray-300'
+                          } transition-colors`}
+                        >
+                          {tab}
+                        </button>
+                      );
+                    })}
+                  </nav>
                 </div>
-              </div>
-
-              {/* Industries Tags */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {Array.isArray(industries) &&
-                  industries.map((industry, index) => (
-                    <span
-                      key={`industry-${index}`}
-                      className="px-3 py-1.5 bg-[#314158]/10 text-[#314158] rounded-full text-sm font-medium"
-                    >
-                      {industry}
-                    </span>
-                  ))}
-              </div>
-
-              {/* Contact Info */}
-              <div className="flex flex-wrap gap-4">
-                {email && (
-                  <div className="flex items-center text-gray-600">
-                    <Mail size={18} className="mr-2 text-[#314158]" />
-                    <span>{email}</span>
-                  </div>
-                )}
-                {phone && (
-                  <div className="flex items-center text-gray-600">
-                    <Phone size={18} className="mr-2 text-[#314158]" />
-                    <span>{phone}</span>
-                  </div>
-                )}
+                
+                {/* Tab Content */}
+                <TabPanel 
+                  activeTab={activeTab}
+                  services={services}
+                  focus={focus}
+                  industries={industries}
+                  industryTags={industryTags}
+                  clients={clients}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Team Section - If team members exist */}
+      {teamLeads.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+          <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+            <h3 className="text-xl font-bold text-gray-900 mb-6">Leadership Team</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {teamLeads.slice(0, showAllTeamMembers ? teamLeads.length : 6).map((member, index) => (
+                <div key={`member-${index}`} className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:shadow-sm transition-shadow bg-white">
+                  <div className="w-12 h-12 rounded-full bg-[#0249aa] flex items-center justify-center text-white font-semibold">
+                    {member?.name?.charAt(0) || 'U'}
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-gray-900">{member?.name}</h4>
+                    <p className="text-sm text-gray-600">{member?.position}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    {member?.linkedinUrl && (
+                      <a
+                        href={member.linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-8 h-8 bg-[#0249aa] rounded flex items-center justify-center text-white hover:bg-[#1a365d] transition-colors"
+                      >
+                        <Linkedin size={14} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {teamLeads.length > 6 && (
+              <div className="text-center mt-6">
+                <button
+                  onClick={() => setShowAllTeamMembers(!showAllTeamMembers)}
+                  className="bg-[#0249aa] hover:bg-[#1a365d] text-white font-medium text-sm px-4 py-2 rounded-md transition-colors"
+                >
+                  {showAllTeamMembers ? 'Show Less' : `Show More (${teamLeads.length - 6} more)`}
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Company Reviews Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+          <CompanyReviews 
+            companyId={companyData._id} 
+            companySlug={companyData.slug} 
+            initialReviewsData={reviewsData}
+          />
+        </div>
+      </section>
 
       {/* CLAIM FORM MODAL */}
       {showClaimForm && (
@@ -344,197 +751,6 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
           onClose={() => setShowClaimForm(false)}
         />
       )}
-
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 lg:col-span-8 space-y-8">
-            {/* Tab Navigation */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-              <div className="border-b border-gray-200">
-                <nav className="flex space-x-8 px-6" aria-label="Tabs">
-                  <button
-                    onClick={() => setActiveTab('overview')}
-                    className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                      activeTab === 'overview'
-                        ? 'border-[#314158] text-[#314158]'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                    }`}
-                  >
-                    Overview
-                  </button>
-                  {teamLeads.length > 0 && (
-                    <button
-                      onClick={() => setActiveTab('team')}
-                      className={`py-4 px-1 border-b-2 font-medium text-sm ${
-                        activeTab === 'team'
-                          ? 'border-[#314158] text-[#314158]'
-                          : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                      }`}
-                    >
-                      Leadership Team
-                    </button>
-                  )}
-                </nav>
-              </div>
-
-              <div className="p-6">
-                {/* Overview Tab */}
-                {activeTab === 'overview' && (
-                  <div className="space-y-8">
-                    {/* Stats Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="bg-[#314158]/5 rounded-xl p-5 border border-[#314158]/10">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 bg-[#314158] rounded-lg flex items-center justify-center">
-                            <Calendar className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <p className="text-sm text-gray-600">Founded</p>
-                            <p className="text-xl font-bold text-gray-900">
-                              {foundedYear}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="bg-[#314158]/5 rounded-xl p-5 border border-[#314158]/10">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 bg-[#314158] rounded-lg flex items-center justify-center">
-                            <Building className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <p className="text-sm text-gray-600">Industries</p>
-                            <p className="text-sm font-bold text-gray-900">
-                              {Array.isArray(industries)
-                                ? industries.length
-                                : 0}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="bg-[#314158]/5 rounded-xl p-5 border border-[#314158]/10">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 bg-[#314158] rounded-lg flex items-center justify-center">
-                            <Users className="w-6 h-6 text-white" />
-                          </div>
-                          <div>
-                            <p className="text-sm text-gray-600">Team Size</p>
-                            <p className="text-xl font-bold text-gray-900">
-                              {employees?.toLocaleString() || 0}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Company Description */}
-                    <div className="bg-white rounded-xl p-6 border border-gray-200">
-                      <h3 className="text-xl font-bold text-gray-900 mb-4">
-                        About {companyName}
-                      </h3>
-                      <p className="text-gray-700 leading-relaxed">
-                        {description}
-                      </p>
-                    </div>
-
-                    {/* Social Links */}
-                    {socialLinks.length > 0 && (
-                      <div className="bg-white rounded-xl p-6 border border-gray-200">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4">
-                          Connect With Us
-                        </h3>
-                        <div className="flex flex-wrap gap-4">
-                          {socialLinks.map(({ href, icon: Icon, label }, index) => (
-                            <a
-                              key={`social-${label}-${index}`}
-                              href={href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="group w-12 h-12 bg-[#314158] rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm"
-                              aria-label={label}
-                            >
-                              <Icon className="w-5 h-5 text-white" />
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Team Tab */}
-                {activeTab === 'team' && teamLeads.length > 0 && (
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {displayedTeamMembers.map((member, index) => (
-                        <TeamMemberCard
-                          key={`member-${index}-${member?.name}`}
-                          member={member}
-                        />
-                      ))}
-                    </div>
-
-                    {/* Show More / Show Less Button */}
-                    {teamLeads.length > 4 && (
-                      <div className="flex justify-center pt-4">
-                        <button
-                          onClick={toggleTeamMembers}
-                          className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-300"
-                          aria-expanded={showAllTeamMembers}
-                        >
-                          {showAllTeamMembers ? (
-                            <>
-                              <ChevronUp className="-ml-1 mr-2 h-4 w-4" />
-                              Show Less
-                            </>
-                          ) : (
-                            <>
-                              <ChevronDown className="-ml-1 mr-2 h-4 w-4" />
-                              Show More
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <aside className="col-span-12 lg:col-span-4 space-y-6">
-            {/* Badges Section */}
-            {companyData._id && (
-              <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">Company Badges</h3>
-                <div>
-                  <CompanyBadges companyId={companyData._id} />
-                </div>
-              </div>
-            )}
-
-            {/* Contact Form */}
-            <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Contact {companyName}</h3>
-              <Suspense fallback={<LoadingSkeleton />}>
-                <ContactFormCompany />
-              </Suspense>
-            </div>
-          </aside>
-        </div>
-      </main>
-
-      {/* Company Reviews Section */}
-      <section className="container mx-auto px-4 py-8">
-        <CompanyReviews 
-          companyId={companyData._id} 
-          companySlug={companyData.slug} 
-          initialReviewsData={reviewsData}
-        />
-      </section>
     </div>
   );
 };

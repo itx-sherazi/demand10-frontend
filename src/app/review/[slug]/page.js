@@ -6,7 +6,7 @@ import { checkUserAuth, getCompanyBySlug } from '@/services/userApi';
 import { toast } from 'react-toastify';
 import dynamic from 'next/dynamic';
 import ReviewForm from '../components/ReviewForm';
-import {FaRegStar } from 'react-icons/fa';
+import { FaRegStar } from 'react-icons/fa';
 
 // Dynamically import the AuthForm to avoid SSR issues
 const AuthForm = dynamic(() => import('@/Componenets/ui/AuthForm'), { ssr: false });
@@ -94,13 +94,13 @@ export default function CompanyReviewPage({ params }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f0f4f8] to-[#e2e8f0]">
+      <div className="min-h-screen bg-[#f8fafc]">
         {/* Hero Section Skeleton */}
-        <section className="relative bg-gradient-to-br from-[#f0f4f8] to-[#e2e8f0] py-12">
+        <section className="relative bg-[#1a365d] text-white py-12">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <div className="h-8 bg-gray-200 rounded w-1/4 mx-auto mb-4 animate-pulse"></div>
-            <div className="h-10 bg-gray-200 rounded w-2/3 mx-auto mb-6 animate-pulse"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto animate-pulse"></div>
+            <div className="h-8 bg-blue-900/30 rounded w-1/4 mx-auto mb-4 animate-pulse"></div>
+            <div className="h-10 bg-blue-900/30 rounded w-2/3 mx-auto mb-6 animate-pulse"></div>
+            <div className="h-4 bg-blue-900/30 rounded w-1/2 mx-auto animate-pulse"></div>
           </div>
         </section>
 
@@ -130,33 +130,30 @@ export default function CompanyReviewPage({ params }) {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      
-
+    <div className="min-h-screen bg-[#f8fafc]">
       {/* Hero Section */}
-      <section className="relative bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 py-8">
-          <div>
-            
-            <h1 className="text-3xl md:text-4xl font-bold text-[#253347] mb-3">
+      <section className="relative bg-gradient-to-r from-[#1a365d] to-[#0249aa] text-white shadow-lg">
+        <div className="max-w-4xl mx-auto px-4 py-12">
+          <div className="text-center">
+            <h1 className="text-3xl md:text-4xl font-bold mb-3">
               Review {company.companyName}
             </h1>
-            <p className="text-lg text-[#314158] mb-6  mx-auto">
+            <p className="text-lg text-blue-100 mb-6 max-w-2xl mx-auto">
               Share your experience to help others make better business decisions
             </p>
-            <div className="flex text-yellow-500">
+            <div className="flex justify-center text-yellow-400">
               {[...Array(5)].map((_, i) => (
                 <FaRegStar key={i} className="h-5 w-5" />
               ))}
-              <span className="ml-2 text-gray-600">Be the first to review</span>
+              <span className="ml-2 text-blue-100">Be the first to review</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <div className="max-w-8xl mx-auto px-4 py-8">
-        <div className="bg-white  p-6 md:p-8 transition-all">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 transition-all">
           <ReviewForm 
             selectedCompany={company} 
             user={user} 

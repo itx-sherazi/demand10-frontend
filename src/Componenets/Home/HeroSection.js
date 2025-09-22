@@ -1,10 +1,9 @@
 "use client";
-
-import Image from "next/image";
 import Marquee from "react-fast-marquee";
 import { useState, useEffect, useRef } from 'react';
+import { searchHeroCompanies } from "@/services/api";
 import Link from "next/link";
-
+import Image from "next/image";
 export default function HeroSection({ homepageCompanies = [] }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -57,9 +56,8 @@ export default function HeroSection({ homepageCompanies = [] }) {
     
     setIsLoading(true);
     try {
-      // Use the new hero search endpoint with proper query parameter handling
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/hero-search?company_name=${encodeURIComponent(searchQuery.trim())}`);
-      const data = await response.json();
+      // Use the new hero search service function
+      const data = await searchHeroCompanies(searchQuery.trim());
       
       if (data.ok && Array.isArray(data.data)) {
         // Limit to 10 results
@@ -78,12 +76,6 @@ export default function HeroSection({ homepageCompanies = [] }) {
     }
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // In a real application, this would trigger a search
-    console.log('Searching for:', searchQuery);
-  };
-
   const handleCompanySelect = (company) => {
     setSearchQuery('');
     setSearchResults([]);
@@ -98,160 +90,127 @@ export default function HeroSection({ homepageCompanies = [] }) {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-[#f8f9fa] to-[#e9ecef] overflow-hidden">
-      {/* Enhanced Top Left Decorative Element */}
-      <div className="absolute top-0 left-0 -translate-x-1/3 -translate-y-1/3 opacity-10">
-        <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="250" cy="250" r="250" fill="#314158" fillOpacity="0.1"/>
-          <circle cx="250" cy="250" r="200" fill="#314158" fillOpacity="0.15"/>
-          <circle cx="250" cy="250" r="150" fill="#314158" fillOpacity="0.2"/>
-          <circle cx="250" cy="250" r="100" fill="#314158" fillOpacity="0.25"/>
-          <circle cx="250" cy="250" r="50" fill="#314158" fillOpacity="0.3"/>
-        </svg>
-      </div>
-
-      {/* Additional Decorative Circles - Top Right */}
-      <div className="absolute top-0 right-0 translate-x-1/4 -translate-y-1/4 opacity-5">
-        <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="150" cy="150" r="150" fill="#8d9fbe" fillOpacity="0.1"/>
-          <circle cx="150" cy="150" r="120" fill="#8d9fbe" fillOpacity="0.15"/>
-          <circle cx="150" cy="150" r="90" fill="#8d9fbe" fillOpacity="0.2"/>
-          <circle cx="150" cy="150" r="60" fill="#8d9fbe" fillOpacity="0.25"/>
-          <circle cx="150" cy="150" r="30" fill="#8d9fbe" fillOpacity="0.3"/>
-        </svg>
-      </div>
-
-      {/* Enhanced Bottom Right Decorative Element */}
-      <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 opacity-10">
-        <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M200 0C310.457 0 400 89.543 400 200C400 310.457 310.457 400 200 400C89.543 400 0 310.457 0 200C0 89.543 89.543 0 200 0Z" fill="#314158"/>
-          <path d="M200 50C282.843 50 350 117.157 350 200C350 282.843 282.843 350 200 350C117.157 350 50 282.843 50 200C50 117.157 117.157 50 200 50Z" fill="#8d9fbe"/>
-          <path d="M200 100C255.228 100 300 144.772 300 200C300 255.228 255.228 300 200 300C144.772 300 100 255.228 100 200C100 144.772 144.772 100 200 100Z" fill="#ffffff"/>
-        </svg>
-      </div>
-
-      {/* Additional Decorative Element - Bottom Left */}
-      <div className="absolute bottom-0 left-0 -translate-x-1/4 translate-y-1/4 opacity-5">
-        <svg width="350" height="350" viewBox="0 0 350 350" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="350" height="350" fill="#314158" fillOpacity="0.05"/>
-          <path d="M0 0L350 350M350 0L0 350" stroke="#8d9fbe" strokeWidth="2"/>
-          <circle cx="175" cy="175" r="100" fill="#314158" fillOpacity="0.1"/>
-          <circle cx="175" cy="175" r="75" fill="#8d9fbe" fillOpacity="0.1"/>
-          <circle cx="175" cy="175" r="50" fill="#314158" fillOpacity="0.1"/>
-          <circle cx="175" cy="175" r="25" fill="#8d9fbe" fillOpacity="0.1"/>
-        </svg>
-      </div>
-
-      {/* Floating Geometric Shapes */}
-      <div className="absolute top-1/4 right-1/4 opacity-5">
-        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="20" y="20" width="60" height="60" rx="10" transform="rotate(15 20 20)" fill="#314158"/>
-        </svg>
-      </div>
-
-      <div className="absolute bottom-1/3 left-1/3 opacity-5">
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="40,10 70,40 40,70 10,40" fill="#8d9fbe"/>
-        </svg>
-      </div>
-
+    <section className="bg-[#0249aa] text-white">
       {/* Hero Content */}
-      <div className="relative w-full mx-auto py-12 sm:py-16 md:py-20">
-        <div className="max-w-4xl mx-auto px-4">
-          <main className="text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-6">
-              Make Confident <br className="sm:hidden" /><span className="text-[#314158]">Technology</span> Decisions
-            </h1>
-            
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-12 leading-relaxed">
-              Search for products and find in-depth information with verified peer reviews that millions of buyers trust
-            </p>
-            
-            {/* Search Form with Autocomplete */}
-            <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto mb-16 relative" ref={dropdownRef}>
-              <div className="flex-grow relative">
+      <div className="max-w-6xl mx-auto px-4 py-10 sm:py-10 md:py-10">
+        <div className="text-center">
+          {/* Main Heading */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+            Find Your Perfect Business Software
+          </h1>
+          
+          {/* Subheading */}
+          <p className="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto mb-10">
+            Discover trusted solutions from our curated selection of verified providers
+          </p>
+          
+          {/* Search Bar - Central Element */}
+          <div className="max-w-2xl mx-auto mb-6">
+            <div className="relative" ref={dropdownRef}>
+              <div className="flex rounded-xl bg-white shadow-xl border border-blue-200 overflow-hidden">
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => searchQuery.trim() !== '' && searchResults.length > 0 && setShowDropdown(true)}
-                  placeholder="Search for products, services, or companies..."
-                  className="w-full px-6 py-4 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#314158] focus:border-transparent shadow-lg text-lg"
+                  placeholder="Search for software, services or providers..."
+                  className="flex-grow px-6 py-4 text-gray-900 placeholder-gray-500 focus:outline-none text-base"
                 />
-                
-                {/* Search Results Dropdown */}
-                {showDropdown && (
-                  <div className="absolute z-20 mt-2 w-full bg-[#eef0f3] rounded-xl shadow-xl border border-gray-200 max-h-96 overflow-y-auto">
-                    {isLoading ? (
-                      <div className="px-6 py-4 text-center text-gray-500">
-                        <div className="flex items-center justify-center">
-                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#314158] mr-2"></div>
-                          Searching...
-                        </div>
+                <button className="bg-[#0249aa] hover:bg-[#0356c7] px-6 flex items-center justify-center transition-colors duration-200">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </button>
+              </div>
+              
+              {/* Search Results Dropdown */}
+              {showDropdown && (
+                <div className="absolute z-50 mt-2 w-full bg-white rounded-xl shadow-lg border border-gray-200 max-h-80 overflow-y-auto">
+                  {isLoading ? (
+                    <div className="py-4 px-5 text-gray-700">
+                      <div className="flex items-center">
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>Searching...</span>
                       </div>
-                    ) : searchResults.length > 0 ? (
-                      searchResults.map((company) => (
-                        <div
+                    </div>
+                  ) : searchResults.length > 0 ? (
+                    <ul>
+                      {searchResults.map((company) => (
+                        <li 
                           key={company._id}
-                          className="px-4 py-3 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 cursor-pointer flex items-center transition-all duration-200"
                           onClick={() => handleCompanySelect(company)}
+                          className="px-5 py-4 hover:bg-blue-50 cursor-pointer text-gray-800 border-b border-gray-100 last:border-b-0 transition-colors duration-150"
                         >
-                          {/* Company Logo */}
-                          <div className="flex-shrink-0 mr-4">
-                            <div className="w-12 h-12 rounded-lg overflow-hidden bg-white flex items-center justify-center border-2 border-[#e2e8f0] shadow-sm">
-                              <Image
-                                src={company.image || "/placeholder-logo.png"}
+                          <div className="flex items-center">
+                            {company.image ? (
+                              <img 
+                                src={company.image} 
                                 alt={company.companyName}
-                                width={40}
-                                height={40}
-                                className="object-contain p-1"
+                                className="w-10 h-10 rounded-full object-contain mr-4 border border-blue-100"
                               />
-                            </div>
-                          </div>
-                          
-                          {/* Company Info */}
-                          <div className="flex-1 min-w-0">
-                            <h3 className="font-semibold text-gray-900 truncate text-sm flex items-center ">
-                              {company.companyName}
-                            </h3>
-                            {company.subcategory && company.subcategory.name && (
-                              <div className="flex items-center mt-1">
-                                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-50 bg-opacity-10 text-[#314158]">
-                                  {company.subcategory.name}
+                            ) : (
+                              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4 border border-blue-200">
+                                <span className="text-blue-800 font-bold">
+                                  {company.companyName.charAt(0)}
                                 </span>
                               </div>
                             )}
+                            <div>
+                              <div className="font-semibold">{company.companyName}</div>
+                              {company.subcategory && (
+                                <div className="text-sm text-gray-600 mt-1">
+                                  {company.subcategory.name}
+                                </div>
+                              )}
+                            </div>
                           </div>
-                          
-                          {/* Arrow Icon */}
-                          <div className="flex-shrink-0 ml-2">
-                            <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="px-6 py-8 text-center text-gray-500">
-                        <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <h3 className="mt-2 text-sm font-medium text-gray-900">No companies found</h3>
-                        <p className="mt-1 text-sm text-gray-500">
-                          Try searching for something else
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className="py-6 px-5 text-gray-600 text-center">
+                      <svg className="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      <p className="font-medium">No companies found</p>
+                      <p className="text-sm mt-1">Try a different search term</p>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
-          </main>
+            
+            {/* Supporting Text */}
+            <p className="text-blue-200 text-sm mt-4 flex items-center justify-center">
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Trusted by thousands of businesses worldwide
+            </p>
+          </div>
+          
+          {/* Quick Category Links */}
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-blue-200 text-sm font-semibold mb-3">POPULAR CATEGORIES</h3>
+            <div className="flex flex-wrap justify-center gap-3">
+              {['CRM Software', 'Accounting', 'HR Management', 'Project Management', 'Marketing'].map((category, index) => (
+                <button 
+                  key={index}
+                  className="px-4 py-2 bg-white hover:bg-blue-800/40 text-black rounded-full text-sm transition-colors duration-200 border border-blue-400/20"
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-      
+        
       {/* Enhanced Bottom Marquee Section */}
-      <div className="relative bg-gradient-to-r from-[#314158] to-[#253347] py-6">
+      {/* <div className="relative bg-gradient-to-r from-[#314158] to-[#253347] py-6">
         <div className="w-full mx-auto px-4">
           <div className="flex items-center mb-4">
             <div className="h-8 w-1 bg-white rounded-full mr-3"></div>
@@ -262,7 +221,6 @@ export default function HeroSection({ homepageCompanies = [] }) {
               homepageCompanies.map((company) => {
                
                 
-                // Create the correct URL using subcategory slug
                 const companyUrl = company.subcategory && company.subcategory.slug 
                   ? `/${company.subcategory.slug}/${company.slug}` 
                   : `/company/${company.slug}`;
@@ -275,7 +233,6 @@ export default function HeroSection({ homepageCompanies = [] }) {
                       hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                       style={{ minWidth: '280px', maxWidth: '280px' }}
                     >
-                      {/* Logo - Left Side */}
                       <div className="flex-shrink-0 mr-4">
                         <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center border-2 border-[#314158]">
                           <Image
@@ -288,9 +245,7 @@ export default function HeroSection({ homepageCompanies = [] }) {
                         </div>
                       </div>
                       
-                      {/* Content - Right Side */}
                       <div className="flex-1 min-w-0">
-                        {/* Subcategory Name - Top */}
                         {company.subcategory && company.subcategory.name && (
                           <div className="mb-1">
                             <span className="text-xs font-semibold text-[#314158] bg-[#f0f4f8] px-2 py-1 rounded-full">
@@ -299,7 +254,6 @@ export default function HeroSection({ homepageCompanies = [] }) {
                           </div>
                         )}
                         
-                        {/* Star Rating Boxes - Middle */}
                         {company.totalReviews > 0 && (
                           <div className="mb-2">
                             <div className="flex gap-0.5">
@@ -322,17 +276,11 @@ export default function HeroSection({ homepageCompanies = [] }) {
                           </div>
                         )}
                         
-                        {/* Company Name - Bottom */}
                         <h3 className="text-sm font-bold text-gray-900 truncate mb-1 leading-tight">
                           {company.companyName}
                         </h3>
                         
-                        {/* Review Count */}
-                        {/* {company.totalReviews > 0 && (
-                          <p className="text-xs text-gray-500">
-                            {company.totalReviews} Review{company.totalReviews !== 1 ? 's' : ''}
-                          </p>
-                        )} */}
+                      
                       </div>
                     </div>
                   </Link>
@@ -350,7 +298,7 @@ export default function HeroSection({ homepageCompanies = [] }) {
             )}
           </Marquee>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

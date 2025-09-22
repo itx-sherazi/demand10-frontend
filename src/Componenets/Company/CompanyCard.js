@@ -1,13 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Users, Calendar, ExternalLink } from 'lucide-react';
-import SimpleBadges from './SimpleBadges'; // Import the SimpleBadges component
+import { MapPin, Users, Calendar, ExternalLink, Building2 } from 'lucide-react';
 
 const CompanyCard = ({ company }) => {
-  // Function to render star ratings
   const renderStars = (rating) => {
-    // Ensure rating is a valid number
     const numericRating = parseFloat(rating);
     const normalizedRating = isNaN(numericRating) ? 0 : Math.max(0, Math.min(5, numericRating));
     const fullStars = Math.floor(normalizedRating);
@@ -33,13 +30,20 @@ const CompanyCard = ({ company }) => {
     return stars;
   };
 
+  // Truncate description to a reasonable length
+  const truncateDescription = (text, maxLength = 150) => {
+    if (!text) return '';
+    if (text.length <= maxLength) return text;
+    return text.substr(0, maxLength) + '...';
+  };
+
   // Ensure company data is properly handled
   const companyRating = company?.averageRating !== undefined ? company.averageRating : 0;
   const reviewCount = company?.totalReviews || 0;
 
   return (
     <article
-      className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 overflow-hidden group relative"
+      className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden group relative hover:border-[#1a365d]/30"
       itemScope
       itemType="https://schema.org/Organization"
     >
@@ -49,9 +53,9 @@ const CompanyCard = ({ company }) => {
       )} */}
       
       <div className="p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+        <div className="flex flex-col md:flex-row gap-6">
           {/* Company Logo & Basic Info */}
-          <div className="flex items-center gap-4 flex-1">
+          <div className="flex flex-col items-center md:items-start gap-4">
             <Link
               href={company?.subcategory?.slug 
                 ? `/${company.subcategory.slug}/${company?.slug}` 
@@ -59,14 +63,14 @@ const CompanyCard = ({ company }) => {
               }
               className="block"
               itemProp="url"
-                target="_blank"
-  rel="noopener noreferrer"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <div className="w-16 h-16 rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center flex-shrink-0">
+              <div className="w-20 h-20 rounded-2xl overflow-hidden bg-gray-100 flex items-center justify-center flex-shrink-0 shadow-md">
                 {company?.image ? (
                   <Image
-                    width={64}
-                    height={64}
+                    width={80}
+                    height={80}
                     src={company.image}
                     alt={`${company?.companyName} logo`}
                     className="w-full h-full object-cover"
@@ -74,7 +78,7 @@ const CompanyCard = ({ company }) => {
                   />
                 ) : (
                   <div
-                    className="w-full h-full bg-gradient-to-br from-[#8d9fbe] to-[#7a8bb0] flex items-center justify-center text-white font-bold text-xl"
+                    className="w-full h-full bg-blue-500 flex items-center justify-center text-white font-bold text-2xl"
                     aria-hidden="true"
                   >
                     {company?.companyName?.charAt(0) || 'C'}
@@ -83,53 +87,79 @@ const CompanyCard = ({ company }) => {
               </div>
             </Link>
             
+            <div className="flex flex-col items-center md:items-start">
+              <div className="flex items-center gap-2 mb-1">
+                <Building2 className="w-4 h-4 text-[#0249aa]" />
+                <span className="text-xs font-medium text-[#0249aa] uppercase tracking-wide">
+                  {company?.subcategory?.name || 'Company'}
+                </span>
+              </div>
+              
+              {company?.industryTags &&
+                company.industryTags.length > 0 && (
+                  <span
+                    className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-[#0249aa] mt-1"
+                    itemProp="industry"
+                  >
+                    {typeof company.industryTags[0] === 'object' && company.industryTags[0] !== null 
+                      ? company.industryTags[0].industryName 
+                      : company.industryTags[0]}
+                  </span>
+                )}
+            </div>
+          </div>
+          
+          {/* Company Details */}
+          <div className="flex-1">
             <Link
               href={company?.subcategory?.slug 
                 ? `/${company.subcategory.slug}/${company?.slug}` 
                 : `/company/${company?.slug || "company"}`
               }
-                target="_blank"
-  rel="noopener noreferrer"
+              target="_blank"
+              rel="noopener noreferrer"
               className="block"
             >
-              <div className="flex-1">
+              <div className="flex flex-col h-full">
                 <h3
-                  className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#8d9fbe] transition-colors"
+                  className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-[#0249aa] transition-colors"
                   itemProp="name"
                 >
                   {company?.companyName}
                 </h3>
                 
-                {/* Display subcategory name if available */}
-                {company?.subcategory?.name && (
-                  <div className="mb-2">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                      {company.subcategory.name}
-                    </span>
-                  </div>
+                {/* Company Description */}
+                {company?.description && (
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                    {truncateDescription(company.description, 200)}
+                  </p>
                 )}
                 
                 {/* Enhanced Star Rating and Review Count with context */}
-{reviewCount > 0 && (
-  <div className="flex items-center mt-1">
-    <div
-      className="flex"
-      aria-label={`Rating: ${parseFloat(companyRating).toFixed(1)} out of 5 stars`}
-    >
-      {renderStars(companyRating)}
-    </div>
-    <span className="ml-2 text-gray-600 text-sm">
-      {parseFloat(companyRating).toFixed(1)}
-    </span>
-    <span className="mx-2 text-gray-300">•</span>
-    <span className="text-gray-600 text-sm">
-      {reviewCount} {reviewCount === 1 ? 'review' : 'reviews'}
-    </span>
-  </div>
-)}
-
-
-                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mt-3 flex-wrap">
+                {(reviewCount > 0 || companyRating > 0) && (
+                  <div className="flex items-center mt-1 mb-3">
+                    <div
+                      className="flex"
+                      aria-label={`Rating: ${parseFloat(companyRating).toFixed(1)} out of 5 stars`}
+                    >
+                      {renderStars(companyRating)}
+                    </div>
+                    <span className="ml-2 text-gray-600 text-sm font-medium">
+                      {parseFloat(companyRating).toFixed(1)}
+                    </span>
+                    {reviewCount > 0 && (
+                      <>
+                        <span className="mx-2 text-gray-300">•</span>
+                        <span className="text-gray-600 text-sm">
+                          {reviewCount} {reviewCount === 1 ? 'review' : 'reviews'}
+                        </span>
+                      </>
+                    )}
+                  </div>
+                )}
+                
+                {/* Company Info Tags */}
+                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mt-2 mb-4">
                   <div
                     className="flex items-center gap-1"
                     itemProp="address"
@@ -159,67 +189,44 @@ const CompanyCard = ({ company }) => {
                     </div>
                   )}
                 </div>
-                {company?.industries &&
-                  company.industries.length > 0 && (
-                    <div className="mt-2">
-                      <span
-                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
-                        itemProp="industry"
-                      >
-                        {company.industries[0]}
-                      </span>
-                    </div>
-                  )}
                 
-                {/* Add service type context for MSP/MSSP companies */}
-                {company?.subcategory?.slug && (
-                  <div className="mt-2">
-                    {company.subcategory.slug.includes('managed-service') && (
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800" title="Managed Service Provider - IT support, cloud solutions, and cybersecurity services">
-                        Managed Service Provider (MSP)
-                      </span>
-                    )}
-                    {company.subcategory.slug.includes('managed-security') && (
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800" title="Managed Security Service Provider - Cybersecurity solutions, threat monitoring, and compliance services">
-                        Managed Security Service Provider (MSSP)
-                      </span>
-                    )}
-                  </div>
-                )}
               </div>
             </Link>
           </div>
-
-          {/* Action Buttons */}
-          <div className="flex gap-3 flex-shrink-0 flex-wrap">
-            <Link
-              href={company?.subcategory?.slug 
-                ? `/${company.subcategory.slug}/${company?.slug}` 
-                : `/company/${company?.slug || "company"}`
-              }
-                target="_blank"
-  rel="noopener noreferrer"
+        </div>
+        
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 pt-4 mt-4 border-t border-gray-100">
+          <Link
+            href={company?.subcategory?.slug 
+              ? `/${company.subcategory.slug}/${company?.slug}` 
+              : `/company/${company?.slug || "company"}`
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1"
+          >
+            <button
+              className="w-full cursor-pointer bg-[#0249aa] hover:bg-[#1a365d] text-white px-4 py-3 rounded-lg transition-colors font-semibold text-sm whitespace-nowrap flex items-center justify-center gap-2"
+              aria-label={`View details of ${company?.companyName}`}
             >
-              <button
-                className="cursor-pointer bg-[#28374b] hover:bg-[#7a8bb0] text-white px-4 py-2.5 rounded-lg transition-colors font-semibold text-sm whitespace-nowrap"
-                aria-label={`View details of ${company?.companyName}`}
-              >
-                View Details
+              <span>View Profile</span>
+            </button>
+          </Link>
+          {company?.website && (
+            <Link
+              href={company.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1"
+              aria-label={`Visit ${company?.companyName} website`}
+            >
+              <button className="w-full cursor-pointer border border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-4 py-3 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm whitespace-nowrap bg-gray-50 hover:bg-white">
+                <ExternalLink className="w-4 h-4" />
+                <span>Visit Website</span>
               </button>
             </Link>
-            {company?.website && (
-              <Link
-                href={company.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cursor-pointer border border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-4 py-2.5 rounded-lg transition-colors flex items-center gap-2 text-sm whitespace-nowrap"
-                aria-label={`Visit ${company?.companyName} website`}
-              >
-                <ExternalLink className="w-4 h-4" />
-                <span>Website</span>
-              </Link>
-            )}
-          </div>
+          )}
         </div>
       </div>
     </article>

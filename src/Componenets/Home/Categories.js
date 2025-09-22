@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { MdKeyboardArrowRight } from "react-icons/md";
 
 const SoftwareCategories = ({ categories = [] }) => {
   // If no categories are passed, use the hardcoded data as fallback
@@ -55,70 +54,17 @@ const SoftwareCategories = ({ categories = [] }) => {
         }
       ];
 
-  const [hoveredCategory, setHoveredCategory] = useState(null);
+  const [expandedCategory, setExpandedCategory] = useState(null);
+
+  const toggleCategory = (index) => {
+    setExpandedCategory(expandedCategory === index ? null : index);
+  };
 
   return (
-    <div className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
-      {/* Enhanced Decorative SVG Background Elements */}
-      {/* Top Left Decorative Element */}
-      <div className="absolute top-0 left-0 -translate-x-1/3 -translate-y-1/3 opacity-5">
-        <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="200" cy="200" r="200" fill="#314158" fillOpacity="0.1"/>
-          <circle cx="200" cy="200" r="160" fill="#314158" fillOpacity="0.15"/>
-          <circle cx="200" cy="200" r="120" fill="#314158" fillOpacity="0.2"/>
-          <circle cx="200" cy="200" r="80" fill="#314158" fillOpacity="0.25"/>
-          <circle cx="200" cy="200" r="40" fill="#314158" fillOpacity="0.3"/>
-        </svg>
-      </div>
-
-      {/* Top Right Decorative Element */}
-      <div className="absolute top-0 right-0 translate-x-1/4 -translate-y-1/4 opacity-5">
-        <svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="125" cy="125" r="125" fill="#8d9fbe" fillOpacity="0.1"/>
-          <circle cx="125" cy="125" r="100" fill="#8d9fbe" fillOpacity="0.15"/>
-          <circle cx="125" cy="125" r="75" fill="#8d9fbe" fillOpacity="0.2"/>
-          <circle cx="125" cy="125" r="50" fill="#8d9fbe" fillOpacity="0.25"/>
-          <circle cx="125" cy="125" r="25" fill="#8d9fbe" fillOpacity="0.3"/>
-        </svg>
-      </div>
-
-      {/* Bottom Right Decorative Element */}
-      <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 opacity-10">
-        <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M150 0C232.843 0 300 67.157 300 150C300 232.843 232.843 300 150 300C67.157 300 0 232.843 0 150C0 67.157 67.157 0 150 0Z" fill="#314158"/>
-          <path d="M150 40C210.751 40 260 89.249 260 150C260 210.751 210.751 260 150 260C89.249 260 40 210.751 40 150C40 89.249 89.249 40 150 40Z" fill="#8d9fbe"/>
-          <path d="M150 80C183.137 80 210 106.863 210 140C210 173.137 183.137 200 150 200C116.863 200 90 173.137 90 140C90 106.863 116.863 80 150 80Z" fill="#ffffff"/>
-        </svg>
-      </div>
-
-      {/* Bottom Left Decorative Element */}
-      <div className="absolute bottom-0 left-0 -translate-x-1/4 translate-y-1/4 opacity-5">
-        <svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="280" height="280" fill="#314158" fillOpacity="0.05"/>
-          <path d="M0 0L280 280M280 0L0 280" stroke="#8d9fbe" strokeWidth="2"/>
-          <circle cx="140" cy="140" r="80" fill="#314158" fillOpacity="0.1"/>
-          <circle cx="140" cy="140" r="60" fill="#8d9fbe" fillOpacity="0.1"/>
-          <circle cx="140" cy="140" r="40" fill="#314158" fillOpacity="0.1"/>
-          <circle cx="140" cy="140" r="20" fill="#8d9fbe" fillOpacity="0.1"/>
-        </svg>
-      </div>
-
-      {/* Floating Geometric Shapes */}
-      <div className="absolute top-1/4 right-1/4 opacity-5">
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="15" y="15" width="50" height="50" rx="8" transform="rotate(15 15 15)" fill="#314158"/>
-        </svg>
-      </div>
-
-      <div className="absolute bottom-1/3 left-1/3 opacity-5">
-        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <polygon points="30,8 52,30 30,52 8,30" fill="#8d9fbe"/>
-        </svg>
-      </div>
-
-      <div className="w-full mx-auto max-w-7xl relative z-10">
+    <div id="categories" className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div className="w-full mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0249aa] mb-6 leading-tight">
             Explore Software Categories
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -126,47 +72,110 @@ const SoftwareCategories = ({ categories = [] }) => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {/* Mobile Accordion View */}
+        <div className="lg:hidden space-y-4 mb-12">
+          {categoriesData.map((category, index) => (
+            <div key={index} className="border border-gray-200 rounded-xl overflow-hidden">
+              <button
+                onClick={() => toggleCategory(index)}
+                className="w-full p-4 bg-[#0249aa] text-white text-left font-bold flex justify-between items-center"
+              >
+                <span>{category.category}</span>
+                <svg 
+                  className={`w-5 h-5 transition-transform duration-300 ${expandedCategory === index ? 'rotate-180' : ''}`}
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              {expandedCategory === index && (
+                <div className="p-4 bg-white">
+                  <ul className="space-y-3">
+                    {category.subcategory.slice(0, 8).map((item, itemIndex) => (
+                      <li key={itemIndex}>
+                        <Link
+                          href={`/${item.slug || item}`}
+                          className="block py-2 px-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-[#0249aa] transition-all duration-200"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-medium">{item.name || item}</span>
+                            <svg className="w-4 h-4 text-[#0249aa]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                    {category.subcategory.length > 8 && (
+                      <li>
+                        <Link
+                          href="#"
+                          className="block py-2 px-3 rounded-lg text-[#0249aa] font-bold text-sm"
+                        >
+                          View All {category.subcategory.length} Subcategories
+                        </Link>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        
+        {/* Desktop Grid View */}
+        <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {categoriesData.map((category, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 relative group"
-              onMouseEnter={() => setHoveredCategory(index)}
-              onMouseLeave={() => setHoveredCategory(null)}
+              className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
             >
-              {/* Enhanced Decorative circle elements for consistent design */}
-              <div className="absolute top-0 left-0 w-24 h-24 rounded-full border-2 border-[#8d9fbe] opacity-20 -translate-x-1/2 -translate-y-1/2"></div>
-              <div className="absolute bottom-0 right-0 w-24 h-24 rounded-full border-2 border-[#8d9fbe] opacity-20 translate-x-1/2 translate-y-1/2"></div>
-              
-              {/* Additional decorative elements */}
-              <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#314158] opacity-5"></div>
-              <div className="absolute bottom-4 left-4 w-6 h-6 rounded-full bg-[#8d9fbe] opacity-10"></div>
-              
-              <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-[#314158] to-[#253347] relative z-10">
-                <h2 className="text-lg font-semibold text-white">{category.category}</h2>
+              <div className="bg-[#0249aa] p-4">
+                <h2 className="text-lg font-bold text-white text-center">{category.category}</h2>
               </div>
-              <div className="p-6 relative z-10">
-                <ul className="space-y-3">
+              <div className="p-4">
+                <ul className="space-y-2">
                   {category.subcategory.slice(0, 6).map((item, itemIndex) => (
-                    <li
-                      key={itemIndex}
-                      className="text-gray-600 hover:text-[#314158] transition-colors group/subitem"
-                    >
+                    <li key={itemIndex}>
                       <Link
                         href={`/${item.slug || item}`}
-                        className="flex items-center py-1 text-sm hover:underline"
+                        className="block py-3 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-[#0249aa] transition-all duration-200 border border-transparent hover:border-[#0249aa]/20"
                       >
-                        <span className="group-hover/subitem:translate-x-1 transition-transform duration-200">
-                          {item.name || item}
-                        </span>
-                        <MdKeyboardArrowRight className="text-base opacity-0 group-hover/subitem:opacity-100 transition-opacity duration-200 ml-1" />
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">{item.name || item}</span>
+                          <svg className="w-4 h-4 text-[#0249aa]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                          </svg>
+                        </div>
                       </Link>
                     </li>
                   ))}
+                  {category.subcategory.length > 6 && (
+                    <li>
+                      <Link
+                        href="#"
+                        className="block py-3 px-4 rounded-lg text-[#0249aa] font-bold text-sm text-center border border-transparent hover:border-[#0249aa]/20"
+                      >
+                        +{category.subcategory.length - 6} more
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
           ))}
+        </div>
+        
+        {/* View All Categories Button */}
+        <div className="text-center mt-12">
+          <Link href="/categories">
+            <button className="bg-[#0249aa] hover:bg-[#0356c7] text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg">
+              View All Categories
+            </button>
+          </Link>
         </div>
       </div>
     </div>

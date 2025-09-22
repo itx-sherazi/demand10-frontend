@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import CompanyCard from "../Company/CompanyCard";
 import SponsoredCompanyCard from "../Company/SponsoredCompanyCard";
+import SkeletonCard from "../Company/SkeletonCard";
 import EndpointSecurityHero from "./EndpointSecurityHero";
 
 export default function CompanyListingPage({
@@ -135,6 +136,10 @@ export default function CompanyListingPage({
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      // Clear timeout on unmount
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -146,10 +151,18 @@ export default function CompanyListingPage({
 
     if (!value.trim()) {
       setSelectedLocation("");
+    } else {
+      // Debounce the location filtering
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+      
+      searchTimeoutRef.current = setTimeout(() => {
+        setSelectedLocation(value);
+      }, 300); // 300ms debounce delay
     }
   };
 
- 
   // Generate structured data for SEO
   const generateStructuredData = () => {
     if (filteredCompanies.length === 0) return null;
@@ -170,7 +183,7 @@ export default function CompanyListingPage({
         },
         employeeCount: company.employees,
         foundingDate: company.foundedYear?.toString(),
-        industry: company.industries?.[0],
+        industry: company.industryTags?.[0],
         ...(isMSP && { 
           serviceType: "Managed Service Provider",
           keywords: "managed service provider, MSP, IT managed services, cybersecurity outsourcing, cloud service provider, 24/7 IT support, data backup and recovery"
@@ -277,7 +290,7 @@ export default function CompanyListingPage({
               disabled={isLoading}
               className={`px-3 py-2 border rounded-lg transition-colors font-medium text-sm disabled:opacity-50 ${
                 currentPage === number
-                  ? "bg-[#314158] text-white border-[#314158] shadow-sm"
+                  ? "bg-[#1a365d] text-white border-[#1a365d] shadow-sm"
                   : "border-gray-300 hover:bg-gray-50"
               }`}
               aria-label={`Go to page ${number}`}
@@ -321,15 +334,24 @@ export default function CompanyListingPage({
   // Handle search from hero section
   const handleHeroSearch = (searchTerm, locationTerm) => {
     setIsLoading(true);
-    updateURL({
-      search: searchTerm,
-      location: locationTerm,
-      page: 1,
-    });
+    
+    // Clear any existing timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+    
+    // Set a new timeout to debounce the search
+    searchTimeoutRef.current = setTimeout(() => {
+      updateURL({
+        search: searchTerm,
+        location: locationTerm,
+        page: 1,
+      });
+    }, 500); // 500ms debounce delay
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white"> {/* Changed back to white for better user experience */}
       {/* Structured Data for SEO */}
       {structuredData && (
         <script
@@ -361,7 +383,7 @@ export default function CompanyListingPage({
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 {/* Left: Total Companies Count */}
                 <div className="flex items-center gap-2">
-                  <BuildingIcon className="w-5 h-5 text-[#314158]" />
+                  <BuildingIcon className="w-5 h-5 text-[#0249aa]" />
                   <h2 className="text-xl font-bold text-gray-900">
                     {totalCompanies.toLocaleString()}{" "}
                     {(pagination.total || filteredCompanies.length) === 1
@@ -391,18 +413,10 @@ export default function CompanyListingPage({
 
             {/* Loading State */}
             {isLoading && (
-              <div className="bg-white rounded-xl shadow-sm p-12 text-center">
-                <div className="text-[#314158] mb-4">
-                  <div
-                    className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#314158] mx-auto"
-                    role="status"
-                  >
-                    <span className="sr-only">Loading...</span>
-                  </div>
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Loading companies...
-                </h3>
+              <div className="space-y-6">
+                {[...Array(2)].map((_, index) => (
+                  <SkeletonCard key={index} />
+                ))}
               </div>
             )}
 
@@ -472,7 +486,7 @@ export default function CompanyListingPage({
       </main>
       
       {/* Related Subcategories Section */}
-      <div className="pb-12 p-6 bg-gradient-to-r from-[#f0f4f9] to-[#e8eff5] border border-[#314158]/20 w-full mx-auto shadow-sm">
+      <div className="pb-12 p-6 bg-white border-t border-gray-200 w-full mx-auto">
         <h3 className="text-2xl font-bold text-gray-900 mb-4">Explore Related {name} Services</h3>
         <p className="text-gray-700 mb-6 max-w-3xl">
           Looking for other technology solutions in {name.toLowerCase().includes("managed service") || name.toLowerCase().includes("msp") ? "managed IT services" : name.toLowerCase().includes("managed security") || name.toLowerCase().includes("mssp") ? "cybersecurity services" : name.toLowerCase().includes("cloud") ? "cloud computing" : name.toLowerCase().includes("network") ? "network security" : "IT services"}? Browse our comprehensive directory of specialized providers and solutions.
@@ -480,7 +494,7 @@ export default function CompanyListingPage({
         
         {loadingRelated ? (
           <div className="flex justify-center items-center h-20">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#314158]"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#0249aa]"></div>
           </div>
         ) : relatedSubcats.length > 0 ? (
           <div className="flex flex-wrap gap-3">
@@ -488,14 +502,14 @@ export default function CompanyListingPage({
               <Link 
                 key={subcategory.slug}
                 href={`/${subcategory.slug}`}
-                className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-[#314158] to-[#253347] text-white hover:from-[#253347] hover:to-[#1a2533] transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+                className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-[#0249aa] text-white hover:bg-[#1a365d] transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
               >
                 {subcategory.name}
               </Link>
             ))}
           </div>
         ) : (
-          <div className="bg-white/50 rounded-xl p-4 border border-gray-200">
+          <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
             <p className="text-gray-500 italic text-center">No related services found.</p>
           </div>
         )}
