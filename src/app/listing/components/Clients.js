@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Chart as ChartJS,
   ArcElement,
@@ -13,11 +13,11 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Clients = ({ clients = [], onClientsChange }) => {
   // Predefined client segments
-  const clientOptions = [
+  const clientOptions = useMemo(() => [
     { id: 'small-business', name: 'Small Business (< $10M)' },
     { id: 'midmarket', name: 'Midmarket ($10M – $1B)' },
     { id: 'enterprise', name: 'Enterprise (> $1B)' }
-  ];
+  ], []);
 
   // State for UI interactions
   const [clientPercentages, setClientPercentages] = useState({});
@@ -32,7 +32,7 @@ const Clients = ({ clients = [], onClientsChange }) => {
       }
     });
     setClientPercentages(initialPercentages);
-  }, [clients]);
+  }, [clients, clientOptions]);
 
   // Handle client percentage change
   const handleClientPercentageChange = (clientId, clientName, percentage) => {

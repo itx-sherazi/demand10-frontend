@@ -1,4 +1,5 @@
 'use client'
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaStar, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -105,7 +106,9 @@ export default function Testimonials() {
           {/* Profile Image */}
           <div className="flex-shrink-0">
             <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-[#1a365d] shadow-lg">
-              <img 
+              <Image
+              height={100}
+              width={100}
                 src={testimonials[currentTestimonial].image}
                 alt={testimonials[currentTestimonial].name}
                 className="w-full h-full object-cover"

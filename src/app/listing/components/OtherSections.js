@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from "react";
 import { ArrowRight, CheckCircle, TrendingUp, Eye, Users, BarChart, Star, Shield, Zap } from 'lucide-react';
+import Image from "next/image";
 
 export default function OtherSections() {
   // State for service type selection
@@ -226,7 +227,9 @@ export default function OtherSections() {
                 onClick={() => handleButtonClick(`customer-logo-${index+1}`)}
               >
                 <div className="bg-gradient-to-br from-gray-100 to-gray-200 border border-gray-200 rounded-xl w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <img 
+                  <Image
+                    width={100} 
+                    height={100}
                     src={logo.src} 
                     alt={logo.alt}
                     className="max-w-full max-h-full object-contain p-2"

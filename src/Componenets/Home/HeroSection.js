@@ -1,6 +1,6 @@
 "use client";
 import Marquee from "react-fast-marquee";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { searchHeroCompanies } from "@/services/api";
 import Link from "next/link";
 import Image from "next/image";
@@ -28,6 +28,31 @@ export default function HeroSection({ homepageCompanies = [] }) {
     };
   }, []);
 
+  const searchCompanies = useCallback(async () => {
+    if (searchQuery.trim() === '') return;
+    
+    setIsLoading(true);
+    try {
+      // Use the new hero search service function
+      const data = await searchHeroCompanies(searchQuery.trim());
+      
+      if (data.ok && Array.isArray(data.data)) {
+        // Limit to 10 results
+        setSearchResults(data.data.slice(0, 10));
+        setShowDropdown(data.data.length > 0);
+      } else {
+        setSearchResults([]);
+        setShowDropdown(false);
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+      setSearchResults([]);
+      setShowDropdown(false);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [searchQuery]);
+
   // Search companies when user types
   useEffect(() => {
     if (searchQuery.trim() === '') {
@@ -51,32 +76,7 @@ export default function HeroSection({ homepageCompanies = [] }) {
         clearTimeout(searchTimeoutRef.current);
       }
     };
-  }, [searchQuery]);
-
-  const searchCompanies = async () => {
-    if (searchQuery.trim() === '') return;
-    
-    setIsLoading(true);
-    try {
-      // Use the new hero search service function
-      const data = await searchHeroCompanies(searchQuery.trim());
-      
-      if (data.ok && Array.isArray(data.data)) {
-        // Limit to 10 results
-        setSearchResults(data.data.slice(0, 10));
-        setShowDropdown(data.data.length > 0);
-      } else {
-        setSearchResults([]);
-        setShowDropdown(false);
-      }
-    } catch (error) {
-      console.error('Search error:', error);
-      setSearchResults([]);
-      setShowDropdown(false);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  }, [searchQuery, searchCompanies]);
 
   const handleCompanySelect = (company) => {
     setSearchQuery('');
@@ -148,7 +148,9 @@ export default function HeroSection({ homepageCompanies = [] }) {
                         >
                           <div className="flex items-center">
                             {company.image ? (
-                              <img 
+                              <Image
+                              width={40} 
+                                height={40}
                                 src={company.image} 
                                 alt={company.companyName}
                                 className="w-10 h-10 rounded-full object-contain mr-4 border border-gray-200"

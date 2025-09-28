@@ -103,8 +103,10 @@ const ReviewSection = () => {
           <div className="space-y-6 w-full">
             {/* Full-width Handshake Image Container */}
             <div className="relative w-full h-96 overflow-hidden rounded-2xl shadow-xl">
-              <img
-                src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSHRFRklGolL7fSb9YpamWvKFqc2fEPXUa9A6bmXFcF_5lz2qwj"
+              <Image
+                width={100}
+                height={100}
+                src="/images/reviewhero.jpg"
                 alt="Business handshake"
                 className="object-cover w-full h-full"
               />

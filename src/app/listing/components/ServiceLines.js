@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Chart as ChartJS,
   ArcElement,
@@ -15,7 +15,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ServiceLines = ({ services, onServicesChange }) => {
   // Service categories and services data
-  const serviceCategories = [
+  const serviceCategories = useMemo(() => [
     {
       id: 'web-development',
       name: 'Web Development',
@@ -71,7 +71,7 @@ const ServiceLines = ({ services, onServicesChange }) => {
         { id: 'database', name: 'Database Support' }
       ]
     }
-  ];
+  ], []);
 
   // State for UI interactions
   const [expandedCategories, setExpandedCategories] = useState(new Set());
@@ -92,7 +92,7 @@ const ServiceLines = ({ services, onServicesChange }) => {
       }
     });
     setServicePercentages(initialPercentages);
-  }, [services]);
+  }, [services, serviceCategories]);
 
   // Handle category expansion/collapse
   const toggleCategory = (categoryId) => {

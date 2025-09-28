@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Chart as ChartJS,
   ArcElement,
@@ -14,7 +14,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const FocusLines = ({ focus, onFocusChange }) => {
   // Focus categories and options data
-  const focusCategories = [
+  const focusCategories = useMemo(() => [
     {
       id: 'application-platforms',
       name: 'Application Platforms',
@@ -75,7 +75,7 @@ const FocusLines = ({ focus, onFocusChange }) => {
         { id: 'ansible', name: 'Ansible' }
       ]
     }
-  ];
+  ], []);
 
   // State for UI interactions
   const [expandedCategories, setExpandedCategories] = useState(new Set());
@@ -96,7 +96,7 @@ const FocusLines = ({ focus, onFocusChange }) => {
       }
     });
     setFocusPercentages(initialPercentages);
-  }, [focus]);
+  }, [focus, focusCategories]);
 
   // Handle category expansion/collapse
   const toggleCategory = (categoryId) => {

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { searchCompanies } from '@/services/userApi';
 import { toast } from 'react-toastify';
 import { FaSearch, FaTimes, FaBuilding } from 'react-icons/fa';
+import Image from 'next/image';
 
 export default function CompanySearch({ onCompanySelect }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -96,7 +97,9 @@ export default function CompanySearch({ onCompanySelect }) {
               >
                 <div className="flex-shrink-0 w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
                   {company.image ? (
-                    <img 
+                    <Image
+                    width={100}
+                    height={100}
                       src={company.image} 
                       alt={company.companyName} 
                       className="w-10 h-10 rounded-lg object-contain"

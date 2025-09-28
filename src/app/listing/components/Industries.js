@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Chart as ChartJS,
   ArcElement,
@@ -13,7 +13,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Industries = ({ industries, onIndustriesChange }) => {
   // Predefined industries data
-  const industryOptions = [
+  const industryOptions = useMemo(() => [
     { id: 'ecommerce', name: 'eCommerce' },
     { id: 'financial-services', name: 'Financial Services' },
     { id: 'business-services', name: 'Business Services' },
@@ -24,7 +24,7 @@ const Industries = ({ industries, onIndustriesChange }) => {
     { id: 'real-estate', name: 'Real Estate' },
     { id: 'transportation-logistics', name: 'Transportation & Logistics' },
     { id: 'legal-cannabis', name: 'Legal Cannabis' }
-  ];
+  ], []);
 
   // State for UI interactions
   const [expanded, setExpanded] = useState(true);
@@ -40,7 +40,7 @@ const Industries = ({ industries, onIndustriesChange }) => {
       }
     });
     setIndustryPercentages(initialPercentages);
-  }, [industries]);
+  }, [industries, industryOptions]);
 
   // Handle industry percentage change
   const handleIndustryPercentageChange = (industryId, industryName, percentage) => {

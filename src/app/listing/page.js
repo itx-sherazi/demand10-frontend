@@ -539,7 +539,7 @@ export default function CompanyListing() {
             <div className="bg-blue-50 rounded-xl p-6 mb-10 border border-blue-100">
               <h3 className="font-bold text-gray-800 mb-2">What happens next?</h3>
               <p className="text-[#4897de] text-sm">
-                We'll review your submission within 24-48 hours. You'll receive an email notification once your listing is approved and live on our platform.
+                We&apos;ll review your submission within 24-48 hours. You&apos;ll receive an email notification once your listing is approved and live on our platform.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
