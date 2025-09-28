@@ -132,10 +132,8 @@ export default function WriteReviewPage() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <div className="bg-gradient-to-br from-[#1a365d] to-[#0249aa] text-white w-8 h-8 rounded flex items-center justify-center font-bold text-lg">
-                D
-              </div>
-              <span className="ml-3 text-xl font-medium text-gray-800">Write a Review</span>
+             
+              <span className="ml-3 text-xl font-medium text-black">Write a Review</span>
             </div>
 
             {/* Progress Bar - Updated to match landing page design */}
@@ -143,25 +141,25 @@ export default function WriteReviewPage() {
               {/* Step 1 - Select Product */}
               <div className="flex items-center">
                 <div className={`w-4 h-4 rounded-full ${
-                  currentStep >= 1 ? "bg-[#1a365d]" : "bg-gray-300"
+                  currentStep >= 1 ? "bg-[#4897de]" : "bg-gray-300"
                 }`}></div>
                 <span className={`ml-2 text-sm font-medium ${
-                  currentStep >= 1 ? "text-[#1a365d]" : "text-gray-500"
+                  currentStep >= 1 ? "text-black" : "text-gray-500"
                 }`}>
                   {currentStep > 1 ? "Product Selected" : "Select Product"}
                 </span>
               </div>
               
               {/* Connector */}
-              <div className={`w-16 h-0.5 ${currentStep > 2 ? "bg-[#1a365d]" : "bg-gray-300"}`}></div>
+              <div className={`w-16 h-0.5 ${currentStep > 2 ? "bg-[#4897de]" : "bg-gray-300"}`}></div>
               
               {/* Step 2 - Project Information */}
               <div className="flex items-center">
                 <div className={`w-4 h-4 rounded-full ${
-                  currentStep >= 2 ? "bg-[#1a365d]" : "bg-gray-300"
+                  currentStep >= 2 ? "bg-[#4897de]" : "bg-gray-300"
                 }`}></div>
                 <span className={`ml-2 text-sm font-medium ${
-                  currentStep >= 2 ? "text-[#1a365d]" : "text-gray-500"
+                  currentStep >= 2 ? "text-black" : "text-gray-500"
                 }`}>
                   {currentStep >= 2 ? (
                     currentStep > 2 ? "Project Info Complete" : "Project Information"
@@ -172,15 +170,15 @@ export default function WriteReviewPage() {
               </div>
               
               {/* Connector */}
-              <div className={`w-16 h-0.5 ${currentStep > 3 ? "bg-[#1a365d]" : "bg-gray-300"}`}></div>
+              <div className={`w-16 h-0.5 ${currentStep > 3 ? "bg-[#4897de]" : "bg-gray-300"}`}></div>
               
               {/* Step 3 - Ratings */}
               <div className="flex items-center">
                 <div className={`w-4 h-4 rounded-full ${
-                  currentStep >= 3 ? "bg-[#1a365d]" : "bg-gray-300"
+                  currentStep >= 3 ? "bg-[#4897de]" : "bg-gray-300"
                 }`}></div>
                 <span className={`ml-2 text-sm font-medium ${
-                  currentStep >= 3 ? "text-[#1a365d]" : "text-gray-500"
+                  currentStep >= 3 ? "text-black" : "text-gray-500"
                 }`}>
                   {currentStep >= 3 ? (
                     currentStep > 3 ? "Ratings Complete" : "Ratings"
@@ -191,15 +189,15 @@ export default function WriteReviewPage() {
               </div>
               
               {/* Connector */}
-              <div className={`w-16 h-0.5 ${currentStep > 4 ? "bg-[#1a365d]" : "bg-gray-300"}`}></div>
+              <div className={`w-16 h-0.5 ${currentStep > 4 ? "bg-[#4897de]" : "bg-gray-300"}`}></div>
               
               {/* Step 4 - Review Details */}
               <div className="flex items-center">
                 <div className={`w-4 h-4 rounded-full ${
-                  currentStep >= 4 ? "bg-[#1a365d]" : "bg-gray-300"
+                  currentStep >= 4 ? "bg-[#4897de]" : "bg-gray-300"
                 }`}></div>
                 <span className={`ml-2 text-sm font-medium ${
-                  currentStep >= 4 ? "text-[#1a365d]" : "text-gray-500"
+                  currentStep >= 4 ? "text-black" : "text-gray-500"
                 }`}>
                   {currentStep >= 4 ? (
                     currentStep > 4 ? "Review Submitted" : "Review Details"
@@ -218,7 +216,7 @@ export default function WriteReviewPage() {
                   currentStep >= 5 ? "bg-[#4ecfc5]" : "bg-gray-300"
                 }`}></div>
                 <span className={`ml-2 text-sm font-medium ${
-                  currentStep >= 5 ? "text-[#1a365d]" : "text-gray-500"
+                  currentStep >= 5 ? "text-black" : "text-gray-500"
                 }`}>
                   Finished!
                 </span>
@@ -229,17 +227,17 @@ export default function WriteReviewPage() {
       </header>
 
       {/* Main Content - Conditionally render based on current step */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {currentStep === 1 && (
           // Step 1: Select Product
           <div className="text-center">
             {/* Main Heading */}
-            <h1 className="text-3xl md:text-4xl font-bold text-[#1a365d] mb-6">
+            <h1 className="text-3xl md:text-4xl font-bold text-black mb-6">
               Your feedback can make a BIG impact
             </h1>
             
             {/* Subtitle */}
-            <p className="text-xl text-[#0249aa] mb-12 max-w-3xl mx-auto">
+            <p className="text-xl text-[#4897de] mb-12 max-w-3xl mx-auto">
               Share your experiences by writing reviews of the software and services you use at work.
             </p>
 
@@ -254,12 +252,12 @@ export default function WriteReviewPage() {
           // Steps 2-4: Review Form Steps
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h1 className="text-2xl md:text-3xl font-bold text-[#1a365d]">
+              <h1 className="text-2xl md:text-3xl font-bold text-black">
                 Review {selectedCompany.companyName}
               </h1>
               <button 
                 onClick={handleBackToSelection}
-                className="text-[#1a365d] hover:text-[#0249aa] font-medium"
+                className="text-[#4897de] hover:text-[#0249aa] font-medium"
               >
                 Change Product
               </button>
@@ -276,25 +274,25 @@ export default function WriteReviewPage() {
         {currentStep === 5 && (
           // Step 5: Finished
           <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-            <div className="bg-gradient-to-r from-[#4ecfc5] to-[#1a365d] text-white rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6">
+            <div className="bg-gradient-to-r from-[#4ecfc5] to-[#0249aa] text-white rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6">
               <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <h2 className="text-3xl font-bold text-[#1a365d] mb-4">Thank You!</h2>
-            <p className="text-[#0249aa] mb-8 text-lg max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-black mb-4">Thank You!</h2>
+            <p className="text-[#4897de] mb-8 text-lg max-w-2xl mx-auto">
               Your review has been submitted successfully. Thank you for taking the time to share your experience.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
                 onClick={() => router.push('/')}
-                className="px-6 py-3 bg-gradient-to-r from-[#1a365d] to-[#0249aa] text-white rounded-xl font-semibold hover:from-[#0249aa] hover:to-[#1a365d] transition-all shadow-md hover:shadow-lg duration-300"
+                className="px-6 py-3 bg-gradient-to-r from-[#4897de] to-[#0249aa] text-white rounded-xl font-semibold hover:from-[#0249aa] hover:to-[#4897de] transition-all shadow-md hover:shadow-lg duration-300"
               >
                 Back to Home
               </button>
               <button
                 onClick={handleBackToSelection}
-                className="px-6 py-3 bg-white text-[#1a365d] border-2 border-[#1a365d] rounded-xl font-semibold hover:bg-[#f0f4f8] transition-all"
+                className="px-6 py-3 bg-white text-black border-2 border-[#4897de] rounded-xl font-semibold hover:bg-[#f0f4f8] transition-all"
               >
                 Write Another Review
               </button>
@@ -306,7 +304,7 @@ export default function WriteReviewPage() {
 
     {/* Additional Sections - Only shown on Step 1 */}
     {currentStep === 1 && (
-      <div className="bg-gradient-to-br from-gray-50 to-gray-100 py-16">
+      <div className="bg-white py-16">
         <div className="w-full mx-auto px-4 space-y-16">
           {/* How It Works Section */}
           <HowItWorks />

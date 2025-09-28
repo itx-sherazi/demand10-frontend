@@ -113,7 +113,24 @@ export default async function RootLayout({ children }) {
           showSpinner={false}
           crawlSpeed={200}
         />
-        <ToastContainer />
+        <ToastContainer 
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+          style={{
+            '--toastify-color-info': '#4897de',
+            '--toastify-color-success': '#4897de',
+            '--toastify-color-warning': '#4897de',
+            '--toastify-color-error': '#4897de',
+          }}
+        />
         <LayoutWrapper categories={categories}>
           {children}
         </LayoutWrapper>

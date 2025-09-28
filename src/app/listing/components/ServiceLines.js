@@ -166,24 +166,20 @@ const ServiceLines = ({ services, onServicesChange }) => {
       {
         data: services.map(service => service.percentage),
         backgroundColor: [
-          '#1a365d',
-          '#2a4a7e',
-          '#3a5ea0',
-          '#4a72c2',
-          '#5a86e4',
-          '#6a9af6',
-          '#7aacf8',
-          '#8ac0fa'
+          '#3b82f6',
+          '#60a5fa',
+          '#93c5fd',
+          '#bfdbfe',
+          '#dbeafe',
+          '#eff6ff'
         ],
         borderColor: [
-          '#0249aa',
-          '#1259ba',
-          '#2269ca',
-          '#3279da',
-          '#4289ea',
-          '#5299fa',
-          '#62a9fb',
-          '#72b9fc'
+          '#1d4ed8',
+          '#2563eb',
+          '#3b82f6',
+          '#60a5fa',
+          '#93c5fd',
+          '#bfdbfe'
         ],
         borderWidth: 1,
       },
@@ -219,8 +215,8 @@ const ServiceLines = ({ services, onServicesChange }) => {
    <div className="space-y-6">
   {/* Section Header */}
   <div className="space-y-4">
-    <h3 className="text-lg font-bold text-[#1a365d]">Service Lines</h3>
-    <p className="text-[#0249aa] text-sm">
+    <h3 className="text-lg font-bold text-gray-800">Service Lines</h3>
+    <p className="text-blue-600 text-sm">
       Select your company&apos;s service offerings and allocate percentages
     </p>
   </div>
@@ -232,16 +228,16 @@ const ServiceLines = ({ services, onServicesChange }) => {
       {serviceCategories.map((category) => (
         <div
           key={category.id}
-          className="border border-gray-200 rounded-lg overflow-hidden"
+          className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
         >
           {/* Category Header */}
           <div
-            className="flex justify-between items-center p-4 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors"
+            className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 cursor-pointer hover:from-blue-100 hover:to-indigo-100 transition-colors"
             onClick={() => toggleCategory(category.id)}
           >
-            <h4 className="font-medium text-[#1a365d]">{category.name}</h4>
+            <h4 className="font-medium text-gray-800">{category.name}</h4>
             <svg
-              className={`w-5 h-5 text-[#0249aa] transition-transform ${
+              className={`w-5 h-5 text-blue-600 transition-transform ${
                 expandedCategories.has(category.id) ? "rotate-180" : ""
               }`}
               fill="none"
@@ -259,7 +255,7 @@ const ServiceLines = ({ services, onServicesChange }) => {
 
           {/* Services List (Expanded) */}
           {expandedCategories.has(category.id) && (
-            <div className="p-4 border-t border-gray-200">
+            <div className="p-4 border-t border-gray-200 bg-white">
               <div className="space-y-3">
                 {category.services.map((service) => {
                   const serviceId = `${category.id}-${service.id}`;
@@ -267,7 +263,7 @@ const ServiceLines = ({ services, onServicesChange }) => {
                   const isSelected = currentPercentage > 0;
 
                   return (
-                    <div key={serviceId} className="flex items-center gap-3">
+                    <div key={serviceId} className="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 transition-colors">
                       <input
                         type="checkbox"
                         id={serviceId}
@@ -275,11 +271,11 @@ const ServiceLines = ({ services, onServicesChange }) => {
                         onChange={() =>
                           toggleService(serviceId, category.name, service.name)
                         }
-                        className="w-4 h-4 text-[#314158] border-gray-300 rounded focus:ring-[#314158]"
+                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
                       <label
                         htmlFor={serviceId}
-                        className="flex-1 text-sm text-[#1a365d]"
+                        className="flex-1 text-sm text-gray-700"
                       >
                         {service.name}
                       </label>
@@ -298,7 +294,7 @@ const ServiceLines = ({ services, onServicesChange }) => {
                                 e.target.value
                               )
                             }
-                            className="w-24 accent-[#1a365d]"
+                            className="w-24 accent-blue-600"
                           />
                           <input
                             type="number"
@@ -313,7 +309,7 @@ const ServiceLines = ({ services, onServicesChange }) => {
                                 e.target.value
                               )
                             }
-                            className="w-16 px-2 py-1 text-sm border border-gray-300 rounded focus:ring-[#1a365d] focus:border-[#1a365d]"
+                            className="w-16 px-2 py-1 text-sm border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
                           />
                           <span className="text-sm text-gray-500">%</span>
                         </div>
@@ -329,8 +325,8 @@ const ServiceLines = ({ services, onServicesChange }) => {
     </div>
 
     {/* Service Distribution Preview (Right) */}
-    <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 shadow-sm">
-      <h4 className="font-bold text-[#1a365d] mb-4">Service Distribution</h4>
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-5 shadow-sm">
+      <h4 className="font-bold text-gray-800 mb-4">Service Distribution</h4>
 
       <div className="flex flex-col md:flex-row gap-6">
         {/* Chart */}
@@ -353,19 +349,19 @@ const ServiceLines = ({ services, onServicesChange }) => {
         <div className="flex-1">
           {services.length > 0 ? (
             <div className="space-y-3">
-              <div className="flex justify-between font-medium text-[#1a365d] border-b border-gray-200 pb-2">
+              <div className="flex justify-between font-medium text-gray-800 border-b border-gray-200 pb-2">
                 <span>Service</span>
                 <span>Percentage</span>
               </div>
               {services.map((service, index) => (
                 <div key={index} className="flex justify-between text-sm py-1">
-                  <span className="text-[#1a365d]">{service.serviceName}</span>
-                  <span className="font-medium text-[#0249aa]">
+                  <span className="text-gray-700">{service.serviceName}</span>
+                  <span className="font-medium text-blue-600">
                     {service.percentage}%
                   </span>
                 </div>
               ))}
-              <div className="flex justify-between font-bold text-[#1a365d] border-t border-gray-200 pt-2 mt-2">
+              <div className="flex justify-between font-bold text-gray-800 border-t border-gray-200 pt-2 mt-2">
                 <span>Total</span>
                 <span>{totalPercentage}%</span>
               </div>
@@ -385,7 +381,6 @@ const ServiceLines = ({ services, onServicesChange }) => {
     </div>
   </div>
 </div>
-
   );
 };
 

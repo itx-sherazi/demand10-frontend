@@ -17,7 +17,7 @@ const FocusDisplay = ({ focus = [] }) => {
   if (!focus || focus.length === 0) {
     return (
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-        <h3 className="text-xl font-bold text-[#1a365d] mb-4">Focus Areas</h3>
+        <h3 className="text-xl font-bold text-black mb-4">Focus Areas</h3>
         <div className="flex flex-col items-center justify-center py-8">
           <div className="w-32 h-32 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center mb-4">
             <div className="text-center text-gray-400">
@@ -40,9 +40,9 @@ const FocusDisplay = ({ focus = [] }) => {
       {
         data: focus.map(focusItem => focusItem.percentage),
         backgroundColor: [
-          '#1a365d',
-          '#0249aa',
-          '#3b82f6',
+          '#4897de', // Primary button color
+          '#0249aa', // Secondary color
+          '#3b82f6', // Replaced #a6871c with blue shade
           '#60a5fa',
           '#93c5fd',
           '#059669',
@@ -51,7 +51,7 @@ const FocusDisplay = ({ focus = [] }) => {
         ].slice(0, focus.length),
         borderColor: [
           '#0f1e35',
-          '#1a365d',
+          '#4897de',
           '#0249aa',
           '#3b82f6',
           '#60a5fa',
@@ -77,7 +77,7 @@ const FocusDisplay = ({ focus = [] }) => {
           font: {
             size: 12
           },
-          color: '#1a365d'
+          color: 'black'
         }
       },
       tooltip: {
@@ -92,7 +92,7 @@ const FocusDisplay = ({ focus = [] }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-      <h3 className="text-xl font-bold text-[#1a365d] mb-6">Focus Areas</h3>
+      <h3 className="text-xl font-bold text-black mb-6">Focus Areas</h3>
       
       <div className="flex flex-col items-center">
         {/* Chart */}

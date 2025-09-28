@@ -199,7 +199,7 @@ const Navbar = ({ categories = [] }) => {
               <div className="flex items-center space-x-4">
                 <Link
                   href="/"
-                  className="text-lg font-semibold text-gray-800  transition-colors duration-300 px-3 py-2"
+                  className="text-lg font-semibold text-black hover:text-[#265ba3] transition-colors duration-300 px-3 py-2"
                 >
                   Home
                 </Link>
@@ -213,7 +213,7 @@ const Navbar = ({ categories = [] }) => {
                 >
                   <button
                     onClick={toggleDropdown}
-                    className="flex items-center text-lg font-semibold  transition-colors duration-300 px-3 py-2 "
+                    className="flex items-center text-lg font-semibold text-black hover:text-[#265ba3] transition-colors duration-300 px-3 py-2"
                   >
                     Categories
                     <ChevronDown
@@ -226,13 +226,13 @@ const Navbar = ({ categories = [] }) => {
               
 <Link
                   href="/review"
-                  className="text-lg font-semibold text-gray-800  transition-colors duration-300 px-3 py-2"
+                  className="text-lg font-semibold text-black hover:text-[#265ba3] transition-colors duration-300 px-3 py-2"
                 >
                   Write a Review
                 </Link>
 <Link
                   href="/listing"
-                  className="text-lg font-semibold text-gray-800  transition-colors duration-300 px-3 py-2"
+                  className="text-lg font-semibold text-black hover:text-[#265ba3] transition-colors duration-300 px-3 py-2"
                 >
                   Add a Product
                 </Link>
@@ -243,18 +243,18 @@ const Navbar = ({ categories = [] }) => {
             </nav>
               {user ? (
                <div className="relative cursor-pointer">
-                  <button
-                    className="hidden lg:flex items-center cursor-pointer justify-center w-13 h-13 rounded-full bg-[#0249aa]  text-white transition-colors duration-300"
-                    onClick={() => (window.location.href = '/user-dashboard')}
-                  >
-                    <User className="h-8 w-8" />
-                  </button>
+                    <Link
+      href="https://vendor.demand10.com/"
+      className="hidden lg:flex items-center cursor-pointer justify-center w-13 h-13 rounded-full bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white transition-colors duration-300"
+    >
+      <User className="h-8 w-8" />
+    </Link>
                 </div>
 
               ) : (
                 // Auth button when user is not logged in
                 <button 
-                  className="hidden lg:flex items-center cursor-pointer bg-[#0249aa]  text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-300"
+                  className="hidden lg:flex items-center cursor-pointer bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-300"
                   onClick={() => setShowAuthForm(true)}
                 >
                   Sign In
@@ -264,7 +264,7 @@ const Navbar = ({ categories = [] }) => {
               {/* Mobile Menu Button */}
               <button
                 onClick={toggleMobileMenu}
-                className="lg:hidden p-2 text-gray-600 hover:text-[#0249aa] hover:bg-[#0249aa]/10 rounded-lg transition-colors duration-300 mobile-menu-button"
+                className="lg:hidden p-2 text-gray-600 hover:text-[#4897de] hover:bg-[#4897de]/10 rounded-lg transition-colors duration-300 mobile-menu-button"
               >
                 {isMobileMenuOpen ? (
                   <X className="h-6 w-6" />
@@ -292,7 +292,7 @@ const Navbar = ({ categories = [] }) => {
                     className="relative group"
                   >
                     {/* Category Header */}
-                  <div className="text-[#28374b] px-3 py-2 ">
+                  <div className="text-[#265ba3] px-3 py-2 ">
   <div className="flex items-center">
     <h3 className="font-bold text-sm flex items-center gap-1 truncate">
       {category.name}
@@ -327,7 +327,7 @@ const Navbar = ({ categories = [] }) => {
                 <Link 
                   href="/all-categories"
                   onClick={closeDropdown}
-                  className="inline-block bg-[#0249aa] text-white px-8 py-2 rounded-lg font-semibold  transition-colors duration-200"
+                  className="inline-block bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white px-8 py-2 rounded-lg font-semibold  transition-colors duration-200"
                 >
                   View All Categories
                 </Link>
@@ -363,7 +363,7 @@ const Navbar = ({ categories = [] }) => {
               </Link>
               <button
                 onClick={toggleMobileMenu}
-                className="p-2 text-gray-600 hover:text-[#0249aa] rounded-lg"
+                className="p-2 text-gray-600 hover:text-[#4897de] rounded-lg"
               >
                 <X className="h-6 w-6" />
               </button>
@@ -372,19 +372,17 @@ const Navbar = ({ categories = [] }) => {
             <div className="p-4 overflow-y-auto h-[calc(100vh-64px)]">
               {/* Auth/Profile Button for Mobile */}
               {user ? (
-                <button 
-                  className="w-full mb-6 bg-[#0249aa] text-white py-3 rounded-lg font-semibold transition-colors duration-300 flex items-center justify-center"
-                  onClick={() => {
-                    toggleMobileMenu();
-                    window.location.href = '/user-dashboard';
-                  }}
-                >
-                  <User className="h-4 w-4 mr-2" />
-                  Profile
-                </button>
+                <Link
+      href="https://vendor.demand10.com/"
+      onClick={toggleMobileMenu}
+      className="w-full mb-6 bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white py-3 rounded-lg font-semibold transition-colors duration-300 flex items-center justify-center"
+    >
+      <User className="h-4 w-4 mr-2" />
+      Profile
+    </Link>
               ) : (
                 <button 
-                  className="w-full mb-6 bg-[#0249aa]  text-white py-3 rounded-lg font-semibold transition-colors duration-300"
+                  className="w-full mb-6 bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white py-3 rounded-lg font-semibold transition-colors duration-300"
                   onClick={() => {
                     toggleMobileMenu();
                     setShowAuthForm(true);

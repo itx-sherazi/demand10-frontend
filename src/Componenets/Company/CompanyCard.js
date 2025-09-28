@@ -4,6 +4,21 @@ import Image from 'next/image';
 import { MapPin, Users, Calendar, ExternalLink, Building2 } from 'lucide-react';
 
 const CompanyCard = ({ company }) => {
+  // Function to get the full image URL
+  const getImageUrl = (imagePath) => {
+    // If it's already a full URL, return as is
+    if (!imagePath) return null;
+    if (imagePath.startsWith('http')) return imagePath;
+    
+    // If it's a relative path, prepend the API base URL
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
+    // Remove /api/v1 prefix if it exists in the imagePath since uploads are served directly
+    const cleanPath = imagePath.startsWith('/api/v1') ? imagePath.substring(7) : imagePath;
+    // For uploads, we need to remove the /api/v1 part from the base URL
+    const uploadBaseUrl = baseUrl.replace('/api/v1', '');
+    return `${uploadBaseUrl}${cleanPath}`;
+  };
+
   const renderStars = (rating) => {
     const numericRating = parseFloat(rating);
     const normalizedRating = isNaN(numericRating) ? 0 : Math.max(0, Math.min(5, numericRating));
@@ -40,6 +55,7 @@ const CompanyCard = ({ company }) => {
   // Ensure company data is properly handled
   const companyRating = company?.averageRating !== undefined ? company.averageRating : 0;
   const reviewCount = company?.totalReviews || 0;
+  const imageUrl = getImageUrl(company?.image);
 
   return (
     <article
@@ -67,11 +83,11 @@ const CompanyCard = ({ company }) => {
               rel="noopener noreferrer"
             >
               <div className="w-20 h-20 rounded-2xl overflow-hidden bg-gray-100 flex items-center justify-center flex-shrink-0 shadow-md">
-                {company?.image ? (
+                {imageUrl ? (
                   <Image
                     width={80}
                     height={80}
-                    src={company.image}
+                    src={imageUrl}
                     alt={`${company?.companyName} logo`}
                     className="w-full h-full object-cover"
                     itemProp="logo"
@@ -207,7 +223,7 @@ const CompanyCard = ({ company }) => {
             className="flex-1"
           >
             <button
-              className="w-full cursor-pointer bg-[#0249aa] hover:bg-[#1a365d] text-white px-4 py-3 rounded-lg transition-colors font-semibold text-sm whitespace-nowrap flex items-center justify-center gap-2"
+              className="w-full cursor-pointer bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d]  text-white px-4 py-3 rounded-lg transition-colors font-semibold text-sm whitespace-nowrap flex items-center justify-center gap-2"
               aria-label={`View details of ${company?.companyName}`}
             >
               <span>View Profile</span>

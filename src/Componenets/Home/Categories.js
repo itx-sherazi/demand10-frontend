@@ -61,13 +61,13 @@ const SoftwareCategories = ({ categories = [] }) => {
   };
 
   return (
-    <div id="categories" className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div id="categories" className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="w-full mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0249aa] mb-6 leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#265ba3] mb-6 leading-tight">
             Explore Software Categories
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-black max-w-3xl mx-auto">
             Discover the perfect software solutions for your business needs across various categories
           </p>
         </div>
@@ -78,7 +78,7 @@ const SoftwareCategories = ({ categories = [] }) => {
             <div key={index} className="border border-gray-200 rounded-xl overflow-hidden">
               <button
                 onClick={() => toggleCategory(index)}
-                className="w-full p-4 bg-[#0249aa] text-white text-left font-bold flex justify-between items-center"
+                className="w-full p-4 bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white text-left font-bold flex justify-between items-center hover:bg-[#0249aa] transition-all duration-300"
               >
                 <span>{category.category}</span>
                 <svg 
@@ -98,11 +98,11 @@ const SoftwareCategories = ({ categories = [] }) => {
                       <li key={itemIndex}>
                         <Link
                           href={`/${item.slug || item}`}
-                          className="block py-2 px-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-[#0249aa] transition-all duration-200"
+                          className="block py-2 px-3 rounded-lg text-black hover:bg-blue-100   transition-all duration-200"
                         >
                           <div className="flex items-center justify-between">
                             <span className="text-sm font-medium">{item.name || item}</span>
-                            <svg className="w-4 h-4 text-[#0249aa]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg className="w-4 h-4 text-[#4897de]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                             </svg>
                           </div>
@@ -113,7 +113,7 @@ const SoftwareCategories = ({ categories = [] }) => {
                       <li>
                         <Link
                           href="#"
-                          className="block py-2 px-3 rounded-lg text-[#0249aa] font-bold text-sm"
+                          className="block py-2 px-3 rounded-lg text-[#4897de] font-bold text-sm hover:bg-[#0249aa] hover:text-white transition-all duration-200"
                         >
                           View All {category.subcategory.length} Subcategories
                         </Link>
@@ -133,7 +133,7 @@ const SoftwareCategories = ({ categories = [] }) => {
               key={index} 
               className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
             >
-              <div className="bg-[#0249aa] p-4">
+              <div className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] p-4">
                 <h2 className="text-lg font-bold text-white text-center">{category.category}</h2>
               </div>
               <div className="p-4">
@@ -142,11 +142,11 @@ const SoftwareCategories = ({ categories = [] }) => {
                     <li key={itemIndex}>
                       <Link
                         href={`/${item.slug || item}`}
-                        className="block py-3 px-4 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-[#0249aa] transition-all duration-200 border border-transparent hover:border-[#0249aa]/20"
+                        className="block py-3 px-4 rounded-lg text-black hover:bg-blue-100  transition-all duration-200 border border-transparent hover:border-[#4897de]/20"
                       >
                         <div className="flex items-center justify-between">
                           <span className="text-sm font-medium">{item.name || item}</span>
-                          <svg className="w-4 h-4 text-[#0249aa]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <svg className="w-4 h-4 text-[#4897de]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                           </svg>
                         </div>
@@ -157,7 +157,7 @@ const SoftwareCategories = ({ categories = [] }) => {
                     <li>
                       <Link
                         href="#"
-                        className="block py-3 px-4 rounded-lg text-[#0249aa] font-bold text-sm text-center border border-transparent hover:border-[#0249aa]/20"
+                        className="block py-3 px-4 rounded-lg text-[#4897de] font-bold text-sm text-center border border-transparent hover:border-[#4897de]/20 hover:bg-[#0249aa] hover:text-white transition-all duration-200"
                       >
                         +{category.subcategory.length - 6} more
                       </Link>
@@ -172,7 +172,7 @@ const SoftwareCategories = ({ categories = [] }) => {
         {/* View All Categories Button */}
         <div className="text-center mt-12">
           <Link href="/categories">
-            <button className="bg-[#0249aa] hover:bg-[#0356c7] text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg">
+            <button className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg">
               View All Categories
             </button>
           </Link>

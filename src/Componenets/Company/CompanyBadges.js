@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { getCompanyBadgesForFrontend } from "@/services/api";
 
-export default function CompanyBadges({ companyId }) {
+export default function CompanyBadges({ companyId, inline = false }) {
   const [badges, setBadges] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,6 +31,39 @@ export default function CompanyBadges({ companyId }) {
     if (companyId) fetchBadges();
   }, [companyId, fetchBadges]);
 
+  // If inline prop is true, render badges inline without margin
+  if (inline) {
+    if (loading) {
+      return (
+        <div className="flex gap-1">
+          {[1, 2].map((i) => (
+            <div key={i} className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
+          ))}
+        </div>
+      );
+    }
+
+    if (error || badges.length === 0) return null;
+
+    return (
+      <div className="flex gap-2 items-center">
+        {badges.map(({ badge, rankPosition }) => (
+          <div key={badge._id} className="relative group">
+            <Image
+              width={32}
+              height={32}
+              src={badge.image}
+              alt={`${badge.name} Badge`}
+              className="w-20 h-20 object-contain transition-transform group-hover:scale-105"
+              title={`${badge.name}${rankPosition ? ` - Rank #${rankPosition}` : ""}`}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Default block layout
   if (loading) {
     return (
       <div className="flex gap-2">
@@ -49,7 +82,6 @@ export default function CompanyBadges({ companyId }) {
 
   return (
     <div className="mb-6">
-      
       <div className="flex flex-wrap gap-3 items-center">
         {badges.map(({ badge, rankPosition }) => (
           <div key={badge._id} className="relative group">

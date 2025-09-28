@@ -132,7 +132,7 @@ export default function CompanyReviewPage({ params }) {
   return (
     <div className="min-h-screen bg-[#f8fafc]">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#1a365d] to-[#0249aa] text-white shadow-lg">
+      <section className="relative bg-gradient-to-r from-[#4897de] to-[#0249aa] text-white shadow-lg">
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center">
             <h1 className="text-3xl md:text-4xl font-bold mb-3">

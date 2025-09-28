@@ -289,7 +289,7 @@ export const getCompanyBySlug = async (slug) => {
   }
 };
 
-// Update company data
+// Update company data with JSON
 export const updateCompanyData = async (slug, companyData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/updateCompanyTeamBySlug/${slug}`, {
@@ -306,6 +306,24 @@ export const updateCompanyData = async (slug, companyData) => {
   } catch (error) {
     console.error("Update company data error:", error);
     return createErrorResponse("Network error during company update");
+  }
+};
+
+// Update company data with image upload (FormData)
+export const updateCompanyWithImage = async (slug, formData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/updateCompanyTeamBySlug/${slug}`, {
+      method: "PUT",
+      credentials: "include",
+      // Don't set Content-Type header - let browser set it with boundary
+      body: formData,
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Update company with image error:", error);
+    return createErrorResponse("Network error during company update with image");
   }
 };
 

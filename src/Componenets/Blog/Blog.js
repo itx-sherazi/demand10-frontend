@@ -275,26 +275,8 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
       />
 
       {/* Hero Section */}
-      <header className="relative bg-gradient-to-r from-[#314158] to-[#253347] overflow-hidden min-h-[50vh] flex items-center">
-        {/* Top Left Circles */}
-        <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 opacity-20">
-          <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
-          </svg>
-        </div>
-
-        {/* Bottom Right Circles */}
-        <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 opacity-20">
-          <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
-          </svg>
-        </div>
+      <header className="relative bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] overflow-hidden min-h-[50vh] flex items-center">
+       
         
         {/* Content Container */}
         <div className="relative z-10 container mx-auto px-6 lg:px-12 py-16 text-center">
@@ -312,7 +294,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
             <a
               href="#blog-posts"
-              className="px-8 py-4 bg-white text-[#314158] font-semibold rounded-lg hover:bg-white/90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
+              className="px-8 py-4 bg-[#4897de]  text-white font-semibold rounded-lg  transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
             >
               Explore Latest Articles
             </a>
@@ -417,7 +399,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                                 </time>
                               </div>
                               <div className="flex items-center">
-                                <Clock className="w-4 h-4 mr-1 text-[#314158]" />
+                                <Clock className="w-4 h-4 mr-1 text-[#4897de]" />
                                 <span>5 min read</span>
                               </div>
                             </div>
@@ -429,7 +411,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                             </h3>
                             <Link href={`/insights/${article.slug}`}>
                               <p
-                                className="text-gray-600 text-md space-y-3 line-clamp-3 hover:text-[#314158]"
+                                className="text-gray-600 text-md space-y-3 line-clamp-3 hover:text-[#4897de]"
                                 itemProp="description"
                               >
                                 {article.shortDescription ||
@@ -453,7 +435,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                               href={`/insights/${article.slug}`}
                               itemProp="url"
                             >
-                              <button className="flex items-center cursor-pointer text-[#314158] hover:text-[#253347] font-medium text-sm">
+                              <button className="flex items-center cursor-pointer text-[#314158]  font-medium text-sm">
                                 Read More <ArrowRight className="w-4 h-4 ml-1" />
                               </button>
                             </Link>

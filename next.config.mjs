@@ -24,30 +24,26 @@ const nextConfig = {
         port: '4000',        // match your badge server port
         pathname: '/badges/**', // optional: limit to badges path
       },
-        {
+       {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '4000',        // match your badge server port
+        pathname: '/uploads/listing-images/**', // optional: limit to badges path
+      },
+       // Production API (live)
+      {
         protocol: 'https',
-        hostname: 'api.intentwire.com',
-
+        hostname: 'api.demand10.com',
+        pathname: '/uploads/listing-images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.demand10.com',
+        pathname: '/badges/**',
       },
     ],
   },
-  async redirects() {
-    return [
-      // Redirect /category/[slug] to /[slug]
-      {
-        source: '/category/:slug*',
-        destination: '/:slug*',
-        permanent: true, // 301 redirect
-      },
-      // Redirect all /product/* URLs to homepage for deindexing
-      {
-        source: '/product/:slug*',
-        destination: '/',
-        permanent: true, // 301 redirect to help Google deindex
-      },
-      // Note: Company redirects need dynamic data, so those will stay in middleware
-    ];
-  },
+
 };
 
 export default nextConfig;

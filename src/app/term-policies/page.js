@@ -55,51 +55,9 @@ const TermsOfUse = () => {
     <>
     <div>
        {/* Hero Section */}
-        <section className="relative bg-gradient-to-r from-[#314158] to-[#253347] overflow-hidden min-h-[50vh] flex items-center">
-          {/* Animated Background Elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            {/* Floating Shapes */}
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/3 right-1/3 w-48 h-48 bg-white/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
-            
-            {/* Grid Overlay */}
-            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:50px_50px]"></div>
-            
-            {/* Floating Icons */}
-            <div className="absolute top-20 right-20 text-white/10 animate-bounce">
-              <Server className="w-12 h-12" />
-            </div>
-            <div className="absolute bottom-20 left-20 text-white/10 animate-bounce delay-500">
-              <Shield className="w-10 h-10" />
-            </div>
-          </div>
-          
-          {/* Top Left Circles */}
-          <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 opacity-20">
-            <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
-            </svg>
-          </div>
+        <section className="relative bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] overflow-hidden min-h-[50vh] flex items-center">
 
-          {/* Bottom Right Circles */}
-          <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 opacity-20">
-            <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
-            </svg>
-          </div>
           
-          {/* Bottom Wave */}
-          <div className="absolute bottom-0 left-0 right-0">
-            <svg viewBox="0 0 1440 120" className="w-full h-auto text-[#253347]" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 0L60 10C120 20 240 40 360 45C480 50 600 40 720 30C840 20 960 10 1080 15C1200 20 1320 40 1380 50L1440 60V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z"/>
-            </svg>
-          </div>
         
           
           {/* Main Content */}

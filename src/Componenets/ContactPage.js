@@ -43,26 +43,8 @@ const ContactPage = () => {
   return (
     <div>
   {/* Hero Section */}
-  <section className="relative bg-gradient-to-r from-[#314158] to-[#253347] overflow-hidden min-h-[70vh] flex items-center">
-    {/* Top Left Circles */}
-    <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 opacity-20">
-      <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-        <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-        <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-        <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
-      </svg>
-    </div>
-
-    {/* Bottom Right Circles */}
-    <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 opacity-20">
-      <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-        <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-        <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-        <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
-      </svg>
-    </div>
+  <section className="relative bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] overflow-hidden min-h-[70vh] flex items-center">
+ 
     
    
     
@@ -88,7 +70,7 @@ const ContactPage = () => {
             </p>
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="flex items-center justify-center px-8 py-4 bg-white text-[#314158] font-semibold rounded-lg hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              <button className="flex items-center justify-center px-8 py-4 bg-[#4897de] text-white font-semibold rounded-lg hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                 <MessageCircle className="w-5 h-5 mr-2" />
                 Start Conversation
               </button>
@@ -114,7 +96,7 @@ const ContactPage = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
           
           {/* Left Section - Support Info */}
-          <div className="bg-gradient-to-br from-[#314158] to-[#253347] rounded-2xl p-8 shadow-lg text-white">
+          <div className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] rounded-2xl p-8 shadow-lg text-white">
             <h2 className="text-3xl font-bold mb-8">
               We&apos;re Here To Support You Always!
             </h2>
@@ -246,7 +228,7 @@ const ContactPage = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-gradient-to-r from-[#314158] to-[#253347] text-white font-semibold py-4 px-8 rounded-lg hover:from-[#253347] hover:to-[#1a2533] transition text-lg shadow-md flex items-center justify-center"
+                className="w-full bg-[#4897de] text-white font-semibold py-4 px-8 rounded-lg hover:from-[#253347] hover:to-[#1a2533] transition text-lg shadow-md flex items-center justify-center"
               >
                 {isLoading ? (
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>

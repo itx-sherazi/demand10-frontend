@@ -17,7 +17,7 @@ const ClientsDisplay = ({ clients = [] }) => {
   if (!clients || clients.length === 0) {
     return (
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-        <h3 className="text-xl font-bold text-[#1a365d] mb-4">Client Segments</h3>
+        <h3 className="text-xl font-bold text-black mb-4">Client Segments</h3>
         <div className="flex flex-col items-center justify-center py-8">
           <div className="w-32 h-32 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center mb-4">
             <div className="text-center text-gray-400">
@@ -40,9 +40,9 @@ const ClientsDisplay = ({ clients = [] }) => {
       {
         data: clients.map(client => client.percentage),
         backgroundColor: [
-          '#1a365d',
-          '#0249aa',
-          '#3b82f6',
+          '#4897de', // Primary button color
+          '#0249aa', // Secondary color
+          '#3b82f6', // Replaced #a6871c with blue shade
           '#60a5fa',
           '#93c5fd',
           '#059669',
@@ -51,7 +51,7 @@ const ClientsDisplay = ({ clients = [] }) => {
         ].slice(0, clients.length),
         borderColor: [
           '#0f1e35',
-          '#1a365d',
+          '#4897de',
           '#0249aa',
           '#3b82f6',
           '#60a5fa',
@@ -77,7 +77,7 @@ const ClientsDisplay = ({ clients = [] }) => {
           font: {
             size: 12
           },
-          color: '#1a365d'
+          color: 'black'
         }
       },
       tooltip: {
@@ -92,7 +92,7 @@ const ClientsDisplay = ({ clients = [] }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-      <h3 className="text-xl font-bold text-[#1a365d] mb-6">Client Segments</h3>
+      <h3 className="text-xl font-bold text-black mb-6">Client Segments</h3>
       
       <div className="flex flex-col items-center">
         {/* Chart */}
@@ -102,12 +102,12 @@ const ClientsDisplay = ({ clients = [] }) => {
         
         {/* Client segments list */}
         <div className="w-full mt-8">
-          <h4 className="text-lg font-semibold text-gray-900 mb-4">Client Segments Distribution</h4>
+          <h4 className="text-lg font-semibold text-black mb-4">Client Segments Distribution</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {clients.map((client, index) => (
               <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <span className="font-medium text-gray-900">{client.clientSegment}</span>
-                <span className="font-bold text-[#1a365d]">{client.percentage}%</span>
+                <span className="font-medium text-black">{client.clientSegment}</span>
+                <span className="font-bold text-[#4897de]">{client.percentage}%</span>
               </div>
             ))}
           </div>

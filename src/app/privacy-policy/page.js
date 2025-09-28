@@ -51,27 +51,8 @@ const PrivacyPolicy = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#314158] to-[#253347] overflow-hidden">
-        {/* Top Left Circles */}
-        <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 opacity-20">
-          <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
-          </svg>
-        </div>
-
-        {/* Bottom Right Circles */}
-        <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 opacity-20">
-          <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
-          </svg>
-        </div>
-        
+      <section className="relative bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] overflow-hidden">
+       
         <div className="absolute inset-0 bg-grid-white/[0.05]"></div>
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="max-w-5xl mx-auto text-center">
@@ -144,7 +125,7 @@ const PrivacyPolicy = () => {
                    
                   <p className="text-gray-600 mb-4 leading-relaxed">
                     <span className="text-md font-semibold text-gray-700 mb-3">Copyright Infringement Notification </span>
-                    If you believe that content available on or through the Abuyo, Inc. DBA SelectHub (&quot;SelectHub&quot;) website (&quot;SelectHub.com&quot; or &quot;Website&quot;) unfairly uses or infringes one or more of your copyright(s), please immediately notify SelectHub&apos;s Copyright Agent by mail, email or faxed notice (&quot;Notification&quot;) providing the information described below. A copy of your Notification will be sent to the person responsible for the material addressed in the Notification.
+                    If you believe that content available on or through the Abuyo, Inc. DBA Demand10 (&quot;Demand10&quot;) website (&quot;Demand10.com&quot; or &quot;Website&quot;) unfairly uses or infringes one or more of your copyright(s), please immediately notify Demand10&apos;s Copyright Agent by mail, email or faxed notice (&quot;Notification&quot;) providing the information described below. A copy of your Notification will be sent to the person responsible for the material addressed in the Notification.
                   </p>
                   <p className="text-gray-600 mb-4 leading-relaxed">
                     Please be advised that you may be held liable for damages if you make material misrepresentations pursuant to federal law in a Notification. Thus, if you are not sure content located on or linked-to by the Website infringes your copyright, or if you believe it&apos;s not a fair use of your copyright, you should consider first contacting an attorney.
@@ -162,7 +143,7 @@ const PrivacyPolicy = () => {
                   </ol>
                   <div className="bg-[#f0f4f9] rounded-lg p-4 border border-[#314158]/20">
                     <p className="text-gray-600 leading-relaxed">
-                      Notifications should be sent via email to: <span className="font-medium text-[#314158]">support@selecthub.com</span>.
+                      Notifications should be sent via email to: <span className="font-medium text-[#314158]">support@Demand10.com</span>.
                     </p>
                   </div>
                 </section>
@@ -170,11 +151,11 @@ const PrivacyPolicy = () => {
                 {/* EULA Section */}
                 <section id="eula">
                   <div className="border-l-4 border-[#314158] pl-4 mb-6">
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">SelectHub End User License Agreement (&quot;EULA&quot;) & Terms of Use</h2>
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">Demand10 End User License Agreement (&quot;EULA&quot;) & Terms of Use</h2>
                     <p className="text-gray-500 text-sm">Last Revision: May 24, 2018</p>
                   </div>
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    THIS IS A LEGAL AGREEMENT BETWEEN YOU, A PERSON OR ENTITY WHO REGISTERS AND USES SELECTHUB.COM SERVICE ON BEHALF OF HIMSELF/HERSELF OR A BUSINESS, GOVERNMENT OR NON-PROFIT AGENCY (&quot;End User&quot;, &quot;User&quot; or &quot;Customer&quot;) AND ABUYO, INC. DBA SELECTHUB (&quot;SelectHub&quot;) REGARDING CUSTOMER&apos;S USE OF SELECTHUB.COM SERVICES (&quot;SelectHub Service&quot; or &quot;Service&quot;). BY CLICKING &quot;I ACCEPT&quot; OR BY USING THE SERVICE, CUSTOMER AGREES TO THE TERMS OF THIS AGREEMENT.
+                    THIS IS A LEGAL AGREEMENT BETWEEN YOU, A PERSON OR ENTITY WHO REGISTERS AND USES Demand10.COM SERVICE ON BEHALF OF HIMSELF/HERSELF OR A BUSINESS, GOVERNMENT OR NON-PROFIT AGENCY (&quot;End User&quot;, &quot;User&quot; or &quot;Customer&quot;) AND ABUYO, INC. DBA Demand10 (&quot;Demand10&quot;) REGARDING CUSTOMER&apos;S USE OF Demand10.COM SERVICES (&quot;Demand10 Service&quot; or &quot;Service&quot;). BY CLICKING &quot;I ACCEPT&quot; OR BY USING THE SERVICE, CUSTOMER AGREES TO THE TERMS OF THIS AGREEMENT.
                   </p>
                   
                   <div className="space-y-6 mt-8">
@@ -184,22 +165,22 @@ const PrivacyPolicy = () => {
                         1. DEFINED TERMS
                       </h3>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Agreement means this SelectHub Web Services Agreement together with any rules and restrictions that may apply at the time.
+                        Agreement means this Demand10 Web Services Agreement together with any rules and restrictions that may apply at the time.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Confidential Information means the SelectHub Service and any information disclosed by SelectHub to User or discovered by User on his/her own accord, either directly or indirectly, in writing, orally, or by inspection of tangible objects relating to the SelectHub Service including without limitation application functionality, application workflow, user interface, product process, application specifications, research content, requirements templates, scorecards, vendor/product leaderboards, data, text, pictures, audio, video, logos and copy.
+                        Confidential Information means the Demand10 Service and any information disclosed by Demand10 to User or discovered by User on his/her own accord, either directly or indirectly, in writing, orally, or by inspection of tangible objects relating to the Demand10 Service including without limitation application functionality, application workflow, user interface, product process, application specifications, research content, requirements templates, scorecards, vendor/product leaderboards, data, text, pictures, audio, video, logos and copy.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Customer&apos;s Data or User&apos;s Data means any Project data or other data or material submitted by Customer during their use of the SelectHub Service.
+                        Customer&apos;s Data or User&apos;s Data means any Project data or other data or material submitted by Customer during their use of the Demand10 Service.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Effective Date means the day the Customer clicks to accept this Agreement, or uses the SelectHub Service, whichever is earlier.
+                        Effective Date means the day the Customer clicks to accept this Agreement, or uses the Demand10 Service, whichever is earlier.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        SelectHub Site means the web site located at https://www.SelectHub.com or related sub-domains.
+                        Demand10 Site means the web site located at https://www.Demand10.com or related sub-domains.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        SelectHub Service (or &quot;Service&quot;) means the SelectHub vendor selection, e-sourcing and e-procurement application or product or product components thereof including but not limited to application functionality, market research, requirements templates or vendor/product scorecards and/or leaderboards that SelectHub makes available to Users over the Internet by means of the SelectHub Site for collaborating on product and services evaluations, vendor sourcing, procurement, sales and marketing purposes.
+                        Demand10 Service (or &quot;Service&quot;) means the Demand10 vendor selection, e-sourcing and e-procurement application or product or product components thereof including but not limited to application functionality, market research, requirements templates or vendor/product scorecards and/or leaderboards that Demand10 makes available to Users over the Internet by means of the Demand10 Site for collaborating on product and services evaluations, vendor sourcing, procurement, sales and marketing purposes.
                       </p>
                     </div>
                     
@@ -209,16 +190,16 @@ const PrivacyPolicy = () => {
                         2. SCOPE OF SERVICE; USAGE; ACCOUNTS; CUSTOMER DATA
                       </h3>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Service. SelectHub shall provide access to Customer to SelectHub Service to be hosted and operated on SelectHub&apos;s and associated third-party computer servers and any applicable additional services in accordance with the terms of this EULA and the terms on SelectHub Site. Users may use the Service to evaluate various products and services if they are prospective buyers, or if they are vendors, they may use the Service to market to, interact with and sell their products and services to those prospective buyers.
+                        Service. Demand10 shall provide access to Customer to Demand10 Service to be hosted and operated on Demand10&apos;s and associated third-party computer servers and any applicable additional services in accordance with the terms of this EULA and the terms on Demand10 Site. Users may use the Service to evaluate various products and services if they are prospective buyers, or if they are vendors, they may use the Service to market to, interact with and sell their products and services to those prospective buyers.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Buyer or Prospective Buyer refers to a user that is in the process of evaluating any products and services for his/her own use or use by the entity he/she is representing. A Buyer may interact with a Vendor via a message, enquiry, RFI, RFP, demo, trial, proof-of-concept (POC) or other related communication mechanism within SelectHub.
+                        Buyer or Prospective Buyer refers to a user that is in the process of evaluating any products and services for his/her own use or use by the entity he/she is representing. A Buyer may interact with a Vendor via a message, enquiry, RFI, RFP, demo, trial, proof-of-concept (POC) or other related communication mechanism within Demand10.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
                         Vendor refers to a user that has a product or service, or represents an entity that has a product or service that he/she would like to market to Buyers, and interact with them while responding to messages, enquiries, RFIs, RFPs, demo requests, trial requests, proof-of-concept requests, or other related communication mechanism from Buyers.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Types and Cost of Service. There are two types of SelectHub Services: (i) Corporate or Paid Edition (&quot;SelectHub Corporate&quot;) wherein a user pays SelectHub a per-project, a per-module or a monthly, quarterly or annual subscription fee for access to the SelectHub Service and the ability to conduct their evaluations on the SelectHub platform and interact with vendors of their choice via messages, enquiries, RFIs, RFPs, demo requests, trial requests, proof-of-concept requests and other communication mechanism; and (ii) Community or Free Edition (&quot;SelectHub Community&quot;) wherein a user does not pay SelectHub to use the SelectHub Service but his/her usage is for functionality preview purposes only, is for a maximum of 30 days, and is subject to any/all usage data being shared with paying third-parties. The associated functionality for both editions is defined by SelectHub and is subject to change at any time. Also, the associated fees for using the Buyer-facing and the Vendor-facing aspects of the Service are subject to change from time to time. For the SelectHub Corporate edition, SelectHub charges fees that are current at the time of usage, unless the fees are pre-defined for a specific period of time via a separate contract or statement of work (SoW). Any and all unpaid or free usage of Service reverts to Community Edition.
+                        Types and Cost of Service. There are two types of Demand10 Services: (i) Corporate or Paid Edition (&quot;Demand10 Corporate&quot;) wherein a user pays Demand10 a per-project, a per-module or a monthly, quarterly or annual subscription fee for access to the Demand10 Service and the ability to conduct their evaluations on the Demand10 platform and interact with vendors of their choice via messages, enquiries, RFIs, RFPs, demo requests, trial requests, proof-of-concept requests and other communication mechanism; and (ii) Community or Free Edition (&quot;Demand10 Community&quot;) wherein a user does not pay Demand10 to use the Demand10 Service but his/her usage is for functionality preview purposes only, is for a maximum of 30 days, and is subject to any/all usage data being shared with paying third-parties. The associated functionality for both editions is defined by Demand10 and is subject to change at any time. Also, the associated fees for using the Buyer-facing and the Vendor-facing aspects of the Service are subject to change from time to time. For the Demand10 Corporate edition, Demand10 charges fees that are current at the time of usage, unless the fees are pre-defined for a specific period of time via a separate contract or statement of work (SoW). Any and all unpaid or free usage of Service reverts to Community Edition.
                       </p>
                     </div>
                   </div>
@@ -227,14 +208,14 @@ const PrivacyPolicy = () => {
                 {/* Privacy Policy Section */}
                 <section id="privacy">
                   <div className="border-l-4 border-[#314158] pl-4 mb-6">
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">SelectHub Privacy Policy</h2>
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">Demand10 Privacy Policy</h2>
                     <p className="text-gray-500 text-sm">(Last Updated: June 20, 2024)</p>
                   </div>
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    Abuyo, Inc. DBA SelectHub (&quot;SelectHub&quot; or &quot;we&quot;) has created this privacy policy (the &quot;Policy&quot;) to explain our privacy practices so you will understand when and how information is collected, used, disclosed and protected with respect to SelectHub-owned websites including but not limited to www.selecthub.com (&quot;Site(s)&quot; or &quot;Web Site(s)&quot;), applications, research content, requirements templates, analyst reports, Leaderboards, phone consultations, email surveys and other services (collectively and individually, &quot;Service&quot;). By using the Service, you consent to the privacy practices described in this Policy.
+                    Abuyo, Inc. DBA Demand10 (&quot;Demand10&quot; or &quot;we&quot;) has created this privacy policy (the &quot;Policy&quot;) to explain our privacy practices so you will understand when and how information is collected, used, disclosed and protected with respect to Demand10-owned websites including but not limited to www.Demand10.com (&quot;Site(s)&quot; or &quot;Web Site(s)&quot;), applications, research content, requirements templates, analyst reports, Leaderboards, phone consultations, email surveys and other services (collectively and individually, &quot;Service&quot;). By using the Service, you consent to the privacy practices described in this Policy.
                   </p>
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    Because of changes in technology and the growth and development of our business, SelectHub may need to modify this Policy from time to time. Changes to this Policy are discussed at the end of this document.
+                    Because of changes in technology and the growth and development of our business, Demand10 may need to modify this Policy from time to time. Changes to this Policy are discussed at the end of this document.
                   </p>
                   
                   <div className="space-y-6 mt-8">
@@ -244,7 +225,7 @@ const PrivacyPolicy = () => {
                         1. TYPES OF INFORMATION WE COLLECT ABOUT YOU
                       </h3>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        SelectHub collects, uses and discloses two types of information: Personal Information and Non-Personal Information (individually and collectively, &quot;Information&quot;). &quot;Personal Information&quot; is information that is directly associated with a specific person or entity such as a user&apos;s name, initials or nickname, e- mail address, organization name, title, phone number, user-chosen credentials and any technology vendor selection project data. &quot;Non-Personal Information&quot; is information that, without the aid of additional information, cannot be directly associated with a specific person or entity.
+                        Demand10 collects, uses and discloses two types of information: Personal Information and Non-Personal Information (individually and collectively, &quot;Information&quot;). &quot;Personal Information&quot; is information that is directly associated with a specific person or entity such as a user&apos;s name, initials or nickname, e- mail address, organization name, title, phone number, user-chosen credentials and any technology vendor selection project data. &quot;Non-Personal Information&quot; is information that, without the aid of additional information, cannot be directly associated with a specific person or entity.
                       </p>
                     </div>
                     
@@ -265,10 +246,10 @@ const PrivacyPolicy = () => {
                       </h3>
                       <h4 className="text-lg font-medium text-gray-700 mb-2">A. Gathering Non-Personal Information</h4>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        (i) Web Browsers Like most Site operators, SelectHub gathers from users of the Site Non-Personal Information of the sort that Web browsers, depending on their settings, may make available. That information includes the user&apos;s Internet Protocol (&quot;IP&quot;) address, operating system and browser type, and the locations of the Web pages the user views right before arriving at, while navigating and immediately after leaving the Site. Such information may also include the user&apos;s role/persona within their organization as stated on the Site (e.g., Procurement Officer, IT Director, etc.), the industry in which their organization operates (e.g., Financial Services company), the size of the organization (e.g., SMB, Fortune 500 company), whether user has a Project or not within the Site, and in certain cases, high-level Project information such as product categories included. At this time, the Site does not acknowledge browser &quot;do not track&quot; settings.
+                        (i) Web Browsers Like most Site operators, Demand10 gathers from users of the Site Non-Personal Information of the sort that Web browsers, depending on their settings, may make available. That information includes the user&apos;s Internet Protocol (&quot;IP&quot;) address, operating system and browser type, and the locations of the Web pages the user views right before arriving at, while navigating and immediately after leaving the Site. Such information may also include the user&apos;s role/persona within their organization as stated on the Site (e.g., Procurement Officer, IT Director, etc.), the industry in which their organization operates (e.g., Financial Services company), the size of the organization (e.g., SMB, Fortune 500 company), whether user has a Project or not within the Site, and in certain cases, high-level Project information such as product categories included. At this time, the Site does not acknowledge browser &quot;do not track&quot; settings.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        (ii) Cookies A cookie is a small amount of data, often including an anonymous unique identifier that is sent to your browser from a Site&apos;s computers and stored on your computer&apos;s hard drive. Most browsers automatically accept cookies as the default setting. SelectHub uses cookies to track a user&apos;s use of the Site during each Site session, both to help SelectHub improve users&apos; experiences and to help SelectHub understand how the Site is being used. YOU CAN MODIFY THE SETTING TO REJECT COOKIES OR TO PROMPT YOU BEFORE ACCEPTING A COOKIE FROM THE SITES YOU VISIT BY EDITING BROWSER OPTIONS. IF YOU DECIDE NOT TO ACCEPT OUR COOKIES, HOWEVER, YOU WILL NOT BE ABLE TO USE THE SERVICE.
+                        (ii) Cookies A cookie is a small amount of data, often including an anonymous unique identifier that is sent to your browser from a Site&apos;s computers and stored on your computer&apos;s hard drive. Most browsers automatically accept cookies as the default setting. Demand10 uses cookies to track a user&apos;s use of the Site during each Site session, both to help Demand10 improve users&apos; experiences and to help Demand10 understand how the Site is being used. YOU CAN MODIFY THE SETTING TO REJECT COOKIES OR TO PROMPT YOU BEFORE ACCEPTING A COOKIE FROM THE SITES YOU VISIT BY EDITING BROWSER OPTIONS. IF YOU DECIDE NOT TO ACCEPT OUR COOKIES, HOWEVER, YOU WILL NOT BE ABLE TO USE THE SERVICE.
                       </p>
                     </div>
                   </div>
@@ -281,7 +262,7 @@ const PrivacyPolicy = () => {
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-gradient-to-br from-[#314158] to-[#253347] rounded-xl p-6 text-white">
+                    <div className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] rounded-xl p-6 text-white">
                       <h3 className="text-xl font-semibold mb-3 flex items-center">
                         <ShieldCheck className="w-5 h-5 mr-2" />
                         How We Protect Your Data
@@ -306,7 +287,7 @@ const PrivacyPolicy = () => {
                       </ul>
                     </div>
                     
-                    <div className="bg-gradient-to-br from-[#253347] to-[#1a2533] rounded-xl p-6 text-white">
+                    <div className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] rounded-xl p-6 text-white">
                       <h3 className="text-xl font-semibold mb-3 flex items-center">
                         <RefreshCw className="w-5 h-5 mr-2" />
                         Your Privacy Rights
@@ -340,7 +321,7 @@ const PrivacyPolicy = () => {
                     <div className="flex flex-col sm:flex-row gap-4">
                       <div className="flex-1">
                         <p className="font-medium text-[#314158]">Email</p>
-                        <p className="text-gray-700">privacy@selecthub.com</p>
+                        <p className="text-gray-700">privacy@Demand10.com</p>
                       </div>
                       <div className="flex-1">
                         <p className="font-medium text-[#314158]">Phone</p>
@@ -348,7 +329,7 @@ const PrivacyPolicy = () => {
                       </div>
                       <div className="flex-1">
                         <p className="font-medium text-[#314158]">Mail</p>
-                        <p className="text-gray-700">SelectHub, 611 S. Congress Ave., Suite 130, Austin, TX 78704</p>
+                        <p className="text-gray-700">Demand10, 611 S. Congress Ave., Suite 130, Austin, TX 78704</p>
                       </div>
                     </div>
                   </div>

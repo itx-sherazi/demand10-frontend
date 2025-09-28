@@ -61,10 +61,20 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
         if (result.ok) {
           setSuccessMessage(result.message || 'Password reset link sent to your email.');
           // Add toast notification for successful password reset request
-          toast.success('Password reset link sent! Please check your email.');
+          toast.success('Password reset link sent! Please check your email.', {
+            style: {
+              backgroundColor: '#4897de',
+              color: 'white'
+            }
+          });
         } else {
           setError(result.message || 'Failed to send password reset link.');
-          toast.error(result.message || 'Failed to send password reset link.');
+          toast.error(result.message || 'Failed to send password reset link.', {
+            style: {
+              backgroundColor: '#4897de',
+              color: 'white'
+            }
+          });
         }
       } else if (isLogin) {
         // Handle login
@@ -74,7 +84,12 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
         });
         
         if (result.ok) {
-          toast.success('Login successful!');
+          toast.success('Login successful!', {
+            style: {
+              backgroundColor: '#4897de',
+              color: 'white'
+            }
+          });
           console.log('Calling onAuthSuccess with user:', result.user);
           onAuthSuccess(result.user);
           onClose();
@@ -90,10 +105,21 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
               <div>
                 {result.message} <br />
                 <span className="font-semibold">Please contact the support team for assistance.</span>
-              </div>
+              </div>,
+              {
+                style: {
+                  backgroundColor: '#4897de',
+                  color: 'white'
+                }
+              }
             );
           } else {
-            toast.error(errorMessage);
+            toast.error(errorMessage, {
+              style: {
+                backgroundColor: '#4897de',
+                color: 'white'
+              }
+            });
           }
         }
       } else {
@@ -102,14 +128,24 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
         if (formData.password !== formData.confirmPassword) {
           const errorMessage = 'Passwords do not match';
           setError(errorMessage);
-          toast.error(errorMessage);
+          toast.error(errorMessage, {
+            style: {
+              backgroundColor: '#4897de',
+              color: 'white'
+            }
+          });
           setLoading(false);
           return;
         }
         if (formData.password.length < 6) {
           const errorMessage = 'Password must be at least 6 characters';
           setError(errorMessage);
-          toast.error(errorMessage);
+          toast.error(errorMessage, {
+            style: {
+              backgroundColor: '#4897de',
+              color: 'white'
+            }
+          });
           setLoading(false);
           return;
         }
@@ -120,7 +156,12 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
         });
         
         if (result.ok) {
-          toast.success('Account created successfully! Please check your email for verification.');
+          toast.success('Account created successfully! Please check your email for verification.', {
+            style: {
+              backgroundColor: '#4897de',
+              color: 'white'
+            }
+          });
           setIsLogin(true);
           setFormData(prev => ({
             email: prev.email,
@@ -130,14 +171,24 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
         } else {
           const errorMessage = result.message || 'Signup failed';
           setError(errorMessage);
-          toast.error(errorMessage);
+          toast.error(errorMessage, {
+            style: {
+              backgroundColor: '#4897de',
+              color: 'white'
+            }
+          });
         }
       }
     } catch (err) {
       console.error('Auth error:', err);
       const errorMessage = 'Network error. Please try again.';
       setError(errorMessage);
-      toast.error(errorMessage);
+      toast.error(errorMessage, {
+        style: {
+          backgroundColor: '#4897de',
+          color: 'white'
+        }
+      });
     } finally {
       setLoading(false);
     }
@@ -160,12 +211,12 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
       <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-scaleIn">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-[#1a365d]">
+          <h2 className="text-2xl font-bold text-[#265ba3]">
             {isForgotPassword ? 'Reset Password' : isLogin ? 'Welcome Back' : 'Create Account'}
           </h2>
           <button 
             onClick={onClose}
-            className="text-gray-500 hover:text-[#314158] transition-colors p-2 rounded-full hover:bg-gray-100"
+            className="text-gray-500 hover:text-[#4897de] transition-colors p-2 rounded-full hover:bg-gray-100"
             aria-label="Close"
           >
             <X className="h-6 w-6" />
@@ -196,7 +247,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1a365d] focus:border-transparent transition-all text-base"
+                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#265ba3] focus:border-transparent transition-all text-base"
                 placeholder="your@email.com"
                 disabled={loading}
               />
@@ -219,7 +270,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1a365d] focus:border-transparent transition-all text-base"
+                  className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#265ba3] focus:border-transparent transition-all text-base"
                   placeholder="••••••••"
                   disabled={loading}
                 />
@@ -257,7 +308,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                    className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1a365d] focus:border-transparent transition-all text-base"
+                    className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#265ba3] focus:border-transparent transition-all text-base"
                     placeholder="••••••••"
                     disabled={loading}
                   />
@@ -292,7 +343,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     required
-                    className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1a365d] focus:border-transparent transition-all text-base"
+                    className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#265ba3] focus:border-transparent transition-all text-base"
                     placeholder="••••••••"
                     disabled={loading}
                   />
@@ -339,7 +390,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-white bg-gradient-to-r from-[#1a365d] to-[#254a84] hover:from-[#254a84] hover:to-[#1a365d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1a365d] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-base font-medium"
+            className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-white bg-[#4897de]  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#f59e0b] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-base font-medium"
           >
             {loading ? (
               <>
@@ -385,7 +436,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
                     confirmPassword: ''
                   });
                 }}
-                className="ml-2 font-medium text-[#1a365d] hover:text-[#254a84] transition-colors"
+                className="ml-2 font-medium text-[#265ba3] hover:text-[#4897de] transition-colors"
               >
                 {isLogin ? 'Sign up now' : 'Sign in'}
               </button>
@@ -395,7 +446,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
               Remember your password?{' '}
               <button
                 onClick={() => resetForm()}
-                className="font-medium text-[#1a365d] hover:text-[#254a84] transition-colors"
+                className="font-medium text-[#265ba3] hover:text-[#4897de] transition-colors"
               >
                 Sign in
               </button>
@@ -413,7 +464,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
                     confirmPassword: ''
                   });
                 }}
-                className="font-medium text-[#314158] hover:text-[#253347] transition-colors flex items-center justify-center"
+                className="font-medium text-[#265ba3] hover:text-[#4897de] transition-colors flex items-center justify-center"
               >
                 <Key className="mr-1 h-4 w-4" />
                 Forgot your password?
@@ -426,7 +477,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
             <p className="mt-4 text-sm text-gray-600">
               <button
                 onClick={resetForm}
-                className="font-medium text-[#314158] hover:text-[#253347] transition-colors flex items-center justify-center"
+                className="font-medium text-[#265ba3] hover:text-[#4897de] transition-colors flex items-center justify-center"
               >
                 <FaArrowLeft className="mr-1 h-4 w-4" />
                 Back to Sign In

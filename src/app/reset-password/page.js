@@ -101,7 +101,7 @@ export default function ResetPasswordPage() {
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div>
             <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-teal-100">
-              <svg className="h-10 w-10 text-[#139692]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-10 w-10 text-[#4897de]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
               </svg>
             </div>
@@ -235,7 +235,7 @@ export default function ResetPasswordPage() {
               <div className="text-center">
                 <Link 
                   href="/"
-                  className="font-medium text-[#139692] hover:text-teal-700 transition-colors duration-200"
+                  className="font-medium text-[#4897de] hover:text-[#0249aa] transition-colors duration-200"
                 >
                   ← Back to Home
                 </Link>

@@ -38,7 +38,12 @@ const ContactFormCompany = ({ subCategory }) => {
       const response = await DataSetRequest(data);
 
       if (response.ok) {
-        toast.success("Successfully submitted!");
+        toast.success("Successfully submitted!", {
+          style: {
+            backgroundColor: '#4897de',
+            color: 'white'
+          }
+        });
         setFormData({
           fullName: "",
           email: "",
@@ -47,11 +52,21 @@ const ContactFormCompany = ({ subCategory }) => {
         });
         setShowPopup(true)
       } else {
-        toast.error("Failed to submit form.");
+        toast.error("Failed to submit form.", {
+          style: {
+            backgroundColor: '#4897de',
+            color: 'white'
+          }
+        });
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.", {
+        style: {
+          backgroundColor: '#4897de',
+          color: 'white'
+        }
+      });
     } finally {
       setIsSubmitting(false);
     }

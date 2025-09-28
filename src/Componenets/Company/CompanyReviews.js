@@ -88,7 +88,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
     const fullStars = Math.floor(rating);
     
     for (let i = 0; i < fullStars; i++) {
-      stars.push(<span key={i} className="text-[#0249aa]" aria-label="Full star">★</span>);
+      stars.push(<span key={i} className="text-[#4897de]" aria-label="Full star">★</span>);
     }
     
     const emptyStars = 5 - fullStars;
@@ -117,7 +117,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12">
             {/* THE PROJECT Section */}
             <div className="lg:col-span-3 bg-white p-5 border-r border-gray-200">
-              <h4 className="text-xs font-semibold text-[#1a365d] uppercase tracking-wider mb-3">
+              <h4 className="text-xs font-semibold text-black uppercase tracking-wider mb-3">
                 THE PROJECT
               </h4>
               
@@ -139,7 +139,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
               </div>
 
               <div className="mt-6">
-                <h5 className="text-xs font-semibold text-[#1a365d] uppercase tracking-wider mb-2">
+                <h5 className="text-xs font-semibold text-black uppercase tracking-wider mb-2">
                   PROJECT SUMMARY
                 </h5>
                 <p className="text-gray-700 text-sm leading-relaxed">
@@ -158,7 +158,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
     
     {/* Rating Display */}
     <div className="flex flex-col items-center text-center border-b border-gray-200 p-6 bg-blue-50">
-      <div className="text-5xl font-bold text-[#1a365d] mb-2">
+      <div className="text-5xl font-bold text-black mb-2">
         {(review.overallRating || 5.0).toFixed(1)}
       </div>
       <div className="flex text-2xl">
@@ -186,10 +186,10 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
             </td>
             <td className="px-4 py-3 text-right">
               <div className="flex items-center justify-end">
-                <span className="font-semibold text-[#1a365d] mr-2 text-base">
+                <span className="font-semibold text-black mr-2 text-base">
                   {item.value.toFixed(1)}
                 </span>
-                <div className="text-[#1a365d] text-base">★</div>
+                <div className="text-black text-base">★</div>
               </div>
             </td>
           </tr>
@@ -201,19 +201,19 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
 
                 {/* Right Column: Review Quote & Feedback */}
                 <div className="flex flex-col justify-start">
-                  <h4 className="text-xs font-semibold text-[#1a365d] uppercase tracking-wider mb-2">
+                  <h4 className="text-xs font-semibold text-black uppercase tracking-wider mb-2">
                     THE REVIEW
                   </h4>
                   {/* Review Quote */}
                   <div className="mb-4">
-                    <blockquote className="text-gray-800 text-base leading-relaxed italic bg-blue-50 p-4 rounded-lg border-l-4 border-[#1a365d] break-words">
+                    <blockquote className="text-gray-800 text-base leading-relaxed italic bg-blue-50 p-4 rounded-lg border-l-4 border-black break-words">
                       &#34;{review.reviewText || review.review || 'They had an in-house team and an offshore team, so they were able to work almost all day.'}&#34;
                     </blockquote>
                   </div>
 
                   {/* Feedback Summary */}
                   <div>
-                    <h5 className="text-xs font-semibold text-[#1a365d] uppercase tracking-wider mb-2">
+                    <h5 className="text-xs font-semibold text-black uppercase tracking-wider mb-2">
                       FEEDBACK SUMMARY
                     </h5>
                     <p className="text-gray-700 text-sm leading-relaxed break-words">
@@ -226,59 +226,58 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
 
             {/* THE REVIEWER Section */}
             <div className="lg:col-span-3 bg-white p-5 border-l border-gray-200">
-              <h4 className="text-xs font-semibold text-[#1a365d] uppercase tracking-wider mb-3">
+              <h4 className="text-xs font-semibold text-black uppercase tracking-wider mb-3">
                 THE REVIEWER
               </h4>
 
               <div className="space-y-4">
                <div>
       {/* Reviewer's Name with Icon */}
-      <div className="font-semibold text-gray-900 flex items-center">
-        <FaUserCircle className="mr-2 text-[#1a365d]" /> {/* Icon before the name */}
+      <div className="font-semibold text-black flex items-center">
+        <FaUserCircle className="mr-2 text-[#4897de]" /> {/* Icon before the name */}
         {review.reviewer?.name || review.reviewerName || 'Claude Collavoli'}
       </div>
 
       {/* Designation with Icon */}
       <div className="text-sm text-gray-700 mt-1 flex items-center">
-        <FaBriefcase className="mr-2 text-[#1a365d]" /> {/* Icon before the designation */}
+        <FaBriefcase className="mr-2 text-[#4897de]" /> {/* Icon before the designation */}
         {review.reviewer?.designation || 'Engagement Manager'}, {review.reviewer?.companyName || 'Solutia SDO'}
       </div>
-
      
     </div>
 
                 <div className="space-y-3">
                   <div className="flex items-start">
-                    <FaIndustry className="w-4 h-4 text-[#1a365d] mr-2 flex-shrink-0 mt-0.5" />
+                    <FaIndustry className="w-4 h-4 text-[#4897de] mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-gray-700 text-sm">
                       {review.reviewer?.industry || 'Business services'}
                     </span>
                   </div>
 
                   <div className="flex items-start">
-                    <FaMapMarkerAlt className="w-4 h-4 text-[#1a365d] mr-2 flex-shrink-0 mt-0.5" />
+                    <FaMapMarkerAlt className="w-4 h-4 text-[#4897de] mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-gray-700 text-sm">
                       {review.reviewer?.location || 'Toronto, Ontario'}
                     </span>
                   </div>
 
                   <div className="flex items-start">
-                    <FaUsers className="w-4 h-4 text-[#1a365d] mr-2 flex-shrink-0 mt-0.5" />
+                    <FaUsers className="w-4 h-4 text-[#4897de] mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-gray-700 text-sm">
                       {review.reviewer?.employees || '51-200'} 
                     </span>
                   </div>
 
                   <div className="flex items-start">
-                    <FaPhoneAlt className="w-4 h-4 text-[#1a365d] mr-2 flex-shrink-0 mt-0.5" />
+                    <FaPhoneAlt className="w-4 h-4 text-[#4897de] mr-2 flex-shrink-0 mt-0.5" />
                     <span className="text-gray-700 text-sm">
                       {review.reviewer?.interviewMethod || 'Phone Interview'}
                     </span>
                   </div>
 
                   <div className="flex items-center pt-2">
-                    <FaCheckCircle className="w-4 h-4 text-[#1a365d] mr-2 flex-shrink-0" />
-                    <span className="text-[#1a365d] text-sm font-medium">Verified</span>
+                    <FaCheckCircle className="w-4 h-4 text-[#4897de] mr-2 flex-shrink-0" />
+                    <span className="text-[#4897de] text-sm font-medium">Verified</span>
                   </div>
                 </div>
               </div>
@@ -293,7 +292,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
     return (
       <div className="space-y-6">
         {/* Write Review Section */}
-        <div className="bg-[#0249aa] rounded-xl p-6 border border-[#0249aa]/20 shadow-lg">
+        <div className="bg-[#265ba3] rounded-xl p-6 border border-[#4897de]/20 shadow-lg">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <h3 className="text-xl font-bold text-white">Share Your Experience</h3>
@@ -301,7 +300,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
             </div>
             <button 
               onClick={handleWriteReviewClick}
-              className="bg-white text-[#1a365d] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              className="bg-white text-black cursor-pointer px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
               Write a Review
             </button>
@@ -309,7 +308,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
         </div>
         
         <div className="flex justify-center items-center h-32">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1a365d]"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black"></div>
         </div>
       </div>
     );
@@ -319,7 +318,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
     return (
       <div className="space-y-6">
         {/* Write Review Section */}
-        <div className="bg-[#0249aa] rounded-xl p-6 border border-[#0249aa]/20 shadow-lg">
+        <div className="bg-[#4897de] rounded-xl p-6 border border-[#4897de]/20 shadow-lg">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <h3 className="text-xl font-bold text-white">Share Your Experience</h3>
@@ -327,7 +326,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
             </div>
             <button 
               onClick={handleWriteReviewClick}
-              className="bg-white text-[#1a365d] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              className="bg-white text-black cursor-pointer px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
               Write a Review
             </button>
@@ -344,7 +343,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
   return (
     <div className="space-y-6">
       {/* Write Review Section */}
-      <div className="bg-[#0249aa] rounded-xl p-6 border border-[#0249aa]/20 shadow-lg">
+      <div className="bg-[#265ba3] rounded-xl p-6 border border-[#4897de]/20 shadow-lg">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h3 className="text-xl font-bold text-white">Share Your Experience</h3>
@@ -352,7 +351,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
           </div>
           <button 
             onClick={handleWriteReviewClick}
-            className="bg-white text-[#1a365d] cursor-pointer px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            className="bg-white text-black cursor-pointer px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           >
             Write a Review
           </button>
@@ -365,7 +364,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
           <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 animate-scaleIn">
             <div className="text-center py-6">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#1a365d]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
@@ -380,7 +379,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
                 </button>
                 <button
                   onClick={() => setShowLoginPopup(false)}
-                  className="flex-1 px-4 py-3 bg-[#1a365d] text-white rounded-lg hover:bg-[#0249aa] transition-all shadow-md font-medium"
+                  className="flex-1 px-4 py-3 bg-black text-white rounded-lg hover:bg-[#4897de] transition-all shadow-md font-medium"
                 >
                   <Link href="/login" className="block w-full h-full text-center">
                     Go to Login
@@ -416,7 +415,7 @@ const CompanyReviews = ({ companyId, companySlug, initialReviewsData }) => {
               <button
                 onClick={handleLoadMore}
                 disabled={loading}
-                className="bg-[#1a365d] text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-[#0249aa] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-sm shadow-md"
+                className="bg-black text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-[#4897de] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-sm shadow-md"
               >
                 {loading ? (
                   <div className="flex items-center space-x-2">

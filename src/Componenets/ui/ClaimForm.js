@@ -94,20 +94,40 @@ export default function ClaimForm({ company, user, onClose }) {
         // Verification required, show token input form
         setShowBusinessEmailForm(false);
         setShowVerificationForm(true);
-        toast.info('Verification code sent to your business email');
+        toast.info('Verification code sent to your business email', {
+          style: {
+            backgroundColor: '#4897de',
+            color: 'white'
+          }
+        });
       } else if (result.ok) {
         // No verification required, claim submitted successfully
-        toast.success('Claim submitted successfully!');
+        toast.success('Claim submitted successfully!', {
+          style: {
+            backgroundColor: '#4897de',
+            color: 'white'
+          }
+        });
         setSuccess(true);
         setTimeout(() => {
           router.push('/user-dashboard');
         }, 2000);
       } else {
-        toast.error(result.message || 'Failed to submit claim');
+        toast.error(result.message || 'Failed to submit claim', {
+          style: {
+            backgroundColor: '#4897de',
+            color: 'white'
+          }
+        });
         setError(result.message || 'Failed to submit claim');
       }
     } catch (err) {
-      toast.error('Network error. Please try again.');
+      toast.error('Network error. Please try again.', {
+        style: {
+          backgroundColor: '#4897de',
+          color: 'white'
+        }
+      });
       setError('Network error. Please try again.');
     } finally {
       setLoading(false);
@@ -134,17 +154,32 @@ export default function ClaimForm({ company, user, onClose }) {
       });
 
       if (result.ok) {
-        toast.success('Business email verified and claim submitted successfully!');
+        toast.success('Business email verified and claim submitted successfully!', {
+          style: {
+            backgroundColor: '#4897de',
+            color: 'white'
+          }
+        });
         setSuccess(true);
         setTimeout(() => {
           router.push('/user-dashboard');
         }, 2000);
       } else {
-        toast.error(result.message || 'Failed to verify business email');
+        toast.error(result.message || 'Failed to verify business email', {
+          style: {
+            backgroundColor: '#4897de',
+            color: 'white'
+          }
+        });
         setError(result.message || 'Failed to verify business email');
       }
     } catch (err) {
-      toast.error('Network error. Please try again.');
+      toast.error('Network error. Please try again.', {
+        style: {
+          backgroundColor: '#4897de',
+          color: 'white'
+        }
+      });
       setError('Network error. Please try again.');
     } finally {
       setLoading(false);
@@ -158,14 +193,24 @@ export default function ClaimForm({ company, user, onClose }) {
     try {
       const authData = await checkUserAuth();
       if (!authData.ok) {
-        toast.error('You must be logged in to submit a claim. Redirecting to login...');
+        toast.error('You must be logged in to submit a claim. Redirecting to login...', {
+          style: {
+            backgroundColor: '#4897de',
+            color: 'white'
+          }
+        });
         setTimeout(() => {
           router.push('/');
         }, 2000);
         return;
       }
     } catch (err) {
-      toast.error('Authentication error. Please try again.');
+      toast.error('Authentication error. Please try again.', {
+        style: {
+          backgroundColor: '#4897de',
+          color: 'white'
+        }
+      });
       return;
     }
     

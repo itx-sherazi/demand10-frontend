@@ -102,24 +102,20 @@ const Industries = ({ industries, onIndustriesChange }) => {
       {
         data: industries.map(industry => industry.percentage),
         backgroundColor: [
-          '#1a365d',
-          '#2a4a7e',
-          '#3a5ea0',
-          '#4a72c2',
-          '#5a86e4',
-          '#6a9af6',
-          '#7aacf8',
-          '#8ac0fa'
+          '#3b82f6',
+          '#60a5fa',
+          '#93c5fd',
+          '#bfdbfe',
+          '#dbeafe',
+          '#eff6ff'
         ],
         borderColor: [
-          '#0249aa',
-          '#1259ba',
-          '#2269ca',
-          '#3279da',
-          '#4289ea',
-          '#5299fa',
-          '#62a9fb',
-          '#72b9fc'
+          '#1d4ed8',
+          '#2563eb',
+          '#3b82f6',
+          '#60a5fa',
+          '#93c5fd',
+          '#bfdbfe'
         ],
         borderWidth: 1,
       },
@@ -154,8 +150,8 @@ const Industries = ({ industries, onIndustriesChange }) => {
   return (
  <div className="space-y-6">
   <div className="space-y-4">
-    <h3 className="text-lg font-bold text-[#1a365d]">Industries</h3>
-    <p className="text-[#0249aa] text-sm">
+    <h3 className="text-lg font-bold text-gray-800">Industries</h3>
+    <p className="text-blue-600 text-sm">
       Select industries your company operates in and allocate percentages
     </p>
   </div>
@@ -163,15 +159,15 @@ const Industries = ({ industries, onIndustriesChange }) => {
   {/* Layout Wrapper */}
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
     {/* Industries List (Left Side) */}
-    <div className="border border-gray-200 rounded-lg overflow-hidden">
+    <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
       {/* Header */}
       <div
-        className="flex justify-between items-center p-4 bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors"
+        className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 cursor-pointer hover:from-blue-100 hover:to-indigo-100 transition-colors"
         onClick={() => setExpanded(!expanded)}
       >
-        <h4 className="font-medium text-[#1a365d]">Select Industries</h4>
+        <h4 className="font-medium text-gray-800">Select Industries</h4>
         <svg
-          className={`w-5 h-5 text-[#0249aa] transition-transform ${
+          className={`w-5 h-5 text-blue-600 transition-transform ${
             expanded ? "rotate-180" : ""
           }`}
           fill="none"
@@ -184,22 +180,22 @@ const Industries = ({ industries, onIndustriesChange }) => {
 
       {/* Industries List (Expanded) */}
       {expanded && (
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-gray-200 bg-white">
           <div className="space-y-3">
             {industryOptions.map((industry) => {
               const currentPercentage = industryPercentages[industry.id] || 0;
               const isSelected = currentPercentage > 0;
 
               return (
-                <div key={industry.id} className="flex items-center gap-3">
+                <div key={industry.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-50 transition-colors">
                   <input
                     type="checkbox"
                     id={industry.id}
                     checked={isSelected}
                     onChange={() => toggleIndustry(industry.id, industry.name)}
-                    className="w-4 h-4 text-[#314158] border-gray-300 rounded focus:ring-[#314158]"
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
-                  <label htmlFor={industry.id} className="flex-1 text-sm text-[#1a365d]">
+                  <label htmlFor={industry.id} className="flex-1 text-sm text-gray-700">
                     {industry.name}
                   </label>
                   {isSelected && (
@@ -212,7 +208,7 @@ const Industries = ({ industries, onIndustriesChange }) => {
                         onChange={(e) =>
                           handleIndustryPercentageChange(industry.id, industry.name, e.target.value)
                         }
-                        className="w-24 accent-[#1a365d]"
+                        className="w-24 accent-blue-600"
                       />
                       <input
                         type="number"
@@ -222,7 +218,7 @@ const Industries = ({ industries, onIndustriesChange }) => {
                         onChange={(e) =>
                           handleIndustryPercentageChange(industry.id, industry.name, e.target.value)
                         }
-                        className="w-16 px-2 py-1 text-sm border border-gray-300 rounded focus:ring-[#1a365d] focus:border-[#1a365d]"
+                        className="w-16 px-2 py-1 text-sm border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
                       />
                       <span className="text-sm text-gray-500">%</span>
                     </div>
@@ -236,8 +232,8 @@ const Industries = ({ industries, onIndustriesChange }) => {
     </div>
 
     {/* Industry Distribution Preview (Right Side) */}
-    <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 shadow-sm">
-      <h4 className="font-bold text-[#1a365d] mb-4">Industry Distribution</h4>
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-5 shadow-sm">
+      <h4 className="font-bold text-gray-800 mb-4">Industry Distribution</h4>
 
       <div className="flex flex-col gap-6">
         {/* Chart */}
@@ -260,17 +256,17 @@ const Industries = ({ industries, onIndustriesChange }) => {
         <div>
           {industries.length > 0 ? (
             <div className="space-y-3">
-              <div className="flex justify-between font-medium text-[#1a365d] border-b border-gray-200 pb-2">
+              <div className="flex justify-between font-medium text-gray-800 border-b border-gray-200 pb-2">
                 <span>Industry</span>
                 <span>Percentage</span>
               </div>
               {industries.map((industry, index) => (
                 <div key={index} className="flex justify-between text-sm py-1">
-                  <span className="text-[#1a365d]">{industry.industryName}</span>
-                  <span className="font-medium text-[#0249aa]">{industry.percentage}%</span>
+                  <span className="text-gray-700">{industry.industryName}</span>
+                  <span className="font-medium text-blue-600">{industry.percentage}%</span>
                 </div>
               ))}
-              <div className="flex justify-between font-bold text-[#1a365d] border-t border-gray-200 pt-2 mt-2">
+              <div className="flex justify-between font-bold text-gray-800 border-t border-gray-200 pt-2 mt-2">
                 <span>Total</span>
                 <span>{totalPercentage}%</span>
               </div>
@@ -290,7 +286,6 @@ const Industries = ({ industries, onIndustriesChange }) => {
     </div>
   </div>
 </div>
-
   );
 };
 

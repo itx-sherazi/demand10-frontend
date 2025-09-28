@@ -284,13 +284,13 @@ export default function ListingForm({ onListingCompleted }) {
   if (!user) {
     return (
       <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 max-w-xl mx-auto text-center">
-        <h2 className="text-2xl font-bold text-[#1a365d] mb-4">Authentication Required</h2>
-        <p className="text-[#0249aa] mb-6">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Authentication Required</h2>
+        <p className="text-[#4897de] mb-6">
           You need to be signed in to list your company. Please sign in to continue.
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1a365d]"
+          className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
         >
           Refresh Page
         </button>
@@ -299,7 +299,7 @@ export default function ListingForm({ onListingCompleted }) {
   }
 
   return (
-    <div className="bg-gradient-to-br from-white to-[#f8fafc]    p-4 md:p-6 border border-gray-100 w-full mx-auto">
+    <div className="bg-gradient-to-br from-white to-blue-50 p-4 md:p-6 border border-gray-100 w-full mx-auto rounded-xl">
    
       
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -307,12 +307,12 @@ export default function ListingForm({ onListingCompleted }) {
         {currentStep === 1 && (
           <div className="space-y-6 animate-fadeIn">
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Company Information</h3>
-              <p className="text-[#0249aa] mb-6">Tell us about your company basics</p>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Company Information</h3>
+              <p className="text-[#4897de] mb-6">Tell us about your company basics</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="companyName" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="companyName" className="block text-gray-700 mb-2 font-medium">
                     Company Name *
                   </label>
                   <input 
@@ -322,13 +322,13 @@ export default function ListingForm({ onListingCompleted }) {
                     value={formData.companyName}
                     onChange={handleInputChange}
                     required 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="Your Company Inc."
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="companyEmail" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="companyEmail" className="block text-gray-700 mb-2 font-medium">
                     Company Email *
                   </label>
                   <input 
@@ -338,13 +338,13 @@ export default function ListingForm({ onListingCompleted }) {
                     value={formData.companyEmail}
                     onChange={handleInputChange}
                     required 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="contact@company.com"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="companyPhone" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="companyPhone" className="block text-gray-700 mb-2 font-medium">
                     Company Phone *
                   </label>
                   <input 
@@ -354,13 +354,13 @@ export default function ListingForm({ onListingCompleted }) {
                     value={formData.companyPhone}
                     onChange={handleInputChange}
                     required 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="+1 (555) 123-4567"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="website" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="website" className="block text-gray-700 mb-2 font-medium">
                     Company Website
                   </label>
                   <input 
@@ -369,13 +369,13 @@ export default function ListingForm({ onListingCompleted }) {
                     name="website" 
                     value={formData.website}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="https://yourcompany.com"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="companyCountry" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="companyCountry" className="block text-gray-700 mb-2 font-medium">
                     Company Country
                   </label>
                   <input
@@ -384,13 +384,13 @@ export default function ListingForm({ onListingCompleted }) {
                     name="companyCountry"
                     value={formData.companyCountry}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="United States"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="employees" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="employees" className="block text-gray-700 mb-2 font-medium">
                     Number of Employees
                   </label>
                   <select 
@@ -398,7 +398,7 @@ export default function ListingForm({ onListingCompleted }) {
                     name="employees"
                     value={formData.employees}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition appearance-none bg-white shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition appearance-none bg-white shadow-sm"
                   >
                     <option value="">Select Range</option>
                     <option value="1-10">1-10</option>
@@ -413,12 +413,12 @@ export default function ListingForm({ onListingCompleted }) {
             </div>
             
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Company Details</h3>
-              <p className="text-[#0249aa] mb-6">Tell us more about your company</p>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Company Details</h3>
+              <p className="text-[#4897de] mb-6">Tell us more about your company</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
-                  <label htmlFor="description" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="description" className="block text-gray-700 mb-2 font-medium">
                     Company Description
                   </label>
                   <textarea 
@@ -427,13 +427,13 @@ export default function ListingForm({ onListingCompleted }) {
                     value={formData.description}
                     onChange={handleInputChange}
                     rows="4"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="Briefly describe your company and what you do..."
                   ></textarea>
                 </div>
                 
                 <div>
-                  <label htmlFor="foundedYear" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="foundedYear" className="block text-gray-700 mb-2 font-medium">
                     Founded Year
                   </label>
                   <input 
@@ -444,13 +444,13 @@ export default function ListingForm({ onListingCompleted }) {
                     onChange={handleInputChange}
                     min="1900" 
                     max={new Date().getFullYear()}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="2010"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="minimumProjectSize" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="minimumProjectSize" className="block text-gray-700 mb-2 font-medium">
                     Minimum Project Size ($)
                   </label>
                   <input 
@@ -460,13 +460,13 @@ export default function ListingForm({ onListingCompleted }) {
                     value={formData.minimumProjectSize}
                     onChange={handleInputChange}
                     min="0"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="1000"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="hourlyRate" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="hourlyRate" className="block text-gray-700 mb-2 font-medium">
                     Hourly Rate ($)
                   </label>
                   <input 
@@ -477,7 +477,7 @@ export default function ListingForm({ onListingCompleted }) {
                     onChange={handleInputChange}
                     min="0"
                     step="0.01"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="50.00"
                   />
                 </div>
@@ -485,7 +485,7 @@ export default function ListingForm({ onListingCompleted }) {
             </div>
             
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Company Logo</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Company Logo</h3>
               
               <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
                 {imagePreview && (
@@ -495,13 +495,13 @@ export default function ListingForm({ onListingCompleted }) {
                       alt="Preview" 
                       width={100}
                       height={100}
-                      className="w-24 h-24 object-cover rounded-lg border-2 border-[#1a365d]"
+                      className="w-24 h-24 object-cover rounded-lg border-2 border-blue-500"
                     />
                   </div>
                 )}
                 <div className="flex-1 w-full">
                   <div className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0">
-                    <label className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white px-5 py-3 rounded-lg cursor-pointer transition-all duration-300 shadow-md">
+                    <label className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white px-5 py-3 rounded-lg cursor-pointer transition-all duration-300 shadow-md">
                       Choose Image
                       <input
                         type="file"
@@ -525,7 +525,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={nextStep}
-                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+                className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
               >
                 Next
                 <FaArrowRight className="ml-2" />
@@ -538,12 +538,12 @@ export default function ListingForm({ onListingCompleted }) {
         {currentStep === 2 && (
           <div className="space-y-6 animate-fadeIn">
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Social Media</h3>
-              <p className="text-[#0249aa] mb-6">Share your company&apos;s social media profiles</p>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Social Media</h3>
+              <p className="text-[#4897de] mb-6">Share your company&apos;s social media profiles</p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <label htmlFor="linkedinUrl" className="block text-[#1a365d] mb-2 font-medium flex items-center">
+                  <label htmlFor="linkedinUrl" className="block text-gray-700 mb-2 font-medium flex items-center">
                     <FaLinkedin className="text-[#0077b5] mr-2" /> LinkedIn
                   </label>
                   <input 
@@ -552,13 +552,13 @@ export default function ListingForm({ onListingCompleted }) {
                     name="linkedinUrl" 
                     value={formData.linkedinUrl}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="https://linkedin.com/company/yourcompany"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="facebookUrl" className="block text-[#1a365d] mb-2 font-medium flex items-center">
+                  <label htmlFor="facebookUrl" className="block text-gray-700 mb-2 font-medium flex items-center">
                     <FaFacebook className="text-[#1877f2] mr-2" /> Facebook
                   </label>
                   <input 
@@ -567,13 +567,13 @@ export default function ListingForm({ onListingCompleted }) {
                     name="facebookUrl" 
                     value={formData.facebookUrl}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="https://facebook.com/yourcompany"
                   />
                 </div>
                 
                 <div>
-                  <label htmlFor="twitterUrl" className="block text-[#1a365d] mb-2 font-medium flex items-center">
+                  <label htmlFor="twitterUrl" className="block text-gray-700 mb-2 font-medium flex items-center">
                     <FaTwitter className="text-[#1da1f2] mr-2" /> Twitter
                   </label>
                   <input 
@@ -582,7 +582,7 @@ export default function ListingForm({ onListingCompleted }) {
                     name="twitterUrl" 
                     value={formData.twitterUrl}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition shadow-sm"
                     placeholder="https://twitter.com/yourcompany"
                   />
                 </div>
@@ -593,7 +593,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={prevStep}
-                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
+                className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
               >
                 <FaArrowLeft className="mr-2" />
                 Back
@@ -602,7 +602,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={nextStep}
-                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+                className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
               >
                 Next
                 <FaArrowRight className="ml-2" />
@@ -615,8 +615,8 @@ export default function ListingForm({ onListingCompleted }) {
         {currentStep === 3 && (
           <div className="space-y-6 animate-fadeIn">
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Services</h3>
-              <p className="text-[#0249aa] mb-6">What services does your company provide?</p>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Services</h3>
+              <p className="text-[#4897de] mb-6">What services does your company provide?</p>
               
               <ServiceLines 
                 services={formData.services} 
@@ -628,7 +628,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={prevStep}
-                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
+                className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
               >
                 <FaArrowLeft className="mr-2" />
                 Back
@@ -637,7 +637,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={nextStep}
-                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+                className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
               >
                 Next
                 <FaArrowRight className="ml-2" />
@@ -650,8 +650,8 @@ export default function ListingForm({ onListingCompleted }) {
         {currentStep === 4 && (
           <div className="space-y-6 animate-fadeIn">
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Focus Areas</h3>
-              <p className="text-[#0249aa] mb-6">What are your company&apos;s focus areas?</p>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Focus Areas</h3>
+              <p className="text-[#4897de] mb-6">What are your company&apos;s focus areas?</p>
               
               <FocusLines 
                 focus={formData.focus} 
@@ -663,7 +663,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={prevStep}
-                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
+                className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
               >
                 <FaArrowLeft className="mr-2" />
                 Back
@@ -672,7 +672,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={nextStep}
-                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+                className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
               >
                 Next
                 <FaArrowRight className="ml-2" />
@@ -685,8 +685,8 @@ export default function ListingForm({ onListingCompleted }) {
         {currentStep === 5 && (
           <div className="space-y-6 animate-fadeIn">
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Industries</h3>
-              <p className="text-[#0249aa] mb-6">Which industries does your company serve?</p>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Industries</h3>
+              <p className="text-[#4897de] mb-6">Which industries does your company serve?</p>
               
               <Industries 
                 industries={formData.industries} 
@@ -698,7 +698,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={prevStep}
-                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
+                className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
               >
                 <FaArrowLeft className="mr-2" />
                 Back
@@ -707,7 +707,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={nextStep}
-                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+                className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
               >
                 Next
                 <FaArrowRight className="ml-2" />
@@ -720,8 +720,8 @@ export default function ListingForm({ onListingCompleted }) {
         {currentStep === 6 && (
           <div className="space-y-6 animate-fadeIn">
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Clients</h3>
-              <p className="text-[#0249aa] mb-6">What types of clients does your company work with?</p>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Clients</h3>
+              <p className="text-[#4897de] mb-6">What types of clients does your company work with?</p>
               
               <Clients 
                 clients={formData.clients} 
@@ -735,7 +735,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={prevStep}
-                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
+                className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
               >
                 <FaArrowLeft className="mr-2" />
                 Back
@@ -744,7 +744,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={nextStep}
-                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+                className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
               >
                 Next
                 <FaArrowRight className="ml-2" />
@@ -757,12 +757,12 @@ export default function ListingForm({ onListingCompleted }) {
         {currentStep === 7 && (
           <div className="space-y-6 animate-fadeIn">
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-              <h3 className="text-xl font-bold text-[#1a365d] mb-4">Categories</h3>
-              <p className="text-[#0249aa] mb-6">Select your company&apos;s primary category and subcategory</p>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Categories</h3>
+              <p className="text-[#4897de] mb-6">Select your company&apos;s primary category and subcategory</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="categoryId" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="categoryId" className="block text-gray-700 mb-2 font-medium">
                     Primary Category *
                   </label>
                   <select 
@@ -771,7 +771,7 @@ export default function ListingForm({ onListingCompleted }) {
                     value={formData.categoryId}
                     onChange={handleCategoryChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition appearance-none bg-white shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition appearance-none bg-white shadow-sm"
                   >
                     <option value="">Select Category</option>
                     {categories.map(category => (
@@ -783,7 +783,7 @@ export default function ListingForm({ onListingCompleted }) {
                 </div>
                 
                 <div>
-                  <label htmlFor="subcategoryId" className="block text-[#1a365d] mb-2 font-medium">
+                  <label htmlFor="subcategoryId" className="block text-gray-700 mb-2 font-medium">
                     Subcategory *
                   </label>
                   <select 
@@ -792,7 +792,7 @@ export default function ListingForm({ onListingCompleted }) {
                     value={formData.subcategoryId}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] outline-none transition appearance-none bg-white shadow-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition appearance-none bg-white shadow-sm"
                     disabled={!formData.categoryId}
                   >
                     <option value="">Select Subcategory</option>
@@ -807,10 +807,10 @@ export default function ListingForm({ onListingCompleted }) {
             </div>
             
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 shadow-sm">
-              <h3 className="font-bold text-[#1a365d] mb-3 flex items-center">
+              <h3 className="font-bold text-gray-800 mb-3 flex items-center">
                 <FaCheck className="text-green-500 mr-2" /> Review Your Details
               </h3>
-              <div className="text-sm text-[#0249aa] space-y-2">
+              <div className="text-sm text-[#4897de] space-y-2">
                 <p><span className="font-medium">User:</span> {user?.email}</p>
                 <p><span className="font-medium">Company:</span> {formData.companyName}</p>
                 <p><span className="font-medium">Website:</span> {formData.website || 'Not provided'}</p>
@@ -825,10 +825,10 @@ export default function ListingForm({ onListingCompleted }) {
                 id="terms" 
                 name="terms" 
                 required 
-                className="w-5 h-5 text-[#1a365d] border-gray-300 rounded focus:ring-[#1a365d] mr-3"
+                className="w-5 h-5 text-[#4897de] border-gray-300 rounded focus:ring-blue-500 mr-3"
               />
-              <label htmlFor="terms" className="text-[#1a365d]">
-                I agree to the <a href="#terms" className="text-[#0249aa] hover:underline font-medium">Terms of Use</a> and <a href="#privacy" className="text-[#0249aa] hover:underline font-medium">Privacy Policy</a>
+              <label htmlFor="terms" className="text-gray-700">
+                I agree to the <a href="#terms" className="text-[#4897de] hover:underline font-medium">Terms of Use</a> and <a href="#privacy" className="text-[#4897de] hover:underline font-medium">Privacy Policy</a>
               </label>
             </div>
             
@@ -836,7 +836,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="button" 
                 onClick={prevStep}
-                className="bg-gray-100 hover:bg-gray-200 text-[#1a365d] font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
+                className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg transition-colors flex items-center shadow-sm"
               >
                 <FaArrowLeft className="mr-2" />
                 Back
@@ -845,7 +845,7 @@ export default function ListingForm({ onListingCompleted }) {
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="bg-gradient-to-r from-[#1a365d] to-[#0249aa] hover:from-[#0249aa] hover:to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg disabled:opacity-70"
+                className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 flex items-center shadow-md hover:shadow-lg disabled:opacity-70"
               >
                 {isSubmitting ? (
                   <>

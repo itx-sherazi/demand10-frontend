@@ -101,9 +101,9 @@ const TabPanel = ({ activeTab, services, focus, industries, industryTags, client
 
     // Colors matching reference image with new color scheme
     const colors = [
-      '#1a365d', // Dark blue
-      '#0249aa', // New blue
-      '#3b82f6', // Blue
+      '#4897de', // Primary button color
+      '#0249aa', // Secondary color
+      '#3b82f6', // Replaced #a6871c with blue shade
       '#60a5fa', // Light blue
       '#93c5fd', // Lighter blue
       '#059669', // Green
@@ -146,7 +146,7 @@ const TabPanel = ({ activeTab, services, focus, industries, industryTags, client
 
 
   // Colors for legend items
-  const colors = ['#1a365d', '#0249aa', '#3b82f6', '#60a5fa', '#93c5fd', '#059669', '#10b981', '#34d399'];
+  const colors = ['#4897de', '#0249aa', '#3b82f6', '#60a5fa', '#93c5fd', '#059669', '#10b981', '#34d399'];
 
   return (
     <div className="bg-white">
@@ -244,7 +244,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
   const scrollbarStyle = `
     .custom-scrollbar {
       scrollbar-width: thin;
-      scrollbar-color: #1a365d #ffffff;
+      scrollbar-color: #4897de #ffffff;
     }
     
     .custom-scrollbar::-webkit-scrollbar {
@@ -257,7 +257,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
     }
     
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background-color: #1a365d;
+      background-color: #4897de;
       border-radius: 3px;
     }
     
@@ -296,6 +296,21 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
       window.removeEventListener('companyClaimed', handleCompanyClaimed);
     };
   }, [companyData?._id]);
+
+  // Function to get the full image URL
+  const getImageUrl = (imagePath) => {
+    // If it's already a full URL, return as is
+    if (!imagePath) return null;
+    if (imagePath.startsWith('http')) return imagePath;
+    
+    // If it's a relative path, prepend the API base URL
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
+    // Remove /api/v1 prefix if it exists in the imagePath since uploads are served directly
+    const cleanPath = imagePath.startsWith('/api/v1') ? imagePath.substring(7) : imagePath;
+    // For uploads, we need to remove the /api/v1 part from the base URL
+    const uploadBaseUrl = baseUrl.replace('/api/v1', '');
+    return `${uploadBaseUrl}${cleanPath}`;
+  };
 
   // Memoize processed company data
   const processedCompanyData = useMemo(() => {
@@ -413,6 +428,9 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
     _id = null
   } = processedCompanyData || {};
 
+  // Get the full image URL
+  const imageUrl = getImageUrl(image);
+
   // Determine if company is verified
   // A company is verified if:
   // 1. It was submitted through the listing form (submittedThroughListingForm = true), OR
@@ -434,11 +452,11 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
           {/* Company Logo */}
 <div className="flex-shrink-0">
   <div className="w-20 h-20 rounded-lg bg-gray-50 border-2 border-gray-200 flex items-center justify-center overflow-hidden shadow-sm">
-    {image && image !== "" ? (
+    {imageUrl && imageUrl !== "" ? (
       <Image
         width={80}
         height={80}
-        src={image}
+        src={imageUrl}
         alt={`${companyName} logo`}
         className="w-full h-full object-contain"
         loading="eager"
@@ -470,9 +488,15 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                 </h1>
                 {/* Verified Badge - Only show if company is verified */}
                 {isVerified && (
-                  <div className="flex items-center gap-1 bg-[#0249aa] text-white px-2 py-1 rounded-full text-xs font-medium">
+                  <div className="flex items-center gap-1 bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white px-2 py-1 rounded-full text-xs font-medium">
                     <Award size={12} />
                     <span>Verified</span>
+                  </div>
+                )}
+                {/* Company Badges - Show if company has badges */}
+                {processedCompanyData?._id && (
+                  <div className="flex items-center">
+                    <CompanyBadges companyId={processedCompanyData._id} inline={true} />
                   </div>
                 )}
               </div>
@@ -506,7 +530,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                   rel="noopener noreferrer"
                   prefetch={false}
                 >
-                  <button className="bg-[#0249aa] hover:bg-[#1a365d] text-white px-6 py-2 rounded-md font-medium text-sm transition-colors shadow-sm hover:shadow">
+                  <button className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white px-6 py-2 rounded-md font-medium text-sm transition-colors shadow-sm hover:shadow">
                     Visit Website
                   </button>
                 </Link>
@@ -515,7 +539,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                 {!isVerified && (
                   <button 
                     onClick={() => setShowClaimForm(true)}
-                    className="border border-[#0249aa] text-[#0249aa] hover:bg-[#0249aa] hover:text-white px-5 py-2.5 rounded-lg font-medium text-sm transition-colors"
+                    className="border border-[#265ba3] text-[#265ba3] hover:bg-[#265ba3] hover:text-white px-5 py-2.5 rounded-lg font-medium text-sm transition-colors"
                   >
                     Claim Profile
                   </button>
@@ -549,8 +573,8 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                     <DollarSign size={16} />
                     <span className="text-sm font-medium">Min project size</span>
                   </div>
-                  <p className="font-semibold text-[#0249aa]">
-                    ${minimumProjectSize?.toLocaleString() || '50,000+'}
+                  <p className="font-semibold text-[#4897de]">
+                    {minimumProjectSize?.toLocaleString() || '50,000+'}
                   </p>
                 </div>
 
@@ -559,8 +583,8 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                     <Clock size={16} />
                     <span className="text-sm font-medium">Hourly rate</span>
                   </div>
-                  <p className="font-semibold text-[#0249aa]">
-                    ${hourlyRate || '50'} / hr
+                  <p className="font-semibold text-[#4897de]">
+                    {hourlyRate || '50'} / hr
                   </p>
                 </div>
 
@@ -569,7 +593,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                     <Users size={16} />
                     <span className="text-sm font-medium">Employees</span>
                   </div>
-                  <p className="font-semibold text-[#0249aa]">
+                  <p className="font-semibold text-[#4897de]">
                     {employees || '10'}   
                   </p>
                 </div>
@@ -579,7 +603,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                     <MapPin size={16} />
                     <span className="text-sm font-medium">Locations</span>
                   </div>
-                  <p className="font-semibold text-[#0249aa]">{companyCountry}</p>
+                  <p className="font-semibold text-[#4897de]">{companyCountry}</p>
                 </div>
 
                 <div className="bg-blue-50 rounded-lg p-4 border border-gray-200">
@@ -587,7 +611,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                     <Calendar size={16} />
                     <span className="text-sm font-medium">Year founded</span>
                   </div>
-                  <p className="font-semibold text-[#0249aa]">
+                  <p className="font-semibold text-[#4897de]">
                     Founded {foundedYear || '2003'}
                   </p>
                 </div>
@@ -610,7 +634,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                       id="tab-select"
                       value={activeTab}
                       onChange={(e) => setActiveTab(e.target.value)}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#0249aa] focus:ring-[#0249aa] sm:text-sm p-2 border box-border appearance-none bg-white"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#4897de] focus:ring-[#4897de] sm:text-sm p-2 border box-border appearance-none bg-white"
                     >
                       {tabs.map((tab) => {
                         // Check if tab has data
@@ -662,8 +686,8 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                           onClick={() => setActiveTab(tab)}
                           className={`flex-1 py-3 px-4 text-sm font-medium text-center whitespace-nowrap min-w-[80px] ${
                             activeTab === tab
-                              ? 'border-b-2 border-[#0249aa] text-[#1a365d] bg-blue-50'
-                              : 'border-transparent text-gray-500 hover:text-[#1a365d] hover:border-gray-300'
+                              ? 'border-b-2 border-[#4897de] text-black bg-blue-50'
+                              : 'border-transparent text-gray-500 hover:text-black hover:border-gray-300'
                           } transition-colors`}
                         >
                           {tab}
@@ -696,11 +720,11 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {teamLeads.slice(0, showAllTeamMembers ? teamLeads.length : 6).map((member, index) => (
                 <div key={`member-${index}`} className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:shadow-sm transition-shadow bg-white">
-                  <div className="w-12 h-12 rounded-full bg-[#0249aa] flex items-center justify-center text-white font-semibold">
+                  <div className="w-12 h-12 rounded-full bg-[#4897de] flex items-center justify-center text-white font-semibold">
                     {member?.name?.charAt(0) || 'U'}
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-semibold text-gray-900">{member?.name}</h4>
+                    <h4 className="font-semibold text-black">{member?.name}</h4>
                     <p className="text-sm text-gray-600">{member?.position}</p>
                   </div>
                   <div className="flex gap-2">
@@ -709,7 +733,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                         href={member.linkedinUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-8 h-8 bg-[#0249aa] rounded flex items-center justify-center text-white hover:bg-[#1a365d] transition-colors"
+                        className="w-8 h-8 bg-[#4897de] rounded flex items-center justify-center text-white hover:bg-[#0249aa] transition-colors"
                       >
                         <Linkedin size={14} />
                       </a>
@@ -723,7 +747,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
               <div className="text-center mt-6">
                 <button
                   onClick={() => setShowAllTeamMembers(!showAllTeamMembers)}
-                  className="bg-[#0249aa] hover:bg-[#1a365d] text-white font-medium text-sm px-4 py-2 rounded-md transition-colors"
+                  className="bg-[#4897de] hover:bg-[#0249aa] text-white font-medium text-sm px-4 py-2 rounded-md transition-colors"
                 >
                   {showAllTeamMembers ? 'Show Less' : `Show More (${teamLeads.length - 6} more)`}
                 </button>
