@@ -1,48 +1,39 @@
 import FaqCom from "@/Componenets/FaqComponent";
 
 export const metadata = {
-  title: "FAQ – Managed IT Services & MSP Solutions Explained",
+  title: "Frequently Asked Questions – MSP & MSSP Solutions",
   description:
-    "Find answers to common questions about managed IT services, MSP providers, cybersecurity solutions, and IntentWire's platform for connecting with top managed service providers near you.",
+    "Get answers to common questions about Managed Service Providers, Managed Security Service Providers, and how Demand10 connects businesses with top-tier technology partners.",
   keywords: [
-    "Managed IT Services FAQ",
-    "MSP services",
-    "managed service provider",
-    "IT managed services",
-    "managed security service provider",
-    "co-managed IT services",
-    "cloud service provider",
-    "managed IT support",
-    "IT services managed services",
-    "managed service providers near me"
+    "MSP FAQ",
+    "MSSP solutions",
+    "Managed Service Providers",
+    "Managed Security Service Providers",
+    "IT outsourcing",
+    "cybersecurity services",
+    "cloud infrastructure",
+    "technology partnerships",
+    "business IT solutions"
   ],
-  metadataBase: new URL("https://intentwire.com"),
+  metadataBase: new URL("https://demand10.com"),
   alternates: {
     canonical: "/faq",
   },
   openGraph: {
-    title: "FAQ – Managed IT Services & MSP Solutions Explained",
+    title: "Frequently Asked Questions – MSP & MSSP Solutions",
     description:
-      "Find answers to common questions about managed IT services, MSP providers, cybersecurity solutions, and IntentWire's platform for connecting with top managed service providers near you.",
-    url: "https://intentwire.com/faq",
-    siteName: "IntentWire",
-    images: [
-      {
-        url: "https://intentwire.com/og-images/faq.jpg",
-        width: 1200,
-        height: 630,
-        alt: "FAQ – Managed IT Services & MSP Solutions Explained",
-      },
-    ],
+      "Get answers to common questions about Managed Service Providers, Managed Security Service Providers, and how Demand10 connects businesses with top-tier technology partners.",
+    url: "https://demand10.com/faq",
+    siteName: "Demand10",
+    
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "FAQ – Managed IT Services & MSP Solutions Explained",
+    title: "Frequently Asked Questions – MSP & MSSP Solutions",
     description:
-      "Find answers to common questions about managed IT services, MSP providers, cybersecurity solutions, and IntentWire's platform for connecting with top managed service providers near you.",
-    images: ["https://intentwire.com/og-images/faq.jpg"],
-    site: "@intentwire",
+      "Get answers to common questions about Managed Service Providers, Managed Security Service Providers, and how Demand10 connects businesses with top-tier technology partners.",
+    site: "@demand10",
   },
 };
 

@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: "Reset Password | IntentWire",
-  description: "Set a new password for your IntentWire account.",
+  title: "Reset Password | Demand10",
+  description: "Set a new password for your Demand10 account.",
   robots: {
     index: false,
     follow: false,

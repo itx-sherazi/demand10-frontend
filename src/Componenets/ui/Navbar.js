@@ -116,8 +116,8 @@ const Navbar = ({ categories = [] }) => {
     ];
     
     // Add domain setting if in production
-    if (typeof window !== 'undefined' && window.location.hostname.includes('intentwire.com')) {
-      cookieOptions.push("domain=.intentwire.com;");
+    if (typeof window !== 'undefined' && window.location.hostname.includes('demand10.com')) {
+      cookieOptions.push("domain=.demand10.com;");
     }
     
     document.cookie = cookieOptions.join(" ");
@@ -180,7 +180,7 @@ const Navbar = ({ categories = [] }) => {
             <Link href="/" className="flex-shrink-0">
               <div className="flex items-center">
                 <Image
-                  src="/images/blue_logo.png"
+                  src="/images/logo.png"
                   width={140}
                   height={60}
                   alt="Logo"
@@ -354,7 +354,7 @@ const Navbar = ({ categories = [] }) => {
             <div className="flex items-center justify-between p-4 border-b">
               <Link href="/" onClick={toggleMobileMenu} className="flex-shrink-0">
                 <Image
-                  src="/images/blue_logo.png"
+                  src="/images/logo.png"
                   width={140}
                   height={60}
                   alt="Logo"
@@ -483,7 +483,7 @@ const Navbar = ({ categories = [] }) => {
                       href="https://www.facebook.com/people/Intentwire/61572572363704/"
                       target="_blank"
                       rel="noopener noreferrer"
-                       className="text-gray-900 hover:text-[#4ecfc5] transition-colors"
+                       className="text-gray-900 hover:text-[#1a365d] transition-colors"
                     >
                       <Facebook className="h-4 w-4" />
                     </a>
@@ -492,7 +492,7 @@ const Navbar = ({ categories = [] }) => {
                       href="https://www.linkedin.com/company/intentwire/posts/?feedView=all"
                       target="_blank"
                       rel="noopener noreferrer"
-                       className="text-gray-900 hover:text-[#4ecfc5] transition-colors"
+                       className="text-gray-900 hover:text-[#1a365d] transition-colors"
                     >
                       <Linkedin className="h-4 w-4" />
                     </a>

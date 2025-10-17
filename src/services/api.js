@@ -7,32 +7,7 @@ const createErrorResponse = (message, status = null) => ({
   status
 });
 
-export const fetchProductDetail = async (slug) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/product/${slug}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Fetch product detail error:", error);
-    return createErrorResponse("Failed to fetch product");
-  }
-};
 
-export const fetchProductData = async (slug) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/product/${slug}`);
-    const result = await response.json();
-
-    if (!response.ok) {
-      return createErrorResponse(result.message || "Failed to fetch product", response.status);
-    }
-
-    return result;
-  } catch (error) {
-    console.error("Fetch product data error:", error);
-    return createErrorResponse("Failed to fetch product");
-  }
-};
 
 export const fetchRelatedSubcategories = async (subcategorySlug, limit = 5) => {
   try {
@@ -182,7 +157,7 @@ export async function fetchCompanyBySubcategoryAndSlug(subcategorySlug, companyS
         industries: Array.isArray(data.data.industries) ? data.data.industries : [],
         teamLeads: Array.isArray(data.data.teamLeads) ? data.data.teamLeads : [],
         companyCountry: data.data.companyCountry || '',
-        image: data.data.image || '/placeholder-logo.png',
+        image: data.data.image || '',
         website: data.data.website || '#'
       };
     }
@@ -245,19 +220,7 @@ export const fetchRelatedCompanies = async (subcategoryId, excludeSlug) => {
   }
 };
 
-export const fetchTrending = async () => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/trending`);
-    const data = await response.json();
 
-    return {
-      products: data?.products || [],
-    };
-  } catch (error) {
-    console.error("Fetch trending error:", error);
-    return { products: [] };
-  }
-};
 
 export async function fetchCategories() {
   try {

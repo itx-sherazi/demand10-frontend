@@ -2,47 +2,39 @@ import Link from "next/link";
 import { Lock, ShieldCheck, EyeOff, Mail, Globe, User, RefreshCw, HelpCircle, ChevronRight, Server, Cloud, Shield } from "lucide-react";
 
 export const metadata = {
-  title: "Privacy Policy | IntentWire Data Protection Practices",
-  description: "Learn how IntentWire safeguards your data. Read our detailed Privacy Policy covering data collection, usage, and protection measures for B2B partners.",
+  title: "Privacy Policy - Data Protection | Demand10",
+  description: "Discover how Demand10 protects your business data. Our comprehensive privacy policy explains data collection, usage, and security practices for IT service providers and B2B clients.",
   keywords: [
     "Privacy Policy",
-    "data protection",
-    "user privacy",
-    "IntentWire privacy",
-    "B2B data security",
-    "GDPR compliance",
-    "data usage policy",
-    "managed service provider",
-    "managed security service provider",
-    "IT managed services",
-    "cloud service provider",
-    "co-managed IT services"
+    "Data Protection",
+    "Business Data Security",
+    "Demand10 Privacy",
+    "IT Service Provider Privacy",
+    "B2B Data Protection",
+    "GDPR Compliance",
+    "Data Usage Policy",
+    "Managed IT Services Privacy",
+    "Cybersecurity Data Handling",
+    "Cloud Services Privacy",
+    "Technology Partner Data Security"
   ],
-  metadataBase: new URL("https://intentwire.com"),
+  metadataBase: new URL("https://demand10.com"),
   alternates: {
     canonical: "/privacy-policy",
   },
   openGraph: {
-    title: "Privacy Policy | IntentWire Data Protection Practices",
-    description: "Learn how IntentWire safeguards your data. Read our detailed Privacy Policy covering data collection, usage, and protection measures for B2B partners.",
-    url: "https://intentwire.com/privacy-policy",
-    siteName: "IntentWire",
-    images: [
-      {
-        url: "https://intentwire.com/og-images/privacy-policy.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Privacy Policy | IntentWire Data Protection Practices",
-      },
-    ],
+    title: "Privacy Policy - Data Protection | Demand10",
+    description: "Discover how Demand10 protects your business data. Our comprehensive privacy policy explains data collection, usage, and security practices for IT service providers and B2B clients.",
+    url: "https://demand10.com/privacy-policy",
+    siteName: "Demand10",
+    
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy Policy | IntentWire Data Protection Practices",
-    description: "Learn how IntentWire safeguards your data. Read our detailed Privacy Policy covering data collection, usage, and protection measures for B2B partners.",
-    images: ["https://intentwire.com/og-images/privacy-policy.jpg"],
-    site: "@intentwire",
+    title: "Privacy Policy - Data Protection | Demand10",
+    description: "Discover how Demand10 protects your business data. Our comprehensive privacy policy explains data collection, usage, and security practices for IT service providers and B2B clients.",
+    site: "@demand10",
   },
 };
 
@@ -54,22 +46,28 @@ const PrivacyPolicy = () => {
       <section className="relative bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] overflow-hidden">
        
         <div className="absolute inset-0 bg-grid-white/[0.05]"></div>
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-18">
           <div className="max-w-5xl mx-auto text-center">
-            <div className="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <ShieldCheck className="w-4 h-4 mr-2" />
-              Updated: August 4, 2025
+            <div className="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-5 py-3 rounded-full text-sm font-medium mb-8 shadow-lg">
+              <ShieldCheck className="w-5 h-5 mr-2" />
+              Last Updated: August 4, 2025
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
-              Our <span className="text-white/90">Privacy Policy</span>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
+              Privacy <span className="text-white/90">Policy</span>
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Your trust is our priority. Learn how we protect your data and respect your privacy as a valued B2B partner.
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-10 leading-relaxed">
+              Your trust is our priority. Discover how we protect your data and respect your privacy as a valued B2B partner.
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="#privacy" className="px-8 py-4 bg-white text-[#265ba3] font-bold rounded-lg hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-lg">
+                Read Privacy Policy
+              </Link>
+              <Link href="#security" className="px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-all duration-300 text-lg">
+                Data Security
+              </Link>
+            </div>
           </div>
         </div>
-        
-       
       </section>
       
       <div className="min-h-screen bg-gray-50 py-12">
@@ -120,30 +118,30 @@ const PrivacyPolicy = () => {
                 <section id="copyright">
                   <div className="border-l-4 border-[#314158] pl-4 mb-6">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">Copyright Policy</h2>
-                    <h3 className="text-xl font-semibold text-[#314158] mb-4">DIGITAL MILLENNIUM COPYRIGHT ACT NOTICE</h3>
+                    <h3 className="text-xl font-semibold text-[#314158] mb-4">Digital Millennium Copyright Act Compliance</h3>
                   </div>
                    
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    <span className="text-md font-semibold text-gray-700 mb-3">Copyright Infringement Notification </span>
-                    If you believe that content available on or through the Abuyo, Inc. DBA Demand10 (&quot;Demand10&quot;) website (&quot;Demand10.com&quot; or &quot;Website&quot;) unfairly uses or infringes one or more of your copyright(s), please immediately notify Demand10&apos;s Copyright Agent by mail, email or faxed notice (&quot;Notification&quot;) providing the information described below. A copy of your Notification will be sent to the person responsible for the material addressed in the Notification.
+                    <span className="text-md font-semibold text-gray-700 mb-3">Reporting Copyright Infringement</span>
+                    If you believe that content available through Demand10 platform infringes upon your copyright, please notify our Copyright Agent with a detailed report. We take intellectual property rights seriously and will respond promptly to valid notifications.
                   </p>
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    Please be advised that you may be held liable for damages if you make material misrepresentations pursuant to federal law in a Notification. Thus, if you are not sure content located on or linked-to by the Website infringes your copyright, or if you believe it&apos;s not a fair use of your copyright, you should consider first contacting an attorney.
+                    Before submitting a report, please ensure you understand that you may be liable for damages if you make false claims. If you&apos;re uncertain about copyright infringement, we recommend consulting with a legal professional first.
                   </p>
                   <p className="text-gray-600 mb-4 leading-relaxed font-medium">
-                    All Notifications should include the following:
+                    Required Information for Copyright Notifications:
                   </p>
                   <ol className="list-decimal pl-6 mb-4 space-y-2 text-gray-600">
-                    <li>A physical or electronic signature of a person authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</li>
-                    <li>Identification of the copyrighted work claimed to have been infringed, or, if multiple copyrighted works at a single online site are covered by a single notification, a representative list of such works at that site.</li>
-                    <li>Identification of the material that is claimed to be infringing or to be the subject of infringing activity and that is to be removed or access to which is to be disabled, and information reasonably sufficient to permit the service provider to locate the material.</li>
-                    <li>Information reasonably sufficient to permit the service provider to contact the complaining party, such as an address, telephone number, and, if available, an electronic mail address at which the complaining party may be contacted.</li>
-                    <li>A statement that the complaining party has a good faith belief that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law.</li>
-                    <li>A statement that the information in the notification is accurate, and under penalty of perjury, that the complaining party is authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</li>
+                    <li>Electronic signature of the copyright owner or authorized representative</li>
+                    <li>Identification of the copyrighted work claimed to be infringed</li>
+                    <li>Specific identification of the allegedly infringing material</li>
+                    <li>Your contact information including address, phone number, and email</li>
+                    <li>Statement of good faith belief that use is unauthorized</li>
+                    <li>Statement of accuracy under penalty of perjury</li>
                   </ol>
                   <div className="bg-[#f0f4f9] rounded-lg p-4 border border-[#314158]/20">
                     <p className="text-gray-600 leading-relaxed">
-                      Notifications should be sent via email to: <span className="font-medium text-[#314158]">support@Demand10.com</span>.
+                      Send copyright notifications to: <span className="font-medium text-[#314158]">info@demand10.com</span>.
                     </p>
                   </div>
                 </section>
@@ -151,55 +149,56 @@ const PrivacyPolicy = () => {
                 {/* EULA Section */}
                 <section id="eula">
                   <div className="border-l-4 border-[#314158] pl-4 mb-6">
-                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">Demand10 End User License Agreement (&quot;EULA&quot;) & Terms of Use</h2>
-                    <p className="text-gray-500 text-sm">Last Revision: May 24, 2018</p>
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">Demand10 End User License Agreement</h2>
+                    <p className="text-gray-500 text-sm">Last Updated: May 24, 2018</p>
                   </div>
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    THIS IS A LEGAL AGREEMENT BETWEEN YOU, A PERSON OR ENTITY WHO REGISTERS AND USES Demand10.COM SERVICE ON BEHALF OF HIMSELF/HERSELF OR A BUSINESS, GOVERNMENT OR NON-PROFIT AGENCY (&quot;End User&quot;, &quot;User&quot; or &quot;Customer&quot;) AND ABUYO, INC. DBA Demand10 (&quot;Demand10&quot;) REGARDING CUSTOMER&apos;S USE OF Demand10.COM SERVICES (&quot;Demand10 Service&quot; or &quot;Service&quot;). BY CLICKING &quot;I ACCEPT&quot; OR BY USING THE SERVICE, CUSTOMER AGREES TO THE TERMS OF THIS AGREEMENT.
+                    This Legal Agreement governs your use of Demand10 services. By accessing or using our platform, you agree to comply with these terms and conditions.
                   </p>
                   
                   <div className="space-y-6 mt-8">
                     <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                       <h3 className="text-xl font-medium text-[#314158] mb-3 flex items-center">
                         <Server className="w-5 h-5 mr-2" />
-                        1. DEFINED TERMS
+                        1. Service Definitions
                       </h3>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Agreement means this Demand10 Web Services Agreement together with any rules and restrictions that may apply at the time.
+                        The Service refers to Demand10 technology platform that connects businesses with managed service providers. This includes our website, applications, and related tools designed to facilitate B2B technology partnerships.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Confidential Information means the Demand10 Service and any information disclosed by Demand10 to User or discovered by User on his/her own accord, either directly or indirectly, in writing, orally, or by inspection of tangible objects relating to the Demand10 Service including without limitation application functionality, application workflow, user interface, product process, application specifications, research content, requirements templates, scorecards, vendor/product leaderboards, data, text, pictures, audio, video, logos and copy.
-                      </p>
-                      <p className="text-gray-600 mb-4 leading-relaxed">
-                        Customer&apos;s Data or User&apos;s Data means any Project data or other data or material submitted by Customer during their use of the Demand10 Service.
-                      </p>
-                      <p className="text-gray-600 mb-4 leading-relaxed">
-                        Effective Date means the day the Customer clicks to accept this Agreement, or uses the Demand10 Service, whichever is earlier.
-                      </p>
-                      <p className="text-gray-600 mb-4 leading-relaxed">
-                        Demand10 Site means the web site located at https://www.Demand10.com or related sub-domains.
-                      </p>
-                      <p className="text-gray-600 mb-4 leading-relaxed">
-                        Demand10 Service (or &quot;Service&quot;) means the Demand10 vendor selection, e-sourcing and e-procurement application or product or product components thereof including but not limited to application functionality, market research, requirements templates or vendor/product scorecards and/or leaderboards that Demand10 makes available to Users over the Internet by means of the Demand10 Site for collaborating on product and services evaluations, vendor sourcing, procurement, sales and marketing purposes.
+                        User Data encompasses any information, content, or materials you submit to our platform during your use of our services, including project specifications, requirements, and communications.
                       </p>
                     </div>
                     
                     <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                       <h3 className="text-xl font-medium text-[#314158] mb-3 flex items-center">
                         <Globe className="w-5 h-5 mr-2" />
-                        2. SCOPE OF SERVICE; USAGE; ACCOUNTS; CUSTOMER DATA
+                        2. Service Access and Usage
                       </h3>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Service. Demand10 shall provide access to Customer to Demand10 Service to be hosted and operated on Demand10&apos;s and associated third-party computer servers and any applicable additional services in accordance with the terms of this EULA and the terms on Demand10 Site. Users may use the Service to evaluate various products and services if they are prospective buyers, or if they are vendors, they may use the Service to market to, interact with and sell their products and services to those prospective buyers.
+                        Demand10 provides two service tiers: Professional Edition for businesses requiring full platform access, and Community Edition for users exploring our services with limited functionality.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Buyer or Prospective Buyer refers to a user that is in the process of evaluating any products and services for his/her own use or use by the entity he/she is representing. A Buyer may interact with a Vendor via a message, enquiry, RFI, RFP, demo, trial, proof-of-concept (POC) or other related communication mechanism within Demand10.
+                        As a business user, you may utilize our platform to discover managed IT service providers, evaluate technology solutions, and connect with qualified partners. As a service provider, you can showcase your offerings to potential clients.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Vendor refers to a user that has a product or service, or represents an entity that has a product or service that he/she would like to market to Buyers, and interact with them while responding to messages, enquiries, RFIs, RFPs, demo requests, trial requests, proof-of-concept requests, or other related communication mechanism from Buyers.
+                        Professional Edition subscribers gain access to advanced features including detailed vendor comparisons, project management tools, and direct communication channels with service providers.
+                      </p>
+                    </div>
+                    
+                    <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                      <h3 className="text-xl font-medium text-[#314158] mb-3 flex items-center">
+                        <Shield className="w-5 h-5 mr-2" />
+                        3. User Responsibilities
+                      </h3>
+                      <p className="text-gray-600 mb-4 leading-relaxed">
+                        You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.
                       </p>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Types and Cost of Service. There are two types of Demand10 Services: (i) Corporate or Paid Edition (&quot;Demand10 Corporate&quot;) wherein a user pays Demand10 a per-project, a per-module or a monthly, quarterly or annual subscription fee for access to the Demand10 Service and the ability to conduct their evaluations on the Demand10 platform and interact with vendors of their choice via messages, enquiries, RFIs, RFPs, demo requests, trial requests, proof-of-concept requests and other communication mechanism; and (ii) Community or Free Edition (&quot;Demand10 Community&quot;) wherein a user does not pay Demand10 to use the Demand10 Service but his/her usage is for functionality preview purposes only, is for a maximum of 30 days, and is subject to any/all usage data being shared with paying third-parties. The associated functionality for both editions is defined by Demand10 and is subject to change at any time. Also, the associated fees for using the Buyer-facing and the Vendor-facing aspects of the Service are subject to change from time to time. For the Demand10 Corporate edition, Demand10 charges fees that are current at the time of usage, unless the fees are pre-defined for a specific period of time via a separate contract or statement of work (SoW). Any and all unpaid or free usage of Service reverts to Community Edition.
+                        You agree to provide accurate, current, and complete information during registration and to update such information to maintain its accuracy.
+                      </p>
+                      <p className="text-gray-600 mb-4 leading-relaxed">
+                        You must not use the Service for any illegal or unauthorized purpose, nor may you violate any laws in your jurisdiction.
                       </p>
                     </div>
                   </div>
@@ -212,44 +211,57 @@ const PrivacyPolicy = () => {
                     <p className="text-gray-500 text-sm">(Last Updated: June 20, 2024)</p>
                   </div>
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    Abuyo, Inc. DBA Demand10 (&quot;Demand10&quot; or &quot;we&quot;) has created this privacy policy (the &quot;Policy&quot;) to explain our privacy practices so you will understand when and how information is collected, used, disclosed and protected with respect to Demand10-owned websites including but not limited to www.Demand10.com (&quot;Site(s)&quot; or &quot;Web Site(s)&quot;), applications, research content, requirements templates, analyst reports, Leaderboards, phone consultations, email surveys and other services (collectively and individually, &quot;Service&quot;). By using the Service, you consent to the privacy practices described in this Policy.
+                    At Demand10, we are committed to protecting your privacy and ensuring the security of your information. This policy explains how we collect, use, and safeguard your data when you use our services.
                   </p>
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    Because of changes in technology and the growth and development of our business, Demand10 may need to modify this Policy from time to time. Changes to this Policy are discussed at the end of this document.
+                    We may update this policy periodically to reflect changes in our practices or legal requirements. We encourage you to review this policy regularly.
                   </p>
                   
                   <div className="space-y-6 mt-8">
                     <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                       <h3 className="text-xl font-medium text-[#314158] mb-3 flex items-center">
                         <User className="w-5 h-5 mr-2" />
-                        1. TYPES OF INFORMATION WE COLLECT ABOUT YOU
+                        1. Information We Collect
                       </h3>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        Demand10 collects, uses and discloses two types of information: Personal Information and Non-Personal Information (individually and collectively, &quot;Information&quot;). &quot;Personal Information&quot; is information that is directly associated with a specific person or entity such as a user&apos;s name, initials or nickname, e- mail address, organization name, title, phone number, user-chosen credentials and any technology vendor selection project data. &quot;Non-Personal Information&quot; is information that, without the aid of additional information, cannot be directly associated with a specific person or entity.
+                        We collect information to provide and improve our services, including:
                       </p>
+                      <ul className="list-disc pl-6 mb-4 space-y-2 text-gray-600">
+                        <li>Account information such as your name, email address, and company details</li>
+                        <li>Business requirements and project specifications you provide</li>
+                        <li>Communication preferences and service interactions</li>
+                        <li>Technical information about your device and browsing activities</li>
+                      </ul>
                     </div>
                     
                     <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                       <h3 className="text-xl font-medium text-[#314158] mb-3 flex items-center">
                         <EyeOff className="w-5 h-5 mr-2" />
-                        2. CHILDREN
+                        2. How We Use Your Information
                       </h3>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        The Site is not intended for children under 18 years of age. We do not knowingly collect information from anyone under the age of 18.
+                        We use your information to:
                       </p>
+                      <ul className="list-disc pl-6 mb-4 space-y-2 text-gray-600">
+                        <li>Connect you with relevant managed service providers</li>
+                        <li>Improve our platform and user experience</li>
+                        <li>Communicate with you about our services</li>
+                        <li>Comply with legal obligations</li>
+                      </ul>
                     </div>
                     
                     <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                       <h3 className="text-xl font-medium text-[#314158] mb-3 flex items-center">
                         <Shield className="w-5 h-5 mr-2" />
-                        3. GATHERING, USE AND DISCLOSURE OF NON-PERSONAL INFORMATION
+                        3. Data Protection Measures
                       </h3>
-                      <h4 className="text-lg font-medium text-gray-700 mb-2">A. Gathering Non-Personal Information</h4>
+                      <h4 className="text-lg font-medium text-gray-700 mb-2">A. Technical Safeguards</h4>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        (i) Web Browsers Like most Site operators, Demand10 gathers from users of the Site Non-Personal Information of the sort that Web browsers, depending on their settings, may make available. That information includes the user&apos;s Internet Protocol (&quot;IP&quot;) address, operating system and browser type, and the locations of the Web pages the user views right before arriving at, while navigating and immediately after leaving the Site. Such information may also include the user&apos;s role/persona within their organization as stated on the Site (e.g., Procurement Officer, IT Director, etc.), the industry in which their organization operates (e.g., Financial Services company), the size of the organization (e.g., SMB, Fortune 500 company), whether user has a Project or not within the Site, and in certain cases, high-level Project information such as product categories included. At this time, the Site does not acknowledge browser &quot;do not track&quot; settings.
+                        We implement industry-standard security measures to protect your data, including encryption, secure server infrastructure, and regular security audits.
                       </p>
+                      <h4 className="text-lg font-medium text-gray-700 mb-2">B. Access Controls</h4>
                       <p className="text-gray-600 mb-4 leading-relaxed">
-                        (ii) Cookies A cookie is a small amount of data, often including an anonymous unique identifier that is sent to your browser from a Site&apos;s computers and stored on your computer&apos;s hard drive. Most browsers automatically accept cookies as the default setting. Demand10 uses cookies to track a user&apos;s use of the Site during each Site session, both to help Demand10 improve users&apos; experiences and to help Demand10 understand how the Site is being used. YOU CAN MODIFY THE SETTING TO REJECT COOKIES OR TO PROMPT YOU BEFORE ACCEPTING A COOKIE FROM THE SITES YOU VISIT BY EDITING BROWSER OPTIONS. IF YOU DECIDE NOT TO ACCEPT OUR COOKIES, HOWEVER, YOU WILL NOT BE ABLE TO USE THE SERVICE.
+                        Access to your information is limited to authorized personnel who require it for their job functions. All staff receive regular security training.
                       </p>
                     </div>
                   </div>
@@ -270,19 +282,19 @@ const PrivacyPolicy = () => {
                       <ul className="space-y-2 text-gray-100">
                         <li className="flex items-start">
                           <ChevronRight className="w-4 h-4 mr-2 mt-1 flex-shrink-0" />
-                          Industry-standard encryption for data transmission
+                          Advanced encryption for data transmission and storage
                         </li>
                         <li className="flex items-start">
                           <ChevronRight className="w-4 h-4 mr-2 mt-1 flex-shrink-0" />
-                          Secure server infrastructure with regular security audits
+                          Secure infrastructure with continuous monitoring
                         </li>
                         <li className="flex items-start">
                           <ChevronRight className="w-4 h-4 mr-2 mt-1 flex-shrink-0" />
-                          Limited access controls to authorized personnel only
+                          Strict access controls and authentication
                         </li>
                         <li className="flex items-start">
                           <ChevronRight className="w-4 h-4 mr-2 mt-1 flex-shrink-0" />
-                          Regular security training for all staff members
+                          Regular security assessments and updates
                         </li>
                       </ul>
                     </div>
@@ -313,25 +325,14 @@ const PrivacyPolicy = () => {
                     </div>
                   </div>
                   
-                  <div className="mt-8 bg-[#f0f4f9] rounded-xl p-6 border border-[#314158]/20">
-                    <h3 className="text-xl font-semibold text-[#314158] mb-4">Contact Us About Privacy</h3>
-                    <p className="text-gray-700 mb-4">
-                      If you have questions about our privacy practices or wish to exercise your rights, please contact us:
+                  <div className="mt-8 bg-[#f8f9fa] rounded-xl p-6 border border-gray-200">
+                    <h3 className="text-xl font-semibold text-[#314158] mb-4">Contact Us</h3>
+                    <p className="text-gray-600 mb-4 leading-relaxed">
+                      If you have questions about this Privacy Policy or concerns about your privacy, please contact our Data Protection Officer:
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <div className="flex-1">
-                        <p className="font-medium text-[#314158]">Email</p>
-                        <p className="text-gray-700">privacy@Demand10.com</p>
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-medium text-[#314158]">Phone</p>
-                        <p className="text-gray-700">877-692-2896</p>
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-medium text-[#314158]">Mail</p>
-                        <p className="text-gray-700">Demand10, 611 S. Congress Ave., Suite 130, Austin, TX 78704</p>
-                      </div>
-                    </div>
+                    <p className="text-gray-600 leading-relaxed">
+                      Email: <span className="font-medium text-[#314158]">info@demand10.com</span>
+                    </p>
                   </div>
                 </section>
               </div>

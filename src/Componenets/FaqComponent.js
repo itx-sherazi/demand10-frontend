@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import { HelpCircle, MessageSquare, MessageCircle, ChevronDown, Link, Server, Shield, Cloud, Users, Building, MapPin } from "lucide-react";
+import {  MessageCircle, ChevronDown, Link, Server, Shield, Cloud, Users, Building, MapPin } from "lucide-react";
 
 const FaqCom = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -11,120 +11,120 @@ const FaqCom = () => {
   // FAQ data organized with managed IT services focus
   const faqItems = [
     {
-      question: "What are the benefits of managed IT services?",
-      answer: "Managed IT services offer numerous advantages for businesses of all sizes:",
+      question: "What are the key advantages of partnering with managed IT service providers?",
+      answer: "Working with professional managed IT service providers delivers significant benefits for organizations of all sizes:",
       listItems: [
-        "Proactive Monitoring: 24/7 surveillance of your IT infrastructure to prevent issues before they impact operations.",
-        "Cost Savings: Reduce the need for in-house IT staff and expensive equipment while gaining access to enterprise-level expertise.",
-        "Enhanced Security: Comprehensive cybersecurity solutions from verified managed security service providers to protect against evolving threats.",
-        "Scalability: Flexible services that grow with your business needs, whether you're a small business or large enterprise.",
-        "Expert Support: Access to a team of skilled IT managed service providers without the overhead of full-time employees.",
-        "Focus on Core Business: Free up internal resources to concentrate on strategic initiatives rather than IT maintenance."
+        "Continuous System Monitoring: Around-the-clock oversight of your IT infrastructure to identify and resolve issues before they disrupt operations.",
+        "Reduced Operational Costs: Lower expenses compared to maintaining an in-house IT department while accessing specialized expertise.",
+        "Robust Cybersecurity: Comprehensive digital security solutions from certified managed security service providers to defend against evolving threats.",
+        "Flexible Scalability: Adaptable services that expand or contract based on your business requirements, from startups to enterprises.",
+        "Access to Experts: Tap into a team of certified IT professionals without the commitment of permanent hires.",
+        "Strategic Focus: Redirect internal resources toward core business objectives instead of routine IT maintenance."
       ]
     },
     {
-      question: "What is a managed service provider (MSP)?",
-      answer: "A Managed Service Provider (MSP) is a third-party company that remotely manages a customer's IT infrastructure and end-user systems. MSPs offer a comprehensive range of services, including network monitoring, data backup, cybersecurity, and cloud solutions. Whether you're looking for managed IT services for small businesses, law firms, or large enterprises, partnering with the right managed service provider can transform your IT operations.",
-      additionalText: "At IntentWire, we connect you with verified managed service providers near you in locations like Chicago, New York, NYC, and New Jersey, ensuring you find the perfect IT managed services provider for your specific needs."
+      question: "What defines a managed service provider (MSP)?",
+      answer: "A Managed Service Provider (MSP) is a professional organization that remotely oversees a client's IT infrastructure and user systems. MSPs deliver comprehensive services including network supervision, data protection, cybersecurity measures, and cloud solutions. Whether you need managed IT services for small businesses, legal practices, or large corporations, partnering with the right managed service provider can revolutionize your technology operations.",
+      additionalText: "Demand10 connects you with pre-vetted managed service providers in your area across major metropolitan markets, ensuring you find the ideal IT managed services provider for your unique requirements."
     },
     {
-      question: "What is the difference between co-managed IT services and fully managed services?",
-      answer: "Co-managed IT services involve a collaborative approach where a managed service provider works alongside your internal IT team:",
+      question: "How do co-managed IT services differ from fully managed services?",
+      answer: "Co-managed IT services utilize a collaborative model where a managed service provider works in tandem with your internal IT personnel:",
       listItems: [
-        "Co-Managed Services: Ideal for organizations with existing IT staff who need additional expertise or support during peak periods. Your IT managed service provider acts as an extension of your team.",
-        "Fully Managed Services: The managed service provider takes complete responsibility for your IT infrastructure, ideal for businesses without internal IT resources or those looking to reduce their IT overhead."
+        "Co-Managed Approach: Perfect for organizations with existing IT staff who require supplementary expertise or support during busy periods. Your IT managed service provider functions as an extension of your current team.",
+        "Fully Managed Model: The managed service provider assumes complete responsibility for your IT infrastructure, ideal for businesses without internal IT resources or those aiming to minimize their technology overhead."
       ],
-      additionalText: "Both co-managed IT services and fully managed services are offered by qualified managed service providers in our network, allowing you to choose the approach that best fits your organizational structure and requirements."
+      additionalText: "Both co-managed IT services and fully managed solutions are available from qualified managed service providers in our network, enabling you to select the approach that aligns best with your organizational structure and requirements."
     },
     {
-      question: "What managed IT security services do you offer?",
-      answer: "Our network of managed security service providers offers comprehensive cybersecurity solutions:",
+      question: "What managed IT security solutions do top providers offer?",
+      answer: "Our network of managed security service providers delivers comprehensive cybersecurity solutions:",
       listItems: [
-        "24/7 Threat Monitoring: Continuous surveillance to detect and respond to cyber threats in real-time.",
-        "Vulnerability Assessments: Regular scanning and analysis of your systems to identify potential security gaps.",
-        "Incident Response: Rapid response protocols to minimize damage and restore operations quickly after a security breach.",
-        "Compliance Management: Assistance with meeting industry regulations such as HIPAA, GDPR, and SOX.",
-        "Endpoint Protection: Advanced security solutions for all devices connected to your network.",
-        "Security Awareness Training: Educating your staff on best practices to prevent security incidents."
+        "Round-the-Clock Threat Detection: Constant surveillance to identify and respond to cyber threats in real-time.",
+        "Security Vulnerability Assessments: Regular scanning and analysis of your systems to uncover potential security weaknesses.",
+        "Rapid Incident Response: Swift response protocols to minimize damage and restore operations quickly following a security breach.",
+        "Regulatory Compliance Assistance: Support with meeting industry standards such as HIPAA, GDPR, and SOX.",
+        "Device Protection: Advanced security solutions for all devices connected to your network.",
+        "Staff Security Education: Training programs to educate your employees on best practices to prevent security incidents."
       ],
-      additionalText: "These managed IT security services are provided by top-rated managed security service providers who are verified partners in our platform, ensuring you receive the highest level of protection."
+      additionalText: "These managed IT security services are delivered by top-rated managed security service providers who are verified partners in our platform, ensuring you receive the highest level of protection."
     },
     {
-      question: "How do I find managed service providers near me?",
-      answer: "IntentWire makes it easy to connect with managed service providers near you:",
+      question: "How can I locate managed service providers in my area?",
+      answer: "Demand10 simplifies the process of connecting with managed service providers near you:",
       listItems: [
-        "Location-Based Search: Our platform allows you to search for managed service providers in specific cities like Chicago, New York, NYC, and New Jersey.",
-        "Specialized Providers: Find managed IT services for small businesses, law firms, healthcare organizations, and other industry-specific requirements.",
-        "Verified Partners: All managed service providers in our network are thoroughly vetted for quality and reliability.",
-        "Detailed Profiles: Review provider profiles, services offered, client testimonials, and performance metrics before making a decision.",
-        "Direct Connection: Contact multiple managed service providers directly through our platform to discuss your specific needs."
+        "Geographic Search: Our platform enables you to search for managed service providers in specific cities and regions.",
+        "Specialized Expertise: Find managed IT services for small businesses, legal firms, healthcare organizations, and other industry-specific requirements.",
+        "Pre-Screened Partners: All managed service providers in our network undergo thorough vetting for quality and dependability.",
+        "Comprehensive Profiles: Review provider profiles, services offered, client testimonials, and performance metrics before making a decision.",
+        "Direct Communication: Contact multiple managed service providers directly through our platform to discuss your specific needs."
       ],
-      additionalText: "Whether you're looking for IT managed services near me or seeking specialized managed IT services for your industry, our platform streamlines the process of finding and connecting with the right managed service provider."
+      additionalText: "Whether you're seeking IT managed services near your location or specialized managed IT services for your industry, our platform streamlines the process of finding and connecting with the right managed service provider."
     },
     {
-      question: "What industries do you serve with managed IT services?",
-      answer: "Our network of managed service providers serves businesses across various sectors:",
+      question: "Which industries benefit from managed IT services?",
+      answer: "Our network of managed service providers serves businesses across diverse sectors:",
       listItems: [
-        "Law Firms: Specialized managed IT services for law firms with strict confidentiality and compliance requirements.",
-        "Small Businesses: Cost-effective managed IT services for small businesses that need enterprise-level IT support without the overhead.",
+        "Legal Services: Specialized managed IT services for law firms with strict confidentiality and compliance requirements.",
+        "Small Enterprises: Cost-effective managed IT services for small businesses that need enterprise-level IT support without the overhead.",
         "Healthcare: HIPAA-compliant managed IT services for healthcare organizations protecting sensitive patient data.",
-        "Finance: Secure managed IT services for financial institutions with stringent regulatory requirements.",
+        "Financial Services: Secure managed IT services for financial institutions with stringent regulatory requirements.",
         "Education: Reliable managed IT services for educational institutions supporting diverse technology needs.",
         "Manufacturing: Industrial-grade managed IT services for manufacturing companies with complex operational technology environments."
       ],
-      additionalText: "Each industry has unique IT challenges, and our managed service providers offer tailored solutions to meet these specific requirements."
+      additionalText: "Each industry presents unique IT challenges, and our managed service providers offer customized solutions to address these specific requirements."
     },
     {
-      question: "What cloud services do managed cloud service providers offer?",
+      question: "What cloud solutions do managed cloud service providers deliver?",
       answer: "Managed cloud service providers in our network offer a comprehensive range of cloud solutions:",
       listItems: [
-        "Cloud Migration: Seamless transition of your data and applications to cloud environments with minimal disruption.",
-        "Cloud Management: Ongoing management and optimization of your cloud infrastructure for peak performance.",
-        "Multi-Cloud Solutions: Strategies for leveraging multiple cloud platforms to avoid vendor lock-in and optimize costs.",
-        "Disaster Recovery: Cloud-based backup and recovery solutions to ensure business continuity.",
-        "Scalability Services: Elastic cloud resources that automatically adjust to your changing business needs.",
-        "Security Integration: Cloud security solutions that protect your data and applications in cloud environments."
+        "Cloud Migration Services: Seamless transition of your data and applications to cloud environments with minimal disruption.",
+        "Cloud Infrastructure Management: Ongoing management and optimization of your cloud infrastructure for peak performance.",
+        "Multi-Cloud Strategies: Approaches for leveraging multiple cloud platforms to avoid vendor lock-in and optimize costs.",
+        "Business Continuity Solutions: Cloud-based backup and recovery solutions to ensure uninterrupted operations.",
+        "Elastic Resource Scaling: Flexible cloud resources that automatically adjust to your changing business needs.",
+        "Integrated Security: Cloud security solutions that protect your data and applications in cloud environments."
       ],
-      additionalText: "These managed cloud service provider solutions are designed to give you the flexibility and reliability of cloud computing while maintaining the security and support of working with experienced managed service providers."
+      additionalText: "These managed cloud service provider solutions are designed to provide you with the flexibility and reliability of cloud computing while maintaining the security and support of working with experienced managed service providers."
     },
     {
-      question: "How do I choose the right managed IT services provider?",
+      question: "What criteria should guide my choice of managed IT services provider?",
       answer: "Selecting the right managed IT services provider requires careful evaluation of several factors:",
       listItems: [
-        "Service Expertise: Ensure the managed service provider has experience with the specific services you need, whether it's managed IT security services, cloud solutions, or general IT support.",
-        "Industry Knowledge: Look for managed service providers who understand the unique requirements of your industry, such as managed IT services for law firms or healthcare organizations.",
-        "Location Proximity: Consider managed service providers near you for easier collaboration and on-site support when needed.",
-        "Response Times: Evaluate the provider's SLAs and response times to ensure they meet your business requirements.",
-        "Scalability: Choose managed service providers who can grow with your business and adapt to changing needs.",
+        "Service Specialization: Ensure the managed service provider has experience with the specific services you need, whether it's managed IT security services, cloud solutions, or general IT support.",
+        "Industry Experience: Look for managed service providers who understand the unique requirements of your industry, such as managed IT services for law firms or healthcare organizations.",
+        "Geographic Proximity: Consider managed service providers near you for easier collaboration and on-site support when needed.",
+        "Performance Guarantees: Evaluate the provider's SLAs and response times to ensure they meet your business requirements.",
+        "Adaptability: Choose managed service providers who can grow with your business and adapt to changing needs.",
         "Client References: Review testimonials and case studies from similar businesses to gauge the provider's effectiveness."
       ],
-      additionalText: "IntentWire simplifies this process by providing detailed profiles of managed service providers, client reviews, and performance metrics to help you make an informed decision."
+      additionalText: "Demand10 simplifies this process by providing detailed profiles of managed service providers, client reviews, and performance metrics to help you make an informed decision."
     },
     {
-      question: "What are the costs associated with managed IT services?",
+      question: "What factors influence managed IT services pricing?",
       answer: "Managed IT services pricing varies based on several factors:",
       listItems: [
-        "Service Scope: The range of services required affects pricing, from basic IT managed support to comprehensive managed IT security services.",
-        "Business Size: Managed IT services for small businesses typically have different pricing structures than enterprise solutions.",
+        "Scope of Services: The range of services required affects pricing, from basic IT managed support to comprehensive managed IT security services.",
+        "Organization Size: Managed IT services for small businesses typically have different pricing structures than enterprise solutions.",
         "Infrastructure Complexity: More complex IT environments require more resources to manage, affecting costs.",
-        "Service Level Agreements: Premium SLAs with faster response times may incur additional costs.",
+        "Performance Commitments: Premium SLAs with faster response times may incur additional costs.",
         "Provider Expertise: Specialized managed service providers with advanced certifications may charge premium rates.",
-        "Geographic Location: Managed service providers in major cities like New York or Chicago may have different pricing than those in other regions."
+        "Regional Market: Managed service providers in major business centers may have different pricing than those in other regions."
       ],
       additionalText: "Our platform allows you to compare pricing and services from multiple managed service providers to find the best value for your specific requirements."
     },
     {
-      question: "How quickly can I get started with managed IT services?",
-      answer: "Getting started with managed IT services through IntentWire is a straightforward process:",
+      question: "How soon can my organization begin using managed IT services?",
+      answer: "Getting started with managed IT services through Demand10 is a streamlined process:",
       listItems: [
-        "Account Setup: Create your IntentWire account in minutes to access our network of managed service providers.",
-        "Requirement Submission: Describe your IT needs, including any specific requirements for managed IT services for small businesses, law firms, or other industries.",
-        "Provider Matching: Receive recommendations for managed service providers near you who match your requirements.",
+        "Account Registration: Create your Demand10 account in minutes to access our network of managed service providers.",
+        "Requirements Submission: Describe your IT needs, including any specific requirements for managed IT services for your business type or industry.",
+        "Provider Recommendations: Receive personalized recommendations for managed service providers near you who match your requirements.",
         "Consultation Scheduling: Connect directly with shortlisted managed service providers to discuss your needs in detail.",
-        "Service Agreement: Finalize contracts and service level agreements with your chosen managed service provider.",
-        "Implementation: Begin receiving managed IT services with minimal disruption to your operations."
+        "Service Activation: Finalize contracts and service level agreements with your chosen managed service provider.",
+        "Implementation Process: Begin receiving managed IT services with minimal disruption to your operations."
       ],
-      additionalText: "Most businesses can begin receiving managed IT services within 1-2 weeks of initial contact, with many managed service providers offering expedited onboarding for urgent requirements."
+      additionalText: "Most businesses can begin receiving managed IT services within 1-2 weeks of initial contact, with many managed service providers offering accelerated onboarding for urgent requirements."
     }
   ];
 
@@ -153,17 +153,9 @@ const FaqCom = () => {
                   </div>
                   {/* Description */}
                   <p className="text-lg text-white/80 mb-8 leading-relaxed">
-                    Find answers to common questions about managed IT services, MSP providers, cybersecurity solutions, and how to connect with top managed service providers near you.
+                    Get clear answers to your most common questions about managed IT services, MSP providers, cybersecurity solutions, and how Demand10 connects you with top-rated managed service providers in your area.
                   </p>
-                  {/* CTA Button */}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <Link href="/contact">
-                      <button className="flex items-center justify-center px-8 py-4 bg-white text-[#314158] font-semibold rounded-lg hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                        <MessageCircle className="w-5 h-5 mr-2" />
-                        Contact Us
-                      </button>
-                    </Link>
-                  </div>
+                
                 </div>
                 
                 {/* Right Content - Icons Grid */}
@@ -176,7 +168,7 @@ const FaqCom = () => {
                         </div>
                         <h3 className="text-white font-semibold">IT Managed Services</h3>
                       </div>
-                      <p className="text-white/80 text-sm">Comprehensive IT support from qualified managed service providers</p>
+                      <p className="text-white/80 text-sm">Comprehensive IT support from pre-vetted managed service providers</p>
                     </div>
                     
                     <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 border border-white/10">
@@ -184,9 +176,9 @@ const FaqCom = () => {
                         <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4">
                           <Shield className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="text-white font-semibold">Security Services</h3>
+                        <h3 className="text-white font-semibold">Cybersecurity</h3>
                       </div>
-                      <p className="text-white/80 text-sm">Advanced cybersecurity from verified managed security service providers</p>
+                      <p className="text-white/80 text-sm">Advanced digital security from certified managed security providers</p>
                     </div>
                     
                     <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 border border-white/10">
@@ -196,7 +188,7 @@ const FaqCom = () => {
                         </div>
                         <h3 className="text-white font-semibold">Cloud Solutions</h3>
                       </div>
-                      <p className="text-white/80 text-sm">Scalable cloud services from top managed cloud service providers</p>
+                      <p className="text-white/80 text-sm">Scalable cloud infrastructure from top-tier providers</p>
                     </div>
                     
                     <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 border border-white/10">
@@ -204,9 +196,9 @@ const FaqCom = () => {
                         <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4">
                           <MapPin className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="text-white font-semibold">Local Providers</h3>
+                        <h3 className="text-white font-semibold">Local Experts</h3>
                       </div>
-                      <p className="text-white/80 text-sm">Connect with managed service providers near you in major cities</p>
+                      <p className="text-white/80 text-sm">Connect with nearby providers in major business hubs</p>
                     </div>
                   </div>
                 </div>
@@ -274,92 +266,83 @@ const FaqCom = () => {
             
             {/* Service Highlights Section */}
             <section className="mt-16 pt-10 border-t border-gray-200">
-              <h3 className="text-2xl font-bold text-center text-gray-800 mb-8">Why Choose Managed IT Services?</h3>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="bg-[#f0f4f9] p-6 rounded-lg border border-[#314158]/20">
-                  <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-[#314158]/10 rounded-lg flex items-center justify-center mr-3">
-                      <Server className="w-5 h-5 text-[#314158]" />
+              <h3 className="text-3xl font-bold text-center text-gray-800 mb-12">Why Choose Demand10 for Your IT Needs?</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="bg-white p-8 rounded-xl border border-[#265ba3]/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="flex items-center mb-5">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#265ba3] to-[#1a365d] rounded-lg flex items-center justify-center mr-4">
+                      <Server className="w-6 h-6 text-white" />
                     </div>
-                    <h4 className="font-semibold text-lg text-[#314158]">Proactive IT Management</h4>
+                    <h4 className="font-bold text-xl text-gray-800">Proactive IT Management</h4>
                   </div>
-                  <p className="text-gray-600">
-                    Prevent issues before they impact your business with 24/7 monitoring by qualified IT managed service providers.
+                  <p className="text-gray-600 leading-relaxed">
+                    Prevent issues before they impact your business with 24/7 monitoring by certified IT managed service providers.
                   </p>
                 </div>
                 
-                <div className="bg-[#f0f4f9] p-6 rounded-lg border border-[#314158]/20">
-                  <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-[#314158]/10 rounded-lg flex items-center justify-center mr-3">
-                      <Shield className="w-5 h-5 text-[#314158]" />
+                <div className="bg-white p-8 rounded-xl border border-[#265ba3]/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="flex items-center mb-5">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#265ba3] to-[#1a365d] rounded-lg flex items-center justify-center mr-4">
+                      <Shield className="w-6 h-6 text-white" />
                     </div>
-                    <h4 className="font-semibold text-lg text-[#314158]">Enhanced Security</h4>
+                    <h4 className="font-bold text-xl text-gray-800">Enhanced Security</h4>
                   </div>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 leading-relaxed">
                     Protect your organization from cyber threats with comprehensive managed IT security services from verified MSSPs.
                   </p>
                 </div>
                 
-                <div className="bg-[#f0f4f9] p-6 rounded-lg border border-[#314158]/20">
-                  <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-[#314158]/10 rounded-lg flex items-center justify-center mr-3">
-                      <Users className="w-5 h-5 text-[#314158]" />
+                <div className="bg-white p-8 rounded-xl border border-[#265ba3]/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="flex items-center mb-5">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#265ba3] to-[#1a365d] rounded-lg flex items-center justify-center mr-4">
+                      <Users className="w-6 h-6 text-white" />
                     </div>
-                    <h4 className="font-semibold text-lg text-[#314158]">Expert Support</h4>
+                    <h4 className="font-bold text-xl text-gray-800">Expert Support</h4>
                   </div>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 leading-relaxed">
                     Access enterprise-level IT expertise without the overhead of full-time staff through qualified managed service providers.
                   </p>
                 </div>
                 
-                <div className="bg-[#f0f4f9] p-6 rounded-lg border border-[#314158]/20">
-                  <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-[#314158]/10 rounded-lg flex items-center justify-center mr-3">
-                      <Building className="w-5 h-5 text-[#314158]" />
+                <div className="bg-white p-8 rounded-xl border border-[#265ba3]/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="flex items-center mb-5">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#265ba3] to-[#1a365d] rounded-lg flex items-center justify-center mr-4">
+                      <Building className="w-6 h-6 text-white" />
                     </div>
-                    <h4 className="font-semibold text-lg text-[#314158]">Industry Specialization</h4>
+                    <h4 className="font-bold text-xl text-gray-800">Industry Specialization</h4>
                   </div>
-                  <p className="text-gray-600">
-                    Connect with managed IT services for small businesses, law firms, and other industry-specific requirements.
+                  <p className="text-gray-600 leading-relaxed">
+                    Connect with specialized managed IT services for small businesses, legal firms, and other industry-specific needs.
                   </p>
                 </div>
                 
-                <div className="bg-[#f0f4f9] p-6 rounded-lg border border-[#314158]/20">
-                  <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-[#314158]/10 rounded-lg flex items-center justify-center mr-3">
-                      <MapPin className="w-5 h-5 text-[#314158]" />
+                <div className="bg-white p-8 rounded-xl border border-[#265ba3]/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="flex items-center mb-5">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#265ba3] to-[#1a365d] rounded-lg flex items-center justify-center mr-4">
+                      <MapPin className="w-6 h-6 text-white" />
                     </div>
-                    <h4 className="font-semibold text-lg text-[#314158]">Local Providers</h4>
+                    <h4 className="font-bold text-xl text-gray-800">Local Providers</h4>
                   </div>
-                  <p className="text-gray-600">
-                    Find managed service providers near you in major cities like Chicago, New York, NYC, and New Jersey.
+                  <p className="text-gray-600 leading-relaxed">
+                    Find trusted managed service providers near you in major business centers across the country.
                   </p>
                 </div>
                 
-                <div className="bg-[#f0f4f9] p-6 rounded-lg border border-[#314158]/20">
-                  <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-[#314158]/10 rounded-lg flex items-center justify-center mr-3">
-                      <Cloud className="w-5 h-5 text-[#314158]" />
+                <div className="bg-white p-8 rounded-xl border border-[#265ba3]/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                  <div className="flex items-center mb-5">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#265ba3] to-[#1a365d] rounded-lg flex items-center justify-center mr-4">
+                      <Cloud className="w-6 h-6 text-white" />
                     </div>
-                    <h4 className="font-semibold text-lg text-[#314158]">Cloud Solutions</h4>
+                    <h4 className="font-bold text-xl text-gray-800">Cloud Solutions</h4>
                   </div>
-                  <p className="text-gray-600">
-                    Scalable cloud services from top managed cloud service providers to support your business growth.
+                  <p className="text-gray-600 leading-relaxed">
+                    Scalable cloud infrastructure from top managed cloud service providers to support your business growth.
                   </p>
                 </div>
               </div>
             </section>
             
-            {/* Still Have Questions Section */}
-            <section className="mt-16 pt-10 border-t border-gray-200 text-center">
-              <div className="max-w-2xl mx-auto">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">Still have questions about managed IT services?</h3>
-                <p className="text-gray-600 mb-6">
-                  If you didn&apos;t find the answer you were looking for about managed service providers, IT managed services, or managed security service providers, our team is ready to help. Contact us to connect with verified managed service providers near you.
-                </p>
-                
-              </div>
-            </section>
+          
           </div>
         </main>
       </div>

@@ -3,56 +3,12 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 
 const SoftwareCategories = ({ categories = [] }) => {
-  // If no categories are passed, use the hardcoded data as fallback
   const categoriesData = categories && categories.length > 0 
     ? categories.map(category => ({
         category: category.name,
         subcategory: category.subcategories || []
       }))
-    : [
-        {
-          category: "Accounting & Finance Software",
-          subcategory: [
-            { name: "Expense Management Software", slug: "expense-management-software" },
-            { name: "Accounts Payable Automation Software", slug: "accounts-payable-automation-software" },
-            { name: "Accounts Receivable Software", slug: "accounts-receivable-software" },
-            { name: "Sales Tax and VAT Compliance Software", slug: "sales-tax-vat-compliance-software" }
-          ]
-        },
-        {
-          category: "Artificial Intelligence Software",
-          subcategory: [
-            { name: "AI Chatbots Software", slug: "ai-chatbots-software" },
-            { name: "Natural Language Processing (NLP) Software", slug: "natural-language-processing-software" },
-            { name: "Large Language Models (LLMs) Software", slug: "large-language-models-software" },
-            { name: "AI Image Generators Software", slug: "ai-image-generators-software" },
-            { name: "Text to Speech Software", slug: "text-to-speech-software" },
-            { name: "Vector Database Software", slug: "vector-database-software" }
-          ]
-        },
-        {
-          category: "Collaboration & Productivity Software",
-          subcategory: [
-            { name: "VoIP Providers", slug: "voip-providers" },
-            { name: "Board Management Software", slug: "board-management-software" },
-            { name: "Digital Adoption Platforms", slug: "digital-adoption-platforms" },
-            { name: "Survey Software", slug: "survey-software" },
-            { name: "Video Conferencing Software", slug: "video-conferencing-software" }
-          ]
-        },
-        {
-          category: "Customer Service Software",
-          subcategory: [
-            { name: "Help Desk Software", slug: "help-desk-software" },
-            { name: "Field Service Management Software", slug: "field-service-management-software" },
-            { name: "Customer Success Software", slug: "customer-success-software" },
-            { name: "Live Chat Software", slug: "live-chat-software" },
-            { name: "Experience Management Software", slug: "experience-management-software" },
-            { name: "Customer Communications Management Software", slug: "customer-communications-management-software" },
-            { name: "Customer Service Automation Software", slug: "customer-service-automation-software" }
-          ]
-        }
-      ];
+    : [""];
 
   const [expandedCategory, setExpandedCategory] = useState(null);
 
@@ -109,16 +65,7 @@ const SoftwareCategories = ({ categories = [] }) => {
                         </Link>
                       </li>
                     ))}
-                    {category.subcategory.length > 8 && (
-                      <li>
-                        <Link
-                          href="#"
-                          className="block py-2 px-3 rounded-lg text-[#4897de] font-bold text-sm hover:bg-[#0249aa] hover:text-white transition-all duration-200"
-                        >
-                          View All {category.subcategory.length} Subcategories
-                        </Link>
-                      </li>
-                    )}
+                 
                   </ul>
                 </div>
               )}
@@ -134,35 +81,24 @@ const SoftwareCategories = ({ categories = [] }) => {
               className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
             >
               <div className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] p-4">
-                <h2 className="text-lg font-bold text-white text-center">{category.category}</h2>
+                <h2 className="text-md font-bold text-white text-center">{category.category}</h2>
               </div>
               <div className="p-4">
-                <ul className="space-y-2">
+                <ul className="space-y-1">
                   {category.subcategory.slice(0, 6).map((item, itemIndex) => (
                     <li key={itemIndex}>
                       <Link
                         href={`/${item.slug || item}`}
-                        className="block py-3 px-4 rounded-lg text-black hover:bg-blue-100  transition-all duration-200 border border-transparent hover:border-[#4897de]/20"
+                        className="block py-1 px-4 hover:underline"
                       >
                         <div className="flex items-center justify-between">
                           <span className="text-sm font-medium">{item.name || item}</span>
-                          <svg className="w-4 h-4 text-[#4897de]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                          </svg>
+                          
                         </div>
                       </Link>
                     </li>
                   ))}
-                  {category.subcategory.length > 6 && (
-                    <li>
-                      <Link
-                        href="#"
-                        className="block py-3 px-4 rounded-lg text-[#4897de] font-bold text-sm text-center border border-transparent hover:border-[#4897de]/20 hover:bg-[#0249aa] hover:text-white transition-all duration-200"
-                      >
-                        +{category.subcategory.length - 6} more
-                      </Link>
-                    </li>
-                  )}
+                 
                 </ul>
               </div>
             </div>
@@ -170,9 +106,9 @@ const SoftwareCategories = ({ categories = [] }) => {
         </div>
         
         {/* View All Categories Button */}
-        <div className="text-center mt-12">
+        <div className="text-right mt-12">
           <Link href="/categories">
-            <button className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg">
+            <button className=" text-[#1a365d] font-semibold hover:underline cursor-pointer">
               View All Categories
             </button>
           </Link>

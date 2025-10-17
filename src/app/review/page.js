@@ -213,7 +213,7 @@ export default function WriteReviewPage() {
               {/* Step 5 - Finished */}
               <div className="flex items-center">
                 <div className={`w-4 h-4 rounded-full ${
-                  currentStep >= 5 ? "bg-[#4ecfc5]" : "bg-gray-300"
+                  currentStep >= 5 ? "bg-[#0249aa]" : "bg-gray-300"
                 }`}></div>
                 <span className={`ml-2 text-sm font-medium ${
                   currentStep >= 5 ? "text-black" : "text-gray-500"
@@ -237,7 +237,7 @@ export default function WriteReviewPage() {
             </h1>
             
             {/* Subtitle */}
-            <p className="text-xl text-[#4897de] mb-12 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
               Share your experiences by writing reviews of the software and services you use at work.
             </p>
 
@@ -274,7 +274,7 @@ export default function WriteReviewPage() {
         {currentStep === 5 && (
           // Step 5: Finished
           <div className="bg-white rounded-2xl shadow-lg p-8 text-center">
-            <div className="bg-gradient-to-r from-[#4ecfc5] to-[#0249aa] text-white rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6">
+            <div className="bg-[#0249aa] text-white rounded-2xl w-20 h-20 flex items-center justify-center mx-auto mb-6">
               <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
               </svg>

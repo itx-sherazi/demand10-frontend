@@ -116,9 +116,8 @@ export default function ListProductSection() {
                     <Image
                       src={logo.src}
                       alt={logo.alt}
-                      layout="fill"
-                      objectFit="contain"
-                      className="transition-transform duration-300 hover:scale-105"
+                      fill
+                      className="transition-transform duration-300 hover:scale-105 object-contain"
                     />
                   </div>
                 </div>

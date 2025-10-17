@@ -122,7 +122,7 @@ const EmailSubscribe = () => {
                             required
                           />
                           <span className="ml-2 text-gray-700 text-sm">
-                            I agree to receive marketing emails from IntentWire. I can unsubscribe at any time.
+                            I agree to receive marketing emails from demand10. I can unsubscribe at any time.
                           </span>
                         </label>
                       </div>

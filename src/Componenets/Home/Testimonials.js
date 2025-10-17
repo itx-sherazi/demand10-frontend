@@ -9,24 +9,24 @@ const TestimonialSlider = () => {
   const testimonials = [
     {
       id: 1,
-      text: "I really appreciate how SaaSworthy simplifies complex information into something that's easy to understand. Their SW Score is well thought out and helps users like me make informed decisions without any hassle. Moreover, their Award-vertical options demonstrate how software compares to industry standards, which gives me confidence in my choices.",
-      author: "Eli Bergman",
-      role: "Editor & Research Specialist",
-      image: "/eli-bergman.jpg"
+      text: "SaaSworthy transformed how we evaluate software solutions. Their comprehensive scoring system and detailed analysis saved us countless hours of research. The platform is intuitive and the information is presented in a way that made our decision-making process much easier.",
+      author: "Sarah Johnson",
+      role: "CTO, TechSolutions Inc.",
+      image: "/sarah-johnson.jpg"
     },
     {
       id: 2,
-      text: "SaaSworthy has completely transformed how we evaluate software solutions. The depth of insights and the clarity of presentation make it an indispensable tool for our decision-making process. I particularly appreciate the detailed reviews that go beyond surface-level features.",
-      author: "Jane Smith",
-      role: "Product Manager",
-      image: "/jane-smith.jpg"
+      text: "As a business leader, I needed a tool that could deliver actionable insights quickly. SaaSworthy exceeded my expectations with their detailed software comparisons and industry benchmarks. We've made better purchasing decisions and saved significantly on software costs.",
+      author: "Michael Chen",
+      role: "Operations Director, GrowthCorp",
+      image: "/michael-chen.jpg"
     },
     {
       id: 3,
-      text: "As a marketing director, I rely on data-driven insights to make critical decisions. SaaSworthy provides exactly that with their comprehensive scoring system and detailed analysis. The platform is intuitive, and the information is presented in a way that saves us countless hours of research.",
-      author: "John Doe",
-      role: "Marketing Director",
-      image: "/john-doe.jpg"
+      text: "The depth of analysis provided by SaaSworthy is unmatched in the industry. Their team clearly understands the challenges businesses face when selecting software. Since using their platform, our team productivity has increased significantly due to better software choices.",
+      author: "Emma Rodriguez",
+      role: "Product Manager, InnovateX",
+      image: "/emma-rodriguez.jpg"
     }
   ];
 

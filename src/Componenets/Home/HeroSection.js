@@ -200,14 +200,36 @@ export default function HeroSection({ homepageCompanies = [] }) {
           <div className="max-w-4xl mx-auto">
             <h3 className="text-blue-200 text-sm font-semibold mb-3">POPULAR CATEGORIES</h3>
             <div className="flex flex-wrap justify-center gap-3">
-              {['CRM Software', 'Accounting', 'HR Management', 'Project Management', 'Marketing'].map((category, index) => (
-                <button 
-                  key={index}
-                  className="px-4 py-2 bg-white hover:bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-black hover:text-white rounded-full text-sm transition-colors duration-200 border border-gray-200"
-                >
-                  {category}
-                </button>
-              ))}
+               <Link 
+                href="/managed-service-providers"
+                target="_blank"
+                className="px-4 py-2 bg-white hover:bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-black hover:text-white rounded-full text-sm transition-colors duration-200 border border-gray-200"
+              >
+                Managed Service Provider
+              </Link>
+              <Link 
+                href="/managed-security-service-providers"
+                target="_blank"
+                className="px-4 py-2 bg-white hover:bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-black hover:text-white rounded-full text-sm transition-colors duration-200 border border-gray-200"
+              >
+                 Managed Security Service Provider
+              </Link>
+              <Link 
+                href="/crm-software"
+                target="_blank"
+                className="px-4 py-2 bg-white hover:bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-black hover:text-white rounded-full text-sm transition-colors duration-200 border border-gray-200"
+              >
+                CRM Software
+              </Link>
+              <Link 
+                href="/accounting-software"
+                target="_blank"
+                className="px-4 py-2 bg-white hover:bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-black hover:text-white rounded-full text-sm transition-colors duration-200 border border-gray-200"
+              >
+                Accounting Software
+              </Link>
+             
+              
             </div>
           </div>
         </div>
@@ -233,11 +255,11 @@ export default function HeroSection({ homepageCompanies = [] }) {
                     // Function to get the full image URL
                 const getImageUrl = (imagePath) => {
                   // If it's already a full URL, return as is
-                  if (!imagePath) return "/placeholder-logo.png";
+                  if (!imagePath) return "";
                   if (imagePath.startsWith('http')) return imagePath;
                   
                   // If it's a relative path, prepend the API base URL
-                  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
+                  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.demand10.com/api/v1';
                   // Remove /api/v1 prefix if it exists in the imagePath since uploads are served directly
                   const cleanPath = imagePath.startsWith('/api/v1') ? imagePath.substring(7) : imagePath;
                   // For uploads, we need to remove the /api/v1 part from the base URL

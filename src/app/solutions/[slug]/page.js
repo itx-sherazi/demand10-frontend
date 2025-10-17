@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
     
     if (!subcategory || !subcategory.name) {
       return {
-        title: "Solution Not Found | IntentWire",
+        title: "Solution Not Found | Demand10",
         description: "No solution details found for this category.",
       };
     }
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
     // TITLE: limit to 55 chars
     let title = `${name} Solutions – ${category}`;
     if (title.length < 45) {
-      title += " | IntentWire";
+      title += " | Demand10";
     }
     if (title.length > 55) {
       title = title.slice(0, 52) + "...";
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }) {
       keywords: [
         name,
         category,
-        "IntentWire",
+        "Demand10",
         "technology solutions",
         "service providers",
         "IT solutions",
@@ -51,35 +51,27 @@ export async function generateMetadata({ params }) {
         "business solutions",
       ],
       alternates: {
-        canonical: `https://intentwire.com/solutions/${slug}`,
+        canonical: `https://demand10.com/solutions/${slug}`,
       },
       openGraph: {
         title,
         description,
-        url: `https://intentwire.com/solutions/${slug}`,
-        siteName: "IntentWire",
-        images: [
-          {
-            url: "https://intentwire.com/og-images/solutions.jpg",
-            width: 1200,
-            height: 630,
-            alt: `${name} – Solution Overview`,
-          },
-        ],
+        url: `https://demand10.com/solutions/${slug}`,
+        siteName: "Demand10",
+       
         type: "website",
       },
       twitter: {
         card: "summary_large_image",
         title,
         description,
-        images: ["https://intentwire.com/og-images/solutions.jpg"],
-        site: "@intentwire",
+        site: "@demand10",
       },
     };
   } catch (error) {
     console.error("Error generating metadata for solutions:", error);
     return {
-      title: "Error | IntentWire Solutions",
+      title: "Error | Demand10 Solutions",
       description: "An error occurred while fetching solution details.",
     };
   }

@@ -26,8 +26,8 @@ export default function ArticleDetail({ blogDetail }) {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": blogDetail.title,
-      "description": blogDetail.metaDescription || blogDetail.description || "Detailed blog post",
-      "image": blogDetail.image || "https://via.placeholder.com/800x400?text=Blog+Image",
+      "description": blogDetail.metaDescription || blogDetail.description || "Detailed article",
+      "image": blogDetail.image || "https://via.placeholder.com/800x400?text=Article+Image",
       "datePublished": publicationDate,
       "dateModified": publicationDate,
       "author": {
@@ -36,10 +36,10 @@ export default function ArticleDetail({ blogDetail }) {
       },
       "publisher": {
         "@type": "Organization",
-        "name": "IntentWire",
+        "name": "Demand10",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://intentwire.com/images/logo.png"
+          "url": "https://demand10.com/images/logo.png"
         }
       },
       "mainEntityOfPage": {
@@ -74,16 +74,16 @@ export default function ArticleDetail({ blogDetail }) {
 
   if (!blogDetail) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center bg-white p-8 rounded-lg shadow-lg max-w-md">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center">
+        <div className="text-center bg-white p-8 rounded-2xl shadow-lg max-w-md border border-gray-200">
           <div className="text-red-500 text-6xl mb-4">⚠️</div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">
-            Blog Not Found
+            Article Not Found
           </h2>
-          <p className="text-gray-600 mb-6">The requested blog post could not be loaded.</p>
+          <p className="text-gray-600 mb-6">The requested article could not be loaded.</p>
           <button
             onClick={() => router.back()}
-            className="bg-[#314158] text-white px-6 py-2 rounded-lg hover:bg-[#253347] transition-colors"
+            className="bg-gradient-to-r from-[#265ba3] to-blue-700 text-white px-6 py-2 rounded-lg hover:from-[#1e4a86] hover:to-blue-800 transition-all duration-300 shadow-md hover:shadow-lg"
           >
             Go Back
           </button>
@@ -94,8 +94,8 @@ export default function ArticleDetail({ blogDetail }) {
 
   // Ensure we're using the correct image path
   const imageUrl = blogDetail.image 
-    ? (blogDetail.image.startsWith('http') ? blogDetail.image : `https://intentwire.com${blogDetail.image}`)
-    : "https://intentwire.com/default-og.png";
+    ? (blogDetail.image.startsWith('http') ? blogDetail.image : `https://demand10.com${blogDetail.image}`)
+    : "https://demand10.com/default-og.png";
 
   // Validate date for time attribute
   const isValidDate = (dateString) => {
@@ -116,32 +116,32 @@ export default function ArticleDetail({ blogDetail }) {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section with Gradient Background */}
-        <section className="relative bg-gradient-to-r from-[#314158] to-[#253347] overflow-hidden rounded-2xl mb-8">
+        <section className="relative bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] overflow-hidden rounded-2xl mb-8">
           {/* Top Left Circles */}
           <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 opacity-20">
             <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
+              <circle cx="300" cy="300" r="100" stroke="#ffffff" strokeWidth="1" />
+              <circle cx="300" cy="300" r="200" stroke="#ffffff" strokeWidth="1" />
+              <circle cx="300" cy="300" r="300" stroke="#ffffff" strokeWidth="1" />
+              <circle cx="300" cy="300" r="400" stroke="#ffffff" strokeWidth="1" />
             </svg>
           </div>
 
           {/* Bottom Right Circles */}
           <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 opacity-20">
             <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-              <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
+              <circle cx="300" cy="300" r="100" stroke="#ffffff" strokeWidth="1" />
+              <circle cx="300" cy="300" r="200" stroke="#ffffff" strokeWidth="1" />
+              <circle cx="300" cy="300" r="300" stroke="#ffffff" strokeWidth="1" />
+              <circle cx="300" cy="300" r="400" stroke="#ffffff" strokeWidth="1" />
             </svg>
           </div>
           
           <div className="relative z-10 py-12 px-6">
             <div className="max-w-4xl mx-auto text-center">
               <Link 
-                href="/blog" 
-                className="inline-flex items-center text-white/90 hover:text-white mb-6 transition-colors"
+                href="/insights" 
+                className="inline-flex items-center text-blue-100 hover:text-white mb-6 transition-colors"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Insights
@@ -151,7 +151,7 @@ export default function ArticleDetail({ blogDetail }) {
                 {blogDetail.title}
               </h1>
               
-              <div className="flex flex-wrap items-center justify-center gap-6 text-white/90">
+              <div className="flex flex-wrap items-center justify-center gap-6 text-blue-100">
                 <div className="flex items-center">
                   <Calendar className="w-5 h-5 mr-2" />
                   <time dateTime={articleDate} className="text-sm">
@@ -179,13 +179,13 @@ export default function ArticleDetail({ blogDetail }) {
           </div>
         </section>
 
-        <article className="bg-white rounded-2xl overflow-hidden shadow-lg">
+        <article className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200">
           {/* Featured Image */}
           <div className="relative w-full h-64 sm:h-80 md:h-96">
             {!imageError ? (
               <Image
                 src={imageUrl}
-                alt={blogDetail.title || "Blog image"}
+                alt={blogDetail.title || "Article image"}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
@@ -193,7 +193,7 @@ export default function ArticleDetail({ blogDetail }) {
                 onError={() => setImageError(true)}
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-[#314158] to-[#253347] flex items-center justify-center">
+              <div className="w-full h-full bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] flex items-center justify-center">
                 <div className="text-center text-white">
                   <div className="text-4xl mb-2">📝</div>
                   <p className="text-xl font-medium">Article Image</p>
@@ -220,12 +220,12 @@ export default function ArticleDetail({ blogDetail }) {
             {(blogDetail.tags && blogDetail.tags.length > 0) && (
               <div className="mt-8 pt-6 border-t border-gray-200">
                 <div className="flex flex-wrap items-center gap-2">
-                  <Tag className="w-5 h-5 text-[#314158]" />
+                  <Tag className="w-5 h-5 text-[#265ba3]" />
                   <div className="flex flex-wrap gap-2">
                     {blogDetail.tags.map((tag, index) => (
                       <span 
                         key={index} 
-                        className="text-sm bg-[#f0f4f9] text-[#314158] px-3 py-1 rounded-full hover:bg-[#314158] hover:text-white transition-colors"
+                        className="text-sm bg-blue-50 text-[#265ba3] px-3 py-1 rounded-full hover:bg-[#265ba3] hover:text-white transition-colors"
                       >
                         {tag}
                       </span>
@@ -243,8 +243,8 @@ export default function ArticleDetail({ blogDetail }) {
                 </div>
                 <div className="flex space-x-4">
                   <Link
-                    href="/blog"
-                    className="px-6 py-3 bg-gradient-to-r from-[#314158] to-[#253347] text-white font-medium rounded-lg hover:from-[#253347] hover:to-[#1a2533] transition-all shadow-md flex items-center"
+                    href="/insights"
+                    className="px-6 py-3 bg-gradient-to-r from-[#265ba3] to-blue-700 text-white font-medium rounded-lg hover:from-[#1e4a86] hover:to-blue-800 transition-all duration-300 shadow-md hover:shadow-lg flex items-center"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to Insights
@@ -258,7 +258,7 @@ export default function ArticleDetail({ blogDetail }) {
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">Keywords</h3>
                   <div className="flex flex-wrap gap-2">
                     {blogDetail.keywords.map((keyword, index) => (
-                      <span key={index} className="text-xs bg-[#314158] text-white px-3 py-1 rounded-full">
+                      <span key={index} className="text-xs bg-[#265ba3] text-white px-3 py-1 rounded-full">
                         {keyword}
                       </span>
                     ))}

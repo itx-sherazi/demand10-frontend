@@ -13,7 +13,7 @@ export default function Testimonials() {
       id: 1,
       name: "Steven Gabbard",
       role: "Founder",
-      content: "SoftwareSuggest listed our product, increasing our visibility and lead generation, resulting in more customers.",
+      content: "Demand10 listed our product, increasing our visibility and lead generation, resulting in more customers.",
       rating: 5,
       image: "https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-09-13/feg4FpDyKX.png"
     },
@@ -29,7 +29,7 @@ export default function Testimonials() {
       id: 3,
       name: "Michael Chen",
       role: "CTO",
-      content: "As a tech company, we needed a platform that understood our industry. SoftwareSuggest delivered beyond expectations.",
+      content: "As a tech company, we needed a platform that understood our industry. Demand10 delivered beyond expectations.",
       rating: 5,
       image: "https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-09-13/feg4FpDyKX.png"
     },
@@ -45,7 +45,7 @@ export default function Testimonials() {
       id: 5,
       name: "David Wilson",
       role: "CEO",
-      content: "Our partnership with SoftwareSuggest has been transformative for our business growth and market expansion.",
+      content: "Our partnership with Demand10 has been transformative for our business growth and market expansion.",
       rating: 5,
       image: "https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-09-13/feg4FpDyKX.png"
     }
@@ -134,7 +134,7 @@ export default function Testimonials() {
             </p>
             <div className="mt-4 pt-4 border-t border-gray-200">
               <h4 className="text-lg font-bold text-[#0249aa]">
-                {testimonials[currentTestimonial].company || "SoftwareSuggest"}
+                {testimonials[currentTestimonial].company || "Demand10"}
               </h4>
             </div>
           </div>

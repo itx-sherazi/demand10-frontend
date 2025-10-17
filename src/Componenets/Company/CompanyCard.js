@@ -5,13 +5,13 @@ import { MapPin, Users, Calendar, ExternalLink, Building2 } from 'lucide-react';
 
 const CompanyCard = ({ company }) => {
   // Function to get the full image URL
-  const getImageUrl = (imagePath) => {
+  const getFullImageUrl = (imagePath) => {
     // If it's already a full URL, return as is
     if (!imagePath) return null;
     if (imagePath.startsWith('http')) return imagePath;
-    
+
     // If it's a relative path, prepend the API base URL
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.demand10.com';
     // Remove /api/v1 prefix if it exists in the imagePath since uploads are served directly
     const cleanPath = imagePath.startsWith('/api/v1') ? imagePath.substring(7) : imagePath;
     // For uploads, we need to remove the /api/v1 part from the base URL
@@ -55,7 +55,7 @@ const CompanyCard = ({ company }) => {
   // Ensure company data is properly handled
   const companyRating = company?.averageRating !== undefined ? company.averageRating : 0;
   const reviewCount = company?.totalReviews || 0;
-  const imageUrl = getImageUrl(company?.image);
+  const imageUrl = getFullImageUrl(company?.image);
 
   return (
     <article
@@ -87,18 +87,17 @@ const CompanyCard = ({ company }) => {
                   <Image
                     width={80}
                     height={80}
-                    src={imageUrl}
+                    src={getFullImageUrl(imageUrl)}
                     alt={`${company?.companyName} logo`}
                     className="w-full h-full object-cover"
                     itemProp="logo"
                   />
                 ) : (
-                  <div
-                    className="w-full h-full bg-blue-500 flex items-center justify-center text-white font-bold text-2xl"
-                    aria-hidden="true"
-                  >
-                    {company?.companyName?.charAt(0) || 'C'}
-                  </div>
+                 <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+        <span className="text-[11px] font-medium text-gray-500 text-center px-2">
+          No logo provided
+        </span>
+      </div>
                 )}
               </div>
             </Link>

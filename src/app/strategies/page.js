@@ -3,7 +3,7 @@ import { Shield, Lock, Link, MessageCircle, Server, Cloud, Users, Building } fro
 import NextLink from "next/link";
 
 export const metadata = {
-  title: "Benefits of Managed IT Services for Business Growth | IntentWire",
+  title: "Benefits of Managed IT Services for Business Growth | Demand10",
   description:
     "Discover the key benefits of managed IT services for businesses, including cost savings, enhanced security, and 24/7 support. Learn how managed service providers can transform your IT operations.",
   keywords: [
@@ -15,35 +15,27 @@ export const metadata = {
     "cloud service provider",
     "managed IT support",
     "IT services managed services",
-    "managed service providers near me"
+    "managed service providers"
   ],
-  metadataBase: new URL("https://intentwire.com"),
+  metadataBase: new URL("https://demand10.com"),
   alternates: {
     canonical: "/strategies",
   },
   openGraph: {
-    title: "Benefits of Managed IT Services for Business Growth | IntentWire",
+    title: "Benefits of Managed IT Services for Business Growth | Demand10",
     description:
       "Discover the key benefits of managed IT services for businesses, including cost savings, enhanced security, and 24/7 support. Learn how managed service providers can transform your IT operations.",
-    url: "https://intentwire.com/strategies",
-    siteName: "IntentWire",
-    images: [
-      {
-        url: "https://intentwire.com/og-images/strategies.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Benefits of Managed IT Services for Business Growth | IntentWire",
-      },
-    ],
+    url: "https://demand10.com/strategies",
+    siteName: "Demand10",
+    
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Benefits of Managed IT Services for Business Growth | IntentWire",
+    title: "Benefits of Managed IT Services for Business Growth | Demand10",
     description:
       "Discover the key benefits of managed IT services for businesses, including cost savings, enhanced security, and 24/7 support. Learn how managed service providers can transform your IT operations.",
-    images: ["https://intentwire.com/og-images/strategies.jpg"],
-    site: "@intentwire",
+    site: "@demand10",
   },
 };
 
@@ -221,6 +213,7 @@ const RobustDataStrategies = () => {
                     <p className="text-gray-700 leading-relaxed mt-3">
                       Learn more about how our <NextLink href="/compliance-risk-management" className="text-[#314158] hover:underline font-medium">compliance and risk management</NextLink> solutions can protect your business.
                     </p>
+
                   </div>
                 </div>
               </section>
@@ -267,6 +260,7 @@ const RobustDataStrategies = () => {
                     <p className="text-gray-700 leading-relaxed mt-3">
                       Discover how our <NextLink href="/data-backup-recovery" className="text-[#314158] hover:underline font-medium">data backup and recovery</NextLink> solutions protect your business assets.
                     </p>
+
                   </div>
                 </div>
               </section>
@@ -313,6 +307,7 @@ const RobustDataStrategies = () => {
                     <p className="text-gray-700 leading-relaxed mt-3">
                       Explore our <NextLink href="/managed-security-service-providers" className="text-[#314158] hover:underline font-medium">managed security service providers</NextLink> network for specialized cybersecurity expertise.
                     </p>
+
                   </div>
                 </div>
               </section>
@@ -359,6 +354,7 @@ const RobustDataStrategies = () => {
                     <p className="text-gray-700 leading-relaxed mt-3">
                       Learn about our <NextLink href="/penetration-testing" className="text-[#314158] hover:underline font-medium">penetration testing</NextLink> services to ensure your security infrastructure remains robust.
                     </p>
+
                   </div>
                 </div>
               </section>
@@ -405,6 +401,7 @@ const RobustDataStrategies = () => {
                     <p className="text-gray-700 leading-relaxed mt-3">
                       Understand how our <NextLink href="/network-security" className="text-[#314158] hover:underline font-medium">network security</NextLink> solutions keep your infrastructure protected.
                     </p>
+
                   </div>
                 </div>
               </section>
@@ -454,10 +451,10 @@ const RobustDataStrategies = () => {
               </div>
             </section>
 
-            {/* Why Choose IntentWire Section */}
+            {/* Why Choose Demand10 Section */}
             <section className="mt-16 pt-8 border-t border-gray-200">
               <h2 className="text-3xl font-bold mb-8 text-[#314158]">
-                Why Choose IntentWire for Managed IT Services?
+                Why Choose Demand10 for Managed IT Services?
               </h2>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
@@ -556,7 +553,7 @@ const RobustDataStrategies = () => {
                 Ready to Experience the Benefits of Managed IT Services?
               </h2>
               <p className="text-gray-700 mb-8 max-w-2xl mx-auto text-lg">
-                Contact us today to learn how IntentWire can connect you with the right managed service providers to transform your IT operations and drive business growth.
+                Contact us today to learn how Demand10 can connect you with the right managed service providers to transform your IT operations and drive business growth.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <NextLink href="/contact">

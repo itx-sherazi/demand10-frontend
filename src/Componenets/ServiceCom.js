@@ -55,9 +55,9 @@ const ServicesPage = () => {
   ];
 
   const marketShareData = [
-    { name: 'Our Company', value: 32, color: '#058f8c' },
-    { name: 'Competitor A', value: 28, color: '#0891b2' },
-    { name: 'Competitor B', value: 22, color: '#0284c7' },
+    { name: 'Our Company', value: 32, color: '#265ba3' },
+    { name: 'Competitor A', value: 28, color: '#1e4a86' },
+    { name: 'Competitor B', value: 22, color: '#1a365d' },
     { name: 'Others', value: 18, color: '#94a3b8' }
   ];
 
@@ -78,7 +78,7 @@ const ServicesPage = () => {
   };
 
   const metrics = [
-    { label: 'Data Accuracy', value: '95%', trend: '+2.3%', icon: Activity, color: 'from-emerald-500 to-teal-600' },
+    { label: 'Data Accuracy', value: '95%', trend: '+2.3%', icon: Activity, color: 'from-blue-500 to-indigo-600' },
     { label: 'Companies Tracked', value: '3.2M', trend: '+12.4%', icon: Users, color: 'from-blue-500 to-cyan-600' },
     { label: 'Faster Decisions', value: '42%', trend: '+5.1%', icon: TrendingUp, color: 'from-purple-500 to-indigo-600' },
     { label: 'Average ROI', value: '8.5x', trend: '+15.2%', icon: Eye, color: 'from-amber-500 to-orange-600' }
@@ -265,66 +265,40 @@ const ServicesPage = () => {
   const whyChooseUs = [
     {
       icon: <Award className="w-10 h-10" />,
-      title: "Expertise",
-      description: "Our team comprises seasoned professionals with extensive experience in IT and security services, verified through our rigorous MSP/MSSP vetting process."
+      title: "Verified Partners",
+      description: "We connect you with pre-vetted managed service providers who meet our stringent quality standards and have proven track records in their respective fields."
     },
     {
       icon: <Target className="w-10 h-10" />,
-      title: "Tailored Solutions",
-      description: "We customize our services to meet the specific needs and goals of your business, connecting you with the right MSPs and MSSPs near you."
+      title: "Precision Matching",
+      description: "Our advanced algorithms match your specific business requirements with the most suitable technology partners, saving you time and resources."
     },
     {
       icon: <TrendingUp className="w-10 h-10" />,
-      title: "Proactive Approach",
-      description: "We focus on preventing issues before they arise to minimize disruptions and downtime, ensuring your business operations run smoothly."
+      title: "Performance Focused",
+      description: "We prioritize solutions that deliver measurable results for your business, helping you achieve your operational and strategic objectives."
     },
     {
       icon: <Users className="w-10 h-10" />,
-      title: "Customer-Centric",
-      description: "Your satisfaction is our priority, and we strive to exceed your expectations in every engagement with our 98% client retention rate."
+      title: "Dedicated Support",
+      description: "Our team provides continuous assistance throughout your partnership journey, ensuring smooth implementation and ongoing success."
     }
   ];
 
-  const testimonials = [
-    {
-      company: "Bain Capital",
-      role: "VP of Business Development",
-      quote:
-        "IntentWire helped us scale as a Managed Service Provider by identifying buying signals early. We reached prospects 2–3 months sooner and closed 40% more deals using intent data – making IntentWire a critical part of our managed service providers toolkit.",
-      rating: 5,
-      avatar: "/serviceImage/testimonials1.webp",
-    },
-    {
-      company: "McKinsey & Company",
-      role: "Senior Partner",
-      quote:
-        "Before IntentWire, we struggled with targeting the right audience. Their platform transformed how Managed security service providers approach demand generation. We saw an 8X CTR boost and tripled our SQLs by focusing on accounts showing active security-related intent.",
-      rating: 5,
-      avatar: "/serviceImage/testimonials2.webp",
-    },
-    {
-      company: "Stax Payments",
-      role: "Head of Growth",
-      quote:
-        "As a Managed security service provider, speed and precision matter. IntentWire syncs perfectly with our Salesforce workflows, giving our SDRs real-time data on companies searching for managed security service providers. It's a game-changer for outbound efficiency.",
-      rating: 5,
-      avatar: "/serviceImage/testimonials3.webp",
-    },
-  ];
-
+  
   const comparisonData = [
     { feature: "Data Accuracy", generic: "60-70%", ours: "95%", advantage: "high" },
-    { feature: "Technographics", generic: "Basic", ours: "Advanced AI-Driven", advantage: "high" },
-    { feature: "Real-time Updates", generic: "Monthly", ours: "Live Feeds", advantage: "high" },
-    { feature: "Compliance", generic: "Self-Reported", ours: "Verified & Audited", advantage: "high" },
-    { feature: "Custom Fields", generic: "5-10", ours: "100+", advantage: "medium" },
+    { feature: "Technographics", generic: "Basic", ours: "Comprehensive", advantage: "high" },
+    { feature: "Real-time Updates", generic: "Monthly", ours: "Continuous", advantage: "high" },
+    { feature: "Compliance", generic: "Self-Reported", ours: "Third-Party Verified", advantage: "high" },
+    { feature: "Custom Fields", generic: "5-10", ours: "Unlimited", advantage: "medium" },
     { feature: "API Integration", generic: "Limited", ours: "Full CRM Sync", advantage: "high" }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#058f8c] via-[#4fd1c7] to-[#4fd1c7] text-white py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white py-24 overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
@@ -342,7 +316,7 @@ const ServicesPage = () => {
             Comprehensive Managed IT and Security Solutions for businesses across the USA, Europe, Australia, and Canada
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <NextLink href="/contact" className="bg-white text-[#058f8c] px-8 py-4 rounded-xl font-bold hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl">
+            <NextLink href="/contact" className="bg-white text-[#265ba3] px-8 py-4 rounded-xl font-bold hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl">
               Request a Consultation
             </NextLink>
             <NextLink href="#services" className="border-2 border-white/30 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all duration-300">
@@ -352,12 +326,12 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* About IntentWire Section */}
+      {/* About Demand10 Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="inline-flex items-center bg-teal-50 text-teal-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <div className="inline-flex items-center bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
                 <CheckCircle className="w-4 h-4 mr-2" />
                 Since 2021
               </div>
@@ -365,36 +339,36 @@ const ServicesPage = () => {
                 Your Strategic MSP & MSSP Technology Partner
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                At IntentWire, we specialize in connecting businesses with premier Managed Service Providers and Managed Security Service Providers. Our comprehensive database serves as the critical link between organizations seeking top MSP and MSSP partnerships and verified IT solution providers across North America, Europe, and Australia.
+                At Demand10, we specialize in connecting businesses with premier Managed Service Providers and Managed Security Service Providers. Our comprehensive database serves as the critical link between organizations seeking top MSP and MSSP partnerships and verified IT solution providers across North America, Europe, and Australia.
               </p>
               <p className="text-lg text-gray-600 mb-8">
                 With over 3.2 million companies in our database and a 95% data accuracy rate, we help businesses make informed decisions about their technology partnerships. Our platform has empowered over 1,200 businesses to streamline their technology procurement process.
               </p>
               <div className="flex flex-wrap gap-4">
-                <NextLink href="/about" className="flex items-center px-6 py-3 bg-[#058f8c] text-white rounded-lg font-medium hover:bg-[#047a77] transition-colors">
+                <NextLink href="/about" className="flex items-center px-6 py-3 bg-[#265ba3] text-white rounded-lg font-medium hover:bg-[#1e4a86] transition-colors">
                   Learn More About Us
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </NextLink>
-                <NextLink href="/managed-service-providers" className="flex items-center px-6 py-3 border border-[#058f8c] text-[#058f8c] rounded-lg font-medium hover:bg-[#058f8c]/5 transition-colors">
+                <NextLink href="/managed-service-providers" className="flex items-center px-6 py-3 border border-[#265ba3] text-[#265ba3] rounded-lg font-medium hover:bg-[#265ba3]/5 transition-colors">
                   Explore MSPs
                   <LinkIcon className="ml-2 h-4 w-4" />
                 </NextLink>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gradient-to-br from-[#058f8c] to-[#4fd1c7] rounded-2xl p-6 text-white">
+              <div className="bg-gradient-to-br from-[#265ba3] to-[#1a365d] rounded-2xl p-6 text-white">
                 <div className="text-3xl font-bold mb-2">3.2M+</div>
                 <div className="text-white/90">Companies Tracked</div>
               </div>
               <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="text-3xl font-bold text-[#058f8c] mb-2">95%</div>
+                <div className="text-3xl font-bold text-[#265ba3] mb-2">95%</div>
                 <div className="text-gray-600">Data Accuracy</div>
               </div>
               <div className="bg-white border border-gray-200 rounded-2xl p-6">
-                <div className="text-3xl font-bold text-[#058f8c] mb-2">500+</div>
+                <div className="text-3xl font-bold text-[#265ba3] mb-2">500+</div>
                 <div className="text-gray-600">Enterprise Clients</div>
               </div>
-              <div className="bg-gradient-to-br from-[#058f8c] to-[#4fd1c7] rounded-2xl p-6 text-white">
+              <div className="bg-gradient-to-br from-[#265ba3] to-[#1a365d] rounded-2xl p-6 text-white">
                 <div className="text-3xl font-bold mb-2">24/7</div>
                 <div className="text-white/90">Support Coverage</div>
               </div>
@@ -426,8 +400,8 @@ const ServicesPage = () => {
             onClick={() => setActiveTab(key)}
             className={`flex items-center px-6 py-3 rounded-xl cursor-pointer font-semibold transition-all duration-300 ${
               activeTab === key
-                ? 'bg-[#058f8c] text-white shadow-lg transform scale-105'
-                : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 hover:border-[#058f8c] hover:text-[#058f8c]'
+                ? 'bg-[#265ba3] text-white shadow-lg transform scale-105'
+                : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 hover:border-[#265ba3] hover:text-[#265ba3]'
             }`}
             aria-label={`View ${service.title} services`}
           >
@@ -446,7 +420,7 @@ const ServicesPage = () => {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
             {React.createElement(services[activeTab].icon, {
-              className: "h-16 w-16 text-[#058f8c] mx-auto"
+              className: "h-16 w-16 text-[#265ba3] mx-auto"
             })}
           </div>
           <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -464,13 +438,13 @@ const ServicesPage = () => {
               key={index} 
               className="flex items-start group hover:bg-gray-50 p-6 rounded-xl transition-all duration-300 border border-transparent hover:border-gray-200"
             >
-              <div className="bg-gradient-to-br from-[#058f8c]/10 to-[#4fd1c7]/10 p-3 rounded-xl mr-4 mt-1 group-hover:shadow-md transition-all duration-300">
-                <div className="text-[#058f8c]">
+              <div className="bg-gradient-to-br from-[#265ba3]/10 to-[#1e4a86]/10 p-3 rounded-xl mr-4 mt-1 group-hover:shadow-md transition-all duration-300">
+                <div className="text-[#265ba3]">
                   {feature.icon}
                 </div>
               </div>
               <div className="flex-1">
-                <h4 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-[#058f8c] transition-colors duration-300">
+                <h4 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-[#265ba3] transition-colors duration-300">
                   {feature.title}
                 </h4>
                 <p className="text-gray-600 leading-relaxed mb-3">
@@ -479,7 +453,7 @@ const ServicesPage = () => {
                 {feature.link && (
                   <NextLink 
                     href={feature.link} 
-                    className="inline-flex items-center text-[#058f8c] font-medium hover:underline"
+                    className="inline-flex items-center text-[#265ba3] font-medium hover:underline"
                   >
                     Learn more
                     <ArrowRight className="ml-1 h-4 w-4" />
@@ -494,7 +468,7 @@ const ServicesPage = () => {
         <div className="text-center">
           <NextLink 
             href="/contact"
-            className="bg-gradient-to-r from-[#058f8c] to-[#4fd1c7] hover:from-[#047a77] hover:to-[#45c4bb] text-white px-10 py-4 cursor-pointer rounded-xl font-semibold transition-all duration-300 flex items-center justify-center mx-auto group shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="bg-gradient-to-r from-[#265ba3] to-[#1a365d] hover:from-[#1e4a86] hover:to-[#162a4a] text-white px-10 py-4 cursor-pointer rounded-xl font-semibold transition-all duration-300 flex items-center justify-center mx-auto group shadow-lg hover:shadow-xl transform hover:scale-105"
             aria-label={`Learn more about ${services[activeTab].title}`}
           >
             {services[activeTab].cta}
@@ -511,7 +485,7 @@ const ServicesPage = () => {
           key={key}
           onClick={() => setActiveTab(key)}
           className={`w-3 h-3 rounded-full transition-all duration-300 ${
-            activeTab === key ? 'bg-[#058f8c] w-8' : 'bg-gray-300 hover:bg-gray-400'
+            activeTab === key ? 'bg-[#265ba3] w-8' : 'bg-gray-300 hover:bg-gray-400'
           }`}
           aria-label={`View ${services[key].title} services`}
         />
@@ -524,7 +498,7 @@ const ServicesPage = () => {
       <section className="py-14 bg-gray-50 relative overflow-hidden">
         <div className="relative w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#058f8c] to-cyan-600 rounded-full text-white text-sm font-medium mb-4">
+            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-[#265ba3] to-blue-700 rounded-full text-white text-sm font-medium mb-4">
               <BarChart3 className="w-4 h-4 mr-2" />
               Real-time Analytics
             </div>
@@ -562,7 +536,7 @@ const ServicesPage = () => {
             <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 backdrop-blur-sm">
               <div className="flex items-center justify-between mb-8">
                 <h3 className="text-2xl font-bold text-gray-900 flex items-center">
-                  <TrendingUp className="w-8 h-8 mr-3 text-[#058f8c]" />
+                  <TrendingUp className="w-8 h-8 mr-3 text-[#265ba3]" />
                   Growth Analytics
                 </h3>
                 <div className="flex gap-2">
@@ -570,7 +544,7 @@ const ServicesPage = () => {
                     onClick={() => setActiveChart('growth')}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       activeChart === 'growth' 
-                        ? 'bg-[#058f8c] text-white' 
+                        ? 'bg-[#265ba3] text-white' 
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                   >
@@ -580,7 +554,7 @@ const ServicesPage = () => {
                     onClick={() => setActiveChart('revenue')}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       activeChart === 'revenue' 
-                        ? 'bg-[#058f8c] text-white' 
+                        ? 'bg-[#265ba3] text-white' 
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                   >
@@ -597,11 +571,11 @@ const ServicesPage = () => {
                       <XAxis dataKey="month" stroke="#6b7280" />
                       <YAxis stroke="#6b7280" />
                       <Tooltip content={<CustomTooltip />} />
-                      <Bar dataKey="tech" fill="#058f8c" radius={4} />
-                      <Bar dataKey="finance" fill="#0891b2" radius={4} />
-                      <Bar dataKey="healthcare" fill="#75dad2" radius={4} />
-                      <Bar dataKey="manufacturing" fill="#059669" radius={4} />
-                      <Bar dataKey="retail" fill="#d97706" radius={4} />
+                      <Bar dataKey="tech" fill="#265ba3" radius={4} />
+                      <Bar dataKey="finance" fill="#1e4a86" radius={4} />
+                      <Bar dataKey="healthcare" fill="#75a9e0" radius={4} />
+                      <Bar dataKey="manufacturing" fill="#1a365d" radius={4} />
+                      <Bar dataKey="retail" fill="#3a6ea5" radius={4} />
                     </BarChart>
                   ) : (
                     <LineChart data={revenueData}>
@@ -609,8 +583,8 @@ const ServicesPage = () => {
                       <XAxis dataKey="month" stroke="#6b7280" />
                       <YAxis stroke="#6b7280" />
                       <Tooltip content={<CustomTooltip />} />
-                      <Line type="monotone" dataKey="revenue" stroke="#058f8c" strokeWidth={3} dot={{ fill: '#058f8c', strokeWidth: 2, r: 6 }} />
-                      <Line type="monotone" dataKey="deals" stroke="#0891b2" strokeWidth={3} dot={{ fill: '#0891b2', strokeWidth: 2, r: 6 }} />
+                      <Line type="monotone" dataKey="revenue" stroke="#265ba3" strokeWidth={3} dot={{ fill: '#265ba3', strokeWidth: 2, r: 6 }} />
+                      <Line type="monotone" dataKey="deals" stroke="#1e4a86" strokeWidth={3} dot={{ fill: '#1e4a86', strokeWidth: 2, r: 6 }} />
                     </LineChart>
                   )}
                 </ResponsiveContainer>
@@ -620,34 +594,34 @@ const ServicesPage = () => {
                 {activeChart === 'growth' ? (
                   <>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded bg-[#058f8c]"></div>
+                      <div className="w-3 h-3 rounded bg-[#265ba3]"></div>
                       <span className="text-sm text-gray-600">Technology</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded bg-[#0891b2]"></div>
+                      <div className="w-3 h-3 rounded bg-[#1e4a86]"></div>
                       <span className="text-sm text-gray-600">Finance</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded bg-[#75dad2]"></div>
+                      <div className="w-3 h-3 rounded bg-[#75a9e0]"></div>
                       <span className="text-sm text-gray-600">Healthcare</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded bg-[#059669]"></div>
+                      <div className="w-3 h-3 rounded bg-[#1a365d]"></div>
                       <span className="text-sm text-gray-600">Manufacturing</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded bg-[#d97706]"></div>
+                      <div className="w-3 h-3 rounded bg-[#3a6ea5]"></div>
                       <span className="text-sm text-gray-600">Retail</span>
                     </div>
                   </>
                 ) : (
                   <>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded bg-[#058f8c]"></div>
+                      <div className="w-3 h-3 rounded bg-[#265ba3]"></div>
                       <span className="text-sm text-gray-600">Revenue ($)</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded bg-[#0891b2]"></div>
+                      <div className="w-3 h-3 rounded bg-[#1e4a86]"></div>
                       <span className="text-sm text-gray-600">Deals Closed</span>
                     </div>
                   </>
@@ -658,7 +632,7 @@ const ServicesPage = () => {
             <div className="space-y-8">
               <div className="bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
                 <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center">
-                  <Target className="w-8 h-8 mr-3 text-[#058f8c]" />
+                  <Target className="w-8 h-8 mr-3 text-[#265ba3]" />
                   Acquisition Opportunities
                 </h3>
                 
@@ -690,7 +664,7 @@ const ServicesPage = () => {
                                 <p className="font-semibold text-gray-900 mb-2">{data.name}</p>
                                 <p className="text-sm text-gray-600">Synergy Score: {data.synergy}</p>
                                 <p className="text-sm text-gray-600">Growth Rate: {data.growth}%</p>
-                                <p className="text-sm font-medium text-[#058f8c]">Potential: {data.potential}</p>
+                                <p className="text-sm font-medium text-[#265ba3]">Potential: {data.potential}</p>
                               </div>
                             );
                           }
@@ -699,9 +673,9 @@ const ServicesPage = () => {
                       />
                       <Scatter 
                         dataKey="size" 
-                        fill="#058f8c"
+                        fill="#265ba3"
                         fillOpacity={0.8}
-                        stroke="#045f5e"
+                        stroke="#1a365d"
                         strokeWidth={2}
                       />
                     </ScatterChart>
@@ -781,7 +755,7 @@ const ServicesPage = () => {
             </p>
           </div>
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
-            <div className="bg-gradient-to-r from-[#058f8c] to-[#4fd1c7] px-8 py-6">
+            <div className="bg-gradient-to-r from-[#265ba3] to-[#1a365d] px-8 py-6">
               <h3 className="text-2xl font-bold text-white flex items-center">
                 <BarChart3 className="w-8 h-8 mr-3" />
                 Competitive Analysis
@@ -797,7 +771,7 @@ const ServicesPage = () => {
                     <th className="px-8 py-6 text-left text-sm font-bold text-gray-500 uppercase tracking-wider">
                       Generic Providers
                     </th>
-                    <th className="px-8 py-6 text-left text-sm font-bold text-[#058f8c] uppercase tracking-wider">
+                    <th className="px-8 py-6 text-left text-sm font-bold text-[#265ba3] uppercase tracking-wider">
                       Our Platform
                     </th>
                   </tr>
@@ -812,7 +786,7 @@ const ServicesPage = () => {
                         <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs mr-2">❌</span>
                         {row.generic}
                       </td>
-                      <td className="px-8 py-6 text-sm text-[#058f8c] font-bold">
+                      <td className="px-8 py-6 text-sm text-[#265ba3] font-bold">
                         <div className="flex items-center">
                           <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs mr-3">✅</span>
                           {row.ours}
@@ -837,7 +811,7 @@ const ServicesPage = () => {
         <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Why Choose IntentWire?
+              Why Choose Demand10?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Discover the advantages of partnering with our team of IT and security experts
@@ -847,8 +821,8 @@ const ServicesPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {whyChooseUs.map((item, index) => (
               <div key={index} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                <div className="bg-[#058f8c]/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                  <div className="text-[#058f8c]">
+                <div className="bg-[#265ba3]/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                  <div className="text-[#265ba3]">
                     {item.icon}
                   </div>
                 </div>
@@ -860,59 +834,19 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-14 bg-white">
-        <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Trusted by Industry Leaders
-            </h2>
-            <p className="text-xl text-gray-600">
-              See what our clients say about our services
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
-                <div className="flex items-center justify-center w-16 h-16 rounded-full mb-6 transition-transform duration-300">
-                  <svg className="h-14 w-20 text-[#2ea5a0]" fill="currentColor" viewBox="0 0 32 32">
-                    <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                  </svg>
-                </div>
-                <blockquote className="text-gray-700 text-lg font-medium mb-6 leading-relaxed">
-                  {testimonial.quote}
-                </blockquote>
-                <div className="flex items-center">
-                  <Image
-                    width={40}
-                    height={40}
-                    src={testimonial.avatar}
-                    alt={`${testimonial.company} representative`}
-                    className="w-12 h-12 rounded-full mr-4"
-                  />
-                  <div>
-                    <div className="font-bold text-gray-900">{testimonial.company}</div>
-                    <div className="text-gray-500 text-sm">{testimonial.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-[#058f8c] via-[#4fd1c7] to-[#4fd1c7]">
+      <section className="py-24 bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d]">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
             Ready to Enhance Your IT and Security Strategies?
           </h2>
           <p className="text-xl text-blue-100 mb-12 leading-relaxed">
-            Contact us today to learn how IntentWire can help your business achieve its objectives with confidence.
+            Contact us today to learn how Demand10 can help your business achieve its objectives with confidence.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <NextLink href="/contact" className="bg-white text-[#058f8c] px-10 py-5 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl">
+            <NextLink href="/contact" className="bg-white text-[#265ba3] px-10 py-5 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-2xl">
               Schedule a Consultation
             </NextLink>
             <NextLink href="/managed-service-providers" className="border-2 border-white/30 backdrop-blur-sm text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white/10 transition-all duration-300">

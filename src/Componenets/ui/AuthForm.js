@@ -216,7 +216,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
           </h2>
           <button 
             onClick={onClose}
-            className="text-gray-500 hover:text-[#4897de] transition-colors p-2 rounded-full hover:bg-gray-100"
+            className="text-gray-500 hover:text-[#265ba3] transition-colors p-2 rounded-full hover:bg-gray-100"
             aria-label="Close"
           >
             <X className="h-6 w-6" />
@@ -379,8 +379,8 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
           {successMessage && (
             <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-xl">
               <div className="flex items-center">
-                <FaCheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                <div className="text-sm text-green-700">
+                <FaCheckCircle className="h-5 w-5 text-[#265ba3] mr-2" />
+                <div className="text-sm text-[#265ba3]">
                   {successMessage}
                 </div>
               </div>
@@ -390,7 +390,7 @@ export default function AuthForm({ onClose, onAuthSuccess }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-white bg-[#4897de]  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#f59e0b] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-base font-medium"
+            className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-white bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d]  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#f59e0b] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-base font-medium"
           >
             {loading ? (
               <>

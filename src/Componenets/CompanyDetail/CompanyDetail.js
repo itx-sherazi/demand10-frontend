@@ -34,6 +34,38 @@ const ContactFormCompany = lazy(() => import("../ui/ContactFormCompany"));
 
 // Tab Panel Component for the right side chart
 const TabPanel = ({ activeTab, services, focus, industries, industryTags, clients }) => {
+  // Generic static placeholder data that works for all company categories
+  const staticServices = [
+    { serviceName: 'Consulting', percentage: 30 },
+    { serviceName: 'Implementation', percentage: 25 },
+    { serviceName: 'Support & Maintenance', percentage: 20 },
+    { serviceName: 'Training', percentage: 15 },
+    { serviceName: 'Custom Development', percentage: 10 }
+  ];
+
+  const staticFocus = [
+    { focusName: 'Small Business', percentage: 35 },
+    { focusName: 'Mid Market', percentage: 30 },
+    { focusName: 'Enterprise', percentage: 25 },
+    { focusName: 'Startups', percentage: 10 }
+  ];
+
+  const staticIndustries = [
+    { industryName: 'Technology', percentage: 25 },
+    { industryName: 'Finance', percentage: 20 },
+    { industryName: 'Healthcare', percentage: 15 },
+    { industryName: 'Retail', percentage: 15 },
+    { industryName: 'Manufacturing', percentage: 10 },
+    { industryName: 'Education', percentage: 10 },
+    { industryName: 'Government', percentage: 5 }
+  ];
+
+  const staticClients = [
+    { clientSegment: 'B2B', percentage: 50 },
+    { clientSegment: 'B2C', percentage: 30 },
+    { clientSegment: 'Hybrid', percentage: 20 }
+  ];
+
   // Chart options matching reference design
   const chartOptions = {
     responsive: true,
@@ -60,15 +92,62 @@ const TabPanel = ({ activeTab, services, focus, industries, industryTags, client
 
   // Get data for the active tab
   const getActiveData = () => {
+    // Helper function to convert simple string arrays to formatted objects
+    const convertToFormattedData = (dataArray, labelKey) => {
+      // Check if dataArray is valid
+      if (!dataArray || !Array.isArray(dataArray) || dataArray.length === 0) return [];
+      
+      try {
+        // Check if data is already in the correct format
+        if (dataArray[0] && typeof dataArray[0] === 'object' && 
+            dataArray[0].hasOwnProperty(labelKey) && dataArray[0].hasOwnProperty('percentage')) {
+          // Validate that all items have the required properties
+          const validData = dataArray.filter(item => 
+            item && typeof item === 'object' && 
+            item.hasOwnProperty(labelKey) && 
+            item.hasOwnProperty('percentage')
+          );
+          
+          if (validData.length > 0) {
+            return validData;
+          }
+        } 
+        // If data is simple strings, convert them to the required format
+        else if (typeof dataArray[0] === 'string') {
+          // Calculate equal percentages for all items
+          const percentage = Math.round(100 / dataArray.length);
+          return dataArray.map((item, index) => ({
+            [labelKey]: item,
+            // Distribute any remainder to the first items
+            percentage: index < (100 % dataArray.length) ? percentage + 1 : percentage
+          }));
+        }
+      } catch (error) {
+        // If there's any error in processing, return empty array
+        console.warn(`Error processing ${labelKey} data:`, error);
+        return [];
+      }
+      
+      return [];
+    };
+
     switch(activeTab) {
       case 'Services':
-        return services || [];
+        // Services should be in the format { serviceName, percentage }
+        const formattedServices = convertToFormattedData(services, 'serviceName');
+        return formattedServices.length > 0 ? formattedServices : staticServices;
       case 'Focus':
-        return focus || [];
+        // Focus should be in the format { focusName, percentage }
+        const formattedFocus = convertToFormattedData(focus, 'focusName');
+        return formattedFocus.length > 0 ? formattedFocus : staticFocus;
       case 'Industries':
-        return industries || []; // Chart data for industries
+        // Industries should be in the format { industryName, percentage }
+        const formattedIndustries = convertToFormattedData(industries, 'industryName');
+        return formattedIndustries.length > 0 ? formattedIndustries : staticIndustries;
       case 'Clients':
-        return clients || [];
+        // Clients should be in the format { clientSegment, percentage }
+        const formattedClients = convertToFormattedData(clients, 'clientSegment');
+        return formattedClients.length > 0 ? formattedClients : staticClients;
       default:
         return [];
     }
@@ -95,12 +174,13 @@ const TabPanel = ({ activeTab, services, focus, industries, industryTags, client
     const data = getActiveData();
     const labelKey = getLabelKey();
     
+    // Always return chart data, even for static data
     if (!data || data.length === 0) {
       return null;
     }
 
     // Colors matching reference image with new color scheme
-    const colors = [
+     const colors = [
       '#4897de', // Primary button color
       '#0249aa', // Secondary color
       '#3b82f6', // Replaced #a6871c with blue shade
@@ -111,12 +191,31 @@ const TabPanel = ({ activeTab, services, focus, industries, industryTags, client
       '#34d399'  // Lighter green
     ];
 
+    // Filter out any invalid data points
+    const validData = data.filter(item => 
+      item && 
+      typeof item === 'object' && 
+      item.hasOwnProperty(labelKey) && 
+      item[labelKey] && 
+      item.hasOwnProperty('percentage') && 
+      typeof item.percentage === 'number' && 
+      !isNaN(item.percentage)
+    );
+
+    if (validData.length === 0) {
+      return null;
+    }
+
     return {
-      labels: data.map(item => item[labelKey]),
+      labels: validData.map(item => item[labelKey]),
       datasets: [
         {
-          data: data.map(item => item.percentage),
-          backgroundColor: colors.slice(0, data.length),
+          data: validData.map(item => {
+            // Ensure percentage is a valid number
+            const percentage = parseFloat(item.percentage);
+            return isNaN(percentage) ? 0 : percentage;
+          }),
+          backgroundColor: colors.slice(0, validData.length),
           borderColor: '#ffffff',
           borderWidth: 2,
         },
@@ -145,7 +244,7 @@ const TabPanel = ({ activeTab, services, focus, industries, industryTags, client
   };
 
 
-  // Colors for legend items
+ // Colors for legend items
   const colors = ['#4897de', '#0249aa', '#3b82f6', '#60a5fa', '#93c5fd', '#059669', '#10b981', '#34d399'];
 
   return (
@@ -155,19 +254,14 @@ const TabPanel = ({ activeTab, services, focus, industries, industryTags, client
         {/* Chart */}
         <div className="w-full h-64 flex-shrink-0">
           {chartData ? <Pie data={chartData} options={chartOptions} /> : (
-            <div className="flex flex-col items-center justify-center h-full p-6 text-center">
-              <p className="text-gray-500 mb-4">
-                No {activeTab.toLowerCase()} data available.
-              </p>
-              <p className="text-sm text-gray-600">
-                Claim this profile and update your company information to add {activeTab.toLowerCase()} data.
-              </p>
+            <div className="flex items-center justify-center h-full">
+              <p className="text-gray-500">No data available</p>
             </div>
           )}
         </div>
         
         {/* Data List or Sidebar */}
-        {chartData && (
+        {activeData && activeData.length > 0 ? (
           <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-4">{getHeading()}</h3>
             
@@ -184,6 +278,10 @@ const TabPanel = ({ activeTab, services, focus, industries, industryTags, client
                 ))}
               </div>
             
+          </div>
+        ) : (
+          <div className="text-center py-4">
+            <p className="text-gray-500">No data available</p>
           </div>
         )}
       </div>
@@ -217,14 +315,13 @@ const TabPanel = ({ activeTab, services, focus, industries, industryTags, client
             </div>
           
         ) : (
-          // No data available message
           <div className="flex items-center justify-center p-12">
             <div className="text-center">
               <p className="text-gray-500 mb-2">
-                No {activeTab.toLowerCase()} data available.
+                Company hasn&apos;t added {activeTab.toLowerCase()} data yet.
               </p>
               <p className="text-sm text-gray-600">
-                Claim this profile and update your company information to add {activeTab.toLowerCase()} data.
+                Claim this profile to update company information.
               </p>
             </div>
           </div>
@@ -241,6 +338,8 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
   const [companyData, setCompanyData] = useState(sampleCompanyData);
 
   // Add custom scrollbar styles
+  
+// Add custom scrollbar styles
   const scrollbarStyle = `
     .custom-scrollbar {
       scrollbar-width: thin;
@@ -304,7 +403,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
     if (imagePath.startsWith('http')) return imagePath;
     
     // If it's a relative path, prepend the API base URL
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://api.demand10/api/v1';
     // Remove /api/v1 prefix if it exists in the imagePath since uploads are served directly
     const cleanPath = imagePath.startsWith('/api/v1') ? imagePath.substring(7) : imagePath;
     // For uploads, we need to remove the /api/v1 part from the base URL
@@ -510,7 +609,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                         key={i}
                         className={`w-4 h-4 ${
                           i < Math.floor(rating)
-                            ? "text-yellow-400 fill-yellow-400"
+                            ? "text-[#265ba3] fill-[#265ba3]"
                             : "text-gray-300"
                         }`}
                       />
@@ -530,7 +629,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                   rel="noopener noreferrer"
                   prefetch={false}
                 >
-                  <button className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white px-6 py-2 rounded-md font-medium text-sm transition-colors shadow-sm hover:shadow">
+                  <button className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white px-6 py-2 rounded-md font-medium text-sm transition-colors shadow-sm hover:shadow hover:bg-[#3eb0a3]">
                     Visit Website
                   </button>
                 </Link>
@@ -539,7 +638,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                 {!isVerified && (
                   <button 
                     onClick={() => setShowClaimForm(true)}
-                    className="border border-[#265ba3] text-[#265ba3] hover:bg-[#265ba3] hover:text-white px-5 py-2.5 rounded-lg font-medium text-sm transition-colors"
+                    className="border border-[#1e4a86] text-[#1e4a86] hover:bg-[#1e4a86] hover:text-white cursor-pointer px-5 py-2.5 rounded-lg font-medium text-sm transition-colors"
                   >
                     Claim Profile
                   </button>
@@ -566,7 +665,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                 <p>{description}</p>
               </div>
 
-              {/* Company Stats Grid */}
+                {/* Company Stats Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mt-8">
                 <div className="bg-blue-50 rounded-lg p-4 border border-gray-200">
                   <div className="flex items-center gap-2 text-gray-700 mb-1">
@@ -637,20 +736,9 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#4897de] focus:ring-[#4897de] sm:text-sm p-2 border box-border appearance-none bg-white"
                     >
                       {tabs.map((tab) => {
-                        // Check if tab has data
-                        const hasData = (() => {
-                          switch(tab) {
-                            case 'Services': return services && services.length > 0;
-                            case 'Focus': return focus && focus.length > 0;
-                            case 'Industries': return industries && industries.length > 0;
-                            case 'Clients': return clients && clients.length > 0;
-                            default: return false;
-                          }
-                        })();
-                        
                         return (
                           <option key={tab} value={tab}>
-                            {tab} {hasData ? '' : '(No data)'}
+                            {tab}
                           </option>
                         );
                       })}
@@ -668,17 +756,6 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                 <div className="hidden md:block mb-6">
                   <nav className="flex overflow-x-auto border-b border-gray-200" aria-label="Tabs">
                     {tabs.map((tab) => {
-                      // Check if tab has data
-                      const hasData = (() => {
-                        switch(tab) {
-                          case 'Services': return services && services.length > 0;
-                          case 'Focus': return focus && focus.length > 0;
-                          case 'Industries': return industries && industries.length > 0;
-                          case 'Clients': return clients && clients.length > 0;
-                          default: return false;
-                        }
-                      })();
-                      
                       // Show all tabs but mark active one
                       return (
                         <button
@@ -713,14 +790,14 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
       </div>
 
       {/* Team Section - If team members exist */}
-      {teamLeads.length > 0 && (
+      {teamLeads && teamLeads.length > 0 && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
           <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
             <h3 className="text-xl font-bold text-gray-900 mb-6">Leadership Team</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {teamLeads.slice(0, showAllTeamMembers ? teamLeads.length : 6).map((member, index) => (
                 <div key={`member-${index}`} className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:shadow-sm transition-shadow bg-white">
-                  <div className="w-12 h-12 rounded-full bg-[#4897de] flex items-center justify-center text-white font-semibold">
+                  <div className="w-12 h-12 rounded-full bg-[#4ecfc5] flex items-center justify-center text-white font-semibold">
                     {member?.name?.charAt(0) || 'U'}
                   </div>
                   <div className="flex-1">
@@ -733,7 +810,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
                         href={member.linkedinUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-8 h-8 bg-[#4897de] rounded flex items-center justify-center text-white hover:bg-[#0249aa] transition-colors"
+                        className="w-8 h-8 bg-[#4ecfc5] rounded flex items-center justify-center text-white hover:bg-[#3eb0a3] transition-colors"
                       >
                         <Linkedin size={14} />
                       </a>
@@ -747,7 +824,7 @@ const CompanyDetail = ({ sampleCompanyData = {}, reviewsData = null }) => {
               <div className="text-center mt-6">
                 <button
                   onClick={() => setShowAllTeamMembers(!showAllTeamMembers)}
-                  className="bg-[#4897de] hover:bg-[#0249aa] text-white font-medium text-sm px-4 py-2 rounded-md transition-colors"
+                  className="bg-[#4ecfc5] hover:bg-[#3eb0a3] text-white font-medium text-sm px-4 py-2 rounded-md transition-colors"
                 >
                   {showAllTeamMembers ? 'Show Less' : `Show More (${teamLeads.length - 6} more)`}
                 </button>

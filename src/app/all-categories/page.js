@@ -1,8 +1,43 @@
 import React from 'react';
 import { fetchCategories } from '@/services/api';
 
+export const metadata = {
+  title: "All Categories - Demand10",
+  description: "Browse all technology categories and subcategories on Demand10. Find managed service providers, cybersecurity solutions, cloud services, and more.",
+  keywords: [
+    "technology categories",
+    "managed service providers",
+    "cybersecurity solutions",
+    "cloud services",
+    "IT services",
+    "technology vendors",
+    "business solutions"
+  ],
+  metadataBase: new URL("https://demand10.com"),
+  alternates: {
+    canonical: "/all-categories",
+  },
+  openGraph: {
+    title: "All Categories - Demand10",
+    description: "Browse all technology categories and subcategories on Demand10. Find managed service providers, cybersecurity solutions, cloud services, and more.",
+    url: "https://demand10.com/all-categories",
+    siteName: "Demand10",
+   
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "All Categories - Demand10",
+    description: "Browse all technology categories and subcategories on Demand10. Find managed service providers, cybersecurity solutions, cloud services, and more.",
+    site: "@demand10",
+  },
+};
 const SoftwareCategoriesPage = async () => {
   const categories = await fetchCategories();
+
+
+
+  
 
   return (
     <div className="min-h-screen bg-[#f3f3f3] py-12 px-4 sm:px-6 lg:px-8">

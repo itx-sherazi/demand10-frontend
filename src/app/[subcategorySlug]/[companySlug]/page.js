@@ -64,23 +64,7 @@ const getCompanyReviewsData = cache(async (companyId, companySlug, page = 1, lim
   }
 });
 
-function truncateText(text, maxLength) {
-  if (!text) return "";
-  return text.length > maxLength
-    ? text.slice(0, maxLength - 1).trim() + "…"
-    : text;
-}
 
-function padTextWithKeyword(text, maxLength, keywordPool) {
-  if (!text || text.length >= maxLength) return text;
-
-  for (const keyword of keywordPool) {
-    if (!text.includes(keyword) && text.length + keyword.length + 2 <= maxLength) {
-      return `${text}. ${keyword}`;
-    }
-  }
-  return text;
-}
 
 export async function generateMetadata({ params }) {
   const { subcategorySlug, companySlug } = await params;
@@ -89,146 +73,62 @@ export async function generateMetadata({ params }) {
 
   if (!company) {
     return {
-      title: "Company Not Found | IntentWire",
+      title: "Company Not Found | Demand10",
       description: "No company data found.",
     };
   }
 
-  // Handle both old string format and new object format for industries
-  let industry = "technology";
-  if (company.industries?.[0]) {
-    if (typeof company.industries[0] === 'object' && company.industries[0] !== null) {
-      industry = company.industries[0].industryName?.toLowerCase() || "technology";
-    } else {
-      industry = company.industries[0]?.toLowerCase() || "technology";
-    }
-  }
+  // Simplified title
+  const title = `${company.companyName}-Demand10`;
 
-  const baseTitle = `${company.companyName}`;
-  const trimmedTitle = truncateText(baseTitle, 55);
-
-  // ✅ Enhanced description with MSP/MSSP keyword integration (Google policy compliant)
-  let baseDescription = "";
+  // Simplified description (160 characters max)
+  let description = "";
   if (company.description && company.description.trim().length > 0) {
-    baseDescription = company.description.trim().slice(0, 155);
+    description = company.description.trim().slice(0, 160);
+    if (description.length > 157) {
+      description = description.slice(0, 157) + "...";
+    }
   } else {
-    // Enhanced description with MSP/MSSP context
-    const isMSP = subcategorySlug.includes("managed-service") || subcategorySlug.includes("msp");
-    const isMSSP = subcategorySlug.includes("managed-security") || subcategorySlug.includes("mssp");
-    
-    if (isMSP) {
-      baseDescription = `Explore ${company.companyName}, a leading managed service provider (MSP) offering IT support, cloud solutions, and cybersecurity services. Discover key details, team insights, and managed IT services.`;
-    } else if (isMSSP) {
-      baseDescription = `Explore ${company.companyName}, a leading managed security service provider (MSSP) offering cybersecurity solutions, threat monitoring, and compliance services. Discover key details and security offerings.`;
-    } else {
-      baseDescription = `Explore ${company.companyName}, a leading ${industry} company${
-        company.companyCountry ? ` based in ${company.companyCountry}` : ""
-      }${company.foundedYear ? `, founded in ${company.foundedYear}` : ""}. Discover key details, team insights, and ${
-        industry.includes("managed") ? "" : "managed IT services and "
-      }security offerings.`;
+    description = `Discover ${company.companyName}, a leading provider in their industry. Find company information, services, and business insights on Demand10.`;
+    if (description.length > 160) {
+      description = description.slice(0, 157) + "...";
     }
   }
 
-  // Streamlined keyword pool for MSP/MSSP context (Google policy compliant)
-  const keywordPool = [
-    "managed service provider",
-    "MSP solutions",
-    "managed security service provider",
-    "MSSP services",
-    "B2B company insight",
-    "business profile",
-    "cybersecurity services",
-    "IT support services",
-    "cloud service provider"
-  ];
-
-  const trimmedDescription = padTextWithKeyword(
-    truncateText(baseDescription, 155),
-    155,
-    keywordPool
-  );
-
-  const imageUrl =
-    company.image || "https://intentwire.com/og-images/default-company.jpg";
-
-  // Enhanced keywords with MSP/MSSP focus (Google policy compliant)
-  const isMSP = subcategorySlug.includes("managed-service") || subcategorySlug.includes("msp");
-  const isMSSP = subcategorySlug.includes("managed-security") || subcategorySlug.includes("mssp");
-  
-  // Handle industries for keywords - support both old and new formats
-  let industriesForKeywords = [];
-  if (Array.isArray(company.industries) && company.industries.length > 0) {
-    industriesForKeywords = company.industries.map(industry => {
-      if (typeof industry === 'object' && industry !== null) {
-        return industry.industryName || '';
-      }
-      return industry || '';
-    }).filter(industry => industry.trim() !== '');
-  }
-  
-  let keywords = [
+  // Simplified keywords
+  const keywords = [
     company.companyName,
-    "IntentWire",
-    "company profile",
-    ...industriesForKeywords,
-    company.companyCountry,
-    "B2B intelligence",
+    "company directory",
+    "top managed service providers",
+    "leads generation",
+    "service provider",
+    "B2B company",
+    subcategorySlug.replace(/-/g, ' '),
+    ...((Array.isArray(company.industries) ? company.industries : [])
+      .map(industry => typeof industry === 'object' ? industry.industryName : industry)
+      .filter(Boolean)
+      .slice(0, 3) || [])
   ];
-  
-  // Add MSP/MSSP specific keywords
-  if (isMSP) {
-    keywords = [...keywords, 
-      "managed service provider",
-      "MSP",
-      "IT services",
-      "cloud services",
-      "best managed service providers"
-    ];
-  } else if (isMSSP) {
-    keywords = [...keywords, 
-      "managed security service provider",
-      "MSSP",
-      "cybersecurity",
-      "security services",
-      "best managed security providers"
-    ];
-  } else {
-    keywords = [...keywords, 
-      "managed service provider",
-      "managed security service provider",
-      "MSP",
-      "MSSP"
-    ];
-  }
 
   return {
-    title: trimmedTitle,
-    description: trimmedDescription,
+    title,
+    description,
     keywords,
     alternates: {
-      canonical: `https://intentwire.com/${subcategorySlug}/${companySlug}`,
+      canonical: `https://demand10.com/${subcategorySlug}/${companySlug}`,
     },
     openGraph: {
-      title: trimmedTitle,
-      description: trimmedDescription,
-      url: `https://intentwire.com/${subcategorySlug}/${companySlug}`,
-      siteName: "IntentWire",
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: `${company.companyName} – Company Overview`,
-        },
-      ],
+      title,
+      description,
+      url: `https://demand10.com/${subcategorySlug}/${companySlug}`,
+      siteName: "Demand10",
       type: "profile",
     },
     twitter: {
       card: "summary_large_image",
-      title: trimmedTitle,
-      description: trimmedDescription,
-      images: [imageUrl],
-      site: "@intentwire",
+      title,
+      description,
+      site: "@demand10",
     },
   };
 }
@@ -296,7 +196,7 @@ export default async function Page({ params }) {
       industries: Array.isArray(currentCompany.industries) ? currentCompany.industries : [],
       teamLeads: Array.isArray(currentCompany.teamLeads) ? currentCompany.teamLeads : [],
       companyCountry: currentCompany.companyCountry || '',
-      image: currentCompany.image || '/placeholder-logo.png',
+      image: currentCompany.image || '',
       website: currentCompany.website || '#'
     };
   }
@@ -332,7 +232,7 @@ export default async function Page({ params }) {
             <div className="space-y-3">
               <Link
                 href={`/${subcategorySlug}`}
-                className="inline-block bg-[#4ecfc5] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3bb3a9] transition-colors"
+                className="inline-block bg-[#1a365d] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3bb3a9] transition-colors"
               >
                 Back to {subcategorySlug.replace(/-/g, ' ')}
               </Link>

@@ -1,41 +1,34 @@
 import ContactPage from "@/Componenets/ContactPage";
 export const metadata = {
-  title: "Contact IntentWire – Connect with Our Team",
+  title: "Contact Demand10 – Get in Touch with Our Technology Experts",
   description:
-    "Reach out to IntentWire for inquiries, support, or partnerships. Our team is here to assist you with your business data needs and technology solutions.",
+    "Connect with Demand10 for inquiries, support, or partnerships. Our team of MSP and MSSP specialists is ready to help you with your business technology solutions and growth strategies.",
   keywords: [
-    "Contact IntentWire",
-    "business data inquiries",
-    "IntentWire support",
-    "B2B data solutions contact"
+    "Contact Demand10",
+    "MSP solutions contact",
+    "MSSP services inquiry",
+    "business technology support",
+    "IT solutions partnership"
   ],
-  metadataBase: new URL("https://intentwire.com"),
+  metadataBase: new URL("https://demand10.com"),
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact IntentWire – Connect with Our Team",
+    title: "Contact Demand10 – Get in Touch with Our Technology Experts",
     description:
-      "Reach out to IntentWire for inquiries, support, or partnerships. Our team is here to assist you with your business data needs and technology solutions.",
-    url: "https://intentwire.com/contact",
-    siteName: "IntentWire",
-    images: [
-      {
-        url: "https://intentwire.com/og-images/contact.jpg", // Replace with your actual Contact OG image URL
-        width: 1200,
-        height: 630,
-        alt: "Contact IntentWire – Connect with Our Team",
-      },
-    ],
+      "Connect with Demand10 for inquiries, support, or partnerships. Our team of MSP and MSSP specialists is ready to help you with your business technology solutions and growth strategies.",
+    url: "https://demand10.com/contact",
+    siteName: "Demand10",
+    
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact IntentWire – Connect with Our Team",
+    title: "Contact Demand10 – Get in Touch with Our Technology Experts",
     description:
-      "Reach out to IntentWire for inquiries, support, or partnerships. Our team is here to assist you with your business data needs and technology solutions.",
-    images: ["https://intentwire.com/og-images/contact.jpg"], // Replace with your actual Contact image URL
-    site: "@intentwire", // Optional: add your Twitter handle
+      "Connect with Demand10 for inquiries, support, or partnerships. Our team of MSP and MSSP specialists is ready to help you with your business technology solutions.",
+    site: "@demand10",
   },
 };
 const Page = () => {

@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: "Verify Email | IntentWire",
-  description: "Verify your email address for your IntentWire account.",
+  title: "Verify Email | Demand10",
+  description: "Verify your email address for your Demand10 account.",
   robots: {
     index: false,
     follow: false,

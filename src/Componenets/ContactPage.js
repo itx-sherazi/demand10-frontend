@@ -61,7 +61,7 @@ const ContactPage = () => {
               </h1>
               <div className="w-20 h-1 bg-white/80 mx-auto lg:mx-0 rounded-full mb-6"></div>
               <h4 className="text-xl sm:text-2xl text-white/90 font-light">
-                with IntentWire
+                with Demand10
               </h4>
             </div>
             {/* Description */}
@@ -70,7 +70,7 @@ const ContactPage = () => {
             </p>
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="flex items-center justify-center px-8 py-4 bg-[#4897de] text-white font-semibold rounded-lg hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              <button className="flex items-center justify-center px-8 py-4 bg-[#265ba3] text-white font-semibold rounded-lg hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                 <MessageCircle className="w-5 h-5 mr-2" />
                 Start Conversation
               </button>
@@ -120,7 +120,7 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-white text-lg mb-1">E-Mail</h3>
-                  <p className="text-white text-xl font-semibold">info@demandtab.com</p>
+                  <p className="text-white text-xl font-semibold">info@demand10.com</p>
                 </div>
               </div>
 
@@ -228,7 +228,7 @@ const ContactPage = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-[#4897de] text-white font-semibold py-4 px-8 rounded-lg hover:from-[#253347] hover:to-[#1a2533] transition text-lg shadow-md flex items-center justify-center"
+                className="w-full bg-[#265ba3] text-white font-semibold py-4 px-8 rounded-lg hover:from-[#253347] hover:to-[#1a2533] transition text-lg shadow-md flex items-center justify-center"
               >
                 {isLoading ? (
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>

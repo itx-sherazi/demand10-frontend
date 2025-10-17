@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <div className="mb-6">
               <Image
-                src="/images/blue_logo.png"
+                src="/images/logo.png"
                 width={160}
                 height={45}
                 alt="Demand10 Logo"
@@ -92,6 +92,12 @@ const Footer = () => {
                 <Link href="/contact" className="text-gray-600 hover:text-[#4897de] transition-colors duration-300 text-base flex items-start group">
                   <span className="text-[#4897de] mr-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                   Contact
+                </Link>
+              </li>
+               <li>
+                <Link href="/history" className="text-gray-600 hover:text-[#4897de] transition-colors duration-300 text-base flex items-start group">
+                  <span className="text-[#4897de] mr-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                  History
                 </Link>
               </li>
             </ul>

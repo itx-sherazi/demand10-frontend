@@ -67,7 +67,7 @@ export default function ResetPasswordPage() {
 
   if (!isValidToken) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#139692] to-teal-500 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1a365d] to-teal-500 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <div className="text-center">
@@ -83,7 +83,7 @@ export default function ResetPasswordPage() {
               <div className="mt-8">
                 <button 
                   onClick={() => router.push('/')} 
-                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#139692] hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200"
+                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#1a365d] hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200"
                 >
                   Back to Home
                 </button>
@@ -96,7 +96,7 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#139692] to-teal-500 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1a365d] to-teal-500 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div>
@@ -129,7 +129,7 @@ export default function ResetPasswordPage() {
                       required
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
-                      className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#139692] focus:border-[#139692] sm:text-sm transition-all"
+                      className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] sm:text-sm transition-all"
                       placeholder="Enter new password"
                     />
                     <button
@@ -165,7 +165,7 @@ export default function ResetPasswordPage() {
                       required
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#139692] focus:border-[#139692] sm:text-sm transition-all"
+                      className="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1a365d] focus:border-[#1a365d] sm:text-sm transition-all"
                       placeholder="Confirm new password"
                     />
                     <button
@@ -193,7 +193,7 @@ export default function ResetPasswordPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="group relative w-full cursor-pointer flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-[#139692] hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 transition-all duration-200 shadow-md hover:shadow-lg"
+                  className="group relative w-full cursor-pointer flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-[#1a365d] hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   {isLoading ? (
                     <>
@@ -253,7 +253,7 @@ export default function ResetPasswordPage() {
               <div className="mt-8">
                 <Link
                   href="/login"
-                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#139692] hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200"
+                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-[#1a365d] hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-200"
                 >
                   Go to Login
                 </Link>

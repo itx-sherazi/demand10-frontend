@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ChevronRight, HomeIcon, SearchIcon, Users, Award, Calendar, Shield, Star } from 'lucide-react';
+import { ChevronRight, HomeIcon, SearchIcon, Users, Award, Calendar} from 'lucide-react';
 
 const EndpointSecurityHero = ({ categoryName = "Endpoint Security", description, name = "Endpoint Security Software", onSearch, totalCompanies }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,16 +19,16 @@ const EndpointSecurityHero = ({ categoryName = "Endpoint Security", description,
         {/* Navigation Breadcrumb */}
         <div className="pb-6">
           <nav className="flex items-center text-blue-100 text-sm" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-[#f59e0b] transition-colors flex items-center">
+            <Link href="/" className="hover:text-[#265ba3] transition-colors flex items-center">
               <HomeIcon className="w-4 h-4 mr-1" />
               Home
             </Link>
             <ChevronRight className="w-4 h-4 mx-2 text-blue-200" />
-            <Link href="/research" className="hover:text-[#f59e0b] transition-colors">
+            <Link href="/" >
               Research
             </Link>
             <ChevronRight className="w-4 h-4 mx-2 text-blue-200" />
-            <Link href="/endpoint-security" className="hover:text-[#f59e0b] transition-colors">
+            <Link href="/" >
               {categoryName}
             </Link>
             <ChevronRight className="w-4 h-4 mx-2 text-blue-200" />
@@ -82,29 +82,7 @@ const EndpointSecurityHero = ({ categoryName = "Endpoint Security", description,
                 </div>
               </div>
               
-              {/* Trust Indicators */}
-              <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                <div className="flex flex-col sm:flex-row sm:items-center">
-                  <div className="flex mb-4 sm:mb-0 sm:mr-6">
-                    {[1, 2, 3, 4, 5].map((item) => (
-                      <div key={item} className="w-10 h-10 rounded-full bg-white border-2 border-[#265ba3] flex items-center justify-center -ml-2 first:ml-0 shadow-sm">
-                        <span className="text-[#265ba3] font-bold text-xs">U{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <div className="flex items-center mb-1">
-                      <Star className="w-4 h-4 text-[#f59e0b] fill-current" />
-                      <Star className="w-4 h-4 text-[#f59e0b] fill-current" />
-                      <Star className="w-4 h-4 text-[#f59e0b] fill-current" />
-                      <Star className="w-4 h-4 text-[#f59e0b] fill-current" />
-                      <Star className="w-4 h-4 text-[#f59e0b] fill-current" />
-                      <span className="text-white font-semibold ml-2">4.9/5</span>
-                    </div>
-                    <p className="text-blue-200 text-sm">Trusted by 10,000+ businesses</p>
-                  </div>
-                </div>
-              </div>
+             
             </div>
 
             {/* Right Content - Search Box */}

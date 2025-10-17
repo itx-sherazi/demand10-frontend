@@ -143,25 +143,7 @@ export default function CompanyListingPage({
     };
   }, []);
 
-  // Handle location input change
-  const handleLocationInputChange = (e) => {
-    const value = e.target.value;
-    setLocationInput(value);
-    setShowSuggestions(true);
-
-    if (!value.trim()) {
-      setSelectedLocation("");
-    } else {
-      // Debounce the location filtering
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
-      }
-      
-      searchTimeoutRef.current = setTimeout(() => {
-        setSelectedLocation(value);
-      }, 300); // 300ms debounce delay
-    }
-  };
+ 
 
   // Generate structured data for SEO
   const generateStructuredData = () => {
@@ -176,7 +158,7 @@ export default function CompanyListingPage({
       item: {
         "@type": "Organization",
         name: company.companyName,
-        url: `https://intentwire.com/${slug}/${company.slug}`,
+        url: `https://demand10.com/${slug}/${company.slug}`,
         address: {
           "@type": "PostalAddress",
           addressCountry: company.companyCountry,
@@ -199,8 +181,8 @@ export default function CompanyListingPage({
       "@context": "https://schema.org",
       "@type": "ItemList",
       itemListElement: companiesData,
-      description: `Browse our comprehensive directory of ${name} companies. Find verified ${isMSP ? "managed service providers (MSPs)" : isMSSP ? "managed security service providers (MSSPs)" : "vendors"} with detailed profiles, contact information, and client reviews. Discover top-rated providers offering ${isMSP ? "IT managed services, cloud solutions, and cybersecurity outsourcing" : isMSSP ? "cybersecurity services, threat monitoring, and compliance solutions" : "specialized services"} near you. ${isMSP ? "Compare MSP pricing, services, and client reviews to find the perfect technology partner for your business." : isMSSP ? "Evaluate MSSP security capabilities, compliance expertise, and threat detection rates to protect your organization." : "Research provider expertise, service offerings, and customer satisfaction ratings."}`,
-      name: `${name} Companies Directory`,
+      description: `Browse our comprehensive directory of ${name} companies on Demand10. Find verified ${isMSP ? "managed service providers (MSPs)" : isMSSP ? "managed security service providers (MSSPs)" : "vendors"} with detailed profiles, contact information, and client reviews. Discover top-rated providers offering ${isMSP ? "IT managed services, cloud solutions, and cybersecurity outsourcing" : isMSSP ? "cybersecurity services, threat monitoring, and compliance solutions" : "specialized services"} near you. ${isMSP ? "Compare MSP pricing, services, and client reviews to find the perfect technology partner for your business." : isMSSP ? "Evaluate MSSP security capabilities, compliance expertise, and threat detection rates to protect your organization." : "Research provider expertise, service offerings, and customer satisfaction ratings."}`,
+      name: `${name} Companies Directory - Demand10`,
       ...(isMSP && { 
         category: "Managed Service Providers",
         keywords: "managed service provider, MSP, IT managed services, cloud service provider, best managed service providers, top MSP, managed IT services, IT support services"
@@ -221,10 +203,10 @@ export default function CompanyListingPage({
   // Enhanced description
   const enhancedDescription = description || 
     (isMSP 
-      ? `Browse our comprehensive directory of managed service providers (MSPs) offering IT managed services, cloud computing solutions, and cybersecurity outsourcing. Find verified MSP companies with detailed profiles, contact information, and client reviews. Discover top-rated managed service providers near you with expertise in ${name.toLowerCase().includes("cloud") ? "cloud infrastructure management" : name.toLowerCase().includes("security") ? "cybersecurity solutions" : "comprehensive IT services"}.`
+      ? `Browse our comprehensive directory of managed service providers (MSPs) on Demand10 offering IT managed services, cloud computing solutions, and cybersecurity outsourcing. Find verified MSP companies with detailed profiles, contact information, and client reviews. Discover top-rated managed service providers near you with expertise in ${name.toLowerCase().includes("cloud") ? "cloud infrastructure management" : name.toLowerCase().includes("security") ? "cybersecurity solutions" : "comprehensive IT services"}.`
       : isMSSP
-      ? `Explore our curated list of managed security service providers (MSSPs) specializing in cybersecurity services, threat monitoring, and compliance management. Discover verified MSSP companies with security expertise and proven track records. Find top managed security service providers near you offering ${name.toLowerCase().includes("network") ? "network security services" : name.toLowerCase().includes("penetration") ? "penetration testing" : "advanced threat protection"}.`
-      : `Browse our comprehensive directory of ${name} companies. Find verified vendors with detailed profiles, contact information, and client reviews. Discover top-rated providers offering specialized services in ${name.toLowerCase().includes("data") ? "data management solutions" : name.toLowerCase().includes("cloud") ? "cloud computing services" : name.toLowerCase().includes("network") ? "network infrastructure" : "technology services"} near you.`);
+      ? `Explore our curated list of managed security service providers (MSSPs) on Demand10 specializing in cybersecurity services, threat monitoring, and compliance management. Discover verified MSSP companies with security expertise and proven track records. Find top managed security service providers near you offering ${name.toLowerCase().includes("network") ? "network security services" : name.toLowerCase().includes("penetration") ? "penetration testing" : "advanced threat protection"}.`
+      : `Browse our comprehensive directory of ${name} companies on Demand10. Find verified vendors with detailed profiles, contact information, and client reviews. Discover top-rated providers offering specialized services in ${name.toLowerCase().includes("data") ? "data management solutions" : name.toLowerCase().includes("cloud") ? "cloud computing services" : name.toLowerCase().includes("network") ? "network infrastructure" : "technology services"} near you.`);
 
   
 

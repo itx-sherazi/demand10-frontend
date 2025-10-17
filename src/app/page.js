@@ -8,9 +8,9 @@ import ReviewSection from "@/Componenets/Home/ClientReviews";
 import GartnerReviews from "@/Componenets/Home/GartnerReviews";
 
 export const metadata = {
-  title: "Top Managed Service Providers & Managed Security Service Providers 2025",
+  title: "Tp Managed Service Providers & Security Solutions 2025",
   description:
-    "Discover top managed service providers (MSPs) and managed security service providers (MSSPs) offering IT support, cybersecurity, and cloud solutions for your business. Find managed service provider examples, definitions, and leading managed security service providers near you.",
+    "Connect with premier Managed Service Providers and Security Service Providers delivering enterprise-grade IT infrastructure, cybersecurity, and cloud solutions. Access our verified database of industry leaders.",
   keywords: [
     "managed service provider",
     "managed security service provider",
@@ -25,33 +25,25 @@ export const metadata = {
     "company directory",
     "verified vendors"
   ],
-  metadataBase: new URL("https://intentwire.com"),
+  metadataBase: new URL("https://demand10.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Top Managed Service Providers & Managed Security Service Providers 2025",
+    title: "Top Managed Service Providers & Security Solutions 2025",
     description:
-      "Discover top managed service providers (MSPs) and managed security service providers (MSSPs) with IntentWire's 95% accurate B2B data. Connect with 10K+ suppliers in 500+ categories across the USA, EU & more. Find managed service provider examples, definitions, and leading managed security service providers near you.",
-    url: "https://intentwire.com/",
-    siteName: "IntentWire",
-    images: [
-      {
-        url: "https://intentwire.com/og-images/home.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Top Managed Service Providers & Managed Security Service Providers",
-      },
-    ],
+      "Access our curated database of top-tier Managed Service Providers and Security Service Providers with Demand10's verified B2B intelligence. Connect with 10K+ vetted suppliers across 500+ specialized categories.",
+    url: "https://demand10.com/",
+    siteName: "Demand10",
+  
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Top Managed Service Providers & Managed Security Service Providers 2025",
+    title: "Top Managed Service Providers & Security Solutions 2025",
     description:
-      "Discover top managed service providers (MSPs) and managed security service providers (MSSPs) offering IT support, cybersecurity, and cloud solutions for your business. Find managed service provider examples, definitions, and leading managed security service providers near you.",
-    images: ["https://intentwire.com/og-images/home.jpg"],
-    site: "@intentwire",
+      "Connect with premier Managed Service Providers and Security Service Providers delivering enterprise-grade IT infrastructure, cybersecurity, and cloud solutions. Access our verified database of industry leaders.",
+    site: "@demand10",
   },
 };
 
@@ -73,11 +65,12 @@ export default async function Home({ searchParams }) {
       ) : (
         <>
           <JobHeroSection homepageCompanies={homepageCompanies} />
-          <GartnerReviews/>
+          <SoftwareCategories categories={categories} />
           <ListProduct />
           
           
-          <SoftwareCategories categories={categories} />
+       
+             <GartnerReviews/>
           <ReviewSection/>
           <Testimonials />
         </>

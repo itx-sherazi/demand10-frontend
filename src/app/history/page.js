@@ -2,43 +2,35 @@ import React from "react";
 import { Target, TrendingUp, Heart, Shield, Lightbulb, Award, Globe, Calendar } from "lucide-react";
 
 export const metadata = {
-  title: "IntentWire History – Innovating Data Solutions Since 2021",
+  title: "Our Journey - Demand10",
   description:
-    "Discover how IntentWire has revolutionized data solutions since 2021, connecting businesses with verified suppliers across various categories.",
+    "Learn about Demand10's mission to connect businesses with trusted service providers through our innovative platform and commitment to excellence.",
   keywords: [
-    "IntentWire history",
-    "data solutions provider",
-    "business data connections",
-    "verified suppliers",
-    "IntentWire company history"
+    "Demand10 story",
+    "company background",
+    "business platform",
+    "service providers",
+    "platform development"
   ],
-  metadataBase: new URL("https://intentwire.com"),
+  metadataBase: new URL("https://demand10.com"),
   alternates: {
     canonical: "/history",
   },
   openGraph: {
-    title: "IntentWire History – Innovating Data Solutions Since 2021",
+    title: "Our Journey - Demand10",
     description:
-      "Discover how IntentWire has revolutionized data solutions since 2021, connecting businesses with verified suppliers across various categories.",
-    url: "https://intentwire.com/history",
-    siteName: "IntentWire",
-    images: [
-      {
-        url: "https://intentwire.com/og-images/history.jpg",
-        width: 1200,
-        height: 630,
-        alt: "IntentWire History – Innovating Data Solutions Since 2021",
-      },
-    ],
+      "Learn about Demand10's mission to connect businesses with trusted service providers through our innovative platform and commitment to excellence.",
+    url: "https://demand10.com/history",
+    siteName: "Demand10",
+   
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "IntentWire History – Innovating Data Solutions Since 2021",
+    title: "Our Journey - Demand10",
     description:
-      "Discover how IntentWire has revolutionized data solutions since 2021, connecting businesses with verified suppliers across various categories.",
-    images: ["https://intentwire.com/og-images/history.jpg"],
-    site: "@intentwire",
+      "Learn about Demand10's mission to connect businesses with trusted service providers through our innovative platform and commitment to excellence.",
+    site: "@demand10",
   },
 };
 
@@ -47,26 +39,26 @@ const milestones = [
   {
     year: "2021",
     icon: <Calendar className="w-8 h-8" />,
-    title: "Foundation Laid",
-    description: "Launched our suite of Managed IT Services, including network monitoring, data backup, and cloud solutions."
+    title: "Platform Foundation",
+    description: "Established our digital platform with a focus on creating meaningful connections between businesses and qualified service professionals."
   },
   {
     year: "2022",
     icon: <Shield className="w-8 h-8" />,
-    title: "Security Expansion",
-    description: "Expanded our offerings to include Managed Security Services, providing 24/7 threat monitoring and incident response."
+    title: "Trust Framework",
+    description: "Implemented comprehensive verification processes to ensure quality and reliability of all listed service providers."
   },
   {
     year: "2023",
     icon: <Globe className="w-8 h-8" />,
-    title: "Global Presence",
-    description: "Established a global presence, serving clients in over 10 countries across USA, Europe, Australia, and Canada."
+    title: "Market Expansion",
+    description: "Extended our reach to serve diverse business needs across multiple regions and industry sectors."
   },
   {
     year: "2024",
     icon: <Award className="w-8 h-8" />,
-    title: "Industry Recognition",
-    description: "Recognized as a leading MSP and MSSP by industry analysts for our innovative approach and customer-centric solutions."
+    title: "Recognition Milestone",
+    description: "Acknowledged by industry partners for our innovative approach to business-service provider matchmaking."
   }
 ];
 
@@ -74,23 +66,23 @@ const milestones = [
 const coreValues = [
   {
     icon: <Heart className="w-10 h-10" />,
-    title: "Integrity",
-    description: "Upholding the highest standards of honesty and transparency in all our dealings."
+    title: "Authenticity",
+    description: "We maintain honest relationships and transparent communication with all our partners."
   },
   {
     icon: <Lightbulb className="w-10 h-10" />,
-    title: "Innovation",
-    description: "Continuously evolving our services to meet the dynamic needs of the digital landscape."
+    title: "Progress",
+    description: "We embrace change and continuously evolve to meet emerging business challenges."
   },
   {
     icon: <Target className="w-10 h-10" />,
-    title: "Accountability",
-    description: "Taking responsibility for delivering results that exceed client expectations."
+    title: "Quality",
+    description: "We uphold rigorous standards in every aspect of our platform and services."
   },
   {
     icon: <TrendingUp className="w-10 h-10" />,
-    title: "Customer-Centricity",
-    description: "Placing our clients at the heart of everything we do, ensuring their success is our success."
+    title: "Partnership",
+    description: "We believe in collaborative success and mutual growth with our community."
   }
 ];
 
@@ -100,68 +92,42 @@ const Page = () => {
       {/* Hero Section */}
       <section
         aria-label="Company Journey"
-        className="relative bg-gradient-to-r from-[#314158] to-[#253347] overflow-hidden min-h-[60vh] flex items-center"
+        className="relative bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] overflow-hidden min-h-[60vh] flex items-center"
       >
-        {/* Top Left Circles */}
-        <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 opacity-20">
-          <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
-          </svg>
-        </div>
-
-        {/* Bottom Right Circles */}
-        <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 opacity-20">
-          <svg width="600" height="600" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="300" cy="300" r="100" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="200" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="300" stroke="#8d9fbe" strokeWidth="1" />
-            <circle cx="300" cy="300" r="400" stroke="#8d9fbe" strokeWidth="1" />
-          </svg>
-        </div>
-       
         <div className="relative z-10 container mx-auto px-6 py-16">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Text Content */}
             <div className="text-center lg:text-left">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
-                Our <span className="text-blue-200">Journey</span>
+                Our <span className="text-blue-200">Path Forward</span>
               </h1>
               <div className="w-24 h-1 bg-blue-300 mx-auto lg:mx-0 rounded-full mb-6"></div>
               <p className="text-lg sm:text-xl text-blue-100 leading-relaxed mb-6">
-                From a small vision to a trusted name in B2B solutions — explore
-                how we built a legacy of innovation, trust, and impact.
+                Discover how we&apos;re building bridges between businesses and exceptional service providers through innovation and dedication.
               </p>
-              <button className="px-8 py-4 bg-white text-[#314158] font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                Read Our Full Story
+              <button className="px-8 py-4 bg-white text-[#265ba3] font-semibold rounded-lg hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                Discover Our Approach
               </button>
             </div>
             
-            {/* Right: Core Values */}
+            {/* Right: Core Values Preview */}
             <div className="space-y-5">
               {[
                 {
-                  title: "Mission",
+                  title: "Our Purpose",
                   icon: <Target className="w-6 h-6 text-white" />,
-                  text: "To empower businesses with practical, forward-thinking digital solutions.",
+                  text: "Creating valuable connections that drive business success and provider growth.",
                 },
                 {
-                  title: "Vision",
+                  title: "Our Direction",
                   icon: <TrendingUp className="w-6 h-6 text-white" />,
-                  text: "To be the most trusted partner for sustainable business growth.",
+                  text: "Building the most reliable network for business-service partnerships globally.",
                 },
                 {
-                  title: "Core Values",
+                  title: "Our Principles",
                   icon: <Heart className="w-6 h-6 text-white" />,
-                  text: "Integrity, innovation, and accountability in every project.",
-                },
-                {
-                  title: "Commitment",
-                  icon: <Shield className="w-6 h-6 text-white" />,
-                  text: "Delivering results with consistency, quality, and care.",
-                },
+                  text: "Authenticity, progress, quality, and partnership in every interaction.",
+                }
               ].map((item, i) => (
                 <div
                   key={i}
@@ -184,40 +150,31 @@ const Page = () => {
           </div>
         </div>
 
-        {/* Bottom Wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg
-            viewBox="0 0 1440 120"
-            className="w-full h-20 fill-current text-white"
-          >
-            <path d="M0,64L48,69.3C96,75,192,85,288,85.3C384,85,480,75,576,69.3C672,64,768,64,864,69.3C960,75,1056,85,1152,85.3C1248,85,1344,75,1392,69.3L1440,64L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
-          </svg>
-        </div>
       </section>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
         {/* Introduction */}
         <section className="mb-16 text-center">
-          <h2 className="text-3xl font-bold text-[#314158] mb-6">Our Journey: From Vision to Innovation</h2>
+          <h2 className="text-3xl font-bold text-[#265ba3] mb-6">Our Path: Building Meaningful Connections</h2>
           <div className="w-full mx-auto">
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              At IntentWire, our story is one of ambition, innovation, and a relentless pursuit of excellence. Established in 2021, we embarked on a mission to redefine the landscape of Managed Service Providers (MSPs) and Managed Security Service Providers (MSSPs), delivering cutting-edge IT solutions to businesses across the USA, Europe, Australia, and Canada.
+              At Demand10, our journey began with a clear objective: to develop a platform that simplifies the process of connecting businesses with qualified service providers. We recognized the challenges companies face when searching for reliable partners and set out to create a solution.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Our journey began with a clear vision: to empower organizations with comprehensive IT and cybersecurity solutions that drive efficiency, security, and growth. From our humble beginnings, weve rapidly evolved into a trusted partner for enterprises seeking reliable and scalable managed services.
+              Today, we serve as a trusted intermediary for organizations seeking professional services across various sectors. Our commitment to quality, verification, and user experience has made us a preferred choice for businesses looking to establish valuable partnerships.
             </p>
           </div>
         </section>
 
         {/* Milestones Section */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-[#314158] mb-2 text-center">Milestones of Excellence</h2>
-          <div className="w-20 h-1 bg-[#314158] mx-auto rounded-full mb-10"></div>
+          <h2 className="text-3xl font-bold text-[#265ba3] mb-2 text-center">Key Moments in Our Development</h2>
+          <div className="w-20 h-1 bg-[#265ba3] mx-auto rounded-full mb-10"></div>
           
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[#314158]/20 hidden md:block"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[#265ba3]/20 hidden md:block"></div>
             
             <div className="space-y-12 md:space-y-0">
               {milestones.map((milestone, index) => (
@@ -227,14 +184,14 @@ const Page = () => {
                 >
                   {/* Year marker */}
                   <div className="md:w-1/2 flex justify-center md:justify-end md:pr-12 mb-4 md:mb-0">
-                    <div className="bg-[#314158] text-white font-bold text-xl py-2 px-6 rounded-lg shadow-md">
+                    <div className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] text-white font-bold text-xl py-2 px-6 rounded-lg shadow-md">
                       {milestone.year}
                     </div>
                   </div>
                   
                   {/* Center dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-white border-4 border-[#314158] rounded-full flex items-center justify-center z-10 hidden md:flex">
-                    <div className="text-[#314158]">
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-white border-4 border-[#265ba3] rounded-full flex items-center justify-center z-10 hidden md:flex">
+                    <div className="text-[#265ba3]">
                       {milestone.icon}
                     </div>
                   </div>
@@ -242,7 +199,7 @@ const Page = () => {
                   {/* Content */}
                   <div className="md:w-1/2 md:pl-12">
                     <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300">
-                      <h3 className="text-xl font-semibold text-[#314158] mb-2">{milestone.title}</h3>
+                      <h3 className="text-xl font-semibold text-[#265ba3] mb-2">{milestone.title}</h3>
                       <p className="text-gray-700">{milestone.description}</p>
                     </div>
                   </div>
@@ -254,18 +211,18 @@ const Page = () => {
 
         {/* Core Values Section */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-[#314158] mb-2 text-center">Core Values That Drive Us</h2>
-          <div className="w-20 h-1 bg-[#314158] mx-auto rounded-full mb-10"></div>
+          <h2 className="text-3xl font-bold text-[#265ba3] mb-2 text-center">Our Guiding Principles</h2>
+          <div className="w-20 h-1 bg-[#265ba3] mx-auto rounded-full mb-10"></div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {coreValues.map((value, index) => (
               <div key={index} className="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-all duration-300 text-center">
-                <div className="bg-[#314158]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <div className="text-[#314158]">
+                <div className="bg-[#265ba3]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="text-[#265ba3]">
                     {value.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-[#314158] mb-2">{value.title}</h3>
+                <h3 className="text-xl font-semibold text-[#265ba3] mb-2">{value.title}</h3>
                 <p className="text-gray-700">{value.description}</p>
               </div>
             ))}
@@ -273,15 +230,18 @@ const Page = () => {
         </section>
 
         {/* Looking Ahead Section */}
-        <section className="bg-blue-50 rounded-xl p-8 border border-blue-100">
-          <h2 className="text-3xl font-bold text-[#314158] mb-6 text-center">Looking Ahead</h2>
+        <section className="bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] rounded-xl p-8 text-white">
+          <h2 className="text-3xl font-bold mb-6 text-center">Our Vision for Tomorrow</h2>
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              As we reflect on our achievements, we remain focused on the future. Our commitment to delivering unparalleled Managed IT and Security Services propels us toward new horizons. We aim to set new industry standards, leveraging emerging technologies to provide innovative solutions that empower businesses worldwide.
+            <p className="text-lg text-blue-100 leading-relaxed mb-6">
+              As we move forward, we remain focused on enhancing our platform capabilities and expanding our network of trusted providers. Our goal is to become the premier destination for businesses seeking reliable professional services.
+            </p>
+            <p className="text-lg text-blue-100 leading-relaxed mb-6">
+              We will continue to invest in technology, verification systems, and user experience improvements to ensure that every interaction on Demand10 creates value for both businesses and service providers.
             </p>
             <div className="mt-8">
-              <button className="px-8 py-3 bg-[#314158] text-white font-medium rounded-lg hover:bg-[#253347] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                Join Our Journey
+              <button className="px-8 py-3 bg-white text-[#265ba3] font-medium rounded-lg hover:bg-blue-50 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                Join Our Growing Network
               </button>
             </div>
           </div>

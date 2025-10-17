@@ -1,58 +1,78 @@
 import { fetchCategories } from "@/services/api";
 
-export const dynamic = "force-dynamic"; // ✅ This allows dynamic fetching during build/runtime
+export const dynamic = "force-dynamic";
 
-export async function GET() {
-  const baseUrl = "https://intentwire.com";
-  
-  // Validate date before using toISOString() to prevent 'Invalid time value' errors
-  let currentDate;
+// Helper function to format dates consistently for sitemaps
+function formatSitemapDate(date) {
   try {
-    const now = new Date();
-    if (isNaN(now.getTime())) {
+    // Handle various date input formats
+    const dateObj = new Date(date);
+    if (isNaN(dateObj.getTime())) {
       throw new Error('Invalid date');
     }
-    currentDate = now.toISOString();
+    return dateObj.toISOString();
   } catch (error) {
-    console.error('❌ Error creating current date for sitemap:', error);
-    currentDate = new Date().toISOString(); // Fallback
+    console.error('❌ Error formatting date for sitemap:', error);
+    // Fallback to current date
+    return new Date().toISOString();
   }
+}
+
+export async function GET() {
+  const baseUrl = "https://demand10.com";
+  
+  // Use consistent date formatting
+  const currentDate = formatSitemapDate(new Date());
 
   let categories = [];
   try {
     categories = await fetchCategories();
+    
   } catch (err) {
-    console.error("❌ Error fetching categories", err);
+    console.error("❌ Error fetching categories for sitemap:", err);
+    // Continue with empty array to avoid breaking the sitemap
   }
 
+  // Create proper sitemap index
   let sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   sitemapIndex += `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
-  // Update sitemap links to use new SEO-friendly URLs
+  // Add subcategory sitemaps
+  let subcategoryCount = 0;
   for (const category of categories) {
     if (!category.subcategories) continue;
     for (const sub of category.subcategories) {
-      sitemapIndex += `
-        <sitemap>
-          <loc>${baseUrl}/sitemaps/subcategory/${sub.slug}</loc>
-          <lastmod>${currentDate}</lastmod>
-        </sitemap>
-      `;
+      subcategoryCount++;
+      sitemapIndex += `  <sitemap>\n`;
+      sitemapIndex += `    <loc>${baseUrl}/sitemaps/subcategory/${sub.slug}</loc>\n`;
+      sitemapIndex += `    <lastmod>${currentDate}</lastmod>\n`;
+      sitemapIndex += `  </sitemap>\n`;
     }
   }
 
-  sitemapIndex += `
-    <sitemap><loc>${baseUrl}/sitemaps/blog-sitemap</loc><lastmod>${currentDate}</lastmod></sitemap>
-    <sitemap><loc>${baseUrl}/sitemaps/static-sitemap</loc><lastmod>${currentDate}</lastmod></sitemap>
-    <sitemap><loc>${baseUrl}/sitemaps/solutions-sitemap</loc><lastmod>${currentDate}</lastmod></sitemap>
-  `;
+  // Add other sitemaps
+  const otherSitemaps = [
+    'blog-sitemap',
+    'static-sitemap',
+    'solutions-sitemap',
+    'city-msp-sitemap'
+  ];
+  
+  for (const sitemapName of otherSitemaps) {
+    sitemapIndex += `  <sitemap>\n`;
+    sitemapIndex += `    <loc>${baseUrl}/sitemaps/${sitemapName}</loc>\n`;
+    sitemapIndex += `    <lastmod>${currentDate}</lastmod>\n`;
+    sitemapIndex += `  </sitemap>\n`;
+  }
 
   sitemapIndex += `</sitemapindex>`;
 
+
   return new Response(sitemapIndex, {
+    status: 200,
     headers: { 
       "Content-Type": "application/xml",
-      "Cache-Control": "public, max-age=3600" // Cache for 1 hour
+      "Cache-Control": "public, max-age=3600"
     },
   });
 }

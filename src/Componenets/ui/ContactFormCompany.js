@@ -183,10 +183,10 @@ const ContactFormCompany = ({ subCategory }) => {
       </p>
       <p className="text-sm text-gray-600 mb-4">
         You’ve shown interest in: <strong>{subCategory}</strong><br />
-        We consider you a <span className="text-emerald-600 font-semibold">trusted lead</span> for this category.
+        We consider you a <span className="text-[#1a365d] font-semibold">trusted lead</span> for this category.
       </p>
       <button
-        className="mt-2 bg-[#4ecfc5] text-white px-6 py-2 cursor-pointer rounded-xl hover:bg-[#3dbcb3] transition"
+        className="mt-2 bg-[#1a365d] text-white px-6 py-2 cursor-pointer rounded-xl hover:bg-[#3dbcb3] transition"
         onClick={() => setShowPopup(false)}
       >
         Got it!

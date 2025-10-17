@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const truncateText = (text, maxLength = 150) => {
-  if (!text) return "No description available";
+  if (!text) return "No content available";
   if (text.length <= maxLength) return text;
   return text.substring(0, maxLength) + "...";
 };
@@ -44,17 +44,17 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
       "@type": "Blog",
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": "https://intentwire.com/blog",
+        "@id": "https://demand10.com/blog",
       },
-      headline: "B2B Insights Blog - Expert Strategies for Growth",
+      headline: "Demand10 Insights - Expert Strategies for Business Growth",
       description:
-        "Actionable strategies, expert analysis, and industry updates to help B2B businesses scale faster and smarter.",
+        "Actionable strategies, expert analysis, and industry updates to help businesses scale faster and smarter with top MSP and MSSP solutions.",
       publisher: {
         "@type": "Organization",
-        name: "IntentWire",
+        name: "Demand10",
         logo: {
           "@type": "ImageObject",
-          url: "https://intentwire.com/images/logo.png",
+          url: "https://demand10.com/images/logo.png",
         },
       },
       blogPost: articles.slice(0, 10).map((article) => {
@@ -161,7 +161,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
           {currentPage > 1 && (
             <Link
               href={`/blog?page=${currentPage - 1}`}
-              className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
             >
               Previous
             </Link>
@@ -183,9 +183,9 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
               <Link
                 key={pageNum}
                 href={`/blog?page=${pageNum}`}
-                className={`px-4 py-2 rounded-md ${
+                className={`px-4 py-2 rounded-lg ${
                   pageNum === currentPage
-                    ? "bg-[#314158] text-white"
+                    ? "bg-gradient-to-r from-[#265ba3] to-blue-700 text-white"
                     : "border border-gray-300 hover:bg-gray-50"
                 }`}
               >
@@ -197,7 +197,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
           {currentPage < totalPages && (
             <Link
               href={`/blog?page=${currentPage + 1}`}
-              className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
             >
               Next
             </Link>
@@ -283,29 +283,29 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
           {/* Heading */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
             Discover Insights That{" "}
-            <span className="text-white/90">Drive Growth</span>
+            <span className="text-blue-200">Drive Business Growth</span>
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8">
+          <p className="text-lg sm:text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-8">
             Actionable strategies, expert analysis, and industry updates to help
-            B2B businesses scale faster and smarter.
+            businesses scale faster and smarter with top MSP and MSSP solutions.
           </p>
 
           {/* Call to Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
             <a
               href="#blog-posts"
-              className="px-8 py-4 bg-[#4897de]  text-white font-semibold rounded-lg  transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
+              className="px-8 py-4 bg-[#265ba3] text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
             >
               Explore Latest Articles
             </a>
-            <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-[#314158] transition-all duration-300">
+            <button className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-lg hover:bg-white/20 transition-all duration-300">
               Join Our Newsletter
             </button>
           </div>
 
           {/* Extra Tagline */}
-          <div className="text-white/80 text-sm sm:text-base">
-            Trusted by B2B professionals across industries — no fluff, just
+          <div className="text-blue-100 text-sm sm:text-base">
+            Trusted by professionals across industries — no fluff, just
             facts.
           </div>
         </div>
@@ -314,7 +314,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
         
       </header>
 
-      <main className="min-h-screen bg-gray-50 py-8">
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left Side - Scrollable Articles */}
@@ -333,13 +333,13 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                     <div className="text-gray-400 text-6xl mb-4">📝</div>
                     <p className="text-gray-600 text-lg">
                       {searchQuery
-                        ? "No blogs found matching your search."
-                        : "No blogs available."}
+                        ? "No articles found matching your search."
+                        : "No articles available."}
                     </p>
                     {searchQuery && (
                       <button
                         onClick={() => setSearchQuery("")}
-                        className="mt-4 px-6 py-2 bg-[#314158] text-white rounded-lg hover:bg-[#253347]"
+                        className="mt-4 px-6 py-2 bg-gradient-to-r from-[#265ba3] to-blue-700 text-white rounded-lg hover:from-[#1e4a86] hover:to-blue-800"
                       >
                         Clear Search
                       </button>
@@ -354,7 +354,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                   {filteredArticles.map((article, index) => (
                     <article
                       key={article._id || index}
-                      className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200"
+                      className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 group"
                       itemScope
                       itemType="https://schema.org/BlogPosting"
                     >
@@ -380,13 +380,13 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                           <div>
                             <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-3">
                               <div className="flex items-center">
-                                <User className="w-4 h-4 mr-1 text-[#314158]" />
+                                <User className="w-4 h-4 mr-1 text-[#265ba3]" />
                                 <span className="mr-2" itemProp="author">
                                   {article.author || "Admin"}
                                 </span>
                               </div>
                               <div className="flex items-center">
-                                <Calendar className="w-4 h-4 mr-1 text-[#314158]" />
+                                <Calendar className="w-4 h-4 mr-1 text-[#265ba3]" />
                                 <time
                                   dateTime={
                                     article.date || article.createdAt
@@ -399,19 +399,19 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                                 </time>
                               </div>
                               <div className="flex items-center">
-                                <Clock className="w-4 h-4 mr-1 text-[#4897de]" />
+                                <Clock className="w-4 h-4 mr-1 text-[#265ba3]" />
                                 <span>5 min read</span>
                               </div>
                             </div>
                             <h3
-                              className="text-xl font-bold text-gray-900 mb-3 hover:text-[#314158] cursor-pointer"
+                              className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#265ba3] transition-colors cursor-pointer"
                               itemProp="headline"
                             >
                               {article.title || "Untitled"}
                             </h3>
                             <Link href={`/insights/${article.slug}`}>
                               <p
-                                className="text-gray-600 text-md space-y-3 line-clamp-3 hover:text-[#4897de]"
+                                className="text-gray-600 text-md space-y-3 line-clamp-3 group-hover:text-[#265ba3] transition-colors"
                                 itemProp="description"
                               >
                                 {article.shortDescription ||
@@ -428,15 +428,15 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                           </div>
                           <div className="mt-4 flex flex-wrap items-center justify-between">
                             <div className="flex items-center">
-                              <Tag className="w-4 h-4 mr-1 text-[#314158]" />
+                              <Tag className="w-4 h-4 mr-1 text-[#265ba3]" />
                               <span className="text-sm text-gray-500">Technology</span>
                             </div>
                             <Link
                               href={`/insights/${article.slug}`}
                               itemProp="url"
                             >
-                              <button className="flex items-center cursor-pointer text-[#314158]  font-medium text-sm">
-                                Read More <ArrowRight className="w-4 h-4 ml-1" />
+                              <button className="flex items-center cursor-pointer text-[#265ba3] font-medium text-sm hover:underline">
+                                Read More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                               </button>
                             </Link>
                           </div>
@@ -454,21 +454,21 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
               <div className="sticky top-8 space-y-6">
                 {/* Search Section */}
                 <section aria-labelledby="search-section">
-                  <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+                  <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
                     <h3
                       id="search-section"
                       className="text-lg font-semibold text-gray-900 mb-4 flex items-center"
                     >
-                      <Search className="w-5 h-5 mr-2 text-[#314158]" />
+                      <Search className="w-5 h-5 mr-2 text-[#265ba3]" />
                       Search Articles
                     </h3>
                     <div className="relative">
                       <input
                         type="text"
-                        placeholder="Search blogs by title..."
+                        placeholder="Search articles by title..."
                         value={searchQuery}
                         onChange={handleSearchChange}
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#314158] focus:border-transparent"
+                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#265ba3] focus:border-transparent"
                         aria-label="Search blog articles"
                       />
                       <Search className="absolute left-3 top-3.5 w-5 h-5 text-gray-400" />
@@ -484,12 +484,12 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
 
                 {/* Latest Posts Section */}
                 <section aria-labelledby="latest-posts">
-                  <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+                  <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-200">
                     <h3
                       id="latest-posts"
                       className="text-lg font-semibold text-gray-900 mb-4 flex items-center"
                     >
-                      <Clock className="w-5 h-5 mr-2 text-[#314158]" />
+                      <Clock className="w-5 h-5 mr-2 text-[#265ba3]" />
                       Latest Posts
                     </h3>
                     {!Array.isArray(latestPosts) || latestPosts.length === 0 ? (
@@ -522,7 +522,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                               />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-center text-xs text-[#314158] mb-1">
+                              <div className="flex items-center text-xs text-[#265ba3] mb-1">
                                 <Calendar className="w-3 h-3 mr-1" />
                                 <time
                                   dateTime={post.date || post.createdAt}
@@ -536,7 +536,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                                 itemProp="url"
                               >
                                 <h4
-                                  className="text-sm font-medium text-gray-900 leading-tight hover:underline hover:text-[#314158] cursor-pointer"
+                                  className="text-sm font-medium text-gray-900 leading-tight hover:underline hover:text-[#265ba3] cursor-pointer"
                                   itemProp="headline"
                                 >
                                   {post.title || "Untitled"}
@@ -550,28 +550,7 @@ const BlogDetailPage = ({ blogData, latestBlog, currentPage = 1 }) => {
                   </div>
                 </section>
 
-                {/* Categories Section */}
-                <section aria-labelledby="categories">
-                  <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200">
-                    <h3
-                      id="categories"
-                      className="text-lg font-semibold text-gray-900 mb-4 flex items-center"
-                    >
-                      <Tag className="w-5 h-5 mr-2 text-[#314158]" />
-                      Categories
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {['Technology', 'Security', 'Cloud', 'MSP', 'MSSP', 'IT Management'].map((category, index) => (
-                        <button
-                          key={index}
-                          className="px-3 py-1.5 text-sm bg-gray-100 hover:bg-[#314158] hover:text-white rounded-full transition-colors"
-                        >
-                          {category}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </section>
+              
               </div>
             </aside>
           </div>

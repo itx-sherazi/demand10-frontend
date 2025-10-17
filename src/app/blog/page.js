@@ -1,13 +1,11 @@
-
-
 import BlogDetailPage from "@/Componenets/Blog/Blog";
 import { fetchBlogs, fetchLatestBlogs } from "@/services/api";
 
 
 export const metadata = {
-  title: "Insights on MSPs, MSSPs & IT Solutions | IntentWire Blog",
+  title: "Insights on MSPs, MSSPs & IT Solutions | Demand10 Blog",
   description:
-    "Explore expert articles on Managed Service Providers, cybersecurity, IT support, and more at IntentWire's blog. Stay updated with the latest industry trends.",
+    "Explore expert articles on Managed Service Providers, cybersecurity, IT support, and more at Demand10's blog. Stay updated with the latest industry trends.",
   keywords: [
     "Managed Service Providers",
     "MSSPs",
@@ -18,33 +16,25 @@ export const metadata = {
     "network administration",
     "IT consulting"
   ],
-  metadataBase: new URL("https://intentwire.com"),
+  metadataBase: new URL("https://demand10.com"),
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
-    title: "Insights on MSPs, MSSPs & IT Solutions | IntentWire Blog",
+    title: "Insights on MSPs, MSSPs & IT Solutions | Demand10 Blog",
     description:
-      "Explore expert articles on Managed Service Providers, cybersecurity, IT support, and more at IntentWire's blog. Stay updated with the latest industry trends.",
-    url: "https://intentwire.com/blog",
-    siteName: "IntentWire Blog",
-    images: [
-      {
-        url: "https://intentwire.com/og-images/blog.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Insights on MSPs, MSSPs & IT Solutions | IntentWire Blog",
-      },
-    ],
+      "Explore expert articles on Managed Service Providers, cybersecurity, IT support, and more at Demand10's blog. Stay updated with the latest industry trends.",
+    url: "https://demand10.com/blog",
+    siteName: "Demand10 Blog",
+    
     type: "article",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Insights on MSPs, MSSPs & IT Solutions | IntentWire Blog",
+    title: "Insights on MSPs, MSSPs & IT Solutions | Demand10 Blog",
     description:
-      "Explore expert articles on Managed Service Providers, cybersecurity, IT support, and more at IntentWire's blog. Stay updated with the latest industry trends.",
-    images: ["https://intentwire.com/og-images/blog.jpg"],
-    site: "@intentwire",
+      "Explore expert articles on Managed Service Providers, cybersecurity, IT support, and more at Demand10's blog. Stay updated with the latest industry trends.",
+    site: "@demand10",
   },
 };
 export default async function Page({ searchParams }) {

@@ -1,18 +1,17 @@
-import Script from 'next/script';
 export const dynamic = 'force-dynamic';
 
 // Global metadata fallback
 export const metadata = {
-  metadataBase: new URL('https://intentwire.com'),
+  metadataBase: new URL('https://demand10.com'),
   title: {
-    default: 'IntentWire - Top MSP & MSSP Database Platform',
-    template: '%s | IntentWire'
+    default: 'Demand10 - Top MSP & MSSP Database Platform',
+    template: '%s | Demand10'
   },
-  description: 'Discover top Managed Service Providers & MSSPs with IntentWire\'s 95% accurate B2B data. Connect with 10K+ suppliers in 500+ categories.',
-  keywords: ['MSP', 'MSSP', 'Managed Service Provider', 'B2B data', 'IntentWire', 'IT services'],
-  authors: [{ name: 'IntentWire Team' }],
-  creator: 'IntentWire',
-  publisher: 'IntentWire',
+  description: 'Discover top Managed Service Providers & MSSPs with Demand10\'s 95% accurate B2B data. Connect with 10K+ suppliers in 500+ categories.',
+  keywords: ['MSP', 'MSSP', 'Managed Service Provider', 'B2B data', 'Demand10', 'IT services'],
+  authors: [{ name: 'Demand10 Team' }],
+  creator: 'Demand10',
+  publisher: 'Demand10',
   robots: {
     index: true,
     follow: true,
@@ -27,25 +26,17 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://intentwire.com',
-    siteName: 'IntentWire',
-    title: 'IntentWire - Top MSP & MSSP Database Platform',
-    description: 'Discover top Managed Service Providers & MSSPs with IntentWire\'s 95% accurate B2B data.',
-    images: [
-      {
-        url: 'https://intentwire.com/og-images/default.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'IntentWire - MSP & MSSP Database Platform',
-      },
-    ],
+    url: 'https://demand10.com',
+    siteName: 'Demand10',
+    title: 'Demand10 - Top MSP & MSSP Database Platform',
+    description: 'Discover top Managed Service Providers & MSSPs with Demand10\'s 95% accurate B2B data.',
+   
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'IntentWire - Top MSP & MSSP Database Platform',
-    description: 'Discover top Managed Service Providers & MSSPs with IntentWire\'s 95% accurate B2B data.',
-    site: '@intentwire',
-    images: ['https://intentwire.com/og-images/default.jpg'],
+    title: 'Demand10 - Top MSP & MSSP Database Platform',
+    description: 'Discover top Managed Service Providers & MSSPs with Demand10\'s 95% accurate B2B data.',
+    site: '@demand10',
   },
 };
 
@@ -64,15 +55,14 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"]
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "IntentWire",
-  "url": "https://intentwire.com",
-  "description": "Discover top Managed Service Providers & MSSPs with IntentWire's 95% accurate B2B data. Connect with 10K+ suppliers in 500+ categories.",
+  "name": "Demand10",
+  "url": "https://demand10.com",
+  "description": "Discover top Managed Service Providers & MSSPs with Demand10's 95% accurate B2B data. Connect with 10K+ suppliers in 500+ categories.",
   "publisher": {
     "@type": "Organization",
-    "name": "IntentWire",
+    "name": "Demand10",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://intentwire.com/og-images/default.jpg"
     }
   }
 };
@@ -90,23 +80,7 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* Google Analytics (GA4) */}
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-YPP2QG998M"
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-YPP2QG998M');
-            `,
-          }}
-        />
+      
         <NextTopLoader
          color="#1a365d"
           height={3}
