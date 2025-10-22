@@ -22,6 +22,7 @@ export default function CompanyListingPage({
   pagination = {},
   sponsorCompanies = [],
   relatedSubcategories = [],
+   content = "" // Add content prop
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -465,6 +466,27 @@ export default function CompanyListingPage({
             </div>
           </aside>
         </div>
+         
+        {/* Subcategory Content Section - Added below company listings */}
+        {content && typeof content === 'string' && content.trim().length > 0 && 
+         !['<p><br></p>', '<p></p>', '<br>'].includes(content.trim()) && (
+          <section 
+            aria-labelledby="subcategory-content-heading"
+            className="bg-white rounded-xl shadow-sm border border-gray-200 mt-8"
+          >
+            <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
+              <h2 id="subcategory-content-heading" className="text-xl font-bold text-gray-800">
+                About {name || "Category"}
+              </h2>
+            </div>
+            <div className="p-6">
+              <div 
+                className="prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: content.trim() }} 
+              />
+            </div>
+          </section>
+        )}
       </main>
       
       {/* Related Subcategories Section */}

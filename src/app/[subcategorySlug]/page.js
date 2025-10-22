@@ -74,6 +74,38 @@ export async function generateMetadata({ params }) {
   }
 }
 
+
+// Add JSON-LD structured data for subcategories
+export async function generateSubcategoryJsonLd({ params }) {
+  const { subcategorySlug } = await params;
+  
+  try {
+    const companiesData = await fetchCompanies(subcategorySlug);
+    
+    if (!companiesData || !companiesData.name) return null;
+    
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": companiesData.name,
+      "description": companiesData.description || "",
+      "url": `https://demand10.com/${subcategorySlug}`,
+      "publisher": {
+        "@type": "Organization",
+        "name": "Demand10"
+      }
+    };
+    
+    return jsonLd;
+  } catch (error) {
+    console.error("JSON-LD generation error:", error);
+    return null;
+  }
+}
+
+
+
+
 export default async function Page({ params, searchParams }) {
   const { subcategorySlug } = await params;
   const resolvedSearchParams = await searchParams;
@@ -90,8 +122,25 @@ export default async function Page({ params, searchParams }) {
     const subcategoryDetails = await fetchSubcategoryDetails(subcategorySlug) || {};
     // Fetch related subcategories on the server side
     const relatedSubcategories = await fetchRelatedSubcategories(subcategorySlug, 5) || [];
+
+    // Generate JSON-LD
+    const jsonLd = await generateSubcategoryJsonLd({ params: { subcategorySlug } });
+    
+    // Extract content from the correct path in the response
+    const content = subcategoryDetails.ok && subcategoryDetails.content
+      ? subcategoryDetails.content || ""
+      : "";
+      // Debug log to see what content we're getting
+    console.log("Subcategory content for", subcategorySlug, ":", content ? content.substring(0, 100) + "..." : "No content");
     return (
       <main>
+        {/* JSON-LD structured data */}
+        {jsonLd && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+        )}
         <Companies 
           companies={companiesData.companies || []} 
           name={companiesData.name || "Unknown Category"} 
@@ -102,6 +151,7 @@ export default async function Page({ params, searchParams }) {
           pagination={companiesData.pagination || {}}
           sponsorCompanies={subcategoryDetails.sponsorCompanies || []}
           relatedSubcategories={relatedSubcategories}
+           content={content}
         />
       </main>
     );

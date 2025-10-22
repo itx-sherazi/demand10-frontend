@@ -10,46 +10,14 @@ Disallow: /intent-admin/
 
 # Block access to user-specific pages
 Disallow: /user-dashboard/
-Disallow: /forgot-password/
-Disallow: /reset-password/
-Disallow: /verify-email/
 
-Disallow: /login/
-Disallow: /signup/
 
-# Block sorting parameters to prevent duplicate content
-Disallow: /*?*sort=
-Disallow: /*&sort=
 
-# Allow specific important paths that might have been blocked
-Allow: /blog/
-Allow: /insights/
-Allow: /solutions/
-Allow: /msp/
 
-# Crawl delay for SEO crawlers
-Crawl-delay: 10
+
 
 # Sitemap
 Sitemap: https://demand10.com/sitemap.xml
 
 # Host
 Host: https://demand10.com
-
-
-# Specific directives for major search engine crawlers
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 5
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 10
-
-User-agent: Slurp
-Allow: /
-Crawl-delay: 15
-
-User-agent: DuckDuckBot
-Allow: /
-Crawl-delay: 10

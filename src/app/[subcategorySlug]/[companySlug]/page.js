@@ -117,6 +117,10 @@ export async function generateMetadata({ params }) {
     alternates: {
       canonical: `https://demand10.com/${subcategorySlug}/${companySlug}`,
     },
+    robots: {
+      index: false,
+      follow: true,
+    },
     openGraph: {
       title,
       description,
