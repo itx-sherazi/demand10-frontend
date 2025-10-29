@@ -473,7 +473,7 @@ const Navbar = ({ categories = [] }) => {
                   </div>
                   <div className="flex items-center space-x-2 text-sm">
                     <Mail className="h-4 w-4 text-gray-600" />
-                    <span>Info@demand10.com</span>
+                    <span>support@demand10.com</span>
                   </div>
                 </div>
                 <div className="mt-4">

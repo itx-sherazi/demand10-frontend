@@ -282,7 +282,7 @@ const TermsOfUse = () => {
                   <li>Your physical or electronic signature</li>
                 </ul>
                 <p className="text-gray-600 mb-4 leading-relaxed">
-                  Send notifications to: info@demand10.com
+                  Send notifications to: support@demand10.com
                 </p>
               </section>
 
@@ -314,7 +314,7 @@ const TermsOfUse = () => {
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   If you have any questions about these Terms of Service, please contact us at:
                   <br />
-                  Email: info@demand10.com
+                  Email: support@demand10.com
                 </p>
               </section>
 

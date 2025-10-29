@@ -8,6 +8,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn, FaPhone, FaEnvelope, FaMapMarke
 const ContactPage = () => {
  const [fullName, setFullName] = useState("");
    const [email, setEmail] = useState("");
+   const [phone, setPhone] = useState("");
    const [message, setMessage] = useState("");
    const [isLoading, setIsLoading] = useState(false);
  
@@ -18,6 +19,7 @@ const ContactPage = () => {
      const data = {
        fullName,
        email,
+       phone,
        message,
      };
  
@@ -28,6 +30,7 @@ const ContactPage = () => {
          toast.success("Successfully submitted!");
          setFullName("");
          setEmail("");
+         setPhone("");
          setMessage("");
        } else {
          toast.error("Failed to submit form.");
@@ -45,9 +48,6 @@ const ContactPage = () => {
   {/* Hero Section */}
   <section className="relative bg-gradient-to-br from-[#265ba3] via-[#1e4a86] to-[#1a365d] overflow-hidden min-h-[70vh] flex items-center">
  
-    
-   
-    
     {/* Main Content */}
     <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="max-w-8xl mx-auto">
@@ -79,18 +79,13 @@ const ContactPage = () => {
               </button>
             </div>
           </div>
-          
-        
         </div>
       </div>
     </div>
-    
-    
   </section>
   
   {/* Contact Form Section */}
   <div className="min-h-screen bg-white">
-     
       {/* Contact Section */}
       <div className="bg-white py-16 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -120,7 +115,7 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-white text-lg mb-1">E-Mail</h3>
-                  <p className="text-white text-xl font-semibold">info@demand10.com</p>
+                  <p className="text-white text-xl font-semibold">support@demand10.com</p>
                 </div>
               </div>
 
@@ -197,15 +192,17 @@ const ContactPage = () => {
                 />
               </div>
 
-              {/* Company Name */}
+              {/* Phone Number */}
               <div>
                 <label className="block text-gray-700 text-sm font-medium mb-2 flex items-center">
-                  <Building className="w-4 h-4 mr-2 text-[#314158]" />
-                  Company Name
+                  <Phone className="w-4 h-4 mr-2 text-[#314158]" />
+                  Phone Number
                 </label>
                 <input
-                  type="text"
-                  placeholder="Enter your company name"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Enter your phone number"
                   className="w-full p-4 rounded-lg border border-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#314158] focus:border-transparent placeholder-gray-500"
                 />
               </div>

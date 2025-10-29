@@ -141,7 +141,7 @@ const PrivacyPolicy = () => {
                   </ol>
                   <div className="bg-[#f0f4f9] rounded-lg p-4 border border-[#314158]/20">
                     <p className="text-gray-600 leading-relaxed">
-                      Send copyright notifications to: <span className="font-medium text-[#314158]">info@demand10.com</span>.
+                      Send copyright notifications to: <span className="font-medium text-[#314158]">support@demand10.com</span>.
                     </p>
                   </div>
                 </section>
@@ -331,7 +331,7 @@ const PrivacyPolicy = () => {
                       If you have questions about this Privacy Policy or concerns about your privacy, please contact our Data Protection Officer:
                     </p>
                     <p className="text-gray-600 leading-relaxed">
-                      Email: <span className="font-medium text-[#314158]">info@demand10.com</span>
+                      Email: <span className="font-medium text-[#314158]">support@demand10.com</span>
                     </p>
                   </div>
                 </section>

@@ -64,7 +64,7 @@ const EndpointSecurityHero = ({ categoryName = "Endpoint Security", description,
                     </div>
                     <div>
                       <div className="text-blue-200 text-sm font-medium">Companies Listed</div>
-                      <div className="text-white font-bold text-2xl">{totalCompanies?.toLocaleString() || '1,000'}+</div>
+                      <div className="text-white font-bold text-2xl">{totalCompanies?.toLocaleString() || '1,000'}</div>
                     </div>
                   </div>
                 </div>
