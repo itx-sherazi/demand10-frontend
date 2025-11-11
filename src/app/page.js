@@ -8,7 +8,7 @@ import ReviewSection from "@/Componenets/Home/ClientReviews";
 import GartnerReviews from "@/Componenets/Home/GartnerReviews";
 
 export const metadata = {
-  title: "Tp Managed Service Providers & Security Solutions 2025",
+  title: "Top Managed Service Providers & Security Solutions 2025",
   description:
     "Connect with premier Managed Service Providers and Security Service Providers delivering enterprise-grade IT infrastructure, cybersecurity, and cloud solutions. Access our verified database of industry leaders.",
   keywords: [

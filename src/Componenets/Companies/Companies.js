@@ -3,7 +3,6 @@ import React, { useState, useMemo, useEffect, useRef } from "react";
 import {
   SearchIcon,
   BuildingIcon,
- 
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -411,7 +410,7 @@ export default function CompanyListingPage({
                 </h2>
                 <div className="space-y-6"> {/* Changed from grid to space-y-6 for single column */}
                   {filteredCompanies.map((company) => (
-                    <CompanyCard key={company._id} company={company} viewMode="list" />
+                    <CompanyCard key={company._id} company={company} subcategoryContext={{name, slug}} viewMode="list" />
                   ))}
                 </div>
               </section>

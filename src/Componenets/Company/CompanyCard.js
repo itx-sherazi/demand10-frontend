@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Users, Calendar, ExternalLink, Building2 } from 'lucide-react';
 
-const CompanyCard = ({ company }) => {
+const CompanyCard = ({ company, subcategoryContext }) => {
   // Function to get the full image URL
   const getFullImageUrl = (imagePath) => {
     // If it's already a full URL, return as is
@@ -57,6 +57,9 @@ const CompanyCard = ({ company }) => {
   const reviewCount = company?.totalReviews || 0;
   const imageUrl = getFullImageUrl(company?.image);
 
+  // Use subcategoryContext if provided, otherwise fallback to company's subcategory
+  const effectiveSubcategory = subcategoryContext || company?.subcategory;
+
   return (
     <article
       className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden group relative hover:border-[#1a365d]/30"
@@ -73,8 +76,8 @@ const CompanyCard = ({ company }) => {
           {/* Company Logo & Basic Info */}
           <div className="flex flex-col items-center md:items-start gap-4">
             <Link
-              href={company?.subcategory?.slug 
-                ? `/${company.subcategory.slug}/${company?.slug}` 
+              href={effectiveSubcategory?.slug 
+                ? `/${effectiveSubcategory.slug}/${company?.slug}` 
                 : `/company/${company?.slug || "company"}`
               }
               className="block"
@@ -106,7 +109,7 @@ const CompanyCard = ({ company }) => {
               <div className="flex items-center gap-2 mb-1">
                 <Building2 className="w-4 h-4 text-[#0249aa]" />
                 <span className="text-xs font-medium text-[#0249aa] uppercase tracking-wide">
-                  {company?.subcategory?.name || 'Company'}
+                  {effectiveSubcategory?.name || 'Company'}
                 </span>
               </div>
               
@@ -127,8 +130,8 @@ const CompanyCard = ({ company }) => {
           {/* Company Details */}
           <div className="flex-1">
             <Link
-              href={company?.subcategory?.slug 
-                ? `/${company.subcategory.slug}/${company?.slug}` 
+              href={effectiveSubcategory?.slug 
+                ? `/${effectiveSubcategory.slug}/${company?.slug}` 
                 : `/company/${company?.slug || "company"}`
               }
               target="_blank"
@@ -213,8 +216,8 @@ const CompanyCard = ({ company }) => {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 pt-4 mt-4 border-t border-gray-100">
           <Link
-            href={company?.subcategory?.slug 
-              ? `/${company.subcategory.slug}/${company?.slug}` 
+            href={effectiveSubcategory?.slug 
+              ? `/${effectiveSubcategory.slug}/${company?.slug}` 
               : `/company/${company?.slug || "company"}`
             }
             target="_blank"
