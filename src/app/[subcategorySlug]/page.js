@@ -14,28 +14,16 @@ export async function generateMetadata({ params }) {
       };
     }
     
-    const name = companiesData.name;
-    const category = companiesData.categoryName || "B2B Intelligence";
+    // Use meta title if available, otherwise fallback to default
+    const title = companiesData.metaTitle || `${companiesData.name} - ${companiesData.categoryName || "B2B Intelligence"}`;
     
-    // Simplified title (55 characters max)
-    let title = `${name} - ${category}`;
-    if (title.length > 55) {
-      title = title.slice(0, 52) + "...";
-    }
+    // Use the description field for meta description
+    const description = companiesData.description?.replace(/\n/g, " ") || `Explore verified ${companiesData.categoryName?.toLowerCase() || "B2B"} vendors in ${companiesData.name}. Find top companies and service providers.`;
     
-    // Simplified description (155 characters max)
-    let description = companiesData.description?.replace(/\n/g, " ") || "";
-    if (description.length === 0) {
-      description = `Explore verified ${category.toLowerCase()} vendors in ${name}. Find top companies and service providers.`;
-    }
-    if (description.length > 155) {
-      description = description.slice(0, 152) + "...";
-    }
-    
-    // Simplified keywords
-    const keywords = [
-      name,
-      category,
+    // Use meta keywords if available, otherwise fallback to default
+    let keywords = [
+      companiesData.name,
+      companiesData.categoryName || "B2B Intelligence",
       "managed security service provider",
       "B2B companies data",
       "company directory",
@@ -43,6 +31,13 @@ export async function generateMetadata({ params }) {
       "business directory"
     ];
     
+    // If metaKeywords exist, use them instead of defaults
+    if (companiesData.metaKeywords && Array.isArray(companiesData.metaKeywords) && companiesData.metaKeywords.length > 0) {
+      keywords = companiesData.metaKeywords;
+    }
+    
+   
+
     return {
       title,
       description,
@@ -84,6 +79,7 @@ export async function generateSubcategoryJsonLd({ params }) {
     
     if (!companiesData || !companiesData.name) return null;
     
+    // Base JSON-LD structure
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -95,6 +91,26 @@ export async function generateSubcategoryJsonLd({ params }) {
         "name": "Demand10"
       }
     };
+    
+    // Add FAQ schema if FAQs exist
+    if (companiesData.faqs && Array.isArray(companiesData.faqs) && companiesData.faqs.length > 0) {
+      // Filter out FAQs with missing question or answer
+      const validFaqs = companiesData.faqs.filter(faq => 
+        faq.question && faq.question.trim() !== '' && 
+        faq.answer && faq.answer.trim() !== ''
+      );
+      
+      if (validFaqs.length > 0) {
+        jsonLd.mainEntity = validFaqs.map((faq, index) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }));
+      }
+    }
     
     return jsonLd;
   } catch (error) {
@@ -130,8 +146,6 @@ export default async function Page({ params, searchParams }) {
     const content = subcategoryDetails.ok && subcategoryDetails.content
       ? subcategoryDetails.content || ""
       : "";
-      // Debug log to see what content we're getting
-    console.log("Subcategory content for", subcategorySlug, ":", content ? content.substring(0, 100) + "..." : "No content");
     return (
       <main>
         {/* JSON-LD structured data */}
@@ -151,7 +165,8 @@ export default async function Page({ params, searchParams }) {
           pagination={companiesData.pagination || {}}
           sponsorCompanies={subcategoryDetails.sponsorCompanies || []}
           relatedSubcategories={relatedSubcategories}
-           content={content}
+          content={content}
+          faqs={companiesData.faqs || []}
         />
       </main>
     );

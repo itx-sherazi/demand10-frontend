@@ -21,7 +21,8 @@ export default function CompanyListingPage({
   pagination = {},
   sponsorCompanies = [],
   relatedSubcategories = [],
-   content = "" // Add content prop
+  content = "", // Add content prop
+  faqs = [] // Add FAQs prop
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -30,6 +31,7 @@ export default function CompanyListingPage({
   const [locationInput, setLocationInput] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [openFAQIndex, setOpenFAQIndex] = useState(null); // Track which FAQ is open
   
   // Related subcategories state
   const [relatedSubcats, setRelatedSubcats] = useState(relatedSubcategories);
@@ -121,6 +123,10 @@ export default function CompanyListingPage({
     setIsLoading(false);
   }, [companies]);
 
+  const toggleFAQ = (index) => {
+    setOpenFAQIndex(openFAQIndex === index ? null : index);
+  };
+
   // Handle clicking outside to close suggestions
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -177,7 +183,8 @@ export default function CompanyListingPage({
       },
     }));
 
-    return {
+    // Base structured data
+    const baseData = {
       "@context": "https://schema.org",
       "@type": "ItemList",
       itemListElement: companiesData,
@@ -192,6 +199,28 @@ export default function CompanyListingPage({
         keywords: "managed security service provider, MSSP, cybersecurity services, security outsourcing, best managed security providers, top MSSP, SOC monitoring, penetration testing"
       })
     };
+
+    // Add FAQ schema if FAQs exist
+    if (faqs && Array.isArray(faqs) && faqs.length > 0) {
+      // Filter out FAQs with missing question or answer
+      const validFaqs = faqs.filter(faq => 
+        faq.question && faq.question.trim() !== '' && 
+        faq.answer && faq.answer.trim() !== ''
+      );
+      
+      if (validFaqs.length > 0) {
+        baseData.mainEntity = validFaqs.map((faq, index) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }));
+      }
+    }
+
+    return baseData;
   };
 
   const structuredData = generateStructuredData();
@@ -484,8 +513,53 @@ export default function CompanyListingPage({
                 dangerouslySetInnerHTML={{ __html: content.trim() }} 
               />
             </div>
+            
+            {/* FAQ Section - Integrated within content section */}
+            {faqs && Array.isArray(faqs) && faqs.length > 0 && (
+              <div className="px-6 pb-6">
+                <div className="border-t border-gray-200 pt-6 mt-6">
+                  <h3 className="text-lg font-bold text-gray-800 mb-4">Frequently Asked Questions</h3>
+                  <div className="space-y-4">
+                    {faqs.map((faq, index) => (
+                      <div key={index} className="border border-gray-200 rounded-lg bg-white shadow-sm">
+                        <div 
+                          className="flex justify-between items-center p-4 cursor-pointer hover:bg-gray-50 transition-colors"
+                          onClick={() => toggleFAQ(index)}
+                        >
+                          <div className="flex-1 flex items-center">
+                            <span className="text-blue-700 font-medium mr-2">Q{index + 1}:</span>
+                            <span className="font-medium text-gray-800">
+                              {faq.question}
+                            </span>
+                          </div>
+                          <div className="ml-2">
+                            <svg 
+                              className={`h-5 w-5 text-gray-500 transform transition-transform ${openFAQIndex === index ? 'rotate-180' : ''}`} 
+                              xmlns="http://www.w3.org/2000/svg" 
+                              viewBox="0 0 20 20" 
+                              fill="currentColor"
+                            >
+                              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                        </div>
+                        {openFAQIndex === index && (
+                          <div className="px-4 pb-4">
+                            <div className="border-t border-gray-200 pt-4">
+                              <p className="text-gray-700">{faq.answer}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
           </section>
         )}
+
+       
       </main>
       
       {/* Related Subcategories Section */}
