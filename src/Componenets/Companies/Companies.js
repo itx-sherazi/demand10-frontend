@@ -564,7 +564,7 @@ export default function CompanyListingPage({
       
       {/* Related Subcategories Section */}
       <div className="pb-12 p-6 bg-white border-t border-gray-200 w-full mx-auto">
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">Explore Related {name} Services</h3>
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">Explore Related {name} </h3>
         <p className="text-gray-700 mb-6 max-w-3xl">
           Looking for other technology solutions in {name.toLowerCase().includes("managed service") || name.toLowerCase().includes("msp") ? "managed IT services" : name.toLowerCase().includes("managed security") || name.toLowerCase().includes("mssp") ? "cybersecurity services" : name.toLowerCase().includes("cloud") ? "cloud computing" : name.toLowerCase().includes("network") ? "network security" : "IT services"}? Browse our comprehensive directory of specialized providers and solutions.
         </p>

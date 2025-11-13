@@ -36,8 +36,7 @@ export async function generateMetadata({ params }) {
       keywords = companiesData.metaKeywords;
     }
     
-   
-
+    
     return {
       title,
       description,
@@ -79,7 +78,6 @@ export async function generateSubcategoryJsonLd({ params }) {
     
     if (!companiesData || !companiesData.name) return null;
     
-    // Base JSON-LD structure
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -91,26 +89,6 @@ export async function generateSubcategoryJsonLd({ params }) {
         "name": "Demand10"
       }
     };
-    
-    // Add FAQ schema if FAQs exist
-    if (companiesData.faqs && Array.isArray(companiesData.faqs) && companiesData.faqs.length > 0) {
-      // Filter out FAQs with missing question or answer
-      const validFaqs = companiesData.faqs.filter(faq => 
-        faq.question && faq.question.trim() !== '' && 
-        faq.answer && faq.answer.trim() !== ''
-      );
-      
-      if (validFaqs.length > 0) {
-        jsonLd.mainEntity = validFaqs.map((faq, index) => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer
-          }
-        }));
-      }
-    }
     
     return jsonLd;
   } catch (error) {
