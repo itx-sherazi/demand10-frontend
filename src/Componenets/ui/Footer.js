@@ -68,6 +68,18 @@ const Footer = () => {
                   Data Backup & Recovery
                 </Link>
               </li>
+               <li>
+                <Link href="/staffing-industry" className="text-gray-600 hover:text-[#4897de] transition-colors duration-300 text-base flex items-start group">
+                  <span className="text-[#4897de] mr-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+               Staffing Industry Intelligence
+                </Link>
+              </li>
+               <li>
+                <Link href="/msp-directory" className="text-gray-600 hover:text-[#4897de] transition-colors duration-300 text-base flex items-start group">
+                  <span className="text-[#4897de] mr-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                 Msp Directory
+                </Link>
+              </li>
             </ul>
           </div>
 

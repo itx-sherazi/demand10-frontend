@@ -36,6 +36,8 @@ function formatSitemapDate(date) {
     { path: "/solutions", changefreq: "weekly", priority: 0.8 },
     { path: "/review", changefreq: "monthly", priority: 0.3 },
     { path: "/listing", changefreq: "monthly", priority: 0.3 },
+    { path: "/staffing-industry", changefreq: "weekly", priority: 0.8 },
+    { path: "/msp-directory", changefreq: "weekly", priority: 0.8 },
   ];
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
