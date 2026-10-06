@@ -106,7 +106,7 @@ const MspCompanyCards = ({ companies, onOpenForm }) => {
                       <div className="flex-1 min-w-0">
                         <h4 className="font-bold text-gray-900 text-sm mb-1 truncate">{company.name}</h4>
                         <p className="text-xs text-gray-600 mb-1 truncate">{company.industry}</p>
-                        <p className="text-xs text-gray-500 truncate">{company.location.split(',').slice(-2).join(',').trim()}</p>
+                        <p className="text-xs text-gray-500 truncate">{company.location ? company.location.split(',').slice(-2).join(',').trim() : ''}</p>
                         <div className="flex gap-3 mt-2">
                           <span className="text-xs text-gray-600">
                             <span className="font-semibold">{company.employees}</span> employees

@@ -463,9 +463,9 @@ const SubCategoryDetailPage = ({ subcategory }) => {
                 </div>
                 <div className="p-5">
                   {/* Display first 5 companies in one line */}
-                  {details.topCompanies?.slice(0, 5).length > 0 && (
+                  {(details.topCompanies || []).slice(0, 5).length > 0 && (
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-6">
-                      {details.topCompanies.slice(0, 5).map((company, index) => (
+                      {(details.topCompanies || []).slice(0, 5).map((company, index) => (
                         <div key={index} className="border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow text-center bg-gray-50">
                           <div className="flex flex-col items-center justify-center">
                             <div className="w-10 h-10 flex items-center justify-center mb-2 bg-white rounded-lg border border-gray-200">
@@ -473,7 +473,7 @@ const SubCategoryDetailPage = ({ subcategory }) => {
                                 <Image 
                                   src={company.logo} 
                                   alt={company.name} 
-                                  width={32}
+                                  width={32} 
                                   height={32}
                                   className="w-6 h-6 object-contain"
                                   onError={(e) => {
@@ -505,9 +505,9 @@ const SubCategoryDetailPage = ({ subcategory }) => {
                   )}
                   
                   {/* Display remaining companies below */}
-                  {details.topCompanies?.slice(5).length > 0 && (
+                  {(details.topCompanies || []).slice(5).length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {details.topCompanies.slice(5).map((company, index) => (
+                      {(details.topCompanies || []).slice(5).map((company, index) => (
                         <div key={`remaining-${index}`} className="border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow bg-gray-50">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 flex items-center justify-center bg-white rounded-lg border border-gray-200 flex-shrink-0">

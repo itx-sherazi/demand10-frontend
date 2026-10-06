@@ -3,18 +3,24 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 
 const SoftwareCategories = ({ categories = [] }) => {
-  const categoriesData = categories && categories.length > 0 
+  const categoriesData = Array.isArray(categories) && categories.length > 0 
     ? categories.map(category => ({
-        category: category.name,
-        subcategory: category.subcategories || []
+        category: category?.name || category?.category || '',
+        subcategory: Array.isArray(category?.subcategories) 
+          ? category.subcategories 
+          : (Array.isArray(category?.subcategory) ? category.subcategory : [])
       }))
-    : [""];
+    : [];
 
   const [expandedCategory, setExpandedCategory] = useState(null);
 
   const toggleCategory = (index) => {
     setExpandedCategory(expandedCategory === index ? null : index);
   };
+
+  if (!categoriesData || categoriesData.length === 0) {
+    return null;
+  }
 
   return (
     <div id="categories" className="min-h-screen py-16 px-4 sm:px-6 lg:px-8 bg-white">
@@ -50,14 +56,14 @@ const SoftwareCategories = ({ categories = [] }) => {
               {expandedCategory === index && (
                 <div className="p-4 bg-white">
                   <ul className="space-y-3">
-                    {category.subcategory.slice(0, 8).map((item, itemIndex) => (
+                    {(category.subcategory || []).slice(0, 8).map((item, itemIndex) => (
                       <li key={itemIndex}>
                         <Link
-                          href={`/${item.slug || item}`}
+                          href={`/${item?.slug || item}`}
                           className="block py-2 px-3 rounded-lg text-black hover:bg-blue-100   transition-all duration-200"
                         >
                           <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium">{item.name || item}</span>
+                            <span className="text-sm font-medium">{item?.name || item}</span>
                             <svg className="w-4 h-4 text-[#4897de]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                             </svg>
@@ -65,7 +71,6 @@ const SoftwareCategories = ({ categories = [] }) => {
                         </Link>
                       </li>
                     ))}
-                 
                   </ul>
                 </div>
               )}
@@ -85,20 +90,18 @@ const SoftwareCategories = ({ categories = [] }) => {
               </div>
               <div className="p-4">
                 <ul className="space-y-1">
-                  {category.subcategory.slice(0, 6).map((item, itemIndex) => (
+                  {(category.subcategory || []).slice(0, 6).map((item, itemIndex) => (
                     <li key={itemIndex}>
                       <Link
-                        href={`/${item.slug || item}`}
+                        href={`/${item?.slug || item}`}
                         className="block py-1 px-4 hover:underline"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium">{item.name || item}</span>
-                          
+                          <span className="text-sm font-medium">{item?.name || item}</span>
                         </div>
                       </Link>
                     </li>
                   ))}
-                 
                 </ul>
               </div>
             </div>
@@ -107,7 +110,7 @@ const SoftwareCategories = ({ categories = [] }) => {
         
         {/* View All Categories Button */}
         <div className="text-right mt-12">
-          <Link href="/categories">
+          <Link href="/all-categories">
             <button className=" text-[#1a365d] font-semibold hover:underline cursor-pointer">
               View All Categories
             </button>

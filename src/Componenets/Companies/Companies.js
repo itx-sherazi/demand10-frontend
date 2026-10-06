@@ -486,7 +486,7 @@ export default function CompanyListingPage({
               <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 mb-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Sponsored Companies</h3>
                 <div className="space-y-4">
-                  {displayedSponsoredCompanies.slice(0, 10).map((company) => (
+                  {(displayedSponsoredCompanies || []).slice(0, 10).map((company) => (
                     <SponsoredCompanyCard key={company._id} company={company} />
                   ))}
                 </div>
