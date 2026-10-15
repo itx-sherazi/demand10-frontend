@@ -19,15 +19,13 @@ import Link from "next/link";
 import ClaimForm from "@/Componenets/ui/ClaimForm";
 import CompanyReviews from "../Company/CompanyReviews";
 import CompanyBadges from "../Company/CompanyBadges";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend
-} from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import dynamic from "next/dynamic";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+// chart.js is heavy; load it after the page renders
+const Pie = dynamic(() => import("./PieChart"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full animate-pulse rounded-full bg-gray-100" />,
+});
 
 // Lazy load heavy components
 const ContactFormCompany = lazy(() => import("../ui/ContactFormCompany"));

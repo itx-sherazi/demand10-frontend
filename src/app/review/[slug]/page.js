@@ -26,17 +26,18 @@ export default function CompanyReviewPage({ params }) {
         const resolvedParams = await params;
         console.log('Resolved params:', resolvedParams);
         
-        // Check user authentication
-        const authData = await checkUserAuth();
-        console.log('Auth data:', authData); // Debugging
+        // Auth check and company lookup are independent, so run them together
+        const [authData, companyData] = await Promise.all([
+          checkUserAuth(),
+          resolvedParams.slug ? getCompanyBySlug(resolvedParams.slug) : null,
+        ]);
+
         if (authData.ok) {
           setUser(authData.user);
         }
-        
-        // Fetch company data using the resolved params
-        if (resolvedParams.slug) {
-          const companyData = await getCompanyBySlug(resolvedParams.slug);
-          console.log('Company data:', companyData); // Debugging
+
+        // Use the company data for the resolved params
+        if (companyData) {
           if (companyData.ok) {
             // Fix: Use companyData.data instead of companyData.company
             setCompany(companyData.data);

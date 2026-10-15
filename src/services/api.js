@@ -20,7 +20,7 @@ export const fetchRelatedSubcategories = async (subcategorySlug, limit = 5) => {
         subcategorySlug: subcategorySlug,
         limit: limit,
       }),
-      cache: "no-store",
+      next: { revalidate: 600 }, // cached on the Next server; related list rarely changes
     });
 
     if (!res.ok) {
@@ -52,7 +52,7 @@ export const fetchBlogsSitemap = async () => {
 
 export const fetchBlogs = async (page = 1) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/get?page=${page}`);
+    const response = await fetch(`${API_BASE_URL}/get?page=${page}`, { next: { revalidate: 300 } });
     if (!response.ok) {
       console.error(`HTTP error! status: ${response.status}`);
       return { data: [], pagination: { total: 0, page: 1, totalPages: 0 } };
@@ -67,7 +67,7 @@ export const fetchBlogs = async (page = 1) => {
 
 export const fetchLatestBlogs = async () => {
   try {
-    const response = await fetch(`${API_BASE_URL}/latest-posts`);
+    const response = await fetch(`${API_BASE_URL}/latest-posts`, { next: { revalidate: 300 } });
     if (!response.ok) {
       console.error(`HTTP error! status: ${response.status}`);
       return [];
@@ -82,7 +82,7 @@ export const fetchLatestBlogs = async () => {
 
 export const fetchSingelBlogs = async (slug) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/getById/${slug}`);
+    const response = await fetch(`${API_BASE_URL}/getById/${slug}`, { next: { revalidate: 300 } });
     const result = await response.json();
 
     if (!response.ok) {
@@ -115,7 +115,7 @@ export const DataSetRequest = async (formData) => {
 
 export async function fetchCompanyDetail(slug) {
   try {
-    const res = await fetch(`${API_BASE_URL}/companybyslug/${slug}`);
+    const res = await fetch(`${API_BASE_URL}/companybyslug/${slug}`, { next: { revalidate: 300 } });
 
     if (!res.ok) {
       console.error("Failed to fetch company detail");
@@ -134,7 +134,7 @@ export async function fetchCompanyBySubcategoryAndSlug(subcategorySlug, companyS
   try {
     // Use the correct endpoint - companybyslug instead of company/subcategory/company
     const res = await fetch(`${API_BASE_URL}/companybyslug/${companySlug}`, {
-      cache: "no-store",
+      next: { revalidate: 300 }, // cached on the Next server for 5 minutes
     });
 
     if (!res.ok) {
@@ -225,7 +225,7 @@ export const fetchRelatedCompanies = async (subcategoryId, excludeSlug) => {
 export async function fetchCategories() {
   try {
     const res = await fetch(`${API_BASE_URL}/categories`, {
-      cache: "no-store",
+      next: { revalidate: 600 }, // used by the root layout on every page
     });
 
     const data = await res.json();
@@ -310,7 +310,7 @@ export async function fetchCompanies(slug, page = 1, limit = 12, search = "", sp
         headers: {
           'Content-Type': 'application/json',
         },
-        cache: 'no-store'
+        next: { revalidate: 300 } // cached on the Next server for 5 minutes
       }
     );
 
@@ -354,7 +354,7 @@ export async function fetchCompanies(slug, page = 1, limit = 12, search = "", sp
 export async function fetchSubcategoryDetails(slug) {
   try {
     const res = await fetch(`${API_BASE_URL}/detail/${slug}`, {
-      cache: "no-store",
+      next: { revalidate: 300 },
     });
 
     if (!res.ok) {
@@ -421,6 +421,7 @@ export const getCompanyReviews = async (slug, page = 1, limit = 10) => {
       headers: {
         "Content-Type": "application/json",
       },
+      next: { revalidate: 300 }, // server-side cache only; ignored in the browser
     });
     const data = await response.json();
     return data;
@@ -503,7 +504,7 @@ export const fetchHomepageCompanies = async () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'no-store'
+      next: { revalidate: 300 }
     });
 
     if (!res.ok) {

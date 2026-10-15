@@ -1,8 +1,10 @@
 import ArticleDetail from "@/Componenets/SingelBlog/SingelBlogPage";
+import Link from "next/link";
 import { fetchSingelBlogs } from "@/services/api";
+import sanitizeHtml from "@/utils/sanitizeHtml";
 
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   try {
     const response = await fetchSingelBlogs(slug);
@@ -96,8 +98,9 @@ export default async function Page({ params }) {
       throw new Error("Article not found");
     }
 
-    // Ensure we're passing the correct data structure
-    const blogData = response.data || response;
+    // Ensure we're passing the correct data structure; clean the editor HTML on the server
+    const rawBlog = response.data || response;
+    const blogData = { ...rawBlog, body: sanitizeHtml(rawBlog.body) };
 
     return (
       <main>
@@ -116,12 +119,12 @@ export default async function Page({ params }) {
           <p className="text-gray-600 mb-6">
             We couldn&apos;t load the article. Please try again later.
           </p>
-          <button
-            onClick={() => window.history.back()}
-            className="bg-gradient-to-r from-[#265ba3] to-blue-700 text-white px-6 py-2 rounded-lg hover:from-[#1e4a86] hover:to-blue-800 transition-all duration-300 shadow-md hover:shadow-lg"
+          <Link
+            href="/blog"
+            className="inline-block bg-gradient-to-r from-[#265ba3] to-blue-700 text-white px-6 py-2 rounded-lg hover:from-[#1e4a86] hover:to-blue-800 transition-all duration-300 shadow-md hover:shadow-lg"
           >
-            Go Back
-          </button>
+            Back to Blog
+          </Link>
         </div>
       </main>
     );

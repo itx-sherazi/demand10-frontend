@@ -185,8 +185,11 @@ export default async function Page({ params }) {
     // If we reach here, redirect to home
     redirect('/');
   }
-  // ✅ Fetch company detail first
-  const companyDetail = await getCompanyDetail(subcategorySlug, companySlug);
+  // ✅ Fetch company detail and first page of reviews in parallel (both only need the slug)
+  const [companyDetail, reviewsData] = await Promise.all([
+    getCompanyDetail(subcategorySlug, companySlug),
+    getCompanyReviewsData(null, companySlug, 1, 10),
+  ]);
   let currentCompany = companyDetail?.data;
 
   // ✅ Add safety validation for company data
@@ -204,14 +207,6 @@ export default async function Page({ params }) {
       website: currentCompany.website || '#'
     };
   }
-
-  // ✅ Fetch company reviews data server-side (initial page)
-  const reviewsData = await getCompanyReviewsData(
-    currentCompany?._id, 
-    currentCompany?.slug, 
-    1, // initial page
-    10 // limit
-  );
 
   // If company not found, show detailed error with debugging info
   if (!currentCompany) {

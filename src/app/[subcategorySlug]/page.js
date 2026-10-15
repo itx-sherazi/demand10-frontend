@@ -1,13 +1,15 @@
 import Companies from "@/Componenets/Companies/Companies";
 import { fetchCompanies, fetchSubcategoryDetails, fetchRelatedSubcategories } from "@/services/api";
+import sanitizeHtml from "@/utils/sanitizeHtml";
 
-
+// generateMetadata and Page both use fetchSubcategoryDetails with the same URL,
+// so Next.js runs that request only once per page view.
 export async function generateMetadata({ params }) {
   const { subcategorySlug } = await params;
   try {
-    const companiesData = await fetchCompanies(subcategorySlug);
+    const details = await fetchSubcategoryDetails(subcategorySlug);
     
-    if (!companiesData || !companiesData.name) {
+    if (!details || !details.name) {
       return {
         title: "Subcategory Not Found | Demand10",
         description: "No data found for this subcategory.",
@@ -15,15 +17,15 @@ export async function generateMetadata({ params }) {
     }
     
     // Use meta title if available, otherwise fallback to default
-    const title = companiesData.metaTitle || `${companiesData.name} - ${companiesData.categoryName || "B2B Intelligence"}`;
+    const title = details.metaTitle || `${details.name} - ${details.categoryName || "B2B Intelligence"}`;
     
     // Use the description field for meta description
-    const description = companiesData.description?.replace(/\n/g, " ") || `Explore verified ${companiesData.categoryName?.toLowerCase() || "B2B"} vendors in ${companiesData.name}. Find top companies and service providers.`;
+    const description = details.description?.replace(/\n/g, " ") || `Explore verified ${details.categoryName?.toLowerCase() || "B2B"} vendors in ${details.name}. Find top companies and service providers.`;
     
     // Use meta keywords if available, otherwise fallback to default
     let keywords = [
-      companiesData.name,
-      companiesData.categoryName || "B2B Intelligence",
+      details.name,
+      details.categoryName || "B2B Intelligence",
       "managed security service provider",
       "B2B companies data",
       "company directory",
@@ -32,10 +34,9 @@ export async function generateMetadata({ params }) {
     ];
     
     // If metaKeywords exist, use them instead of defaults
-    if (companiesData.metaKeywords && Array.isArray(companiesData.metaKeywords) && companiesData.metaKeywords.length > 0) {
-      keywords = companiesData.metaKeywords;
+    if (details.metaKeywords && Array.isArray(details.metaKeywords) && details.metaKeywords.length > 0) {
+      keywords = details.metaKeywords;
     }
-    
     
     return {
       title,
@@ -68,37 +69,25 @@ export async function generateMetadata({ params }) {
   }
 }
 
+// JSON-LD structured data for subcategories
+function buildSubcategoryJsonLd(subcategorySlug, data) {
+  if (!data || !data.name) return null;
 
-// Add JSON-LD structured data for subcategories
-export async function generateSubcategoryJsonLd({ params }) {
-  const { subcategorySlug } = await params;
-  
-  try {
-    const companiesData = await fetchCompanies(subcategorySlug);
-    
-    if (!companiesData || !companiesData.name) return null;
-    
-    const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": companiesData.name,
-      "description": companiesData.description || "",
-      "url": `https://demand10.com/${subcategorySlug}`,
-      "publisher": {
-        "@type": "Organization",
-        "name": "Demand10"
-      }
-    };
-    
-    return jsonLd;
-  } catch (error) {
-    console.error("JSON-LD generation error:", error);
-    return null;
-  }
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": data.name,
+    "description": data.description || "",
+    "url": `https://demand10.com/${subcategorySlug}`,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Demand10"
+    }
+  };
 }
 
-
-
+// Escape "<" so stored text can never close the <script> tag
+const serializeJsonLd = (jsonLd) => JSON.stringify(jsonLd).replace(/</g, "\\u003c");
 
 export default async function Page({ params, searchParams }) {
   const { subcategorySlug } = await params;
@@ -110,19 +99,22 @@ export default async function Page({ params, searchParams }) {
   const search = resolvedSearchParams?.search || "";
   
   try {
-    // Pass search parameter to API
-    const companiesData = await fetchCompanies(subcategorySlug, page, limit, search) || {};
-    // Fetch subcategory details to get sponsorCompanies
-    const subcategoryDetails = await fetchSubcategoryDetails(subcategorySlug) || {};
-    // Fetch related subcategories on the server side
-    const relatedSubcategories = await fetchRelatedSubcategories(subcategorySlug, 5) || [];
+    // All three requests are independent, so run them in parallel
+    const [companiesResult, detailsResult, relatedResult] = await Promise.all([
+      fetchCompanies(subcategorySlug, page, limit, search),
+      fetchSubcategoryDetails(subcategorySlug),
+      fetchRelatedSubcategories(subcategorySlug, 5),
+    ]);
+    const companiesData = companiesResult || {};
+    const subcategoryDetails = detailsResult || {};
+    const relatedSubcategories = relatedResult || [];
 
-    // Generate JSON-LD
-    const jsonLd = await generateSubcategoryJsonLd({ params: { subcategorySlug } });
+    const jsonLd = buildSubcategoryJsonLd(subcategorySlug, companiesData.name ? companiesData : subcategoryDetails);
     
     // Extract content from the correct path in the response
+    // Editor HTML is cleaned on the server before it reaches dangerouslySetInnerHTML
     const content = subcategoryDetails.ok && subcategoryDetails.content
-      ? subcategoryDetails.content || ""
+      ? sanitizeHtml(subcategoryDetails.content)
       : "";
     return (
       <main>
@@ -130,7 +122,7 @@ export default async function Page({ params, searchParams }) {
         {jsonLd && (
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
           />
         )}
         <Companies 

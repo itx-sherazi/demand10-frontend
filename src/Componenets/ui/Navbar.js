@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import dynamic from 'next/dynamic';
-import { checkUserAuth } from '@/services/userApi'; // Import the existing service 
+import { checkUserAuth, userLogout } from '@/services/userApi'; // Import the existing service 
 import { IoMdArrowDropdown } from "react-icons/io";
 
 // Dynamically import the AuthForm to avoid SSR issues
@@ -107,8 +107,11 @@ const Navbar = ({ categories = [] }) => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleSignOut = () => {
-    // Remove the user token cookie with proper domain and path
+  const handleSignOut = async () => {
+    // The userToken cookie is httpOnly and belongs to the API domain, so only the API can clear it
+    await userLogout();
+
+    // Also remove any client-visible copy of the cookie
     const cookieOptions = [
       "userToken=;",
       "expires=Thu, 01 Jan 1970 00:00:00 GMT;",

@@ -13,31 +13,45 @@ export default function CompanySearch({ onCompanySelect }) {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchContainerRef = useRef(null);
 
+  // Debounce typing and ignore responses for queries the user has already moved past
+  const debounceRef = useRef(null);
+  const latestQueryRef = useRef('');
+
+  useEffect(() => () => clearTimeout(debounceRef.current), []);
+
   // Handle search input change
-  const handleSearchChange = async (e) => {
+  const handleSearchChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
+    latestQueryRef.current = query;
+    clearTimeout(debounceRef.current);
 
     if (query.length > 1) {
       setIsLoading(true);
-      try {
-        const response = await searchCompanies(query);
-        if (response.ok) {
-          setSuggestions(response.companies);
-          // Add a small delay to ensure proper rendering
-          setTimeout(() => {
-            setShowSuggestions(true);
-          }, 10);
-        }
-      } catch (error) {
-        console.error('Error searching companies:', error);
-        toast.error('Failed to search companies');
-      } finally {
-        setIsLoading(false);
-      }
+      debounceRef.current = setTimeout(() => runSearch(query), 300);
     } else {
+      setIsLoading(false);
       setSuggestions([]);
       setShowSuggestions(false);
+    }
+  };
+
+  const runSearch = async (query) => {
+    try {
+      const response = await searchCompanies(query);
+      if (query !== latestQueryRef.current) return; // a newer search is in progress
+      if (response.ok) {
+        setSuggestions(response.companies);
+        // Add a small delay to ensure proper rendering
+        setTimeout(() => {
+          setShowSuggestions(true);
+        }, 10);
+      }
+    } catch (error) {
+      console.error('Error searching companies:', error);
+      toast.error('Failed to search companies');
+    } finally {
+      if (query === latestQueryRef.current) setIsLoading(false);
     }
   };
 

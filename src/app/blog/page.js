@@ -38,7 +38,8 @@ export const metadata = {
   },
 };
 export default async function Page({ searchParams }) {
-  const page = parseInt(searchParams.page) || 1;
+  const { page: pageParam } = await searchParams;
+  const page = parseInt(pageParam) || 1;
   
   let BlogData = null;
   let LatestBlog = null;
